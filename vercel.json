@@ -1,6 +1,9 @@
 {
   "cleanUrls": true,
   "rewrites": [
+    { "source": "/", "has": [{ "type": "host", "value": "(www\\.)?statlift\\.net" }], "destination": "/en/index.html" },
+    { "source": "/", "has": [{ "type": "host", "value": "(www\\.)?statlift\\.de" }], "destination": "/de/index.html" },
+    
     { "source": "/zugang", "has": [{ "type": "host", "value": "(www\\.)?statlift\\.net" }], "destination": "/en/zugang.html" },
     { "source": "/feedback", "has": [{ "type": "host", "value": "(www\\.)?statlift\\.net" }], "destination": "/en/feedback.html" },
     { "source": "/zugang", "has": [{ "type": "host", "value": "(www\\.)?statlift\\.de" }], "destination": "/de/zugang.html" },
