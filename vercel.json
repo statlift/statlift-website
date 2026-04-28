@@ -1,24 +1,6 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "has": [{ "type": "host", "value": "statlift.net" }], "destination": "/en/index.html" },
-    { "source": "/", "has": [{ "type": "host", "value": "www.statlift.net" }], "destination": "/en/index.html" },
-    { "source": "/", "has": [{ "type": "host", "value": "statlift.de" }], "destination": "/de/index.html" },
-    { "source": "/", "has": [{ "type": "host", "value": "www.statlift.de" }], "destination": "/de/index.html" },
-    
-    { "source": "/access", "has": [{ "type": "host", "value": "statlift.net" }], "destination": "/en/zugang.html" },
-    { "source": "/access", "has": [{ "type": "host", "value": "www.statlift.net" }], "destination": "/en/zugang.html" },
-    { "source": "/zugang", "has": [{ "type": "host", "value": "statlift.net" }], "destination": "/en/zugang.html" },
-    { "source": "/zugang", "has": [{ "type": "host", "value": "www.statlift.net" }], "destination": "/en/zugang.html" },
-    
-    { "source": "/feedback", "has": [{ "type": "host", "value": "statlift.net" }], "destination": "/en/feedback.html" },
-    { "source": "/feedback", "has": [{ "type": "host", "value": "www.statlift.net" }], "destination": "/en/feedback.html" },
-
-    { "source": "/zugang", "has": [{ "type": "host", "value": "statlift.de" }], "destination": "/de/zugang.html" },
-    { "source": "/zugang", "has": [{ "type": "host", "value": "www.statlift.de" }], "destination": "/de/zugang.html" },
-    { "source": "/feedback", "has": [{ "type": "host", "value": "statlift.de" }], "destination": "/de/feedback.html" },
-    { "source": "/feedback", "has": [{ "type": "host", "value": "www.statlift.de" }], "destination": "/de/feedback.html" },
-    
     { "source": "/(.*)", "has": [{ "type": "host", "value": "statlift.net" }], "destination": "/en/$1" },
     { "source": "/(.*)", "has": [{ "type": "host", "value": "www.statlift.net" }], "destination": "/en/$1" },
     { "source": "/(.*)", "has": [{ "type": "host", "value": "statlift.de" }], "destination": "/de/$1" },
