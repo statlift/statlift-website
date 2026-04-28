@@ -300,7 +300,7 @@
         <div class="hero-orb orb-b"></div>
 
         <div class="form-card">
-            <span class="eyebrow">Kundenfeedback</span>
+            <span class="eyebrow">Customer Feedback</span>
             <h1>Your feedback matters</h1>
             <p class="subtitle">Help us make Statlift even better. Filling this out takes less than 2 minutes.</p>
 
@@ -316,13 +316,13 @@
                 </div>
 
                 <div class="form-group">
-                    <span class="star-label">Gesamtbewertung</span>
-                    <div class="star-row" id="starRow" role="group" aria-label="Bewertung">
-                        <button type="button" class="star-btn" data-val="1" aria-label="1 Stern">★</button>
-                        <button type="button" class="star-btn" data-val="2" aria-label="2 Sterne">★</button>
-                        <button type="button" class="star-btn" data-val="3" aria-label="3 Sterne">★</button>
-                        <button type="button" class="star-btn" data-val="4" aria-label="4 Sterne">★</button>
-                        <button type="button" class="star-btn" data-val="5" aria-label="5 Sterne">★</button>
+                    <span class="star-label">Overall Rating</span>
+                    <div class="star-row" id="starRow" role="group" aria-label="Rating">
+                        <button type="button" class="star-btn" data-val="1" aria-label="1 Star">★</button>
+                        <button type="button" class="star-btn" data-val="2" aria-label="2 Stars">★</button>
+                        <button type="button" class="star-btn" data-val="3" aria-label="3 Stars">★</button>
+                        <button type="button" class="star-btn" data-val="4" aria-label="4 Stars">★</button>
+                        <button type="button" class="star-btn" data-val="5" aria-label="5 Stars">★</button>
                     </div>
                     <p class="star-hint" id="starHint">Please select a rating</p>
                     <input type="hidden" id="rating" value="">
@@ -334,7 +334,7 @@
                 </div>
 
                 <button type="submit" class="btn-submit" id="submitBtn">
-                    <span id="btnText">Feedback absenden →</span>
+                    <span id="btnText">Submit feedback →</span>
                     <div class="spinner" id="spinner"></div>
                 </button>
             </form>
@@ -345,7 +345,7 @@
             </div>
 
             <div class="msg-box error" id="errorMsg">
-                <div class="msg-title">Fehler beim Senden</div>
+                <div class="msg-title">Error sending</div>
                 <div class="msg-text" id="errorText">Please try again or write directly to us at <a href="mailto:team@statlift.net" style="color:#818cf8;">team@statlift.net</a>.</div>
             </div>
         </div>
@@ -408,7 +408,7 @@
             successBox.style.display = 'none';
             errorBox.style.display = 'none';
             btn.disabled = true;
-            btnText.textContent = 'Wird gesendet...';
+            btnText.textContent = 'Sending...';
             spinner.style.display = 'block';
 
             try {
@@ -423,7 +423,7 @@
             } catch (err) {
                 console.error(err);
                 btn.disabled = false;
-                btnText.textContent = 'Feedback absenden →';
+                btnText.textContent = 'Submit feedback →';
                 spinner.style.display = 'none';
                 errorBox.style.display = 'block';
             }
