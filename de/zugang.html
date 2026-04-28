@@ -289,7 +289,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 </div>
 
 <div class="msg ok" id="msgOk"><div class="msg-t">✅ Vielen Dank!</div><div class="msg-b">Ihre Zugangsdaten wurden sicher übermittelt. Wir richten alles für Sie ein.</div></div>
-<div class="msg err" id="msgErr"><div class="msg-t">Ein Fehler ist aufgetreten</div><div class="msg-b" id="msgErrTxt">Bitte prüfen Sie Ihre Eingaben oder schreiben Sie uns an team@statlift.net.</div></div>
+<div class="msg err" id="msgErr"><div class="msg-t">Ein Fehler ist aufgetreten</div><div class="msg-b" id="msgErrTxt">Bitte prüfen Sie Ihre Eingaben oder schreiben Sie uns an team@statlift.de.</div></div>
 </div></main>
 
 <script>
@@ -331,7 +331,7 @@ async function submitForm() {
     if (!res.ok || data.success === false) {
       document.getElementById('msgErrTxt').textContent = data.error === 'not_found'
         ? 'E-Mail nicht in unserer Datenbank gefunden. Bitte die Abo-E-Mail verwenden.'
-        : 'Bitte prüfen Sie Ihre Eingaben oder kontaktieren Sie team@statlift.net.';
+        : 'Bitte prüfen Sie Ihre Eingaben oder kontaktieren Sie team@statlift.de.';
       document.getElementById('msgErr').style.display = 'block';
     } else {
       document.querySelector('.card').querySelector('form') && (document.querySelector('.card').querySelector('form').style.display='none');
