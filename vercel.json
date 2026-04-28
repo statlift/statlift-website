@@ -1,8 +1,13 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/zugang", "destination": "/zugang.html" },
-    { "source": "/feedback", "destination": "/feedback.html" }
+    { "source": "/zugang", "has": [{ "type": "host", "value": "(www\\.)?statlift\\.net" }], "destination": "/en/zugang.html" },
+    { "source": "/feedback", "has": [{ "type": "host", "value": "(www\\.)?statlift\\.net" }], "destination": "/en/feedback.html" },
+    { "source": "/zugang", "has": [{ "type": "host", "value": "(www\\.)?statlift\\.de" }], "destination": "/de/zugang.html" },
+    { "source": "/feedback", "has": [{ "type": "host", "value": "(www\\.)?statlift\\.de" }], "destination": "/de/feedback.html" },
+    
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "(www\\.)?statlift\\.net" }], "destination": "/en/$1" },
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "(www\\.)?statlift\\.de" }], "destination": "/de/$1" }
   ],
   "headers": [
     {
