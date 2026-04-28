@@ -55,7 +55,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 <body>
 <nav id="navbar"><div class="container"><a href="/" class="nav-logo">Stat<span>lift</span></a></div></nav>
 <main><div class="card">
-<span class="eyebrow">Professional-Abo</span>
+<span class="eyebrow">Professional Package</span>
 <h1>Website Credentials</h1>
 <p class="subtitle">Select your CMS platform and enter your credentials – we'll handle the rest.</p>
 
@@ -105,7 +105,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 </div>
 
 <div id="cms-sections">
-  <div class="pick-hint">👆 Wählen Sie oben Ihr CMS-System</div>
+  <div class="pick-hint">👆 Select your CMS system above</div>
 <div id="section_wordpress" class="cms-section" style="display:none">
       <div class="note-box">⚠️ No standard login password – please create an App Password (instructions below).</div>
       <div class="form-group">
@@ -127,7 +127,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
       </div>
     </div>
 <div id="section_hubspot" class="cms-section" style="display:none">
-      <div class="note-box">⚠️ Benötigt: Scopes cms.blogs.read + cms.blogs.write.</div>
+      <div class="note-box">⚠️ Requires: Scopes cms.blogs.read + cms.blogs.write.</div>
       <div class="form-group">
           <label for="hubspot_cms_api_key">Private App Access Token</label>
           <input type="password" id="hubspot_cms_api_key" name="cms_api_key" placeholder="pat-eu-..." autocomplete="off">
@@ -143,7 +143,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
       </div>
     </div>
 <div id="section_webflow" class="cms-section" style="display:none">
-      <div class="note-box">⚠️ Token muss Scope cms:read + cms:write haben.</div>
+      <div class="note-box">⚠️ Token must have Scope cms:read + cms:write.</div>
       <div class="form-group">
           <label for="webflow_cms_api_key">API Token</label>
           <input type="password" id="webflow_cms_api_key" name="cms_api_key" placeholder="..." autocomplete="off">
@@ -175,7 +175,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
       </div>
     </div>
 <div id="section_contao" class="cms-section" style="display:none">
-      <div class="note-box">⚠️ Benötigt API-Bundle (z.B. oneup/contao-api-bundle).</div>
+      <div class="note-box">⚠️ Requires API Bundle (e.g., oneup/contao-api-bundle).</div>
       <div class="form-group">
           <label for="contao_cms_url">Website URL</label>
           <input type="url" id="contao_cms_url" name="cms_url" placeholder="https://yourwebsite.com" autocomplete="off">
@@ -191,7 +191,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
       </div>
     </div>
 <div id="section_drupal" class="cms-section" style="display:none">
-      <div class="note-box">⚠️ REST-Modul + Basic Auth-Modul müssen aktiviert sein.</div>
+      <div class="note-box">⚠️ REST module + Basic Auth module must be enabled.</div>
       <div class="form-group">
           <label for="drupal_cms_url">Website URL</label>
           <input type="url" id="drupal_cms_url" name="cms_url" placeholder="https://yourwebsite.com" autocomplete="off">
@@ -211,7 +211,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
       </div>
     </div>
 <div id="section_shopify" class="cms-section" style="display:none">
-      <div class="note-box">⚠️ Token benötigt Berechtigung: read_content + write_content.</div>
+      <div class="note-box">⚠️ Token requires permission: read_content + write_content.</div>
       <div class="form-group">
           <label for="shopify_cms_url">Store URL</label>
           <input type="text" id="shopify_cms_url" name="cms_url" placeholder="mystore.myshopify.com" autocomplete="off">
@@ -231,7 +231,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
       </div>
     </div>
 <div id="section_shopware" class="cms-section" style="display:none">
-      <div class="note-box">⚠️ Integration unter Einstellungen > System > Integrationen erstellen.</div>
+      <div class="note-box">⚠️ Create integration under Settings > System > Integrations.</div>
       <div class="form-group">
           <label for="shopware_cms_url">Store URL</label>
           <input type="url" id="shopware_cms_url" name="cms_url" placeholder="https://mystore.com" autocomplete="off">
@@ -267,7 +267,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
       </div>
     </div>
 <div id="section_squarespace" class="cms-section" style="display:none">
-      <div class="note-box">⚠️ Unter Einstellungen > Entwicklertools > API Key.</div>
+      <div class="note-box">⚠️ Under Settings > Developer Tools > API Keys.</div>
       <div class="form-group">
           <label for="squarespace_cms_api_key">API Key</label>
           <input type="password" id="squarespace_cms_api_key" name="cms_api_key" placeholder="..." autocomplete="off">
@@ -321,7 +321,7 @@ async function submitForm() {
   }
 
   const btn = document.getElementById('submitBtn');
-  btn.disabled = true; btn.textContent = 'Wird übermittelt...';
+  btn.disabled = true; btn.textContent = 'Submitting...';
   document.getElementById('msgOk').style.display = 'none';
   document.getElementById('msgErr').style.display = 'none';
 
@@ -339,7 +339,7 @@ async function submitForm() {
       document.getElementById('submitWrap').style.display = 'none';
     }
   } catch(e) {
-    document.getElementById('msgErrTxt').textContent = 'Verbindungsfehler. Bitte versuchen Sie es erneut.';
+    document.getElementById('msgErrTxt').textContent = 'Connection error. Please try again.';
     document.getElementById('msgErr').style.display = 'block';
   }
   btn.disabled = false; btn.textContent = 'Submit credentials securely →';
