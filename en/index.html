@@ -1617,7 +1617,7 @@
             <div class="hero-inner">
                 <span class="eyebrow reveal">Exclusive Expert Articles · B2B</span>
                 <h1 class="hero-headline reveal d1">
-                    Ihre Website.<br>Endlich sichtbar.
+                    Your website.<br>Finally visible.
                 </h1>
                 <p class="hero-sub reveal d2">
                     Statlift writes strategic articles that make your business visible on Google —
@@ -2256,13 +2256,13 @@
                         <div class="form-group">
                             <label for="f-name">Your Name *</label>
                             <input type="text" id="f-name" placeholder="" autocomplete="name" required>
-                            <div class="form-err">Bitte geben Sie Ihren Namen an.</div>
+                            <div class="form-err">Please enter your name.</div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="f-company">Company *</label>
                                 <input type="text" id="f-company" placeholder="" autocomplete="organization" required>
-                                <div class="form-err">Bitte geben Sie Ihren Company Namen an.</div>
+                                <div class="form-err">Please enter your company name.</div>
                             </div>
                             <div class="form-group">
                                 <label for="f-email">Email Address *</label>
@@ -2481,7 +2481,7 @@
             if (!ok) return;
 
             const btn = form.querySelector('button[type="submit"]');
-            btn.textContent = 'Wird gesendet...';
+            btn.textContent = 'Sending...';
             btn.disabled = true;
 
             const payload = {
@@ -2509,12 +2509,12 @@
                 } else {
                     btn.textContent = 'Submit Inquiry';
                     btn.disabled = false;
-                    alert('Fehler beim Senden. Bitte versuchen Sie es erneut.');
+                    alert('Error sending. Please try again.');
                 }
             } catch {
                 btn.textContent = 'Submit Inquiry';
                 btn.disabled = false;
-                alert('Netzwerkfehler. Bitte versuchen Sie es erneut.');
+                alert('Network error. Please try again.');
             }
         });
 
@@ -2551,7 +2551,7 @@
                 if (!ok) return;
 
                 const btn = gratisForm.querySelector('button[type="submit"]');
-                btn.textContent = 'Wird gesendet...';
+                btn.textContent = 'Sending...';
                 btn.disabled = true;
 
                 const payload = {
