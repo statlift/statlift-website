@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-
 <html lang="de">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Feedback — Statlift</title>
-<meta content="noindex, nofollow" name="robots"/>
-<meta content="Teilen Sie uns Ihr Feedback zu Statlift mit." name="description"/>
-<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;rect width='100' height='100' rx='18' fill='%234F46E5'/&gt;&lt;text y='.9em' font-size='72' x='50%' text-anchor='middle' font-family='Inter,sans-serif' font-weight='800' fill='white'&gt;S&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback — Statlift</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Share your feedback about Statlift with us.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%234F46E5'/><text y='.9em' font-size='72' x='50%' text-anchor='middle' font-family='Inter,sans-serif' font-weight='800' fill='white'>S</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
         /* ══════════════════════════════
            RESET & BASE
         ══════════════════════════════ */
@@ -287,65 +286,79 @@
     </style>
 </head>
 <body>
-<nav id="navbar">
-<div class="container">
-<div class="nav-inner">
-<a class="nav-logo" href="https://statlift.net">Stat</a>
-</div>
-</div>
-</nav>
-<main>
-<div class="hero-orb orb-a"></div>
-<div class="hero-orb orb-b"></div>
-<div class="form-card">
-<span class="eyebrow">Kundenfeedback</span>
-<h1>Your feedback matters</h1>
-<p class="subtitle">Help us make Statlift even better. Filling this out takes less than 2 minutes.</p>
-<form id="feedbackForm" novalidate="">
-<div class="form-group">
-<label for="firma">Company Name</label>
-<input id="firma" required="" type="text"/>
-</div>
-<div class="form-group">
-<label for="email">Your Email Address</label>
-<input id="email" required="" type="email"/>
-</div>
-<div class="form-group">
-<span class="star-label">Gesamtbewertung</span>
-<div aria-label="Bewertung" class="star-row" id="starRow" role="group">
-<button aria-label="1 Stern" class="star-btn" data-val="1" type="button">★</button>
-<button aria-label="2 Sterne" class="star-btn" data-val="2" type="button">★</button>
-<button aria-label="3 Sterne" class="star-btn" data-val="3" type="button">★</button>
-<button aria-label="4 Sterne" class="star-btn" data-val="4" type="button">★</button>
-<button aria-label="5 Sterne" class="star-btn" data-val="5" type="button">★</button>
-</div>
-<p class="star-hint" id="starHint">Please select a rating</p>
-<input id="rating" type="hidden" value=""/>
-</div>
-<div class="form-group">
-<label for="feedback">Your Feedback </label>
-<textarea id="feedback"></textarea>
-</div>
-<button class="btn-submit" id="submitBtn" type="submit"><span id="btnText">Submit Feedback →</span><div class="spinner" id="spinner"></div></button>
-</form>
-<div class="msg-box success" id="successMsg">
-<div class="msg-title">✓ Vielen Dank für Ihr Feedback!</div>
-<div class="msg-text">Ihre Rückmeldung hilft uns, den Service kontinuierlich zu verbessern. Wir schätzen die Zeit, die Sie sich genommen haben.</div>
-</div>
-<div class="msg-box error" id="errorMsg">
-<div class="msg-title">Fehler beim Senden</div>
-<div class="msg-text" id="errorText">Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an <a href="mailto:team@statlift.net" style="color:#818cf8;">team@statlift.net</a>.</div>
-</div>
-</div>
-</main>
-<script>
+
+    <nav id="navbar">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="https://statlift.net" class="nav-logo">Stat<span>lift</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero-orb orb-a"></div>
+        <div class="hero-orb orb-b"></div>
+
+        <div class="form-card">
+            <span class="eyebrow">Kundenfeedback</span>
+            <h1>Your feedback matters</h1>
+            <p class="subtitle">Help us make Statlift even better. Filling this out takes less than 2 minutes.</p>
+
+            <form id="feedbackForm" novalidate>
+                <div class="form-group">
+                    <label for="firma">Company Name</label>
+                    <input type="text" id="firma" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <span class="star-label">Gesamtbewertung</span>
+                    <div class="star-row" id="starRow" role="group" aria-label="Bewertung">
+                        <button type="button" class="star-btn" data-val="1" aria-label="1 Stern">★</button>
+                        <button type="button" class="star-btn" data-val="2" aria-label="2 Sterne">★</button>
+                        <button type="button" class="star-btn" data-val="3" aria-label="3 Sterne">★</button>
+                        <button type="button" class="star-btn" data-val="4" aria-label="4 Sterne">★</button>
+                        <button type="button" class="star-btn" data-val="5" aria-label="5 Sterne">★</button>
+                    </div>
+                    <p class="star-hint" id="starHint">Please select a rating</p>
+                    <input type="hidden" id="rating" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="feedback">Your Feedback <span style="color:#64748b;font-weight:400;">(optional)</span></label>
+                    <textarea id="feedback"></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <span id="btnText">Feedback absenden →</span>
+                    <div class="spinner" id="spinner"></div>
+                </button>
+            </form>
+
+            <div class="msg-box success" id="successMsg">
+                <div class="msg-title">✓ Thank you for your feedback!</div>
+                <div class="msg-text">Your feedback helps us continuously improve our service. We appreciate the time you took.</div>
+            </div>
+
+            <div class="msg-box error" id="errorMsg">
+                <div class="msg-title">Fehler beim Senden</div>
+                <div class="msg-text" id="errorText">Please try again or write directly to us at <a href="mailto:team@statlift.net" style="color:#818cf8;">team@statlift.net</a>.</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
         // ── Webhook URL ────────────────────────────────────────────────────
-        // Der n8n Webhook sendet das Feedback als Telegram-Nachricht.
-        // Die URL aktualisiert sich automatisch mit der aktuellen ngrok URL.
+        // The n8n webhook sends the feedback as a Telegram message.
+        // The URL updates automatically with the current ngrok URL.
         const WEBHOOK_URL = 'https://hierocratic-marline-uricolytic.ngrok-free.dev/webhook/feedback';
 
         // ── Star Rating ────────────────────────────────────────────────────
-        const hints = ['', 'Nicht zufrieden', 'Ausbaufähig', 'Gut', 'Sehr gut', 'Ausgezeichnet!'];
+        const hints = ['', 'Not satisfied', 'Needs improvement', 'Good', 'Very good', 'Excellent!'];
         let selectedRating = 0;
 
         document.querySelectorAll('.star-btn').forEach(btn => {
@@ -382,12 +395,12 @@
             const feedback = document.getElementById('feedback').value.trim();
 
             if (!firma || !email) {
-                errorBox.querySelector('#errorText').textContent = 'Bitte füllen Sie Firmenname und E-Mail-Adresse aus.';
+                errorBox.querySelector('#errorText').textContent = 'Please fill in your company name and email address.';
                 errorBox.style.display = 'block';
                 return;
             }
             if (!rating) {
-                errorBox.querySelector('#errorText').textContent = 'Bitte wählen Sie eine Bewertung (Sterne).';
+                errorBox.querySelector('#errorText').textContent = 'Please select a rating (stars).';
                 errorBox.style.display = 'block';
                 return;
             }
