@@ -268,11 +268,11 @@ input:-webkit-autofill:active {
     <div id="liGuide" class="li-box">
       <strong style="font-size:.9rem;color:var(--text)">So geben Sie Statlift Admin-Rechte auf LinkedIn:</strong>
       <ol class="li-steps">
-        <li>Klicken Sie auf Ihrer <strong>LinkedIn Unternehmensseite</strong> oben auf <strong>„Seite verwalten"</strong></li>
-        <li>Klicken Sie links auf <strong>„Einstellungen"</strong> → <strong>„Administratoren verwalten"</strong></li>
-        <li>Wählen Sie <strong>„Admins hinzufügen"</strong> und suchen Sie nach: <strong style="color:var(--primary)">Statlift</strong></li>
-        <li>Wählen Sie die Rolle <strong>„Super-Admin"</strong> und bestätigen Sie</li>
-        <li>Fertig! Sobald die Rechte aktiv sind, kümmern wir uns um den Rest.</li>
+        <li><span>Klicken Sie auf Ihrer <strong>LinkedIn Unternehmensseite</strong> oben auf <strong>„Seite verwalten"</strong></span></li>
+        <li><span>Klicken Sie links auf <strong>„Einstellungen"</strong> → <strong>„Administratoren verwalten"</strong></span></li>
+        <li><span>Wählen Sie <strong>„Admins hinzufügen"</strong> und suchen Sie nach: <strong style="color:var(--primary)">Statlift</strong></span></li>
+        <li><span>Wählen Sie die Rolle <strong>„Super-Admin"</strong> und bestätigen Sie</span></li>
+        <li><span>Fertig! Sobald die Rechte aktiv sind, kümmern wir uns um den Rest.</span></li>
       </ol>
       <p style="font-size:.8rem;color:var(--muted);margin-top:.5rem">Sie können die Zugriffsrechte jederzeit in Ihren LinkedIn-Einstellungen widerrufen.</p>
     </div>
@@ -305,6 +305,106 @@ input:-webkit-autofill:active {
   <a href="#" onclick="openModal('modal-datenschutz');return false;">Datenschutz</a>
 </footer>
 
+<div id="modal-impressum" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;">
+<div style="max-width:680px;margin:60px auto;padding:0 24px 60px;">
+<div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+<h2 style="font-size:1.6rem;">Impressum</h2>
+<button onclick="closeModal('modal-impressum')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+</div>
+<div style="font-size:0.9rem;color:#e2e8f0;line-height:1.9;">
+<h3 style="margin-bottom:10px;font-size:1rem;">Angaben gemäß § 5 TMG</h3>
+<p style="margin-bottom:20px;">
+
+                        Statlift<br/>
+
+                        Philip Exner<br/>
+
+                        [Straße und Hausnummer]<br/>
+
+                        [PLZ Ort]<br/>
+
+                        Deutschland
+
+                    </p>
+<h3 style="margin-bottom:10px;font-size:1rem;">Kontakt</h3>
+<p style="margin-bottom:20px;">
+
+                        E-Mail: team@statlift.de
+
+                    </p>
+<h3 style="margin-bottom:10px;font-size:1rem;">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
+
+                    </h3>
+<p style="margin-bottom:20px;">
+
+                        Philip Exner<br/>
+
+                        [Adresse wie oben]
+
+                    </p>
+<h3 style="margin-bottom:10px;font-size:1rem;">Haftungsausschluss</h3>
+<p style="margin-bottom:12px;">Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt
+
+                        erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch
+
+                        keine Gewähr übernehmen.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="modal-datenschutz" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;">
+<div style="max-width:680px;margin:60px auto;padding:0 24px 60px;">
+<div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+<h2 style="font-size:1.6rem;">Datenschutzerklärung</h2>
+<button onclick="closeModal('modal-datenschutz')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+</div>
+<div style="font-size:0.9rem;color:#e2e8f0;line-height:1.9;">
+<h3 style="margin-bottom:10px;font-size:1rem;">1. Verantwortlicher</h3>
+<p style="margin-bottom:20px;">Verantwortlich im Sinne der DSGVO ist: Philip Exner, [Adresse],
+
+                        team@statlift.de</p>
+<h3 style="margin-bottom:10px;font-size:1rem;">2. Erhebung und Verarbeitung personenbezogener Daten
+
+                    </h3>
+<p style="margin-bottom:20px;">Wir erheben personenbezogene Daten nur, wenn Sie uns diese im Rahmen
+
+                        der Kontaktaufnahme freiwillig mitteilen (z. B. Name, E-Mail-Adresse, Website-URL). Diese Daten
+
+                        werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben.
+
+                    </p>
+<h3 style="margin-bottom:10px;font-size:1rem;">3. Hosting</h3>
+<p style="margin-bottom:20px;">Diese Website wird über Vercel Inc., 340 Pine Street, Suite 701, San
+
+                        Francisco, CA 94104, USA gehostet. Vercel verarbeitet möglicherweise technische Verbindungsdaten
+
+                        (IP-Adresse, Zeitstempel). Weitere Informationen finden Sie in der Datenschutzerklärung von
+
+                        Vercel: vercel.com/legal/privacy-policy</p>
+<h3 style="margin-bottom:10px;font-size:1rem;">4. Google Fonts</h3>
+<p style="margin-bottom:20px;">Diese Website verwendet Google Fonts. Beim Aufruf der Seite wird die
+
+                        Schriftart vom Google-Server geladen, wobei Ihre IP-Adresse an Google übermittelt werden kann.
+
+                        Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einheitlicher
+
+                        Darstellung).</p>
+<h3 style="margin-bottom:10px;font-size:1rem;">5. Ihre Rechte</h3>
+<p style="margin-bottom:20px;">Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung,
+
+                        Einschränkung der Verarbeitung sowie Datenübertragbarkeit bezüglich Ihrer gespeicherten
+
+                        personenbezogenen Daten. Wenden Sie sich dafür an: team@statlift.de</p>
+<h3 style="margin-bottom:10px;font-size:1rem;">6. Beschwerderecht</h3>
+<p>Sie haben das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren, wenn Sie der
+
+                        Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen Daten gegen die DSGVO verstößt.</p>
+</div>
+</div>
+</div>
+</div>
 <script>
 // --- CHIPS SELECTION LOGIC ---
 function selectSingleChip(element, groupName) {
@@ -540,6 +640,15 @@ async function submitForm(e) {
     btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Onboarding abschließen';
   }
 }
+
+function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+window.addEventListener('click', function(event) {
+  if (event.target.id === 'modal-impressum' || event.target.id === 'modal-datenschutz') {
+    event.target.style.display = 'none';
+  }
+});
+
 </script>
 </body>
 </html>
