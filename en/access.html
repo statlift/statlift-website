@@ -661,12 +661,15 @@ async function submitForm() {
 
     if (!res.ok || data.success === false) {
 
-      document.getElementById('msgErrTxt').textContent = data.error === 'not_found'
-
-        ? 'Error: This email address has no active subscription.'
-
-        : 'Please check your inputs or contact team@statlift.net.';
-
+      if (data.error === 'not_found') {
+        document.getElementById('msgErrTxt').textContent = 'Error: This email address has no active subscription.';
+      } else if (data.error === 'wrong_abo') {
+        document.getElementById('msgErrTxt').textContent = 'Error: This email address has not subscribed to Subscription 2.';
+      } else if (data.error === 'already_submitted') {
+        document.getElementById('msgErrTxt').innerHTML = 'You have already submitted your access data. If you want to change it, please contact us at <a href="mailto:team@statlift.net" style="color:#818cf8;text-decoration:none;">team@statlift.net</a>.';
+      } else {
+        document.getElementById('msgErrTxt').textContent = 'Please check your inputs or contact team@statlift.net.';
+      }
       document.getElementById('msgErr').style.display = 'block';
 
     } else {
