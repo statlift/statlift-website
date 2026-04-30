@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Statlift – Website Onboarding</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+
 <meta name="description" content="Start your website project with Statlift. Share your vision with us.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,8 +18,9 @@
 }
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
 a{text-decoration:none;color:inherit}
-nav{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;background:rgba(7,7,26,.92);backdrop-filter:blur(14px)}
-.logo{font-size:1.2rem;font-weight:800;letter-spacing:-.03em}.logo span{color:var(--primary)}
+nav{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.90);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-container{max-width:1080px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.25rem;font-weight:800;letter-spacing:-.04em;color:#f8fafc}.logo span{color:var(--primary)}
 .nav-badge{font-size:.78rem;color:var(--muted);background:rgba(129,140,248,.08);border:1px solid var(--border);padding:.3rem .8rem;border-radius:999px}
 .hero{text-align:center;padding:4.5rem 1.5rem 2.5rem;max-width:660px;margin:0 auto}
 .badge{display:inline-block;background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.22);color:var(--primary);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .85rem;border-radius:999px;margin-bottom:1.4rem}
@@ -130,8 +134,10 @@ input:-webkit-autofill:active {
 </head>
 <body>
 <nav>
-  <a class="logo" href="https://statlift.net">Stat<span>lift</span></a>
-  <span class="nav-badge">Plan 3 · Website Onboarding</span>
+  <div class="nav-container">
+    <a class="logo" href="https://statlift.net">Stat<span>lift</span></a>
+    <span class="nav-badge">Plan 3 · Website Onboarding</span>
+  </div>
 </nav>
 
 <div class="hero">
