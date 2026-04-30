@@ -11,7 +11,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#07071a;--surface:#0f0f26;--border:#1c1c3d;--primary:#818cf8;--primary-dark:#6366f1;
-  --text:#f1f5f9;--muted:#8892a4;--success:#22c55e;--error:#ef4444;
+  --text:#f1f5f9;--muted:#8892a4;--success:#22c55e;--error:#ef4444;--warn:#f59e0b;
 }
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
 a{text-decoration:none;color:inherit}
@@ -41,37 +41,56 @@ input[type=text],input[type=email],textarea,select{
 input:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(129,140,248,.13)}
 input.error{border-color:var(--error)!important;box-shadow:0 0 0 3px rgba(239,68,68,.12)!important}
 input.ok{border-color:var(--success)!important}
-.field-msg{font-size:.77rem;margin-top:.4rem;min-height:1.2em}
+.field-msg{font-size:.77rem;margin-top:.4rem;min-height:1.2em;display:block}
 .field-msg.err{color:var(--error)}
 .field-msg.ok{color:var(--success)}
 textarea{resize:vertical;min-height:110px}
 select option{background:#09091f}
+hr.div{border:none;border-top:1px solid var(--border);margin:1.8rem 0}
+/* Domain */
 .dom-wrap{position:relative}
 .dom-input{padding-right:7rem!important}
-.domain-status{position:absolute;right:.85rem;top:50%;transform:translateY(-50%);font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:.35rem;pointer-events:none}
+.dom-status{position:absolute;right:.85rem;top:50%;transform:translateY(-50%);font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:.35rem;pointer-events:none}
 .s-check{color:var(--muted)}.s-ok{color:var(--success)}.s-bad{color:var(--error)}
 .dot{width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block}
-.chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.45rem}
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.45rem;align-items:center}
 .chip{display:inline-flex;align-items:center;gap:.35rem;background:#09091f;border:1.5px solid var(--border);border-radius:8px;padding:.45rem .9rem;cursor:pointer;font-size:.85rem;color:var(--muted);transition:all .18s;user-select:none}
 .chip:hover{border-color:var(--primary);color:var(--text)}
 .chip.on{background:rgba(129,140,248,.12);border-color:var(--primary);color:var(--primary);font-weight:600}
 .chip input{display:none}
+.chip-add{display:inline-flex;align-items:center;justify-content:center;width:2.2rem;height:2.2rem;border-radius:8px;background:#09091f;border:1.5px dashed var(--muted);color:var(--muted);cursor:pointer;transition:all .2s;font-size:1.2rem;line-height:1}
+.chip-add:hover{border-color:var(--primary);color:var(--primary)}
+/* Custom Add Page Input */
+.add-page-wrap{display:none;align-items:center;gap:.5rem;margin-top:.5rem}
+.add-page-wrap input{padding:.4rem .8rem;font-size:.85rem;width:200px}
+.add-page-btn{background:var(--primary);color:#fff;border:none;border-radius:6px;padding:.45rem .8rem;font-weight:600;cursor:pointer;font-size:.85rem}
+/* Logo */
 .logo-options{display:flex;gap:.8rem;flex-wrap:wrap}
 .logo-btn{flex:1;min-width:150px;background:#09091f;border:1.5px solid var(--border);border-radius:10px;padding:1rem 1.2rem;cursor:pointer;text-align:left;transition:all .2s;color:var(--muted);font-family:inherit;font-size:.88rem;font-weight:600}
 .logo-btn:hover{border-color:var(--primary);color:var(--text)}
 .logo-btn.on{background:rgba(129,140,248,.1);border-color:var(--primary);color:var(--primary)}
 .logo-btn .icon{font-size:1.5rem;display:block;margin-bottom:.4rem}
-.upload-zone{border:2px dashed var(--border);border-radius:10px;padding:2rem;text-align:center;cursor:pointer;transition:border-color .2s;margin-top:1rem}
+.upload-zone{border:2px dashed var(--border);border-radius:10px;padding:2rem;text-align:center;cursor:pointer;transition:border-color .2s;margin-top:1rem;position:relative}
 .upload-zone:hover{border-color:var(--primary)}
 .upload-zone.has-file{border-color:var(--success);background:rgba(34,197,94,.05)}
 .upload-zone input{display:none}
 .upload-zone p{color:var(--muted);font-size:.87rem}
-.upload-zone .filename{color:var(--success);font-weight:600;margin-top:.4rem;font-size:.85rem}
+.upload-zone .filename{color:var(--success);font-weight:600;margin-top:.4rem;font-size:.85rem;display:inline-block}
+.remove-file{display:none;margin-left:.5rem;color:var(--error);cursor:pointer;font-size:1.1rem;vertical-align:middle;padding:0 .3rem}
+.upload-zone.has-file .remove-file{display:inline-block}
+/* LinkedIn info box */
 .li-box{background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.18);border-radius:12px;padding:1.3rem 1.5rem}
 .li-steps{list-style:none;counter-reset:li;margin-top:.8rem}
 .li-steps li{counter-increment:li;display:flex;gap:.7rem;align-items:flex-start;font-size:.88rem;color:var(--muted);margin-bottom:.75rem}
 .li-steps li::before{content:counter(li);background:var(--primary);color:#fff;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
 .li-steps li strong{color:var(--text)}
+/* Form Error Message */
+.form-error-box{display:none;background:rgba(239,68,68,.1);border:1px solid var(--error);border-radius:10px;padding:1.2rem;margin-bottom:1.5rem;text-align:center}
+.form-error-box h3{color:var(--error);font-size:1.05rem;margin-bottom:.4rem}
+.form-error-box p{color:var(--text);font-size:.9rem}
+.form-error-box a{color:var(--primary);text-decoration:underline}
+/* Submit */
 .btn-submit{width:100%;background:var(--primary);color:#fff;font-family:inherit;font-size:1rem;font-weight:700;padding:1rem;border-radius:10px;border:none;cursor:pointer;transition:background .2s,box-shadow .2s,transform .1s;display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:.5rem}
 .btn-submit:hover{background:var(--primary-dark);box-shadow:0 4px 28px rgba(99,102,241,.38)}
 .btn-submit:active{transform:scale(.99)}
@@ -93,10 +112,15 @@ footer a{color:var(--primary)}
 <div class="hero">
   <div class="badge">Plan 3 · Premium</div>
   <h1>We build your <em>website.</em></h1>
-  <p class="sub">Share your vision — we handle the rest. Domain, hosting, design and weekly SEO content are all included.</p>
+  <p class="sub">Share your vision with us — we handle the rest. Domain, hosting, design, and weekly SEO content are included.</p>
 </div>
 
 <form id="form" onsubmit="submitForm(event)" novalidate>
+  
+  <div class="form-error-box" id="formErrorBox">
+    <h3 id="formErrorTitle">Submission Error</h3>
+    <p id="formErrorText">Please check your inputs.</p>
+  </div>
 
   <!-- Contact -->
   <div class="card">
@@ -106,22 +130,26 @@ footer a{color:var(--primary)}
       <div class="fg"><label>Last Name<span class="req">*</span></label><input type="text" name="nachname" required></div>
     </div>
     <div class="g2">
-      <div class="fg"><label>Email Address<span class="req">*</span></label><input type="email" name="email" required></div>
+      <div class="fg">
+        <label>Email Address<span class="req">*</span></label>
+        <input type="email" id="emailInput" name="email" required oninput="clearEmailError()">
+        <p class="field-msg" id="emailMsg">Please use the exact email address you used to subscribe.</p>
+      </div>
       <div class="fg"><label>Company Name<span class="req">*</span></label><input type="text" name="firma" required></div>
     </div>
-    <div class="fg"><label>Industry<span class="req">*</span></label><input type="text" name="branche" required></div>
+    <div class="fg" style="margin-bottom:0"><label>Industry<span class="req">*</span></label><input type="text" name="branche" required></div>
   </div>
 
   <!-- Domain -->
   <div class="card">
     <div class="sec">Your Desired Domain</div>
-    <div class="fg">
+    <div class="fg" style="margin-bottom:0">
       <label>Domain<span class="req">*</span></label>
       <div class="dom-wrap">
         <input type="text" id="domainInput" name="domain" class="dom-input" autocomplete="off" oninput="onDomainInput(this.value)" onblur="validateDomain()">
         <div class="domain-status" id="domStatus"></div>
       </div>
-      <p class="field-msg" id="domMsg">Enter your desired domain with extension – e.g. <strong>mycompany.com</strong>, <strong>.de</strong> or <strong>.net</strong></p>
+      <p class="field-msg" id="domMsg">Enter your desired domain with extension – e.g. <strong>mycompany.com</strong>, <strong>.net</strong>, or <strong>.co.uk</strong></p>
     </div>
   </div>
 
@@ -131,45 +159,50 @@ footer a{color:var(--primary)}
 
     <div class="fg">
       <label>What style should your website have?<span class="req">*</span></label>
-      <div class="chips">
-        <label class="chip"><input type="checkbox" name="stil" value="modern"><span>Modern &amp; minimalist</span></label>
-        <label class="chip"><input type="checkbox" name="stil" value="elegant"><span>Elegant &amp; professional</span></label>
-        <label class="chip"><input type="checkbox" name="stil" value="bold"><span>Bold &amp; striking</span></label>
-        <label class="chip"><input type="checkbox" name="stil" value="warm"><span>Warm &amp; approachable</span></label>
-        <label class="chip"><input type="checkbox" name="stil" value="tech"><span>Technical &amp; innovative</span></label>
+      <div class="chips" id="stilChips">
+        <label class="chip" onclick="selectSingleChip(this, 'stil')"><input type="radio" name="stil" value="modern" required><span>Modern &amp; minimalist</span></label>
+        <label class="chip" onclick="selectSingleChip(this, 'stil')"><input type="radio" name="stil" value="elegant"><span>Elegant &amp; professional</span></label>
+        <label class="chip" onclick="selectSingleChip(this, 'stil')"><input type="radio" name="stil" value="bold"><span>Bold &amp; striking</span></label>
+        <label class="chip" onclick="selectSingleChip(this, 'stil')"><input type="radio" name="stil" value="warm"><span>Warm &amp; approachable</span></label>
+        <label class="chip" onclick="selectSingleChip(this, 'stil')"><input type="radio" name="stil" value="tech"><span>Technical &amp; innovative</span></label>
       </div>
     </div>
 
     <div class="fg">
       <label>Preferred color direction<span class="req">*</span></label>
-      <div class="chips">
-        <label class="chip"><input type="checkbox" name="farbe" value="dark"><span>Dark</span></label>
-        <label class="chip"><input type="checkbox" name="farbe" value="light"><span>Light</span></label>
-        <label class="chip"><input type="checkbox" name="farbe" value="colorful"><span>Colorful</span></label>
-        <label class="chip"><input type="checkbox" name="farbe" value="neutral"><span>Neutral / Grey</span></label>
+      <div class="chips" id="farbeChips">
+        <label class="chip" onclick="selectSingleChip(this, 'farbe')"><input type="radio" name="farbe" value="dark" required><span>Dark</span></label>
+        <label class="chip" onclick="selectSingleChip(this, 'farbe')"><input type="radio" name="farbe" value="light"><span>Light</span></label>
+        <label class="chip" onclick="selectSingleChip(this, 'farbe')"><input type="radio" name="farbe" value="colorful"><span>Colorful</span></label>
+        <label class="chip" onclick="selectSingleChip(this, 'farbe')"><input type="radio" name="farbe" value="neutral"><span>Neutral / Grey</span></label>
       </div>
     </div>
 
     <div class="fg">
       <label>Which pages should the website include?<span class="req">*</span></label>
-      <div class="chips">
-        <label class="chip on"><input type="checkbox" name="seiten" value="home" checked><span>Home</span></label>
-        <label class="chip"><input type="checkbox" name="seiten" value="services"><span>Services</span></label>
-        <label class="chip"><input type="checkbox" name="seiten" value="about"><span>About Us</span></label>
-        <label class="chip on"><input type="checkbox" name="seiten" value="blog" checked><span>Blog</span></label>
-        <label class="chip"><input type="checkbox" name="seiten" value="contact"><span>Contact</span></label>
-        <label class="chip"><input type="checkbox" name="seiten" value="team"><span>Team</span></label>
-        <label class="chip"><input type="checkbox" name="seiten" value="portfolio"><span>Portfolio</span></label>
+      <div class="chips" id="seitenChips">
+        <label class="chip on" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="home" checked><span>Home</span></label>
+        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="services"><span>Services</span></label>
+        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="about"><span>About Us</span></label>
+        <label class="chip on" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="blog" checked><span>Blog</span></label>
+        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="contact"><span>Contact</span></label>
+        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="team"><span>Team</span></label>
+        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="portfolio"><span>Portfolio</span></label>
+        <div class="chip-add" onclick="showAddPage()" title="Add another page">+</div>
+      </div>
+      <div class="add-page-wrap" id="addPageWrap">
+        <input type="text" id="customPageInput" placeholder="Name of page (e.g., Careers)">
+        <button type="button" class="add-page-btn" onclick="addCustomPage()">Add</button>
       </div>
     </div>
 
     <div class="fg">
       <label>Describe your website vision<span class="req">*</span></label>
-      <textarea name="beschreibung" required placeholder="What should be on the homepage? What should visitors learn about your company? What services do you offer? The more details, the better."></textarea>
+      <textarea name="beschreibung" required></textarea>
     </div>
 
     <!-- Logo -->
-    <div class="fg">
+    <div class="fg" style="margin-bottom:0">
       <label>Do you have a logo for your website?<span class="req">*</span></label>
       <div class="logo-options">
         <button type="button" class="logo-btn" id="btn-logo-yes" onclick="setLogo('yes')">
@@ -179,12 +212,17 @@ footer a{color:var(--primary)}
           <span class="icon">✏️</span>No, please create one for me
         </button>
       </div>
-      <input type="hidden" name="logo_choice" id="logo_choice">
-      <div id="uploadZone" class="upload-zone" style="display:none" onclick="document.getElementById('logoFile').click()">
-        <input type="file" id="logoFile" accept=".jpg,.jpeg,.png,.gif,.svg,.webp,.avif,.bmp,.tif,.tiff,.ico,.pdf,.ai,.eps" onchange="handleFile(this)">
-        <p>Drop your logo here or click to select</p>
-        <p style="font-size:.75rem;margin-top:.3rem">JPG, PNG, SVG, GIF, WEBP, AI, PDF and more</p>
-        <p class="filename" id="fileName"></p>
+      <input type="hidden" name="logo_choice" id="logo_choice" required>
+      <div id="uploadZone" class="upload-zone" style="display:none">
+        <div onclick="document.getElementById('logoFile').click()">
+          <input type="file" id="logoFile" accept=".jpg,.jpeg,.png,.gif,.svg,.webp,.avif,.bmp,.tif,.tiff,.ico,.pdf,.ai,.eps" onchange="handleFile(this)">
+          <p>Drop your logo here or click to select</p>
+          <p style="font-size:.75rem;margin-top:.3rem">JPG, PNG, SVG, GIF, WEBP, AI, PDF and more</p>
+        </div>
+        <div>
+          <span class="filename" id="fileName"></span>
+          <span class="remove-file" id="removeFileBtn" onclick="removeFile(event)" title="Remove image">✕</span>
+        </div>
       </div>
     </div>
   </div>
@@ -192,13 +230,13 @@ footer a{color:var(--primary)}
   <!-- LinkedIn -->
   <div class="card">
     <div class="sec">LinkedIn Integration <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0;font-size:.82rem">(optional)</span></div>
-    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.2rem">To automatically publish your weekly articles on LinkedIn, you need to grant <strong style="color:var(--text)">admin rights</strong> to our LinkedIn account. Just follow these steps:</p>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.2rem">So that Statlift can automatically publish your weekly articles on LinkedIn, you need to grant our LinkedIn account <strong style="color:var(--text)">administrator rights</strong> to your page. Just follow this guide:</p>
 
     <div class="fg">
       <label>Would you like automatic LinkedIn publishing?</label>
       <div class="chips">
-        <label class="chip on" id="li-yes-chip"><input type="radio" name="linkedin_opt" value="yes" checked onchange="toggleLi(true)"><span>Yes, post automatically</span></label>
-        <label class="chip" id="li-no-chip"><input type="radio" name="linkedin_opt" value="no" onchange="toggleLi(false)"><span>No, I'll post myself</span></label>
+        <label class="chip on" id="li-yes-chip" onclick="toggleLiChip(this, true)"><input type="radio" name="linkedin_opt" value="yes" checked><span>Yes, post automatically</span></label>
+        <label class="chip" id="li-no-chip" onclick="toggleLiChip(this, false)"><input type="radio" name="linkedin_opt" value="no"><span>No, I'll post myself</span></label>
       </div>
     </div>
 
@@ -215,10 +253,10 @@ footer a{color:var(--primary)}
     </div>
   </div>
 
-  <!-- Additional -->
+  <!-- Sonstiges -->
   <div class="card">
     <div class="sec">Additional Information</div>
-    <div class="fg">
+    <div class="fg" style="margin-bottom:0">
       <label>Is there anything special we should know? <span class="opt-tag">(optional)</span></label>
       <textarea name="sonstiges"></textarea>
     </div>
@@ -243,27 +281,63 @@ footer a{color:var(--primary)}
 </footer>
 
 <script>
-document.querySelectorAll('.chips').forEach(group => {
-  group.querySelectorAll('.chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      chip.classList.toggle('on');
-      chip.querySelector('input').checked = chip.classList.contains('on');
-    });
+// --- CHIPS SELECTION LOGIC ---
+function selectSingleChip(element, groupName) {
+  document.querySelectorAll(`input[name="${groupName}"]`).forEach(inp => {
+    inp.checked = false;
+    inp.closest('.chip').classList.remove('on');
   });
-});
-
-function toggleLi(show) {
-  document.getElementById('liGuide').style.display = show ? 'block' : 'none';
-  document.getElementById('li-yes-chip').classList.toggle('on', show);
-  document.getElementById('li-no-chip').classList.toggle('on', !show);
+  const input = element.querySelector('input');
+  input.checked = true;
+  element.classList.add('on');
 }
 
+function toggleMultiChip(element) {
+  const input = element.querySelector('input');
+  input.checked = !input.checked;
+  element.classList.toggle('on', input.checked);
+}
+
+function toggleLiChip(element, show) {
+  document.getElementById('li-yes-chip').classList.toggle('on', show);
+  document.getElementById('li-no-chip').classList.toggle('on', !show);
+  document.getElementById('li-yes-chip').querySelector('input').checked = show;
+  document.getElementById('li-no-chip').querySelector('input').checked = !show;
+  document.getElementById('liGuide').style.display = show ? 'block' : 'none';
+}
+
+// --- CUSTOM PAGE ADDITION ---
+function showAddPage() {
+  const wrap = document.getElementById('addPageWrap');
+  wrap.style.display = wrap.style.display === 'flex' ? 'none' : 'flex';
+  if(wrap.style.display === 'flex') document.getElementById('customPageInput').focus();
+}
+
+function addCustomPage() {
+  const inp = document.getElementById('customPageInput');
+  const val = inp.value.trim();
+  if(!val) return;
+  const newChip = document.createElement('label');
+  newChip.className = 'chip on';
+  newChip.setAttribute('onclick', 'toggleMultiChip(this)');
+  newChip.innerHTML = `<input type="checkbox" name="seiten" value="${val}" checked><span>${val}</span>`;
+  const container = document.getElementById('seitenChips');
+  container.insertBefore(newChip, container.querySelector('.chip-add'));
+  inp.value = '';
+  document.getElementById('addPageWrap').style.display = 'none';
+}
+
+// --- LOGO LOGIC ---
 function setLogo(val) {
   document.getElementById('logo_choice').value = val;
   document.getElementById('btn-logo-yes').classList.toggle('on', val === 'yes');
   document.getElementById('btn-logo-no').classList.toggle('on', val === 'no');
   document.getElementById('uploadZone').style.display = val === 'yes' ? 'block' : 'none';
+  if (val === 'no') {
+    removeFile(new Event('click'));
+  }
 }
+
 function handleFile(input) {
   if (input.files && input.files[0]) {
     document.getElementById('fileName').textContent = '✓ ' + input.files[0].name;
@@ -271,8 +345,25 @@ function handleFile(input) {
   }
 }
 
-const TLD_RE = /\.[a-z]{2,}$/i;
-let domainAvailable = null, domTimer;
+function removeFile(e) {
+  e.stopPropagation();
+  const input = document.getElementById('logoFile');
+  input.value = '';
+  document.getElementById('fileName').textContent = '';
+  document.getElementById('uploadZone').classList.remove('has-file');
+}
+
+// --- DOMAIN VALIDATION ---
+const VALID_TLDS = ['com','net','org','de','at','ch','eu','info','biz','co','io','me','co.uk','nl','fr','it','es','pl'];
+let domainAvailable = null;
+let domTimer;
+
+function clearEmailError() {
+  document.getElementById('emailInput').classList.remove('error');
+  const msg = document.getElementById('emailMsg');
+  msg.className = 'field-msg';
+  msg.textContent = 'Please use the exact email address you used to subscribe.';
+}
 
 function onDomainInput(val) {
   clearTimeout(domTimer);
@@ -280,19 +371,31 @@ function onDomainInput(val) {
   const msg = document.getElementById('domMsg');
   const inp = document.getElementById('domainInput');
   const st = document.getElementById('domStatus');
-  val = val.trim();
-  inp.classList.remove('error','ok');
+  val = val.trim().toLowerCase();
+  inp.classList.remove('error', 'ok');
   st.innerHTML = '';
   msg.className = 'field-msg';
-  msg.innerHTML = 'Enter your desired domain with extension \u2013 e.g. <strong>mycompany.com</strong>, <strong>.de</strong> or <strong>.net</strong>';
+  msg.innerHTML = 'Enter your desired domain with extension – e.g. <strong>mycompany.com</strong>, <strong>.net</strong>, or <strong>.co.uk</strong>';
+  
   if (!val) return;
-  if (!TLD_RE.test(val)) {
+  
+  const parts = val.split('.');
+  if (parts.length < 2 || parts[parts.length-1] === '') {
     msg.className = 'field-msg err';
-    msg.textContent = 'Please include a domain extension – e.g. mycompany.com';
+    msg.textContent = 'Please include a domain extension – e.g. .com or .net';
     inp.classList.add('error');
     return;
   }
-  st.innerHTML = '<span class="dot s-check"></span><span class="s-check">Checking\u2026</span>';
+  
+  const tld = parts[parts.length-1];
+  if (!VALID_TLDS.includes(tld)) {
+    msg.className = 'field-msg err';
+    msg.textContent = `The .${tld} extension is not supported or invalid. Please choose a common extension like .com, .net, or .co.uk.`;
+    inp.classList.add('error');
+    return;
+  }
+
+  st.innerHTML = '<span class="dot s-check"></span><span class="s-check">Checking…</span>';
   domTimer = setTimeout(() => checkDomainAvailability(val), 700);
 }
 
@@ -309,48 +412,99 @@ async function checkDomainAvailability(domain) {
       st.innerHTML = '<span class="dot s-bad"></span><span class="s-bad">Taken</span>';
       inp.classList.add('error'); inp.classList.remove('ok');
       msg.className = 'field-msg err';
-      msg.textContent = 'This domain is already taken. Please choose another one.';
+      msg.textContent = 'This domain is unfortunately already taken. Please choose another one.';
     } else {
       st.innerHTML = '<span class="dot s-ok"></span><span class="s-ok">Available</span>';
       inp.classList.add('ok'); inp.classList.remove('error');
       msg.className = 'field-msg ok';
-      msg.textContent = '\u2713 This domain appears to be available.';
+      msg.textContent = '✓ This domain is available!';
     }
   } catch(e) { st.innerHTML = ''; }
 }
 
+function validateDomain() {
+  const val = document.getElementById('domainInput').value.trim();
+  if (!val) return false;
+  const parts = val.split('.');
+  if (parts.length < 2 || !VALID_TLDS.includes(parts[parts.length-1].toLowerCase())) return false;
+  if (domainAvailable === false) return false;
+  return true;
+}
+
+function showError(title, text) {
+  const box = document.getElementById('formErrorBox');
+  document.getElementById('formErrorTitle').textContent = title;
+  document.getElementById('formErrorText').innerHTML = text;
+  box.style.display = 'block';
+  box.scrollIntoView({behavior: 'smooth', block: 'center'});
+}
+
 async function submitForm(e) {
   e.preventDefault();
-  const domVal = document.getElementById('domainInput').value.trim();
-  if (!domVal || !TLD_RE.test(domVal)) {
+  document.getElementById('formErrorBox').style.display = 'none';
+
+  const logoChoice = document.getElementById('logo_choice').value;
+  if (!logoChoice) {
+    showError("Missing Information", "Please choose whether you have a logo or if we should create one.");
+    return;
+  }
+
+  const domVal = document.getElementById('domainInput').value.trim().toLowerCase();
+  const parts = domVal.split('.');
+  if (parts.length < 2 || !VALID_TLDS.includes(parts[parts.length-1])) {
     document.getElementById('domainInput').classList.add('error');
-    document.getElementById('domMsg').className = 'field-msg err';
-    document.getElementById('domMsg').textContent = 'Please include a domain extension – e.g. mycompany.com';
-    document.getElementById('domainInput').scrollIntoView({behavior:'smooth',block:'center'});
+    showError("Invalid Domain", "Please enter a valid domain with extension (e.g. .com or .net).");
     return;
   }
   if (domainAvailable === false) {
     document.getElementById('domainInput').classList.add('error');
-    document.getElementById('domainInput').scrollIntoView({behavior:'smooth',block:'center'});
+    showError("Domain Taken", "The chosen domain is already taken. Please choose another one.");
     return;
   }
+
   const btn = document.getElementById('submitBtn');
-  btn.disabled = true; btn.textContent = 'Submitting\u2026';
+  btn.disabled = true; btn.textContent = 'Validating & Submitting…';
+  
   const fd = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
+  
   ['stil','farbe','seiten'].forEach(k => {
     data[k] = Array.from(document.querySelectorAll(`[name="${k}"]:checked`)).map(i => i.value).join(', ');
   });
+  
   const lf = document.getElementById('logoFile');
   if (lf && lf.files && lf.files[0]) data['logo_dateiname'] = lf.files[0].name;
+
   try {
-    await fetch('https://n8n.statlift.net/webhook/abo3-onboarding-en', {
-      method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)
+    const res = await fetch('https://n8n.statlift.net/webhook/abo3-onboarding-en', {
+      method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
     });
-  } catch(err) {}
-  document.getElementById('form').style.display = 'none';
-  document.querySelector('.hero').style.display = 'none';
-  document.getElementById('successMsg').style.display = 'block';
+    
+    let result = {};
+    try { result = await res.json(); } catch(err) {}
+
+    if (result.error === 'not_found') {
+      document.getElementById('emailInput').classList.add('error');
+      showError("Email not found", "We couldn't find this email address in our active customer database. Please use the exact email address you used when subscribing.");
+      btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Complete Onboarding';
+      return;
+    }
+    
+    if (result.error === 'already_submitted') {
+      document.getElementById('emailInput').classList.add('error');
+      showError("Already submitted", 'You have already completed the onboarding for this subscription! If you need to change anything, please email us directly at <a href="mailto:team@statlift.net">team@statlift.net</a>.');
+      btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Complete Onboarding';
+      return;
+    }
+
+    document.getElementById('form').style.display = 'none';
+    document.querySelector('.hero').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+
+  } catch(err) {
+    showError("Connection Error", "The form could not be submitted. Please try again later or contact us directly.");
+    btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Complete Onboarding';
+  }
 }
 </script>
 </body>
