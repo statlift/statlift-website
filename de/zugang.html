@@ -661,12 +661,15 @@ async function submitForm() {
 
     if (!res.ok || data.success === false) {
 
-      document.getElementById('msgErrTxt').textContent = data.error === 'not_found'
-
-        ? 'Fehler: Diese E-Mail-Adresse hat kein aktives Abo abgeschlossen.'
-
-        : 'Bitte prüfen Sie Ihre Eingaben oder kontaktieren Sie team@statlift.de.';
-
+      if (data.error === 'not_found') {
+        document.getElementById('msgErrTxt').textContent = 'Fehler: Diese E-Mail-Adresse hat kein aktives Abo abgeschlossen.';
+      } else if (data.error === 'wrong_abo') {
+        document.getElementById('msgErrTxt').textContent = 'Fehler: Diese E-Mail-Adresse hat kein Abo 2 abgeschlossen.';
+      } else if (data.error === 'already_submitted') {
+        document.getElementById('msgErrTxt').innerHTML = 'Du hast uns bereits die Zugangsdaten übermittelt. Falls du diese anpassen möchtest, melde dich per E-Mail bei uns: <a href="mailto:team@statlift.de" style="color:#818cf8;text-decoration:none;">team@statlift.de</a>.';
+      } else {
+        document.getElementById('msgErrTxt').textContent = 'Bitte prüfen Sie Ihre Eingaben oder kontaktieren Sie team@statlift.de.';
+      }
       document.getElementById('msgErr').style.display = 'block';
 
     } else {
