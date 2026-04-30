@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statlift — Start Your Website Project</title>
+<meta name="description" content="Tell us your vision. We build your individual website including domain, hosting, and weekly SEO content.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08081a;--surface:#111128;--border:#1e1e42;--primary:#818cf8;--primary-dark:#6366f1;
+  --text:#f1f5f9;--muted:#94a3b8;--success:#22c55e;--error:#ef4444;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;background:rgba(8,8,26,.9);backdrop-filter:blur(12px)}
+.logo{font-size:1.25rem;font-weight:800;letter-spacing:-.03em;color:var(--text)}.logo span{color:var(--primary)}
+.hero{text-align:center;padding:5rem 1.5rem 3rem;max-width:680px;margin:0 auto}
+.badge{display:inline-block;background:rgba(129,140,248,.12);border:1px solid rgba(129,140,248,.25);color:var(--primary);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.35rem .9rem;border-radius:999px;margin-bottom:1.5rem}
+h1{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:1rem}
+h1 span{background:linear-gradient(135deg,var(--primary),#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.subtitle{color:var(--muted);font-size:1.05rem;max-width:540px;margin:0 auto}
+.form-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2.5rem;max-width:720px;margin:0 auto 3rem;box-shadow:0 0 60px rgba(99,102,241,.06)}
+.section-title{font-size:1rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem}
+.section-title::before{content:'';display:inline-block;width:3px;height:1.1em;background:var(--primary);border-radius:2px}
+.form-group{margin-bottom:1.5rem}
+label{display:block;font-size:.875rem;font-weight:600;color:var(--text);margin-bottom:.5rem}
+label .opt{color:var(--muted);font-weight:400;font-size:.8rem}
+input,textarea,select{width:100%;background:#0d0d24;border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem;color:var(--text);font-family:inherit;font-size:.95rem;transition:border-color .2s,box-shadow .2s;outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(129,140,248,.15)}
+input::placeholder,textarea::placeholder{color:var(--muted)}
+select option{background:#0d0d24}
+textarea{resize:vertical;min-height:120px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media(max-width:640px){.grid-2{grid-template-columns:1fr}}
+.divider{border:none;border-top:1px solid var(--border);margin:2rem 0}
+.domain-wrapper{position:relative}
+.domain-input{padding-right:9rem!important}
+.domain-status{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);font-size:.8rem;font-weight:600;display:flex;align-items:center;gap:.4rem}
+.status-checking{color:var(--muted)}
+.status-available{color:var(--success)}
+.status-taken{color:var(--error)}
+.status-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.domain-hint{font-size:.8rem;color:var(--muted);margin-top:.5rem}
+.chip-group{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.5rem}
+.chip{display:flex;align-items:center;gap:.4rem;background:#0d0d24;border:1px solid var(--border);border-radius:8px;padding:.5rem 1rem;cursor:pointer;transition:all .2s;font-size:.875rem;color:var(--muted);user-select:none}
+.chip:hover{border-color:var(--primary);color:var(--text)}
+.chip.active{background:rgba(129,140,248,.15);border-color:var(--primary);color:var(--primary)}
+.chip input{display:none}
+.linkedin-box{background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.2);border-radius:12px;padding:1.25rem 1.5rem;margin-top:.75rem}
+.linkedin-box p{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;background:var(--primary);color:#fff;font-family:inherit;font-size:1rem;font-weight:700;padding:1rem 2.5rem;border-radius:10px;border:none;cursor:pointer;transition:background .2s,transform .1s,box-shadow .2s;width:100%;margin-top:.5rem}
+.btn:hover{background:var(--primary-dark);box-shadow:0 4px 24px rgba(99,102,241,.35)}
+.btn:active{transform:scale(.99)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.success-msg{display:none;text-align:center;padding:3rem 1.5rem;max-width:480px;margin:0 auto}
+.success-icon{font-size:3rem;margin-bottom:1rem}
+.success-msg h2{font-size:1.5rem;font-weight:700;margin-bottom:.75rem}
+.success-msg p{color:var(--muted)}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--muted);font-size:.8rem;margin-top:2rem}
+footer a{color:var(--primary);text-decoration:none}
+</style>
+</head>
+<body>
+<nav><a class="logo" href="https://statlift.net">Stat<span>lift</span></a><span style="font-size:.85rem;color:var(--muted)">Plan 3 · Website Onboarding</span></nav>
+
+<div class="hero">
+  <div class="badge">Plan 3 · Premium</div>
+  <h1>We build your <span>website.</span></h1>
+  <p class="subtitle">Share your vision — we handle the rest. Domain, hosting, design and weekly SEO content are all included.</p>
+</div>
+
+<form id="onboardingForm" style="padding:0 1.5rem" onsubmit="submitForm(event)">
+<div class="form-card">
+
+  <!-- 1: Contact -->
+  <div class="section-title">Your Contact Details</div>
+  <div class="grid-2">
+    <div class="form-group">
+      <label>First Name <span class="opt">*</span></label>
+      <input type="text" name="vorname" required placeholder="John">
+    </div>
+    <div class="form-group">
+      <label>Last Name <span class="opt">*</span></label>
+      <input type="text" name="nachname" required placeholder="Doe">
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="form-group">
+      <label>Email Address <span class="opt">*</span></label>
+      <input type="email" name="email" required placeholder="info@yourcompany.com">
+    </div>
+    <div class="form-group">
+      <label>Company Name <span class="opt">*</span></label>
+      <input type="text" name="firma" required placeholder="Acme Corp Ltd.">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Industry <span class="opt">*</span></label>
+    <input type="text" name="branche" required placeholder="e.g. Accounting, Trades, IT Services">
+  </div>
+
+  <hr class="divider">
+
+  <!-- 2: Domain -->
+  <div class="section-title">Your Desired Domain</div>
+  <div class="form-group">
+    <label>Domain Search <span class="opt">(live check)</span></label>
+    <div class="domain-wrapper">
+      <input type="text" id="domainInput" name="domain" placeholder="mycompany.com" class="domain-input" oninput="checkDomain(this.value)">
+      <div class="domain-status" id="domainStatus"></div>
+    </div>
+    <p class="domain-hint">Enter your desired domain and we'll check availability live. If you don't have a domain yet, we recommend a .com domain.</p>
+  </div>
+  <div class="form-group">
+    <label>Alternative Domains <span class="opt">(optional)</span></label>
+    <input type="text" name="domain_alt" placeholder="e.g. mycompany.net, mycompany.co.uk">
+  </div>
+
+  <hr class="divider">
+
+  <!-- 3: Website Design -->
+  <div class="section-title">Website Vision</div>
+  <div class="form-group">
+    <label>What style should your website have? <span class="opt">*</span></label>
+    <div class="chip-group">
+      <label class="chip" onclick="toggleChip(this,'stil')"><input type="checkbox" name="stil" value="modern">Modern & minimalist</label>
+      <label class="chip" onclick="toggleChip(this,'stil')"><input type="checkbox" name="stil" value="elegant">Elegant & professional</label>
+      <label class="chip" onclick="toggleChip(this,'stil')"><input type="checkbox" name="stil" value="bold">Bold & striking</label>
+      <label class="chip" onclick="toggleChip(this,'stil')"><input type="checkbox" name="stil" value="warm">Warm & approachable</label>
+      <label class="chip" onclick="toggleChip(this,'stil')"><input type="checkbox" name="stil" value="tech">Technical & innovative</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Preferred color direction <span class="opt">*</span></label>
+    <div class="chip-group">
+      <label class="chip" onclick="toggleChip(this,'farbe')"><input type="checkbox" name="farbe" value="dark">Dark</label>
+      <label class="chip" onclick="toggleChip(this,'farbe')"><input type="checkbox" name="farbe" value="light">Light</label>
+      <label class="chip" onclick="toggleChip(this,'farbe')"><input type="checkbox" name="farbe" value="colorful">Colorful</label>
+      <label class="chip" onclick="toggleChip(this,'farbe')"><input type="checkbox" name="farbe" value="neutral">Neutral / Grey</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Reference Websites <span class="opt">(optional)</span></label>
+    <input type="text" name="referenz" placeholder="e.g. https://example.com — websites you like">
+  </div>
+  <div class="form-group">
+    <label>Which pages should the website include? <span class="opt">*</span></label>
+    <div class="chip-group">
+      <label class="chip active" onclick="toggleChip(this,'seiten')"><input type="checkbox" name="seiten" value="home" checked>Home</label>
+      <label class="chip" onclick="toggleChip(this,'seiten')"><input type="checkbox" name="seiten" value="services">Services</label>
+      <label class="chip" onclick="toggleChip(this,'seiten')"><input type="checkbox" name="seiten" value="about">About Us</label>
+      <label class="chip active" onclick="toggleChip(this,'seiten')"><input type="checkbox" name="seiten" value="blog" checked>Blog</label>
+      <label class="chip" onclick="toggleChip(this,'seiten')"><input type="checkbox" name="seiten" value="contact">Contact</label>
+      <label class="chip" onclick="toggleChip(this,'seiten')"><input type="checkbox" name="seiten" value="team">Team</label>
+      <label class="chip" onclick="toggleChip(this,'seiten')"><input type="checkbox" name="seiten" value="portfolio">Portfolio</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Describe your website vision <span class="opt">*</span></label>
+    <textarea name="beschreibung" required placeholder="What should be on the homepage? What should visitors learn about your company? What services do you offer? The more details, the better."></textarea>
+  </div>
+  <div class="form-group">
+    <label>Do you already have a logo or brand identity? <span class="opt">*</span></label>
+    <select name="logo">
+      <option value="">Please select...</option>
+      <option value="ja_logo">Yes, I have a finished logo</option>
+      <option value="ja_farben">Yes, I have defined colors/fonts</option>
+      <option value="nein">No — please create one for me</option>
+    </select>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 4: LinkedIn -->
+  <div class="section-title">LinkedIn Integration <span style="font-weight:400;color:var(--muted);text-transform:none;font-size:.85rem;letter-spacing:0">(optional)</span></div>
+  <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem">To automatically publish your weekly articles on LinkedIn, we need your credentials once. This is completely optional.</p>
+  <div class="form-group">
+    <label>Would you like to use the LinkedIn integration?</label>
+    <div class="chip-group">
+      <label class="chip active" id="li-yes" onclick="toggleLinkedIn(true)"><input type="radio" name="linkedin_opt" value="yes" checked>Yes, post automatically</label>
+      <label class="chip" id="li-no" onclick="toggleLinkedIn(false)"><input type="radio" name="linkedin_opt" value="no">No, I'll post myself</label>
+    </div>
+  </div>
+  <div id="linkedinFields" class="linkedin-box">
+    <p>⚠️ Your credentials will only be used to set up the automation and will not be stored afterwards.</p>
+    <div class="grid-2">
+      <div class="form-group" style="margin-bottom:0">
+        <label>LinkedIn Email</label>
+        <input type="email" name="li_email" placeholder="your@email.com">
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>LinkedIn Password</label>
+        <input type="password" name="li_passwort" placeholder="••••••••••">
+      </div>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem">Alternatively, you can send us an email after onboarding.</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 5: Additional -->
+  <div class="section-title">Additional Information</div>
+  <div class="form-group">
+    <label>Is there anything special we should know? <span class="opt">(optional)</span></label>
+    <textarea name="sonstiges" placeholder="Special wishes, target audience, competitors, deadlines or any other notes..."></textarea>
+  </div>
+
+  <button type="submit" class="btn" id="submitBtn">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    Complete Onboarding
+  </button>
+</div>
+</form>
+
+<div class="success-msg" id="successMsg">
+  <div class="success-icon">✅</div>
+  <h2>Perfect — let's get started!</h2>
+  <p>Your onboarding was successfully submitted. We'll get back to you within 24 hours with the next steps.</p>
+  <p style="margin-top:1rem;color:var(--primary);font-weight:600">team@statlift.net</p>
+</div>
+
+<footer>
+  <a href="https://statlift.net">Statlift</a> &middot; <a href="https://statlift.net#imprint">Imprint</a> &middot; <a href="https://statlift.net#privacy">Privacy</a>
+</footer>
+
+<script>
+let domainTimer;
+function checkDomain(val){
+  const el=document.getElementById('domainStatus');
+  clearTimeout(domainTimer);
+  val=val.trim();
+  if(!val||val.length<4){el.innerHTML='';return}
+  el.innerHTML='<span class="status-dot status-checking"></span><span class="status-checking">Checking...</span>';
+  domainTimer=setTimeout(async()=>{
+    try{
+      const r=await fetch(`https://dns.google/resolve?name=${encodeURIComponent(val)}&type=A`);
+      const d=await r.json();
+      if(d.Status===0&&d.Answer&&d.Answer.length>0){
+        el.innerHTML='<span class="status-dot status-taken"></span><span class="status-taken">Taken</span>';
+      }else{
+        el.innerHTML='<span class="status-dot status-available"></span><span class="status-available">Available</span>';
+      }
+    }catch(e){el.innerHTML='';}
+  },700);
+}
+
+function toggleChip(el,group){
+  const multi=['seiten','stil'];
+  if(!multi.includes(group)){
+    document.querySelectorAll(`[name="${group}"]`).forEach(inp=>{
+      inp.closest('.chip').classList.remove('active');
+    });
+  }
+  el.classList.toggle('active');
+}
+
+function toggleLinkedIn(show){
+  document.getElementById('linkedinFields').style.display=show?'block':'none';
+  document.getElementById('li-yes').classList.toggle('active',show);
+  document.getElementById('li-no').classList.toggle('active',!show);
+}
+
+async function submitForm(e){
+  e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;btn.textContent='Submitting...';
+  const fd=new FormData(e.target);
+  const data=Object.fromEntries(fd.entries());
+  ['seiten','stil','farbe'].forEach(k=>{
+    data[k]=Array.from(document.querySelectorAll(`[name="${k}"]:checked`)).map(i=>i.value).join(', ');
+  });
+  try{
+    await fetch('https://n8n.statlift.net/webhook/abo3-onboarding-en',{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)
+    });
+  }catch(e){}
+  document.getElementById('onboardingForm').style.display='none';
+  document.querySelector('.hero').style.display='none';
+  document.getElementById('successMsg').style.display='block';
+}
+</script>
+</body>
+</html>
