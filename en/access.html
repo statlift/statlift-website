@@ -254,8 +254,9 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
         </div>
 
 <div class="form-group">
-          <label for="wordpress_cms_user">Username</label>
-          <input type="text" id="wordpress_cms_user" name="cms_user" value="Statlift" readonly style="background-color: rgba(255,255,255,.05); color: #9ca3af; cursor: not-allowed;" autocomplete="off">
+          <label for="wordpress_cms_user">Your WordPress Username (Admin Account)</label>
+          <input type="text" id="wordpress_cms_user" name="cms_user" placeholder="e.g. admin or your-username" autocomplete="off">
+          <div class="field-error" id="wp_user_error">Please enter your WordPress username.</div>
         </div>
 
 <div class="form-group">
@@ -270,7 +271,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
         <div class="guide-title">📋 Step-by-Step Guide: WordPress</div>
 
-        <ol class="steps"><li>Log into WordPress</li><li>Go to <b>Users → Profile</b></li><li>Scroll down to <b>Application Passwords</b></li><li>Enter <b>Statlift</b> and click <b>Add New Application Password</b></li><li>Copy the generated password – it will only be shown once!</li><li>Enter it above as your App Password</li></ol>
+        <ol class="steps"><li>Log into WordPress</li><li>Go to <b>Users → Profile</b></li><li>Note your <b>Username</b> at the very top of the page – enter it in the “Your WordPress Username” field above</li><li>Scroll down to <b>Application Passwords</b></li><li>Enter any name (e.g. <b>Statlift</b>) and click <b>Add New Application Password</b></li><li>Copy the generated password – it will only be shown once!</li><li>Enter it above as your App Password</li></ol>
 
       </div>
 
@@ -654,6 +655,20 @@ async function submitForm() {
     return;
   }
 
+  if (selectedCms === 'wordpress') {
+    const userVal = document.getElementById('wordpress_cms_user').value.trim();
+    const userErr = document.getElementById('wp_user_error');
+    if (!userVal) {
+      userErr.style.display = 'block';
+      document.getElementById('wordpress_cms_user').classList.add('invalid');
+      document.getElementById('wordpress_cms_user').focus();
+      return;
+    } else {
+      userErr.style.display = 'none';
+      document.getElementById('wordpress_cms_user').classList.remove('invalid');
+    }
+  }
+
   
 
   const payload = { email, cms_system: selectedCms };
@@ -701,6 +716,7 @@ async function submitForm() {
         if (selectedCms === 'wordpress') {
           document.getElementById('wordpress_cms_pass').value = '';
           document.getElementById('wordpress_cms_url').value = '';
+          document.getElementById('wordpress_cms_user').value = '';
           document.getElementById('wp_plugin_warning').style.display = 'block';
         }
         document.getElementById('submitWrap').style.display = 'block';
