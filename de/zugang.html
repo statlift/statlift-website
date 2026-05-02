@@ -617,6 +617,12 @@ function selectCms(id) {
 
   document.getElementById('msgErr').style.display = 'none';
 
+  // Smooth scroll to input fields
+  setTimeout(() => {
+    const target = document.getElementById('cms-sections');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
+
 }
 
 
