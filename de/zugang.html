@@ -506,35 +506,29 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 <div id="section_wix" class="cms-section" style="display:none">
 
-      <div class="note-box">ℹ️ Folgen Sie der Anleitung unten, um Ihren Wix API-Schlüssel und Ihre Site-ID zu erhalten.</div>
+      <div class="note-box">ℹ️ Folgen Sie der Anleitung unten, um Ihren Wix API-Schlüssel zu erhalten und Ihre Website-URL einzufügen.</div>
 
       <div class="form-group">
           <label for="wix_cms_api_key">API-Schlüssel</label>
-          <input type="password" id="wix_cms_api_key" name="cms_api_key" placeholder="..." autocomplete="off">
+          <input type="password" id="wix_cms_api_key" name="cms_api_key" placeholder="IST.eyJ..." autocomplete="off">
         </div>
 
       <div class="form-group">
-          <label for="wix_cms_extra1">Site-ID</label>
-          <input type="text" id="wix_cms_extra1" name="cms_extra1" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" autocomplete="off">
+          <label for="wix_cms_extra1">Website-URL oder Site-ID</label>
+          <input type="text" id="wix_cms_extra1" name="cms_extra1" placeholder="https://manage.wix.com/dashboard/xxxxxxxx-xxxx-... oder nur die ID" autocomplete="off">
+          <div class="field-error" id="wix_siteid_error">Bitte geben Sie Ihre Wix-URL oder Site-ID ein.</div>
         </div>
 
       <div class="guide">
         <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Wix</div>
         <ol class="steps">
           <li>Öffnen Sie Ihre <b>Wix-Website im Editor</b> und klicken Sie im linken Menü auf <b>Apps</b></li>
-          <li>Klicken Sie auf <b>App hinzufügen</b> und suchen Sie nach <b>Wix Blog</b> – fügen Sie die App Ihrer Website hinzu (falls noch nicht vorhanden)</li>
-          <li>Gehen Sie anschließend zu den <b>Einstellungen</b> Ihrer Website</li>
-          <li>Klicken Sie auf <b>Headless-Einstellungen</b> und dann auf <b>API-Schlüssel verwalten</b></li>
-          <li>Klicken Sie auf <b>API-Schlüssel generieren</b></li>
-          <li>Scrollen Sie unter <b>Website-Berechtigungen</b> zu <b>Wix Blog</b> und kreuzen Sie es an</li>
-          <li>Klicken Sie auf <b>Schlüssel generieren</b> und kopieren Sie den <b>API-Schlüssel</b> in das Feld oben</li>
-          <li>Die <b>Site-ID</b> finden Sie direkt daneben unter <b>Kontonummer</b> – klicken Sie auf <b>ID kopieren</b> (siehe Bild unten) und tragen Sie diese ein</li>
+          <li>Klicken Sie auf <b>App hinzufügen</b>, suchen Sie nach <b>Wix Blog</b> und fügen Sie die App hinzu (falls noch nicht vorhanden)</li>
+          <li>Gehen Sie zu den <b>Einstellungen</b> Ihrer Website → <b>Headless-Einstellungen</b> → <b>API-Schlüssel verwalten</b></li>
+          <li>Klicken Sie auf <b>API-Schlüssel generieren</b>, setzen Sie unter <b>Website-Berechtigungen</b> einen Haken bei <b>Wix Blog</b> und klicken Sie auf <b>Schlüssel generieren</b></li>
+          <li>Kopieren Sie den generierten <b>API-Schlüssel</b> in das Feld oben</li>
+          <li>Gehen Sie nun zu Ihrem <b>Wix Dashboard</b> (<a href="https://manage.wix.com" target="_blank" style="color:#818cf8;">manage.wix.com</a>), wählen Sie Ihre Website aus und kopieren Sie die <b>gesamte URL</b> aus der Adresszeile Ihres Browsers in das Feld „Website-URL oder Site-ID" – wir extrahieren die ID automatisch</li>
         </ol>
-
-        <div style="margin-top:16px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);">
-          <img src="/de/wix-site-id.png" alt="Wix Site-ID Speicherort – ID kopieren Button ist markiert" style="width:100%;display:block;border-radius:8px;">
-        </div>
-        <p style="font-size:0.8rem;color:#64748b;margin-top:8px;text-align:center;">↑ Die <b style="color:#a5b4fc;">Site-ID</b> befindet sich in der Kontonummer-Box – klicken Sie auf „ID kopieren"</p>
       </div>
 
     </div>
@@ -596,6 +590,13 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 const WEBHOOK = 'https://hierocratic-marline-uricolytic.ngrok-free.dev/webhook/wp-zugangsdaten';
 
 let selectedCms = null;
+
+// Extract Wix site ID from a full dashboard URL or return as-is if already a UUID
+function extractWixSiteId(value) {
+  value = (value || '').trim();
+  const match = value.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
+  return match ? match[0] : value;
+}
 
 function validateWpPass() {
   const val = document.getElementById('wordpress_cms_pass').value;
@@ -675,7 +676,22 @@ async function submitForm() {
     }
   }
 
-  
+  // For Wix: extract site ID from URL before building payload
+  if (selectedCms === 'wix') {
+    const rawVal = document.getElementById('wix_cms_extra1').value.trim();
+    const siteId = extractWixSiteId(rawVal);
+    const errEl = document.getElementById('wix_siteid_error');
+    const inp = document.getElementById('wix_cms_extra1');
+    if (!siteId) {
+      errEl.style.display = 'block';
+      inp.classList.add('invalid');
+      return;
+    }
+    errEl.style.display = 'none';
+    inp.classList.remove('invalid');
+    // Write cleaned ID back so the loop below picks it up
+    inp.value = siteId;
+  }
 
   const payload = { email, cms_system: selectedCms };
 
