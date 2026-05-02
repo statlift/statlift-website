@@ -318,11 +318,11 @@ input:-webkit-autofill:active {
 
       <div class="fg">
 
-        <label>E-Mail-Adresse<span class="req">*</span></label>
+        <label>E-Mail-Adresse (Abo-Adresse)<span class="req">*</span></label>
 
         <input type="email" id="emailInput" name="email" required oninput="clearEmailError()">
 
-        <p class="field-msg" id="emailMsg">Bitte verwenden Sie die E-Mail, mit der Sie gebucht haben.</p>
+        <p class="field-msg" id="emailMsg"></p>
 
       </div>
 
@@ -986,7 +986,7 @@ function clearEmailError() {
 
   msg.className = 'field-msg';
 
-  msg.textContent = 'Bitte verwenden Sie die E-Mail, mit der Sie gebucht haben.';
+  msg.textContent = '';
 
 }
 
