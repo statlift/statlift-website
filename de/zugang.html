@@ -718,12 +718,17 @@ async function submitForm() {
       } else if (data.error === 'already_submitted') {
         document.getElementById('msgErrTxt').innerHTML = 'Du hast uns bereits die Zugangsdaten übermittelt. Falls du diese anpassen möchtest, melde dich per E-Mail bei uns: <a href="mailto:team@statlift.de" style="color:#818cf8;text-decoration:none;">team@statlift.de</a>.';
       } else if (data.error === 'invalid_credentials') {
-        document.getElementById('msgErrTxt').innerHTML = '⚠️ <b>Zugangsdaten ungültig oder Plugin blockiert den Zugriff.</b><br>Bitte überprüfen Sie:<ul style="margin-top:8px;padding-left:18px;font-size:.88rem;"><li>Ist das App-Passwort korrekt kopiert?</li><li>Hat ein Sicherheits-Plugin (Wordfence, iThemes o.ä.) den Zugriff blockiert?</li><li>Ist die Website-URL exakt richtig (inkl. https://)?</li></ul>Bitte korrigieren Sie die Daten und übermitteln Sie diese erneut.';
-        if (selectedCms === 'wordpress') {
-          document.getElementById('wordpress_cms_pass').value = '';
-          document.getElementById('wordpress_cms_url').value = '';
-          document.getElementById('wordpress_cms_user').value = '';
-          document.getElementById('wp_plugin_warning').style.display = 'block';
+        if (selectedCms === 'wix') {
+          document.getElementById('msgErrTxt').innerHTML = '⚠️ <b>Zugangsdaten ungültig.</b><br>Bitte überprüfen Sie:<ul style="margin-top:8px;padding-left:18px;font-size:.88rem;"><li>Haben Sie unter Website-Berechtigungen die App <b>Wix Blog</b> angekreuzt?</li><li>Haben Sie den <b>API-Schlüssel</b> vollständig kopiert?</li><li>Ist die <b>Site-ID</b> korrekt eingetragen?</li></ul>Bitte korrigieren Sie die Daten und übermitteln Sie diese erneut.';
+          document.getElementById('wix_cms_api_key').value = '';
+        } else {
+          document.getElementById('msgErrTxt').innerHTML = '⚠️ <b>Zugangsdaten ungültig oder Plugin blockiert den Zugriff.</b><br>Bitte überprüfen Sie:<ul style="margin-top:8px;padding-left:18px;font-size:.88rem;"><li>Ist das App-Passwort korrekt kopiert?</li><li>Hat ein Sicherheits-Plugin (Wordfence, iThemes o.ä.) den Zugriff blockiert?</li><li>Ist die Website-URL exakt richtig (inkl. https://)?</li></ul>Bitte korrigieren Sie die Daten und übermitteln Sie diese erneut.';
+          if (selectedCms === 'wordpress') {
+            document.getElementById('wordpress_cms_pass').value = '';
+            document.getElementById('wordpress_cms_url').value = '';
+            document.getElementById('wordpress_cms_user').value = '';
+            document.getElementById('wp_plugin_warning').style.display = 'block';
+          }
         }
         document.getElementById('submitWrap').style.display = 'block';
       } else {
