@@ -111,6 +111,11 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 
 .disabled-cms{opacity:0.4;cursor:not-allowed;pointer-events:none;}
+.li-toggle-btn{flex:1;padding:12px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.02);color:#cbd5e1;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;}
+.li-toggle-btn:hover{border-color:rgba(79,70,229,.5);background:rgba(79,70,229,.05);}
+.li-toggle-btn.active-ja{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.4);color:#86efac;}
+.li-toggle-btn.active-nein{background:rgba(100,116,139,.15);border-color:rgba(100,116,139,.35);color:#94a3b8;}
+#linkedin-section{display:none;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.07);}
 </style>
 
 
@@ -541,6 +546,27 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 
 
+<!-- LinkedIn Integration -->
+<div id="linkedin-section">
+  <div style="font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#818cf8;margin-bottom:10px;">LinkedIn-Integration <span style="font-weight:400;color:#475569;text-transform:none;letter-spacing:0;font-size:.8rem;">(optional)</span></div>
+  <p style="font-size:.88rem;color:#94a3b8;margin-bottom:14px;line-height:1.6;">Möchten Sie, dass Statlift Ihre wöchentlichen Artikel automatisch auf LinkedIn veröffentlicht?</p>
+  <div style="display:flex;gap:10px;margin-bottom:14px;">
+    <button type="button" id="li-ja-btn" class="li-toggle-btn" onclick="setLinkedin('JA')">✅ Ja, automatisch posten</button>
+    <button type="button" id="li-nein-btn" class="li-toggle-btn active-nein" onclick="setLinkedin('NEIN')">❌ Nein, ich poste selbst</button>
+  </div>
+  <div id="li-guide" style="display:none;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:18px 20px;">
+    <div class="guide-title">So geben Sie Statlift Admin-Rechte auf LinkedIn:</div>
+    <ol class="steps">
+      <li>Klicken Sie auf Ihrer <b>LinkedIn Unternehmensseite</b> oben auf <b>„Seite verwalten“</b></li>
+      <li>Klicken Sie links auf <b>„Einstellungen“</b> → <b>„Administratoren verwalten“</b></li>
+      <li>Wählen Sie <b>„Admins hinzufügen“</b> und suchen Sie nach: <b style="color:#818cf8;">Statlift</b></li>
+      <li>Wählen Sie die Rolle <b>„Super-Admin“</b> und bestätigen Sie</li>
+      <li>Fertig! Sobald die Rechte aktiv sind, kümmern wir uns um den Rest.</li>
+    </ol>
+    <p style="font-size:.8rem;color:#475569;margin-top:10px;">Sie können die Zugriffsrechte jederzeit in Ihren LinkedIn-Einstellungen widerrufen.</p>
+  </div>
+</div>
+
 <div id="submitWrap" style="display:none">
 
   <button class="btn" id="submitBtn" onclick="submitForm()">Zugangsdaten übermitteln →</button>
@@ -562,6 +588,14 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 const WEBHOOK = 'https://hierocratic-marline-uricolytic.ngrok-free.dev/webhook/wp-zugangsdaten';
 
 let selectedCms = null;
+let linkedinChoice = 'NEIN';
+
+function setLinkedin(val) {
+  linkedinChoice = val;
+  document.getElementById('li-ja-btn').className = 'li-toggle-btn' + (val === 'JA' ? ' active-ja' : '');
+  document.getElementById('li-nein-btn').className = 'li-toggle-btn' + (val === 'NEIN' ? ' active-nein' : '');
+  document.getElementById('li-guide').style.display = val === 'JA' ? 'block' : 'none';
+}
 
 // Extract Wix site ID from a full dashboard URL or return as-is if already a UUID
 function extractWixSiteId(value) {
@@ -671,7 +705,7 @@ async function submitForm() {
     inp.value = siteId;
   }
 
-  const payload = { email, cms_system: selectedCms };
+  const payload = { email, cms_system: selectedCms, linkedin: linkedinChoice };
 
   const sec = document.getElementById('section_' + selectedCms);
 
