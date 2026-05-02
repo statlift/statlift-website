@@ -111,10 +111,18 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 
 .disabled-cms{opacity:0.4;cursor:not-allowed;pointer-events:none;}
-.li-toggle-btn{flex:1;padding:12px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.02);color:#cbd5e1;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;}
-.li-toggle-btn:hover{border-color:rgba(79,70,229,.5);background:rgba(79,70,229,.05);}
-.li-toggle-btn.active-ja{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.4);color:#86efac;}
-.li-toggle-btn.active-nein{background:rgba(100,116,139,.15);border-color:rgba(100,116,139,.35);color:#94a3b8;}
+/* LinkedIn - identical to onboarding */
+.z-chip{display:inline-flex;align-items:center;gap:.35rem;background:#111116;border:1.5px solid rgba(255,255,255,.1);border-radius:8px;padding:.45rem .9rem;cursor:pointer;font-size:.85rem;color:#94a3b8;transition:all .18s;user-select:none;}
+.z-chip:hover{border-color:#818cf8;color:#f8fafc;}
+.z-chip.on{background:rgba(129,140,248,.12);border-color:#818cf8;color:#818cf8;font-weight:600;}
+.z-chip input{display:none;}
+.li-box{background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.18);border-radius:12px;padding:1.3rem 1.5rem;margin-top:12px;}
+.li-steps{list-style:none;counter-reset:li;margin-top:.8rem;padding:0;}
+.li-steps li{counter-increment:li;display:flex;gap:.7rem;align-items:flex-start;font-size:.88rem;color:#94a3b8;margin-bottom:.75rem;}
+.li-steps li::before{content:counter(li);background:#818cf8;color:#fff;width:1.5rem;height:1.5rem;min-width:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;margin-top:.1rem;}
+.li-steps li strong{color:#f8fafc;}
+.z-sec{font-size:.78rem;font-weight:700;color:#818cf8;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.2rem;display:flex;align-items:center;gap:.55rem;}
+.z-sec::before{content:"";width:3px;height:1em;background:#818cf8;border-radius:2px;flex-shrink:0;}
 #linkedin-section{display:none;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.07);}
 </style>
 
@@ -160,56 +168,59 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 
 
-<div class="cms-grid">
-
-<div class="cms-card" data-cms="wordpress" onclick="selectCms('wordpress')" tabindex="0">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/wordpresslogo.png" alt="WordPress"></div>
-      <div class="cms-label">WordPress</div>
-    </div>
-
-<div class="cms-card disabled-cms" data-cms="hubspot">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/hubspotlogo.jpg" alt="HubSpot"></div>
-      <div class="cms-label">HubSpot</div>
-    </div>
-
-<div class="cms-card disabled-cms" data-cms="webflow">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/webflowlogo.png" alt="Webflow"></div>
-      <div class="cms-label">Webflow</div>
-    </div>
-
-<div class="cms-card disabled-cms" data-cms="typo3">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/typo3logo.png" alt="TYPO3"></div>
-      <div class="cms-label">TYPO3</div>
-    </div>
-
-<div class="cms-card disabled-cms" data-cms="contao">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/contaologo.png" alt="Contao"></div>
-      <div class="cms-label">Contao</div>
-    </div>
-
-<div class="cms-card disabled-cms" data-cms="drupal">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/drupallogo.png" alt="Drupal"></div>
-      <div class="cms-label">Drupal</div>
-    </div>
-
-<div class="cms-card disabled-cms" data-cms="shopify">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/shopifylogo.png" alt="Shopify"></div>
-      <div class="cms-label">Shopify</div>
-    </div>
-
-<div class="cms-card disabled-cms" data-cms="shopware">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/shopwarelogo.png" alt="Shopware"></div>
-      <div class="cms-label">Shopware</div>
-    </div>
-
-<div class="cms-card" data-cms="wix" onclick="selectCms('wix')" tabindex="0">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/wixlogo.png" alt="Wix"></div>
-      <div class="cms-label">Wix</div>
-    </div>
-
-<div class="cms-card" data-cms="squarespace" onclick="selectCms('squarespace')" tabindex="0">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/squarespacelogo.png" alt="Squarespace" style="filter:invert(1) brightness(0)"></div>
-      <div class="cms-label">Squarespace</div>
+<div class="cms-grid">
+
+<div class="cms-card" data-cms="wordpress" onclick="selectCms('wordpress')" tabindex="0">
+      <div class="cms-icon logo-chip"><img src="/assets/logos/wordpresslogo.png" alt="WordPress"></div>
+      <div class="cms-label">WordPress</div>
+    </div>
+
+<div class="cms-card" data-cms="wix" onclick="selectCms('wix')" tabindex="0">
+      <div class="cms-icon logo-chip"><img src="/assets/logos/wixlogo.png" alt="Wix"></div>
+      <div class="cms-label">Wix</div>
+    </div>
+
+<div class="cms-card" data-cms="squarespace" onclick="selectCms('squarespace')" tabindex="0">
+      <div class="cms-icon logo-chip"><img src="/assets/logos/squarespacelogo.png" alt="Squarespace" style="filter:invert(1) brightness(0)"></div>
+      <div class="cms-label">Squarespace</div>
+    </div>
+
+<div class="cms-card disabled-cms" data-cms="hubspot">
+      <div class="cms-icon logo-chip"><img src="/assets/logos/hubspotlogo.jpg" alt="HubSpot"></div>
+      <div class="cms-label">HubSpot</div>
+    </div>
+
+<div class="cms-card disabled-cms" data-cms="webflow">
+      <div class="cms-icon logo-chip"><img src="/assets/logos/webflowlogo.png" alt="Webflow"></div>
+      <div class="cms-label">Webflow</div>
+    </div>
+
+<div class="cms-card disabled-cms" data-cms="typo3">
+      <div class="cms-icon logo-chip"><img src="/assets/logos/typo3logo.png" alt="TYPO3"></div>
+      <div class="cms-label">TYPO3</div>
+    </div>
+
+<div class="cms-card disabled-cms" data-cms="contao">
+      <div class="cms-icon logo-chip"><img src="/assets/logos/contaologo.png" alt="Contao"></div>
+      <div class="cms-label">Contao</div>
+    </div>
+
+<div class="cms-card disabled-cms" data-cms="drupal">
+      <div class="cms-icon logo-chip"><img src="/assets/logos/drupallogo.png" alt="Drupal"></div>
+      <div class="cms-label">Drupal</div>
+    </div>
+
+<div class="cms-card disabled-cms" data-cms="shopify">
+      <div class="cms-icon logo-chip"><img src="/assets/logos/shopifylogo.png" alt="Shopify"></div>
+      <div class="cms-label">Shopify</div>
+    </div>
+
+<div class="cms-card disabled-cms" data-cms="shopware">
+      <div class="cms-icon logo-chip"><img src="/assets/logos/shopwarelogo.png" alt="Shopware"></div>
+      <div class="cms-label">Shopware</div>
+    </div>
+
+</div>
     </div>
 
 </div>
@@ -548,22 +559,25 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 <!-- LinkedIn Integration -->
 <div id="linkedin-section">
-  <div style="font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#818cf8;margin-bottom:10px;">LinkedIn-Integration <span style="font-weight:400;color:#475569;text-transform:none;letter-spacing:0;font-size:.8rem;">(optional)</span></div>
-  <p style="font-size:.88rem;color:#94a3b8;margin-bottom:14px;line-height:1.6;">Möchten Sie, dass Statlift Ihre wöchentlichen Artikel automatisch auf LinkedIn veröffentlicht?</p>
-  <div style="display:flex;gap:10px;margin-bottom:14px;">
-    <button type="button" id="li-ja-btn" class="li-toggle-btn" onclick="setLinkedin('JA')">✅ Ja, automatisch posten</button>
-    <button type="button" id="li-nein-btn" class="li-toggle-btn active-nein" onclick="setLinkedin('NEIN')">❌ Nein, ich poste selbst</button>
+  <div class="z-sec">LinkedIn-Integration <span style="font-weight:400;color:#94a3b8;text-transform:none;letter-spacing:0;font-size:.82rem;">(optional)</span></div>
+  <p style="color:#94a3b8;font-size:.9rem;margin-bottom:1.2rem;line-height:1.6;">Damit Statlift Ihre wöchentlichen Beiträge automatisch auf LinkedIn veröffentlichen kann, müssen Sie unserem LinkedIn-Konto <strong style="color:#f8fafc;">Administratorrechte</strong> auf Ihrer Seite geben.</p>
+  <div style="margin-bottom:1rem;">
+    <label style="font-size:.83rem;font-weight:600;margin-bottom:.6rem;display:block;color:#f8fafc;">Möchten Sie die automatische LinkedIn-Veröffentlichung?</label>
+    <div style="display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.45rem;">
+      <label class="z-chip on" id="li-yes-chip" onclick="toggleLiChip(this,true)"><input type="radio" name="linkedin_opt" value="ja" checked style="display:none"><span>Ja, automatisch posten</span></label>
+      <label class="z-chip" id="li-no-chip" onclick="toggleLiChip(this,false)"><input type="radio" name="linkedin_opt" value="nein" style="display:none"><span>Nein, ich poste selbst</span></label>
+    </div>
   </div>
-  <div id="li-guide" style="display:none;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:18px 20px;">
-    <div class="guide-title">So geben Sie Statlift Admin-Rechte auf LinkedIn:</div>
-    <ol class="steps">
-      <li>Klicken Sie auf Ihrer <b>LinkedIn Unternehmensseite</b> oben auf <b>„Seite verwalten“</b></li>
-      <li>Klicken Sie links auf <b>„Einstellungen“</b> → <b>„Administratoren verwalten“</b></li>
-      <li>Wählen Sie <b>„Admins hinzufügen“</b> und suchen Sie nach: <b style="color:#818cf8;">Statlift</b></li>
-      <li>Wählen Sie die Rolle <b>„Super-Admin“</b> und bestätigen Sie</li>
-      <li>Fertig! Sobald die Rechte aktiv sind, kümmern wir uns um den Rest.</li>
+  <div id="liGuide" class="li-box">
+    <strong style="font-size:.9rem;color:#f8fafc;">So geben Sie Statlift Admin-Rechte auf LinkedIn:</strong>
+    <ol class="li-steps">
+      <li><span>Klicken Sie auf Ihrer <strong>LinkedIn Unternehmensseite</strong> oben auf <strong>„Seite verwalten“</strong></span></li>
+      <li><span>Klicken Sie links auf <strong>„Einstellungen“</strong> → <strong>„Administratoren verwalten“</strong></span></li>
+      <li><span>Wählen Sie <strong>„Admins hinzufügen“</strong> und suchen Sie nach: <strong style="color:#818cf8;">Statlift</strong></span></li>
+      <li><span>Wählen Sie die Rolle <strong>„Super-Admin“</strong> und bestätigen Sie</span></li>
+      <li><span>Fertig! Sobald die Rechte aktiv sind, kümmern wir uns um den Rest.</span></li>
     </ol>
-    <p style="font-size:.8rem;color:#475569;margin-top:10px;">Sie können die Zugriffsrechte jederzeit in Ihren LinkedIn-Einstellungen widerrufen.</p>
+    <p style="font-size:.8rem;color:#475569;margin-top:.5rem;">Sie können die Zugriffsrechte jederzeit in Ihren LinkedIn-Einstellungen widerrufen.</p>
   </div>
 </div>
 
@@ -588,13 +602,13 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 const WEBHOOK = 'https://hierocratic-marline-uricolytic.ngrok-free.dev/webhook/wp-zugangsdaten';
 
 let selectedCms = null;
-let linkedinChoice = 'NEIN';
+let linkedinChoice = 'JA';
 
-function setLinkedin(val) {
-  linkedinChoice = val;
-  document.getElementById('li-ja-btn').className = 'li-toggle-btn' + (val === 'JA' ? ' active-ja' : '');
-  document.getElementById('li-nein-btn').className = 'li-toggle-btn' + (val === 'NEIN' ? ' active-nein' : '');
-  document.getElementById('li-guide').style.display = val === 'JA' ? 'block' : 'none';
+function toggleLiChip(el, isYes) {
+  linkedinChoice = isYes ? 'JA' : 'NEIN';
+  document.getElementById('li-yes-chip').className = 'z-chip' + (isYes ? ' on' : '');
+  document.getElementById('li-no-chip').className = 'z-chip' + (!isYes ? ' on' : '');
+  document.getElementById('liGuide').style.display = isYes ? 'block' : 'none';
 }
 
 // Extract Wix site ID from a full dashboard URL or return as-is if already a UUID
