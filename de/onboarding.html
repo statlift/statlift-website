@@ -483,6 +483,11 @@ input:-webkit-autofill:active {
         </div>
 
       </div>
+<div id="logoDescZone" style="display:none; margin-top:1.5rem;">
+<label>Wie soll Ihr Logo aussehen? (Farben, Stil, Ideen)<span class="req">*</span></label>
+<textarea name="logo_beschreibung" id="logoDesc"></textarea>
+</div>
+
 
     </div>
 
@@ -897,21 +902,25 @@ function addCustomPage() {
 // --- LOGO LOGIC ---
 
 function setLogo(val) {
-
   document.getElementById('logo_choice').value = val;
-
   document.getElementById('btn-logo-yes').classList.toggle('on', val === 'yes');
-
   document.getElementById('btn-logo-no').classList.toggle('on', val === 'no');
-
   document.getElementById('uploadZone').style.display = val === 'yes' ? 'block' : 'none';
-
+  
+  const ldz = document.getElementById('logoDescZone');
+  const ldi = document.getElementById('logoDesc');
+  
   if (val === 'no') {
-
+    if(ldz) ldz.style.display = 'block';
+    if(ldi) ldi.setAttribute('required', 'required');
     removeFile(new Event('click'));
-
+  } else {
+    if(ldz) ldz.style.display = 'none';
+    if(ldi) {
+      ldi.removeAttribute('required');
+      ldi.value = '';
+    }
   }
-
 }
 
 
