@@ -54,7 +54,8 @@ h1{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:800;letter-spacing:-.025em;mar
 
 .cms-card.active{border-color:var(--accent);background:rgba(79,70,229,.12);box-shadow:0 0 0 2px rgba(79,70,229,.2)}
 
-.cms-icon{width:40px;height:40px;border-radius:8px;border:1px solid transparent;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.cms-icon{width:48px;height:48px;border-radius:8px;border:1px solid transparent;display:flex;align-items:center;justify-content:center;font-size:1.4rem;padding:6px}
+.cms-icon img{width:100%;height:100%;object-fit:contain;display:block}
 
 .cms-label{font-size:.72rem;font-weight:600;text-align:center;color:#cbd5e1}
 
@@ -156,83 +157,53 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 <div class="cms-grid">
 
 <div class="cms-card" data-cms="wordpress" onclick="selectCms('wordpress')" tabindex="0">
-
-      <div class="cms-icon" style="background:#21759b22;border-color:#21759b44"><svg width="22" height="22" viewBox="0 0 24 24" fill="#21759b" xmlns="http://www.w3.org/2000/svg"><path d="M12.158 12.786l-2.698 7.84c.806.236 1.657.365 2.54.365 1.047 0 2.05-.18 2.986-.51-.024-.037-.046-.078-.065-.123l-2.763-7.572zm5.405-3.033c0-.63-.21-1.12-.47-1.488-.386-.543-.755-.998-.755-1.54 0-.613.473-1.173 1.12-1.173.056 0 .11.006.164.015A8.932 8.932 0 0012 2a8.948 8.948 0 00-6.19 2.44A2.943 2.943 0 016.326 3.86c-1.312 0-2.31.98-2.31 2.31 0 1.155.77 2.065 1.628 3.167.63.805 1.347 1.715 1.347 3.097 0 1.295-.892 2.765-1.452 4.025-1.18-1.575-1.875-3.52-1.875-5.617 0-.585.056-1.158.163-1.715.196.155.433.245.69.245.542 0 .98-.438.98-.98 0-.022-.002-.042-.005-.063a8.941 8.941 0 005.158 12.43L6.035 7.02c-.105-.315-.367-.543-.682-.613a1.996 1.996 0 01-.19-.053A8.966 8.966 0 0012 22a8.963 8.963 0 007.822-4.707L16.29 8.28c-.28-.787-.997-1.33-1.837-1.33-.21 0-.414.038-.605.105.156-.35.253-.745.253-1.165 0-.525-.138-1.025-.383-1.463A8.932 8.932 0 0012 2c2.096 0 4.025.72 5.564 1.913-1.592.595-2.71 1.995-2.71 3.665 0 .543.14 1.05.385 1.487l3.665 10.046c.403-.787.69-1.644.823-2.553l-2.164-6.805zm-5.563-7.753c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9z"/></svg></div>
-
+      <div class="cms-icon" style="background:rgba(33,117,155,0.1);border-color:rgba(33,117,155,0.25)"><img src="/assets/logos/wordpresslogo.png" alt="WordPress"></div>
       <div class="cms-label">WordPress</div>
-
     </div>
 
 <div class="cms-card disabled-cms" data-cms="hubspot">
-
-      <div class="cms-icon" style="background:#ff7a5922;border-color:#ff7a5944">🟠</div>
-
+      <div class="cms-icon" style="background:rgba(255,122,89,0.1);border-color:rgba(255,122,89,0.25)"><img src="/assets/logos/hubspotlogo.jpg" alt="HubSpot"></div>
       <div class="cms-label">HubSpot</div>
-
     </div>
 
 <div class="cms-card disabled-cms" data-cms="webflow">
-
-      <div class="cms-icon" style="background:#4353ff22;border-color:#4353ff44">🔷</div>
-
+      <div class="cms-icon" style="background:rgba(67,83,255,0.1);border-color:rgba(67,83,255,0.25)"><img src="/assets/logos/webflowlogo.png" alt="Webflow"></div>
       <div class="cms-label">Webflow</div>
-
     </div>
 
 <div class="cms-card disabled-cms" data-cms="typo3">
-
-      <div class="cms-icon" style="background:#f4970022;border-color:#f4970044">🟥</div>
-
+      <div class="cms-icon" style="background:rgba(244,151,0,0.1);border-color:rgba(244,151,0,0.25)"><img src="/assets/logos/typo3logo.png" alt="TYPO3"></div>
       <div class="cms-label">TYPO3</div>
-
     </div>
 
 <div class="cms-card disabled-cms" data-cms="contao">
-
-      <div class="cms-icon" style="background:#f47c0022;border-color:#f47c0044">🟩</div>
-
+      <div class="cms-icon" style="background:rgba(235,133,20,0.1);border-color:rgba(235,133,20,0.25)"><img src="/assets/logos/contaologo.png" alt="Contao"></div>
       <div class="cms-label">Contao</div>
-
     </div>
 
 <div class="cms-card disabled-cms" data-cms="drupal">
-
-      <div class="cms-icon" style="background:#0678be22;border-color:#0678be44">🔵</div>
-
+      <div class="cms-icon" style="background:rgba(6,120,190,0.1);border-color:rgba(6,120,190,0.25)"><img src="/assets/logos/drupallogo.png" alt="Drupal"></div>
       <div class="cms-label">Drupal</div>
-
     </div>
 
 <div class="cms-card disabled-cms" data-cms="shopify">
-
-      <div class="cms-icon" style="background:#95bf4722;border-color:#95bf4744"><svg width="22" height="22" viewBox="0 0 24 24" fill="#95bf47" xmlns="http://www.w3.org/2000/svg"><path d="M21.282 3.652a1.442 1.442 0 0 0-1.026-.411l-3.32-.016c-.05-.002-.1-.005-.15-.011L14.654.514A1.6 1.6 0 0 0 13.565.04l-5.631 1.58A1.6 1.6 0 0 0 6.772 3.01l.056.241-3.66.866a1.439 1.439 0 0 0-1.127 1.492l1.968 15.65c.081.597.595 1.05 1.196 1.05h13.682c.571 0 1.066-.407 1.18-1.002l1.986-16.148a1.44 1.44 0 0 0-.77-1.507zm-7.643 14.774c-4.482 0-4.417-2.617-4.417-2.617h1.495s.16 1.258 2.871 1.258c2.198 0 2.222-1.077 2.222-1.17 0-.317-.184-.816-1.92-.931-3.056-.206-4.502-1.378-4.502-3.111 0-1.848 1.472-3.14 4.14-3.14 3.645 0 3.738 2.054 3.738 2.054l-1.397.05s-.088-.936-2.278-.936c-1.88 0-2.072.846-2.072 1.042 0 .445.367.72 1.637.839 3.407.318 4.792 1.464 4.792 3.197 0 1.942-1.587 3.465-4.309 3.465z"/></svg></div>
-
+      <div class="cms-icon" style="background:rgba(149,191,71,0.1);border-color:rgba(149,191,71,0.25)"><img src="/assets/logos/shopifylogo.png" alt="Shopify"></div>
       <div class="cms-label">Shopify</div>
-
     </div>
 
 <div class="cms-card disabled-cms" data-cms="shopware">
-
-      <div class="cms-icon" style="background:#189eff22;border-color:#189eff44">🩵</div>
-
+      <div class="cms-icon" style="background:rgba(24,158,255,0.1);border-color:rgba(24,158,255,0.25)"><img src="/assets/logos/shopwarelogo.png" alt="Shopware"></div>
       <div class="cms-label">Shopware</div>
-
     </div>
 
 <div class="cms-card" data-cms="wix" onclick="selectCms('wix')" tabindex="0">
-
-      <div class="cms-icon" style="background:#faad0022;border-color:#faad0044">⬛</div>
-
+      <div class="cms-icon" style="background:rgba(250,205,0,0.08);border-color:rgba(250,205,0,0.2)"><img src="/assets/logos/wixlogo.png" alt="Wix"></div>
       <div class="cms-label">Wix</div>
-
     </div>
 
 <div class="cms-card" data-cms="squarespace" onclick="selectCms('squarespace')" tabindex="0">
-
-      <div class="cms-icon" style="background:#22222222;border-color:#22222244">⬜</div>
-
+      <div class="cms-icon" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15)"><img src="/assets/logos/squarespacelogo.png" alt="Squarespace"></div>
       <div class="cms-label">Squarespace</div>
-
     </div>
 
 </div>
