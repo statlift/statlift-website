@@ -54,9 +54,7 @@ h1{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:800;letter-spacing:-.025em;mar
 
 .cms-card.active{border-color:var(--accent);background:rgba(79,70,229,.12);box-shadow:0 0 0 2px rgba(79,70,229,.2)}
 
-.cms-icon{width:48px;height:48px;border-radius:8px;border:1px solid transparent;display:flex;align-items:center;justify-content:center;font-size:1.4rem;padding:6px}
-.cms-icon img{width:100%;height:100%;object-fit:contain;display:block}
-.cms-icon.logo-chip{background:#fff!important;border-color:rgba(255,255,255,0.15)!important;padding:5px;box-shadow:0 2px 8px rgba(0,0,0,0.35)}
+.cms-icon{width:40px;height:40px;border-radius:8px;border:1px solid transparent;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
 
 .cms-label{font-size:.72rem;font-weight:600;text-align:center;color:#cbd5e1}
 
@@ -109,21 +107,10 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 @media(max-width:580px){.cms-grid{grid-template-columns:repeat(3,1fr)}.card{padding:28px 18px}}
 
+
 .disabled-cms{opacity:0.4;cursor:not-allowed;pointer-events:none;}
-/* LinkedIn - identical to onboarding */
-.z-chip{display:inline-flex;align-items:center;gap:.35rem;background:#111116;border:1.5px solid rgba(255,255,255,.1);border-radius:8px;padding:.45rem .9rem;cursor:pointer;font-size:.85rem;color:#94a3b8;transition:all .18s;user-select:none;}
-.z-chip:hover{border-color:#818cf8;color:#f8fafc;}
-.z-chip.on{background:rgba(129,140,248,.12);border-color:#818cf8;color:#818cf8;font-weight:600;}
-.z-chip input{display:none;}
-.li-box{background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.18);border-radius:12px;padding:1.3rem 1.5rem;margin-top:12px;}
-.li-steps{list-style:none;counter-reset:li;margin-top:.8rem;padding:0;}
-.li-steps li{counter-increment:li;display:flex;gap:.7rem;align-items:flex-start;font-size:.88rem;color:#94a3b8;margin-bottom:.75rem;}
-.li-steps li::before{content:counter(li);background:#818cf8;color:#fff;width:1.5rem;height:1.5rem;min-width:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;margin-top:.1rem;}
-.li-steps li strong{color:#f8fafc;}
-.z-sec{font-size:.78rem;font-weight:700;color:#818cf8;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.2rem;display:flex;align-items:center;gap:.55rem;}
-.z-sec::before{content:"";width:3px;height:1em;background:#818cf8;border-radius:2px;flex-shrink:0;}
-#linkedin-section{display:none;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.07);}
 </style>
+
 
 
     <!-- Favicon and Social Previews -->
@@ -145,74 +132,107 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
     <meta name="twitter:card" content="summary_large_image">
 
 
+
 </head>
 
 <body>
 
-<nav id="navbar"><div class="container" style="display:flex;align-items:center;justify-content:space-between"><a href="/" class="nav-logo">Stat<span>lift</span></a><span style="font-size:.78rem;color:#cbd5e1;background:rgba(129,140,248,.08);border:1px solid rgba(255,255,255,.07);padding:.3rem .8rem;border-radius:999px;">Abo 2 — <span style="color:#818cf8;">Professionell</span></span></div></nav>
+<nav id="navbar"><div class="container"><a href="/" class="nav-logo">Stat<span>lift</span></a></div></nav>
 
-<div style="text-align:center;padding:110px 24px 40px;max-width:660px;margin:0 auto">
-  <div style="display:inline-block;background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.22);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .85rem;border-radius:999px;margin-bottom:1.2rem;color:#cbd5e1;">Abo 2 — <span style="color:#818cf8;">Professionell</span></div>
-  <h1 style="font-size:clamp(1.6rem,4vw,2.1rem);font-weight:800;letter-spacing:-.025em;margin-bottom:10px;">Website-Zugangsdaten</h1>
-  <p style="color:#e2e8f0;font-size:1rem;max-width:500px;margin:0 auto;">Wählen Sie Ihr CMS-System und tragen Sie die Zugangsdaten ein – wir übernehmen den Rest.</p>
-</div>
+<main><div class="card">
 
-<main style="padding:0 24px 60px;display:flex;justify-content:center"><div class="card">
+<span class="eyebrow">Professional-Abo</span>
+
+<h1>Website-Zugangsdaten</h1>
+
+<p class="subtitle">Wählen Sie Ihr CMS-System und tragen Sie die Zugangsdaten ein – wir übernehmen den Rest.</p>
+
 
 
 <div class="form-group"><label for="email">Ihre E-Mail-Adresse (Abo-Adresse)</label><input type="email" id="email" required placeholder="ihre@email.de"></div>
 
 
+
 <div class="cms-grid">
 
 <div class="cms-card" data-cms="wordpress" onclick="selectCms('wordpress')" tabindex="0">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/wordpresslogo.png" alt="WordPress"></div>
+
+      <div class="cms-icon" style="background:#21759b22;border-color:#21759b44"><svg width="22" height="22" viewBox="0 0 24 24" fill="#21759b" xmlns="http://www.w3.org/2000/svg"><path d="M12.158 12.786l-2.698 7.84c.806.236 1.657.365 2.54.365 1.047 0 2.05-.18 2.986-.51-.024-.037-.046-.078-.065-.123l-2.763-7.572zm5.405-3.033c0-.63-.21-1.12-.47-1.488-.386-.543-.755-.998-.755-1.54 0-.613.473-1.173 1.12-1.173.056 0 .11.006.164.015A8.932 8.932 0 0012 2a8.948 8.948 0 00-6.19 2.44A2.943 2.943 0 016.326 3.86c-1.312 0-2.31.98-2.31 2.31 0 1.155.77 2.065 1.628 3.167.63.805 1.347 1.715 1.347 3.097 0 1.295-.892 2.765-1.452 4.025-1.18-1.575-1.875-3.52-1.875-5.617 0-.585.056-1.158.163-1.715.196.155.433.245.69.245.542 0 .98-.438.98-.98 0-.022-.002-.042-.005-.063a8.941 8.941 0 005.158 12.43L6.035 7.02c-.105-.315-.367-.543-.682-.613a1.996 1.996 0 01-.19-.053A8.966 8.966 0 0012 22a8.963 8.963 0 007.822-4.707L16.29 8.28c-.28-.787-.997-1.33-1.837-1.33-.21 0-.414.038-.605.105.156-.35.253-.745.253-1.165 0-.525-.138-1.025-.383-1.463A8.932 8.932 0 0012 2c2.096 0 4.025.72 5.564 1.913-1.592.595-2.71 1.995-2.71 3.665 0 .543.14 1.05.385 1.487l3.665 10.046c.403-.787.69-1.644.823-2.553l-2.164-6.805zm-5.563-7.753c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9z"/></svg></div>
+
       <div class="cms-label">WordPress</div>
-    </div>
 
-<div class="cms-card" data-cms="wix" onclick="selectCms('wix')" tabindex="0">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/wixlogo.png" alt="Wix"></div>
-      <div class="cms-label">Wix</div>
-    </div>
-
-<div class="cms-card" data-cms="squarespace" onclick="selectCms('squarespace')" tabindex="0">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/squarespacelogo.png" alt="Squarespace" style="filter:invert(1) brightness(0)"></div>
-      <div class="cms-label">Squarespace</div>
     </div>
 
 <div class="cms-card disabled-cms" data-cms="hubspot">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/hubspotlogo.jpg" alt="HubSpot"></div>
+
+      <div class="cms-icon" style="background:#ff7a5922;border-color:#ff7a5944">🟠</div>
+
       <div class="cms-label">HubSpot</div>
+
     </div>
 
 <div class="cms-card disabled-cms" data-cms="webflow">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/webflowlogo.png" alt="Webflow"></div>
+
+      <div class="cms-icon" style="background:#4353ff22;border-color:#4353ff44">🔷</div>
+
       <div class="cms-label">Webflow</div>
+
     </div>
 
 <div class="cms-card disabled-cms" data-cms="typo3">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/typo3logo.png" alt="TYPO3"></div>
+
+      <div class="cms-icon" style="background:#f4970022;border-color:#f4970044">🟥</div>
+
       <div class="cms-label">TYPO3</div>
+
     </div>
 
 <div class="cms-card disabled-cms" data-cms="contao">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/contaologo.png" alt="Contao"></div>
+
+      <div class="cms-icon" style="background:#f47c0022;border-color:#f47c0044">🟩</div>
+
       <div class="cms-label">Contao</div>
+
     </div>
 
 <div class="cms-card disabled-cms" data-cms="drupal">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/drupallogo.png" alt="Drupal"></div>
+
+      <div class="cms-icon" style="background:#0678be22;border-color:#0678be44">🔵</div>
+
       <div class="cms-label">Drupal</div>
+
     </div>
 
 <div class="cms-card disabled-cms" data-cms="shopify">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/shopifylogo.png" alt="Shopify"></div>
+
+      <div class="cms-icon" style="background:#95bf4722;border-color:#95bf4744"><svg width="22" height="22" viewBox="0 0 24 24" fill="#95bf47" xmlns="http://www.w3.org/2000/svg"><path d="M21.282 3.652a1.442 1.442 0 0 0-1.026-.411l-3.32-.016c-.05-.002-.1-.005-.15-.011L14.654.514A1.6 1.6 0 0 0 13.565.04l-5.631 1.58A1.6 1.6 0 0 0 6.772 3.01l.056.241-3.66.866a1.439 1.439 0 0 0-1.127 1.492l1.968 15.65c.081.597.595 1.05 1.196 1.05h13.682c.571 0 1.066-.407 1.18-1.002l1.986-16.148a1.44 1.44 0 0 0-.77-1.507zm-7.643 14.774c-4.482 0-4.417-2.617-4.417-2.617h1.495s.16 1.258 2.871 1.258c2.198 0 2.222-1.077 2.222-1.17 0-.317-.184-.816-1.92-.931-3.056-.206-4.502-1.378-4.502-3.111 0-1.848 1.472-3.14 4.14-3.14 3.645 0 3.738 2.054 3.738 2.054l-1.397.05s-.088-.936-2.278-.936c-1.88 0-2.072.846-2.072 1.042 0 .445.367.72 1.637.839 3.407.318 4.792 1.464 4.792 3.197 0 1.942-1.587 3.465-4.309 3.465z"/></svg></div>
+
       <div class="cms-label">Shopify</div>
+
     </div>
 
 <div class="cms-card disabled-cms" data-cms="shopware">
-      <div class="cms-icon logo-chip"><img src="/assets/logos/shopwarelogo.png" alt="Shopware"></div>
+
+      <div class="cms-icon" style="background:#189eff22;border-color:#189eff44">🩵</div>
+
       <div class="cms-label">Shopware</div>
+
+    </div>
+
+<div class="cms-card" data-cms="wix" onclick="selectCms('wix')" tabindex="0">
+
+      <div class="cms-icon" style="background:#faad0022;border-color:#faad0044">⬛</div>
+
+      <div class="cms-label">Wix</div>
+
+    </div>
+
+<div class="cms-card" data-cms="squarespace" onclick="selectCms('squarespace')" tabindex="0">
+
+      <div class="cms-icon" style="background:#22222222;border-color:#22222244">⬜</div>
+
+      <div class="cms-label">Squarespace</div>
+
     </div>
 
 </div>
@@ -244,8 +264,9 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 <div class="form-group">
           <label for="wordpress_cms_pass">App-Passwort</label>
           <input type="password" id="wordpress_cms_pass" name="cms_pass" placeholder="xxxx xxxx xxxx xxxx xxxx xxxx" autocomplete="off" oninput="validateWpPass()">
-          <div class="field-error" id="wp_pass_error">Das App-Passwort hat nicht das richtige Format.</div>
+          <div class="field-error" id="wp_pass_error">Das App-Passwort hat nicht das richtige Format. WordPress-App-Passwörter bestehen aus 24 Zeichen in 6 Gruppen (z.B. xxxx xxxx xxxx xxxx xxxx xxxx).</div>
         </div>
+
 
 
       <div class="guide">
@@ -279,6 +300,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
         </div>
 
 
+
       <div class="guide">
 
         <div class="guide-title">📋 Schritt-für-Schritt Anleitung: HubSpot</div>
@@ -308,6 +330,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
           <input type="text" id="webflow_cms_extra1" name="cms_extra1" placeholder="..." autocomplete="off">
 
         </div>
+
 
 
       <div class="guide">
@@ -341,6 +364,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
         </div>
 
 
+
       <div class="guide">
 
         <div class="guide-title">📋 Schritt-für-Schritt Anleitung: TYPO3</div>
@@ -370,6 +394,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
           <input type="password" id="contao_cms_api_key" name="cms_api_key" placeholder="..." autocomplete="off">
 
         </div>
+
 
 
       <div class="guide">
@@ -409,6 +434,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
           <input type="password" id="drupal_cms_pass" name="cms_pass" placeholder="..." autocomplete="off">
 
         </div>
+
 
 
       <div class="guide">
@@ -465,6 +491,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
           <input type="password" id="shopware_cms_extra1" name="cms_extra1" placeholder="..." autocomplete="off">
 
         </div>
+
 
 
       <div class="guide">
@@ -527,6 +554,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
         </div>
 
 
+
       <div class="guide">
 
         <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Squarespace</div>
@@ -540,35 +568,13 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 </div>
 
 
-<!-- LinkedIn Integration -->
-<div id="linkedin-section">
-  <div class="z-sec">LinkedIn-Integration <span style="font-weight:400;color:#94a3b8;text-transform:none;letter-spacing:0;font-size:.82rem;">(optional)</span></div>
-  <p style="color:#94a3b8;font-size:.9rem;margin-bottom:1.2rem;line-height:1.6;">Damit Statlift Ihre wöchentlichen Beiträge automatisch auf LinkedIn veröffentlichen kann, müssen Sie unserem LinkedIn-Konto <strong style="color:#f8fafc;">Administratorrechte</strong> auf Ihrer Seite geben.</p>
-  <div style="margin-bottom:1rem;">
-    <label style="font-size:.83rem;font-weight:600;margin-bottom:.6rem;display:block;color:#f8fafc;">Möchten Sie die automatische LinkedIn-Veröffentlichung?</label>
-    <div style="display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.45rem;">
-      <label class="z-chip on" id="li-yes-chip" onclick="toggleLiChip(this,true)"><input type="radio" name="linkedin_opt" value="ja" checked style="display:none"><span>Ja, automatisch posten</span></label>
-      <label class="z-chip" id="li-no-chip" onclick="toggleLiChip(this,false)"><input type="radio" name="linkedin_opt" value="nein" style="display:none"><span>Nein, ich poste selbst</span></label>
-    </div>
-  </div>
-  <div id="liGuide" class="li-box">
-    <strong style="font-size:.9rem;color:#f8fafc;">So geben Sie Statlift Admin-Rechte auf LinkedIn:</strong>
-    <ol class="li-steps">
-      <li><span>Klicken Sie auf Ihrer <strong>LinkedIn Unternehmensseite</strong> oben auf <strong>„Seite verwalten“</strong></span></li>
-      <li><span>Klicken Sie links auf <strong>„Einstellungen“</strong> → <strong>„Administratoren verwalten“</strong></span></li>
-      <li><span>Wählen Sie <strong>„Admins hinzufügen“</strong> und suchen Sie nach: <strong style="color:#818cf8;">Statlift</strong></span></li>
-      <li><span>Wählen Sie die Rolle <strong>„Super-Admin“</strong> und bestätigen Sie</span></li>
-      <li><span>Fertig! Sobald die Rechte aktiv sind, kümmern wir uns um den Rest.</span></li>
-    </ol>
-    <p style="font-size:.8rem;color:#475569;margin-top:.5rem;">Sie können die Zugriffsrechte jederzeit in Ihren LinkedIn-Einstellungen widerrufen.</p>
-  </div>
-</div>
 
 <div id="submitWrap" style="display:none">
 
   <button class="btn" id="submitBtn" onclick="submitForm()">Zugangsdaten übermitteln →</button>
 
 </div>
+
 
 
 <div class="msg ok" id="msgOk"><div class="msg-t">✅ Vielen Dank!</div><div class="msg-b">Ihre Zugangsdaten wurden sicher übermittelt. Wir richten alles für Sie ein.</div></div>
@@ -578,19 +584,12 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 </div></main>
 
 
+
 <script>
 
-const WEBHOOK = 'https://hierocratic-marline-uricolytic.ngrok-free.dev/webhook/wp-zugangsdaten';
+const WEBHOOK = 'https://admin.statlift.de/webhook/wp-zugangsdaten';
 
 let selectedCms = null;
-let linkedinChoice = 'JA';
-
-function toggleLiChip(el, isYes) {
-  linkedinChoice = isYes ? 'JA' : 'NEIN';
-  document.getElementById('li-yes-chip').className = 'z-chip' + (isYes ? ' on' : '');
-  document.getElementById('li-no-chip').className = 'z-chip' + (!isYes ? ' on' : '');
-  document.getElementById('liGuide').style.display = isYes ? 'block' : 'none';
-}
 
 // Extract Wix site ID from a full dashboard URL or return as-is if already a UUID
 function extractWixSiteId(value) {
@@ -625,6 +624,7 @@ function wpPassIsValid() {
 }
 
 
+
 function selectCms(id) {
 
   selectedCms = id;
@@ -640,19 +640,13 @@ function selectCms(id) {
   if (sec) sec.style.display = 'block';
 
   document.getElementById('submitWrap').style.display = 'block';
-  document.getElementById('linkedin-section').style.display = 'block';
 
   document.getElementById('msgOk').style.display = 'none';
 
   document.getElementById('msgErr').style.display = 'none';
 
-  // Smooth scroll to input fields
-  setTimeout(() => {
-    const target = document.getElementById('cms-sections');
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 50);
-
 }
+
 
 
 async function submitForm() {
@@ -699,7 +693,7 @@ async function submitForm() {
     inp.value = siteId;
   }
 
-  const payload = { email, cms_system: selectedCms, linkedin: linkedinChoice };
+  const payload = { email, cms_system: selectedCms };
 
   const sec = document.getElementById('section_' + selectedCms);
 
@@ -714,6 +708,7 @@ async function submitForm() {
   }
 
 
+
   const btn = document.getElementById('submitBtn');
 
   btn.disabled = true; btn.textContent = 'Wird übermittelt...';
@@ -721,6 +716,7 @@ async function submitForm() {
   document.getElementById('msgOk').style.display = 'none';
 
   document.getElementById('msgErr').style.display = 'none';
+
 
 
   try {
