@@ -433,12 +433,58 @@
 <footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.07);padding:24px;text-align:center;font-size:0.82rem;color:#64748b;margin-top:40px;">
   <a href="https://statlift.de" style="color:#818cf8;text-decoration:none;">Statlift</a>
   &middot;
+  <a href="#" onclick="openModal(\'modal-tos\');return false;" style="color:#64748b;text-decoration:none;">AGB &amp; Widerruf</a>
+  &middot;
   <a href="#" onclick="openModal('modal-impressum');return false;" style="color:#64748b;text-decoration:none;">Impressum</a>
   &middot;
   <a href="#" onclick="openModal('modal-datenschutz');return false;" style="color:#64748b;text-decoration:none;">Datenschutz</a>
 </footer>
 
 <!-- IMPRESSUM MODAL -->
+
+<!-- AGB & WIDERRUF MODAL -->
+<div id="modal-tos" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;justify-content:center;align-items:flex-start;">
+  <div style="max-width:720px;margin:60px auto;padding:0 24px 60px;width:100%;">
+    <div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+        <h2 style="font-size:1.6rem;color:#f8fafc;">AGB &amp; Widerrufsbelehrung</h2>
+        <button onclick="closeModal('modal-tos')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+      </div>
+      <div style="font-size:0.88rem;color:#e2e8f0;line-height:1.9;">
+
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 1 Anbieter &amp; Geltungsbereich</h3>
+        <p style="margin-bottom:20px;">Anbieter ist Statlift LLC, 30 N Gould St Ste N, Sheridan, WY 82801, USA (nachfolgend „Statlift"). Diese AGB gelten für alle Leistungen von Statlift, insbesondere für Content- und SEO-Abonnements. Abweichende Bedingungen des Kunden werden nicht anerkannt.</p>
+
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 2 Leistungsgegenstand</h3>
+        <p style="margin-bottom:20px;">Statlift erbringt monatliche Content-Dienstleistungen (Fachartikel, SEO-Optimierung, ggf. Veröffentlichung auf der Kundenwebsite) gemäß dem jeweils gebuchten Abonnement-Modell. Der Leistungsumfang ergibt sich aus der zum Buchungszeitpunkt gültigen Leistungsbeschreibung auf statlift.de.</p>
+
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 3 Vertragsschluss</h3>
+        <p style="margin-bottom:20px;">Der Vertrag kommt durch Abschluss des Zahlungsvorgangs über Stripe zustande. Mit der Zahlung bestätigt der Kunde diese AGB gelesen und akzeptiert zu haben.</p>
+
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 4 Laufzeit &amp; Kündigung</h3>
+        <p style="margin-bottom:20px;">Abo 1 und Abo 2 laufen monatlich und sind jederzeit zum Ende des laufenden Abrechnungsmonats kündbar. Abo 3 hat eine Mindestlaufzeit von 12 Monaten und kann danach mit einer Frist von 30 Tagen zum Monatsende gekündigt werden. Die Kündigung erfolgt per E-Mail an team@statlift.de.</p>
+
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 5 Preise &amp; Zahlung</h3>
+        <p style="margin-bottom:20px;">Alle Preise sind in EUR angegeben und verstehen sich zzgl. ggf. anfallender gesetzlicher Umsatzsteuer. Die Abrechnung erfolgt monatlich im Voraus über Stripe. Bei B2B-Leistungen an in Deutschland ansässige Unternehmen gilt das Reverse-Charge-Verfahren (§ 13b UStG), sofern keine abweichende steuerliche Regelung greift. Der Kunde ist für die korrekte steuerliche Behandlung in seinem Land verantwortlich.</p>
+
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 6 Widerrufsbelehrung</h3>
+        <p style="margin-bottom:12px;"><strong style="color:#f8fafc;">Für Verbraucher (B2C):</strong> Sie haben das Recht, diesen Vertrag binnen 14 Tagen ohne Angabe von Gründen zu widerrufen. Die Widerrufsfrist beginnt mit Vertragsschluss. Zur Ausübung Ihres Widerrufsrechts wenden Sie sich an: team@statlift.de.</p>
+        <p style="margin-bottom:20px;padding:12px 16px;background:rgba(255,255,255,0.04);border-radius:8px;font-size:0.82rem;color:#94a3b8;"><strong style="color:#818cf8;">Hinweis für Unternehmen (B2B):</strong> Unternehmer haben kein gesetzliches Widerrufsrecht. Mit Beginn der Leistungserbringung (Erstellung des ersten Artikels) durch Statlift erlischt ein etwaiges Widerrufsrecht auch für Verbraucher, sofern der Verbraucher ausdrücklich zugestimmt hat, dass mit der Ausführung vor Ablauf der Widerrufsfrist begonnen wird.</p>
+
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 7 Rückerstattungsrichtlinie (Refund Policy)</h3>
+        <p style="margin-bottom:20px;">Da Statlift digitale Inhalte (Artikel, SEO-Texte) liefert, die nach der Erstellung nicht „zurückgegeben" werden können, sind bereits erbrachte Leistungen grundsätzlich nicht erstattungsfähig. Im Falle eines berechtigten Mangels (z. B. Nichtlieferung vereinbarter Artikel) wird Statlift entweder Nachlieferung oder anteilige Gutschrift anbieten. Anfragen an: team@statlift.de.</p>
+
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 8 Haftungsbeschränkung</h3>
+        <p style="margin-bottom:20px;">Statlift haftet nur bei Vorsatz und grober Fahrlässigkeit. Die Haftung für mittelbare Schäden, entgangenen Gewinn und Datenverlust ist ausgeschlossen. Statlift übernimmt keine Garantie für bestimmte Suchmaschinenpositionen oder Umsatzentwicklungen.</p>
+
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 9 Anwendbares Recht &amp; Streitigkeiten</h3>
+        <p>Es gilt das Recht des US-Bundesstaats Wyoming. Für Verbraucher in der EU bleiben zwingende Verbraucherschutzrechte des jeweiligen Aufenthaltslandes unberührt. Bei Streitigkeiten kann die EU-Streitschlichtungsplattform genutzt werden: <a href="https://ec.europa.eu/consumers/odr" style="color:#818cf8;" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. Unsere E-Mail für Schlichtungsanfragen: team@statlift.de</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="modal-impressum" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;justify-content:center;align-items:flex-start;">
   <div style="max-width:680px;margin:60px auto;padding:0 24px 60px;width:100%;">
     <div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
@@ -492,7 +538,9 @@
         <h3 style="margin-bottom:10px;font-size:1rem;">4. Google Fonts</h3>
         <p style="margin-bottom:20px;">Diese Website verwendet Google Fonts. Beim Aufruf der Seite wird die Schriftart vom Google-Server geladen, wobei Ihre IP-Adresse an Google übermittelt werden kann. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.</p>
         <h3 style="margin-bottom:10px;font-size:1rem;">5. Ihre Rechte</h3>
-        <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie Datenübertragbarkeit. Kontakt: team@statlift.de</p>
+        <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie Datenübertragbarkeit. Kontakt: team@statlift.de
+        <h3 style="margin-bottom:10px;font-size:1rem;">6. Zahlungsabwicklung (Stripe)</h3>
+        <p style="margin-bottom:20px;">Für die Zahlungsabwicklung nutzen wir Stripe Payments Europe, Ltd., 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, Irland. Stripe verarbeitet Ihre Zahlungsdaten (z. B. Kreditkartennummer, Bankdaten) zur Abwicklung des Kaufvorgangs. Statlift erhält keinen Zugriff auf vollständige Zahlungsdaten. Weitere Informationen: <a href="https://stripe.com/de/privacy" style="color:#818cf8;" target="_blank" rel="noopener">stripe.com/de/privacy</a>. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</p>
       </div>
     </div>
   </div>
