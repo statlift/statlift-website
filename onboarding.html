@@ -2154,47 +2154,71 @@ function onDomainInput(val) {
 
 
 async function checkDomainAvailability(domain) {
-
   const st  = document.getElementById('domStatus');
   const inp = document.getElementById('domainInput');
   const msg = document.getElementById('domMsg');
 
+  st.innerHTML = '<span style="color:#94a3b8;font-size:0.8rem;">⏳ Prüfe…</span>';
+  msg.className = 'field-msg';
+  msg.textContent = '';
+
   try {
-    // rdap.org ist IANA-Proxy mit CORS-Support: 200=vergeben, 404=verfügbar
+    // Primary: Google DoH (DNS-over-HTTPS) — fast, CORS-safe, no API key
+    const gUrl = 'https://dns.google/resolve?name=' + encodeURIComponent(domain) + '&type=SOA';
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 9000);
+    const t = setTimeout(() => controller.abort(), 5000);
+    const r = await fetch(gUrl, { signal: controller.signal, headers: { Accept: 'application/json' } });
+    clearTimeout(t);
 
-    const r = await fetch('https://rdap.org/domain/' + encodeURIComponent(domain), {
-      signal: controller.signal
-    });
-    clearTimeout(timeout);
+    if (!r.ok) throw new Error('DNS fetch failed');
+    const data = await r.json();
 
-    if (r.status === 200) {
-      domainAvailable = false;
-      st.innerHTML = '<span class="dot s-bad"></span><span class="s-bad">Vergeben</span>';
-      inp.classList.add('error'); inp.classList.remove('ok');
-      msg.className = 'field-msg err';
-      msg.textContent = 'Diese Domain ist bereits registriert. Bitte wählen Sie eine andere.';
-    } else if (r.status === 404) {
+    // Status 0 = NOERROR (domain exists), Status 3 = NXDOMAIN (not found = available)
+    if (data.Status === 3) {
+      // Double-check with Cloudflare DoH to be sure
+      try {
+        const cfUrl = 'https://cloudflare-dns.com/dns-query?name=' + encodeURIComponent(domain) + '&type=NS';
+        const r2 = await fetch(cfUrl, { headers: { Accept: 'application/dns-json' } });
+        const d2 = await r2.json();
+        if (d2.Status === 0 && d2.Answer && d2.Answer.length > 0) {
+          // Cloudflare says it exists
+          domainAvailable = false;
+          st.innerHTML = '<span class="dot s-bad"></span><span class="s-bad">Vergeben</span>';
+          inp.classList.add('error'); inp.classList.remove('ok');
+          msg.className = 'field-msg err';
+          msg.textContent = 'Diese Domain ist bereits registriert. Bitte wählen Sie eine andere.';
+          return;
+        }
+      } catch(e2) { /* Cloudflare fallback failed — trust Google result */ }
+
       domainAvailable = true;
       st.innerHTML = '<span class="dot s-ok"></span><span class="s-ok">Verfügbar</span>';
       inp.classList.add('ok'); inp.classList.remove('error');
       msg.className = 'field-msg ok';
       msg.textContent = '✓ Diese Domain ist verfügbar!';
+
+    } else if (data.Status === 0) {
+      domainAvailable = false;
+      st.innerHTML = '<span class="dot s-bad"></span><span class="s-bad">Vergeben</span>';
+      inp.classList.add('error'); inp.classList.remove('ok');
+      msg.className = 'field-msg err';
+      msg.textContent = 'Diese Domain ist bereits registriert. Bitte wählen Sie eine andere.';
+
     } else {
+      // Status 2 = SERVFAIL etc.
       domainAvailable = null;
       st.innerHTML = '';
       msg.className = 'field-msg';
-      msg.textContent = 'Status konnte nicht geprüft werden – bitte manuell nachsehen.';
+      msg.textContent = 'Status konnte nicht ermittelt werden – bitte direkt beim Registrar prüfen.';
     }
 
   } catch(e) {
+    // Total fallback: show neutral status, don't block form
     domainAvailable = null;
     st.innerHTML = '';
     msg.className = 'field-msg';
-    msg.textContent = 'Prüfung nicht möglich – bitte beim Registrar nachsehen.';
+    msg.textContent = 'Automatische Prüfung nicht möglich – Domain wird manuell geprüft.';
   }
-
 }
 
 
