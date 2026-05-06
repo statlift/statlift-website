@@ -89,7 +89,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 .steps li b{color:#f8fafc}
 
-.pick-hint{text-align:center;padding:40px 0;color:#475569;font-size:.95rem}
+
 
 .btn{width:100%;padding:14px;border-radius:8px;font-family:inherit;font-size:1rem;font-weight:600;background:var(--accent);color:#fff;border:none;cursor:pointer;transition:all .25s;box-shadow:0 0 24px var(--glow);margin-top:8px}
 
@@ -125,6 +125,11 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 #linkedin-section{display:none;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.07);}
 
 #formContent{display:block;background:transparent;border:none;padding:0;margin:0}
+
+.success{display:none;text-align:center;padding:4rem 1.5rem;max-width:480px;margin:0 auto}
+.success .icon{font-size:3rem;margin-bottom:1.2rem}
+.success h2{font-size:1.6rem;font-weight:800;margin-bottom:1rem;color:#f8fafc}
+.success p{color:#94a3b8;font-size:1rem;line-height:1.7}
 </style>
 
 
@@ -574,7 +579,14 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 </div>
 
 
-<div class="msg ok" id="msgOk"><div class="msg-t">✅ Vielen Dank!</div><div class="msg-b">Ihre Zugangsdaten wurden sicher übermittelt. Wir richten alles für Sie ein.</div></div>
+</div><!-- /formContent -->
+
+<div class="success" id="successMsg">
+  <div class="icon">✅</div>
+  <h2>Vielen Dank!</h2>
+  <p>Ihre Zugangsdaten wurden sicher übermittelt.<br>Wir melden uns bei Ihnen, sobald wir alles eingerichtet haben.</p>
+  <p style="margin-top:1.2rem;color:#818cf8;font-weight:700;font-size:1rem">team@statlift.de</p>
+</div>
 
 <div class="msg err" id="msgErr"><div class="msg-t">Ein Fehler ist aufgetreten</div><div class="msg-b" id="msgErrTxt">Bitte prüfen Sie Ihre Eingaben oder schreiben Sie uns an team@statlift.de.</div></div>
 
@@ -645,7 +657,7 @@ function selectCms(id) {
   document.getElementById('submitWrap').style.display = 'block';
   document.getElementById('linkedin-section').style.display = 'block';
 
-  document.getElementById('msgOk').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'none';
 
   document.getElementById('msgErr').style.display = 'none';
 
@@ -721,7 +733,7 @@ async function submitForm() {
 
   btn.disabled = true; btn.textContent = 'Wird übermittelt...';
 
-  document.getElementById('msgOk').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'none';
 
   document.getElementById('msgErr').style.display = 'none';
 
@@ -763,7 +775,7 @@ async function submitForm() {
 
       document.querySelector('.card').querySelector('form') && (document.querySelector('.card').querySelector('form').style.display='none');
 
-      document.getElementById('msgOk').style.display = 'block';
+      document.getElementById('formContent').style.display = 'none'; document.getElementById('successMsg').style.display = 'block'; window.scrollTo({top:0,behavior:'smooth'});
 
       document.getElementById('submitWrap').style.display = 'none';
 
