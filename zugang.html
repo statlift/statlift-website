@@ -1527,11 +1527,10 @@ async function submitForm() {
 
 
 
-      document.querySelector('.card').querySelector('form') && (document.querySelector('.card').style.display='none');
-
+      const card = document.querySelector('.card');
+      if (card) card.style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
-
-      window.scrollTo({top:0, behavior:'smooth'});
+      window.scrollTo({top: 0, behavior: 'smooth'});
 
 
 
