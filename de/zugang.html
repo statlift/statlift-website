@@ -48,15 +48,15 @@ h1{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:800;letter-spacing:-.025em;mar
 
 .cms-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:28px}
 
-.cms-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;user-select:none;background:transparent}
+.cms-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border:1.5px solid transparent;border-radius:10px;cursor:pointer;transition:all .2s;user-select:none;background:transparent}
 
 .cms-card:hover,.cms-card:focus{border-color:rgba(79,70,229,.5);background:rgba(79,70,229,.05);outline:none}
 
 .cms-card.active{border-color:var(--accent);background:rgba(79,70,229,.12);box-shadow:0 0 0 2px rgba(79,70,229,.2)}
 
 .cms-icon{width:48px;height:48px;border-radius:8px;border:1px solid transparent;display:flex;align-items:center;justify-content:center;font-size:1.4rem;padding:6px}
-.cms-icon img{width:100%;height:100%;object-fit:contain;display:block;filter:brightness(0) invert(1);opacity:0.85}
-.cms-icon.logo-chip{background:rgba(255,255,255,0.08)!important;border-color:rgba(255,255,255,0.12)!important;padding:6px}
+.cms-icon img{width:100%;height:100%;object-fit:contain;display:block}
+.cms-icon.logo-chip{background:#fff!important;border-color:rgba(255,255,255,0.15)!important;padding:5px;box-shadow:0 2px 8px rgba(0,0,0,0.35)}
 
 .cms-label{font-size:.72rem;font-weight:600;text-align:center;color:#cbd5e1}
 
@@ -109,7 +109,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 @media(max-width:580px){.cms-grid{grid-template-columns:repeat(3,1fr)}.card{padding:28px 18px}}
 
-.disabled-cms{opacity:0.4;cursor:not-allowed;pointer-events:none;}
+
 /* LinkedIn - identical to onboarding */
 .z-chip{display:inline-flex;align-items:center;gap:.35rem;background:#111116;border:1.5px solid rgba(255,255,255,.1);border-radius:8px;padding:.45rem .9rem;cursor:pointer;font-size:.85rem;color:#94a3b8;transition:all .18s;user-select:none;}
 .z-chip:hover{border-color:#818cf8;color:#f8fafc;}
@@ -130,6 +130,8 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 .success .icon{font-size:3rem;margin-bottom:1.2rem}
 .success h2{font-size:1.6rem;font-weight:800;margin-bottom:1rem;color:#f8fafc}
 .success p{color:#94a3b8;font-size:1rem;line-height:1.7}
+
+.disabled-cms{opacity:0.35;cursor:not-allowed;pointer-events:none;border-color:transparent!important;background:transparent!important}
 </style>
 
 
