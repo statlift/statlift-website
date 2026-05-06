@@ -309,6 +309,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 
 <main><div class="card">
+<div id="formContent">
 
 
 
@@ -1148,6 +1149,8 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 
 
+</div><!-- /formContent -->
+
 <div class="success" id="successMsg">
   <div class="icon">✅</div>
   <h2>Vielen Dank!</h2>
@@ -1527,8 +1530,8 @@ async function submitForm() {
 
 
 
-      const card = document.querySelector('.card');
-      if (card) card.style.display = 'none';
+      const fc = document.getElementById('formContent');
+      if (fc) fc.style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
       window.scrollTo({top: 0, behavior: 'smooth'});
 
