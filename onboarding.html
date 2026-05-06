@@ -2444,7 +2444,15 @@ async function submitForm(e) {
 
 
 
-  if (lf && lf.files && lf.files[0]) data['logo_dateiname'] = lf.files[0].name;
+  if (lf && lf.files && lf.files[0]) {
+    data['logo_dateiname'] = lf.files[0].name;
+    // Read file as base64 for Telegram upload
+    await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => { data['logo_base64'] = e.target.result.split(',')[1]; resolve(); };
+      reader.readAsDataURL(lf.files[0]);
+    });
+  }
 
 
 
