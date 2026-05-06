@@ -1470,7 +1470,7 @@ async function submitForm() {
 
       } else if (data.error === 'wrong_abo') {
 
-        document.getElementById('msgErrTxt').textContent = 'Ihre E-Mail-Adresse ist keinem Abo 2 zugeordnet. Diese Funktion steht ausschließlich Abo 2 Kunden zur Verfügung. Bei Fragen wenden Sie sich an team@statlift.de.';
+        document.getElementById('msgErrTxt').textContent = 'Sie haben keinen Zugriff auf diese Übermittlung. Bitte prüfen Sie, ob Sie die korrekte E-Mail-Adresse angegeben haben. Bei Fragen wenden Sie sich an team@statlift.de.';
 
       } else if (data.error === 'already_submitted') {
 
