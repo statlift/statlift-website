@@ -78,13 +78,12 @@
 <nav>
   <div class="nav-container">
     <a class="logo" href="https://statlift.de">Stat<span>lift</span></a>
-    <span class="nav-badge">Logo-Erstellung · Einmalige Zahlung</span>
+    <span class="nav-badge">Logo-Erstellung</span>
   </div>
 </nav>
 
 <div class="hero">
-  <span class="badge">Einmalige Zahlung</span>
-  <h1>Ihr Logo — <em>professionell,</em> in 3–5 Tagen.</h1>
+  <h1>Wie soll Ihr Logo aussehen?</h1>
   <p class="sub">Sagen Sie uns, wofür Ihr Unternehmen steht — wir erstellen ein Logo, das dazu passt.</p>
 </div>
 
@@ -245,7 +244,7 @@ async function submitLogo() {
   const branche = document.getElementById('branche').value.trim();
   const stil = document.querySelector('[name="stil"]:checked');
   const typ = document.querySelector('[name="typ"]:checked');
-  const farben = document.getElementById('farbenHidden').value.trim();
+  const farben = '';
   const beschreibung = document.getElementById('beschreibung').value.trim();
   const inspiration = document.getElementById('inspiration').value.trim();
 
@@ -254,13 +253,12 @@ async function submitLogo() {
   if (!branche)     return showError('Fehlende Angabe', 'Bitte geben Sie Ihre Branche an.');
   if (!stil)        return showError('Fehlende Angabe', 'Bitte wählen Sie einen Logo-Stil aus.');
   if (!typ)         return showError('Fehlende Angabe', 'Bitte wählen Sie einen Logo-Typ aus.');
-  if (!farben)      return showError('Fehlende Angabe', 'Bitte wählen Sie mindestens eine Farbe aus.');
   if (!beschreibung) return showError('Fehlende Angabe', 'Bitte beschreiben Sie kurz Ihre Logo-Vorstellungen.');
 
   const btn = document.getElementById('submitBtn');
   btn.disabled = true; btn.textContent = 'Wird übermittelt…';
 
-  const payload = { name, email, branche, stil: stil.value, typ: typ.value, farben, beschreibung, inspiration };
+  const payload = { name, email, branche, stil: stil.value, typ: typ.value, beschreibung, inspiration };
 
   try {
     const res = await fetch(WEBHOOK, {
