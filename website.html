@@ -532,7 +532,7 @@ input:-webkit-autofill:active {
 
 
 
-  <p class="sub">Kein Abo, keine monatlichen Kosten. Sie erhalten eine fertige, professionelle Website inkl. Logo — einmalig bezahlt, dauerhaft in Ihrem Besitz. Teilen Sie uns Ihre Wünsche mit.</p>
+  <p class="sub">Kein Abo, keine monatlichen Kosten. Sie erhalten eine fertige, professionelle Website — einmalig bezahlt, dauerhaft in Ihrem Besitz. Teilen Sie uns Ihre Wünsche mit.</p>
 
 
 
@@ -605,46 +605,6 @@ input:-webkit-autofill:active {
 
 
   </div>
-
-
-
-
-
-
-
-  <!-- Domain -->
-
-
-
-  <div class="card">
-
-
-
-    <div class="sec">Ihre Wunsch-Domain</div>
-
-
-
-    <div class="fg" style="margin-bottom:0">
-
-
-
-      <label>Domain<span class="req">*</span></label>
-
-
-
-      <div class="dom-wrap">
-
-
-
-        <input type="text" id="domainInput" name="domain" class="dom-input" autocomplete="off" oninput="onDomainInput(this.value)" onblur="validateDomain()">
-
-
-
-        <div class="domain-status" id="domStatus"></div>
-
-
-
-      </div>
 
 
 
@@ -849,123 +809,7 @@ input:-webkit-autofill:active {
 
 
     </div>
-
-
-
-
-
-
-
-    <!-- Logo -->
-
-
-
-    <div class="fg" style="margin-bottom:0">
-
-
-
-      <label>Haben Sie ein Logo für Ihre Website?<span class="req">*</span></label>
-
-
-
-      <div class="logo-options">
-
-
-
-        <button type="button" class="logo-btn" id="btn-logo-yes" onclick="setLogo('yes')">
-
-
-
-          <span class="icon">🖼️</span>Ja, ich habe ein fertiges Logo
-
-
-
-        </button>
-
-
-
-        <button type="button" class="logo-btn" id="btn-logo-no" onclick="setLogo('no')">
-
-
-
-          <span class="icon">✏️</span>Nein, erstell mir eines
-
-
-
-        </button>
-
-
-
-      </div>
-
-
-
-      <div id="logo-desc-wrap" style="display:none;margin-top:14px;">
-
-        <label style="font-size:.88rem;color:#a5b4fc;margin-bottom:8px;display:block;">Beschreiben Sie kurz, wie Ihr Logo aussehen soll:</label>
-
-        <textarea name="logo_beschreibung" id="logo_beschreibung" rows="4" style="width:100%;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:13px 16px;font-family:inherit;font-size:.95rem;color:#f8fafc;outline:none;resize:vertical;"></textarea>
-
-      </div>
-
-
-
-      <input type="hidden" name="logo_choice" id="logo_choice" required>
-
-
-
-      <div id="uploadZone" class="upload-zone" style="display:none">
-
-
-
-        <div onclick="document.getElementById('logoFile').click()">
-
-
-
-          <input type="file" id="logoFile" accept=".jpg,.jpeg,.png,.gif,.svg,.webp,.avif,.bmp,.tif,.tiff,.ico,.pdf,.ai,.eps" onchange="handleFile(this)">
-
-
-
-          <p>Logo hier ablegen oder klicken zum Auswählen</p>
-
-
-
-          <p style="font-size:.75rem;margin-top:.3rem">JPG, PNG, SVG, GIF, WEBP, AI, PDF und weitere</p>
-
-
-
-        </div>
-
-
-
-        <div>
-
-
-
-          <span class="filename" id="fileName"></span>
-
-
-
-          <span class="remove-file" id="removeFileBtn" onclick="removeFile(event)" title="Bild entfernen">✕</span>
-
-
-
-        </div>
-
-
-
-      </div>
-
-
-
-    </div>
-
-
-
   </div>
-    
-
-
 
   </div>
 
@@ -2151,35 +1995,7 @@ async function submitForm(e) {
 
 
 
-  // 1. Logo check
-
-
-
-  const logoChoice = document.getElementById('logo_choice').value;
-
-
-
-  if (!logoChoice) {
-
-
-
-    showError("Fehlende Angabe", "Bitte wählen Sie aus, ob Sie ein Logo haben oder wir eines erstellen sollen.");
-
-
-
-    return;
-
-
-
-  }
-
-
-
-
-
-
-
-  // 2. Domain check
+  // 1. Domain check
 
 
 
