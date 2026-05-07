@@ -335,6 +335,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 
 #formContent{display:block;background:transparent;border:none;padding:0;margin:0}
+.success-page{display:flex;align-items:center;justify-content:center;min-height:70vh;text-align:center;padding:2rem}
 
 .success{display:none;text-align:center;padding:4rem 1.5rem;max-width:480px;margin:0 auto}
 .success .icon{font-size:3rem;margin-bottom:1.2rem}
@@ -1688,13 +1689,16 @@ async function submitForm() {
       }
       document.getElementById('msgErr').style.display = 'block';
     } else {
-      // Hide the entire form and show only the success message
-      document.getElementById('formContent').style.display = 'none';
+      // Hide the entire card, show success fullscreen
+      const card = document.querySelector('main .card');
+      if (card) card.style.display = 'none';
       document.getElementById('submitWrap').style.display = 'none';
       const success = document.getElementById('successMsg');
       if (success) {
-        success.style.display = 'block';
-        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        success.classList.add('success-page');
+        success.style.display = 'flex';
+        success.style.flexDirection = 'column';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
   } catch(e) {
