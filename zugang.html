@@ -1688,10 +1688,14 @@ async function submitForm() {
       }
       document.getElementById('msgErr').style.display = 'block';
     } else {
-      document.querySelector('.card').querySelector('form') && (document.querySelector('.card').querySelector('form').style.display='none');
-      document.getElementById('msgOk') && (document.getElementById('msgOk').style.display = 'block');
-      document.getElementById('successMsg') && (document.getElementById('successMsg').style.display = 'block');
+      // Hide the entire form and show only the success message
+      document.getElementById('formContent').style.display = 'none';
       document.getElementById('submitWrap').style.display = 'none';
+      const success = document.getElementById('successMsg');
+      if (success) {
+        success.style.display = 'block';
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
   } catch(e) {
     document.getElementById('msgErrTxt').textContent = 'Verbindungsfehler. Bitte versuchen Sie es erneut.';
