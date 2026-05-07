@@ -332,30 +332,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:1.8rem 0}
 
 
 
-/* LinkedIn info box */
-
-
-
-.li-box{background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.18);border-radius:12px;padding:1.3rem 1.5rem}
-
-
-
-.li-steps{list-style:none;counter-reset:li;margin-top:.8rem}
-
-
-
-.li-steps li{counter-increment:li;display:flex;gap:.7rem;align-items:center;font-size:.88rem;color:var(--muted);margin-bottom:.75rem}
-
-
-
-.li-steps li::before{content:counter(li);background:var(--primary);color:#fff;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
-
-
-
-.li-steps li strong{color:var(--text)}
-
-
-
 /* Form Error Message */
 
 
@@ -987,65 +963,6 @@ input:-webkit-autofill:active {
 
 
   </div>
-
-
-
-
-
-
-
-  <!-- LinkedIn -->
-
-
-
-  <div class="card">
-
-
-
-    <div class="sec">LinkedIn-Integration <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0;font-size:.82rem">(optional)</span></div>
-
-
-
-    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.2rem">Damit Statlift Ihre wöchentlichen Beiträge automatisch auf LinkedIn veröffentlichen kann, müssen Sie unserem LinkedIn-Konto <strong style="color:var(--text)">Administratorrechte</strong> auf Ihrer Seite geben. Folgen Sie dazu einfach dieser Anleitung:</p>
-
-
-
-
-
-
-
-    <div class="fg">
-
-
-
-      <label>Möchten Sie die automatische LinkedIn-Veröffentlichung?</label>
-
-
-
-      <div class="chips">
-
-
-
-        <label class="chip on" id="li-yes-chip" onclick="toggleLiChip(this, true)"><input type="radio" name="linkedin_opt" value="ja" checked><span>Ja, automatisch posten</span></label>
-
-
-
-        <label class="chip" id="li-no-chip" onclick="toggleLiChip(this, false)"><input type="radio" name="linkedin_opt" value="nein"><span>Nein, ich poste selbst</span></label>
-
-
-
-      </div>
-
-
-
-    </div>
-
-
-
-
-
-
-
     <div id="liGuide" class="li-box">
 
 
@@ -1724,38 +1641,6 @@ function toggleMultiChip(element) {
 
 
   element.classList.toggle('on', input.checked);
-
-
-
-}
-
-
-
-
-
-
-
-function toggleLiChip(element, show) {
-
-
-
-  document.getElementById('li-yes-chip').classList.toggle('on', show);
-
-
-
-  document.getElementById('li-no-chip').classList.toggle('on', !show);
-
-
-
-  document.getElementById('li-yes-chip').querySelector('input').checked = show;
-
-
-
-  document.getElementById('li-no-chip').querySelector('input').checked = !show;
-
-
-
-  document.getElementById('liGuide').style.display = show ? 'block' : 'none';
 
 
 
