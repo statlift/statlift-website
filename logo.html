@@ -181,12 +181,30 @@ async function submitLogo() {
   const payload = { email, stil: stil.value, typ: typ.value, beschreibung, inspiration };
 
   try {
-    const res = await fetch(WEBHOOK, {
+    const res = await fetch('https://admin.statlift.de/webhook/submit-website-logo', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(payload)
     });
-    if (res.ok) {
+    
+    let result = {};
+    try { result = await res.json(); } catch(e) {}
+    
+    if (result.error === 'not_found') {
+      document.getElementById('email').classList.add('error');
+      showError('Keine Zahlung gefunden', 'Ihre E-Mail-Adresse wurde nicht in der Kunden-Datenbank gefunden. Bitte verwenden Sie exakt die E-Mail-Adresse, mit der Sie das Logo bestellt haben.');
+      btn.disabled = false; btn.textContent = 'Übermitteln';
+      return;
+    }
+    
+    if (result.error === 'already_submitted') {
+      document.getElementById('email').classList.add('error');
+      showError('Bereits eingereicht', 'Sie haben das Formular bereits abgeschickt! Falls Sie nachträglich etwas ändern möchten, schreiben Sie uns bitte an team@statlift.de.');
+      btn.disabled = false; btn.textContent = 'Übermitteln';
+      return;
+    }
+
+    if (result.success || res.ok) {
       document.getElementById('successOverlay').classList.add('show');
     } else {
       throw new Error('Server error');
