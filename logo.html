@@ -30,8 +30,8 @@
     label{display:block;font-size:.83rem;font-weight:600;margin-bottom:.45rem;color:var(--text)}
     .req{color:var(--primary);margin-left:2px}
     .opt-tag{color:var(--muted);font-weight:400;font-size:.77rem;margin-left:.3rem}
-    input[type=email],textarea{width:100%;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:13px 16px;font-family:inherit;font-size:.95rem;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical}
-    input[type=email]:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(129,140,248,.12)}
+    input[type=text],input[type=email],textarea{width:100%;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:13px 16px;font-family:inherit;font-size:.95rem;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical}
+    input[type=text]:focus,input[type=email]:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(129,140,248,.12)}
     input.error,textarea.error{border-color:var(--error)!important;box-shadow:0 0 0 3px rgba(239,68,68,.1)!important}
     input::placeholder,textarea::placeholder{color:rgba(255,255,255,.18)}
     .chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.3rem}
@@ -121,7 +121,6 @@
     </div>
     <div class="fg" style="margin-bottom:0">
       <label>Gibt es Logos, die Sie inspirieren?<span class="opt-tag">(optional)</span></label>
-      <input type="email" style="display:none"> <!-- honeypot trick for autocomplete -->
       <input type="text" id="inspiration" name="inspiration" autocomplete="off">
     </div>
   </div>
