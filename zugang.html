@@ -1670,94 +1670,24 @@ function wpPassIsValid() {
 
 
 function selectCms(id) {
-
-
-
-
-
   selectedCms = id;
-
-
-
-
-
   document.querySelectorAll('.cms-card').forEach(c => c.classList.toggle('active', c.dataset.cms === id));
-
-
-
-
-
   document.querySelectorAll('.cms-section').forEach(s => s.style.display = 'none');
-
-
-
-
-
   document.querySelector('.pick-hint') && (document.querySelector('.pick-hint').style.display = 'none');
 
-
-
-
-
   const sec = document.getElementById('section_' + id);
-
-
-
-
-
   if (sec) sec.style.display = 'block';
 
-
-
-
-
   document.getElementById('submitWrap').style.display = 'block';
-
-
-  document.getElementById('
-
-
-
-
-
-  document.getElementById('successMsg').style.display = 'none';
-
-
-
-
-
+  document.getElementById('msgOk').style.display = 'none';
   document.getElementById('msgErr').style.display = 'none';
 
-
-
-
-
   // Smooth scroll to input fields
-
-
   setTimeout(() => {
-
-
     const target = document.getElementById('cms-sections');
-
-
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-
   }, 50);
-
-
-
-
-
 }
-
-
-
-
-
-
-
 
 async function submitForm() {
 
