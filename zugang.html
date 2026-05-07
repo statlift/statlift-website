@@ -1550,118 +1550,38 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 
 
 <script>
-
-
-
-
-
 const WEBHOOK = 'https://admin.statlift.de/submit/abo2';
-
-
-
-
-
 let selectedCms = null;
 
-
-// Extract Wix site ID from a full dashboard URL or return as-is if already a UUID
-
-
 function extractWixSiteId(value) {
-
-
   value = (value || '').trim();
-
-
   const match = value.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
-
-
   return match ? match[0] : value;
-
-
 }
-
-
-
-
 
 function validateWpPass() {
-
-
   const val = document.getElementById('wordpress_cms_pass').value;
-
-
   const clean = val.replace(/\s+/g, '');
-
-
   const errEl = document.getElementById('wp_pass_error');
-
-
   const inp = document.getElementById('wordpress_cms_pass');
-
-
-  // WP app passwords are exactly 24 chars (stripped of spaces)
-
-
   if (clean.length > 0 && clean.length !== 24) {
-
-
     errEl.style.display = 'block';
-
-
     inp.classList.add('invalid');
-
-
   } else {
-
-
     errEl.style.display = 'none';
-
-
     inp.classList.remove('invalid');
-
-
   }
-
-
 }
-
-
-
-
 
 function clearWpError() {
-
-
   document.getElementById('wp_plugin_warning').style.display = 'none';
-
-
 }
-
-
-
-
 
 function wpPassIsValid() {
-
-
   if (selectedCms !== 'wordpress') return true;
-
-
   const clean = document.getElementById('wordpress_cms_pass').value.replace(/\s+/g, '');
-
-
   return clean.length === 24;
-
-
 }
-
-
-
-
-
-
-
 
 function selectCms(id) {
   selectedCms = id;
@@ -1673,10 +1593,10 @@ function selectCms(id) {
   if (sec) sec.style.display = 'block';
 
   document.getElementById('submitWrap').style.display = 'block';
-  document.getElementById('msgOk').style.display = 'none';
-  document.getElementById('msgErr').style.display = 'none';
+  document.getElementById('msgOk') && (document.getElementById('msgOk').style.display = 'none');
+  document.getElementById('successMsg') && (document.getElementById('successMsg').style.display = 'none');
+  document.getElementById('msgErr') && (document.getElementById('msgErr').style.display = 'none');
 
-  // Smooth scroll to input fields
   setTimeout(() => {
     const target = document.getElementById('cms-sections');
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1684,374 +1604,101 @@ function selectCms(id) {
 }
 
 async function submitForm() {
-
-
-
-
-
   const email = document.getElementById('email').value.trim();
-
-
-
-
-
   if (!email || !selectedCms) { alert('Bitte E-Mail und CMS-System auswählen.'); return; }
 
-
-
-
-
   if (!wpPassIsValid()) {
-
-
     document.getElementById('wp_pass_error').style.display = 'block';
-
-
     document.getElementById('wordpress_cms_pass').classList.add('invalid');
-
-
     document.getElementById('wordpress_cms_pass').focus();
-
-
     return;
-
-
   }
-
-
-
-
 
   if (selectedCms === 'wordpress') {
-
-
     const userVal = document.getElementById('wordpress_cms_user').value.trim();
-
-
     const userErr = document.getElementById('wp_user_error');
-
-
     if (!userVal) {
-
-
       userErr.style.display = 'block';
-
-
       document.getElementById('wordpress_cms_user').classList.add('invalid');
-
-
       document.getElementById('wordpress_cms_user').focus();
-
-
       return;
-
-
     } else {
-
-
       userErr.style.display = 'none';
-
-
       document.getElementById('wordpress_cms_user').classList.remove('invalid');
-
-
     }
-
-
   }
-
-
-
-
-
-  // For Wix: extract site ID from URL before building payload
-
 
   if (selectedCms === 'wix') {
-
-
     const rawVal = document.getElementById('wix_cms_extra1').value.trim();
-
-
     const siteId = extractWixSiteId(rawVal);
-
-
     const errEl = document.getElementById('wix_siteid_error');
-
-
     const inp = document.getElementById('wix_cms_extra1');
-
-
     if (!siteId) {
-
-
       errEl.style.display = 'block';
-
-
       inp.classList.add('invalid');
-
-
       return;
-
-
     }
-
-
     errEl.style.display = 'none';
-
-
     inp.classList.remove('invalid');
-
-
-    // Write cleaned ID back so the loop below picks it up
-
-
     inp.value = siteId;
-
-
   }
 
-
-
-
-
-  const payload = { email, cms_system: selectedCms
-
-
-
-
-
+  const payload = { email, cms_system: selectedCms };
   const sec = document.getElementById('section_' + selectedCms);
-
-
-
-
-
   if (sec) {
-
-
-
-
-
     sec.querySelectorAll('input').forEach(inp => {
-
-
-
-
-
       if (inp.name) payload[inp.name] = inp.value.trim();
-
-
-
-
-
     });
-
-
-
-
-
   }
-
-
-
-
-
-
-
 
   const btn = document.getElementById('submitBtn');
-
-
-
-
-
   btn.disabled = true; btn.textContent = 'Wird übermittelt...';
 
-
-
-
-
-  document.getElementById('successMsg').style.display = 'none';
-
-
-
-
-
-  document.getElementById('msgErr').style.display = 'none';
-
-
-
-
-
-
-
+  document.getElementById('msgOk') && (document.getElementById('msgOk').style.display = 'none');
+  document.getElementById('successMsg') && (document.getElementById('successMsg').style.display = 'none');
+  document.getElementById('msgErr') && (document.getElementById('msgErr').style.display = 'none');
 
   try {
-
-
-
-
-
     const res = await fetch(WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
-
-
-
-
-
     const data = await res.json().catch(() => ({}));
 
-
-
-
-
     if (!res.ok || data.success === false) {
-
-
-
-
-
       if (data.error === 'not_found') {
-
-
         document.getElementById('msgErrTxt').textContent = 'Fehler: Diese E-Mail-Adresse hat kein aktives Abo abgeschlossen.';
-
-
       } else if (data.error === 'wrong_abo') {
-
-
         document.getElementById('msgErrTxt').textContent = 'Fehler: Diese E-Mail-Adresse hat kein Abo 2 abgeschlossen.';
-
-
       } else if (data.error === 'already_submitted') {
-
-
         document.getElementById('msgErrTxt').innerHTML = 'Du hast uns bereits die Zugangsdaten übermittelt. Falls du diese anpassen möchtest, melde dich per E-Mail bei uns: <a href="mailto:team@statlift.de" style="color:#818cf8;text-decoration:none;">team@statlift.de</a>.';
-
-
       } else if (data.error === 'invalid_credentials') {
-
-
         if (selectedCms === 'wix') {
-
-
           document.getElementById('msgErrTxt').innerHTML = '⚠️ <b>Zugangsdaten ungültig.</b><br>Bitte überprüfen Sie:<ul style="margin-top:8px;padding-left:18px;font-size:.88rem;"><li>Haben Sie unter Website-Berechtigungen die App <b>Wix Blog</b> angekreuzt?</li><li>Haben Sie den <b>API-Schlüssel</b> vollständig kopiert?</li><li>Ist die <b>Site-ID</b> korrekt eingetragen?</li></ul>Bitte korrigieren Sie die Daten und übermitteln Sie diese erneut.';
-
-
           document.getElementById('wix_cms_api_key').value = '';
-
-
         } else {
-
-
           document.getElementById('msgErrTxt').innerHTML = '⚠️ <b>Zugangsdaten ungültig oder Plugin blockiert den Zugriff.</b><br>Bitte überprüfen Sie:<ul style="margin-top:8px;padding-left:18px;font-size:.88rem;"><li>Ist das App-Passwort korrekt kopiert?</li><li>Hat ein Sicherheits-Plugin (Wordfence, iThemes o.ä.) den Zugriff blockiert?</li><li>Ist die Website-URL exakt richtig (inkl. https://)?</li></ul>Bitte korrigieren Sie die Daten und übermitteln Sie diese erneut.';
-
-
           if (selectedCms === 'wordpress') {
-
-
             document.getElementById('wordpress_cms_pass').value = '';
-
-
             document.getElementById('wordpress_cms_url').value = '';
-
-
             document.getElementById('wordpress_cms_user').value = '';
-
-
             document.getElementById('wp_plugin_warning').style.display = 'block';
-
-
           }
-
-
         }
-
-
         document.getElementById('submitWrap').style.display = 'block';
-
-
       } else {
-
-
         document.getElementById('msgErrTxt').textContent = 'Bitte prüfen Sie Ihre Eingaben oder kontaktieren Sie team@statlift.de.';
-
-
       }
-
-
       document.getElementById('msgErr').style.display = 'block';
-
-
-
-
-
     } else {
-
-
-
-
-
       document.querySelector('.card').querySelector('form') && (document.querySelector('.card').querySelector('form').style.display='none');
-
-
-
-
-
-      document.getElementById('formContent').style.display = 'none'; document.getElementById('successMsg').style.display = 'block'; window.scrollTo({top:0,behavior:'smooth'});
-
-
-
-
-
+      document.getElementById('msgOk') && (document.getElementById('msgOk').style.display = 'block');
+      document.getElementById('successMsg') && (document.getElementById('successMsg').style.display = 'block');
       document.getElementById('submitWrap').style.display = 'none';
-
-
-
-
-
     }
-
-
-
-
-
   } catch(e) {
-
-
-
-
-
     document.getElementById('msgErrTxt').textContent = 'Verbindungsfehler. Bitte versuchen Sie es erneut.';
-
-
-
-
-
     document.getElementById('msgErr').style.display = 'block';
-
-
-
-
-
   }
-
-
-
-
-
   btn.disabled = false; btn.textContent = 'Zugangsdaten übermitteln →';
-
-
-
-
-
 }
-
-
-
-
-
 </script>
 
 
