@@ -607,23 +607,7 @@ input:-webkit-autofill:active {
 
 
 
-  <!-- Domain -->
-
-  <div class="card">
-
-    <div class="sec">Wunsch-Domain</div>
-
-    <div class="fg" style="margin-bottom:0">
-
-      <label>Welche Domain möchten Sie?<span class="req">*</span></label>
-
-      <div class="dom-wrap">
-
-        <input type="text" id="domainInput" name="domain" class="dom-input" placeholder="Ihre-Domain.de" autocomplete="off" required oninput="checkDomain()">
-
-        <div class="dom-status" id="domStatus"></div>
-
-      </div>
+  <input type="hidden" name="typ" value="website">
 
       <p class="field-msg" id="domMsg">Geben Sie Ihre Wunsch-Domain mit Endung ein – z.&nbsp;B. <strong>meinefirma.de</strong>, <strong>.net</strong> oder <strong>.com</strong></p>
 
@@ -2001,62 +1985,6 @@ async function submitForm(e) {
 
 
   document.getElementById('formErrorBox').style.display = 'none';
-
-
-
-
-
-
-
-  // 1. Domain check
-
-
-
-  const domVal = document.getElementById('domainInput').value.trim().toLowerCase();
-
-
-
-  const parts = domVal.split('.');
-
-
-
-  if (parts.length < 2 || !VALID_TLDS.includes(parts[parts.length-1])) {
-
-
-
-    document.getElementById('domainInput').classList.add('error');
-
-
-
-    showError("Ungültige Domain", "Bitte geben Sie eine gültige Domain mit Endung an (z. B. .de oder .com).");
-
-
-
-    return;
-
-
-
-  }
-
-
-
-  if (domainAvailable === false) {
-
-
-
-    document.getElementById('domainInput').classList.add('error');
-
-
-
-    showError("Domain vergeben", "Die gewählte Domain ist bereits vergeben. Bitte wählen Sie eine andere.");
-
-
-
-    return;
-
-
-
-  }
 
 
 
