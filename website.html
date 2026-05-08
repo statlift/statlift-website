@@ -609,19 +609,9 @@ input:-webkit-autofill:active {
 
   <input type="hidden" name="typ" value="website">
 
-      <p class="field-msg" id="domMsg">Geben Sie Ihre Wunsch-Domain mit Endung ein – z.&nbsp;B. <strong>meinefirma.de</strong>, <strong>.net</strong> oder <strong>.com</strong></p>
+      
 
-    </div>
-
-  </div>
-
-
-
-
-
-
-
-  <!-- Design -->
+    <!-- Design -->
 
 
 
@@ -1651,14 +1641,6 @@ function removeFile(e) {
 
 
 
-const VALID_TLDS = ['com','net','org','de','at','ch','eu','info','biz','co','io','me','co.uk','nl','fr','it','es','pl'];
-
-
-
-let domainAvailable = null;
-
-
-
 let domTimer;
 
 
@@ -1908,35 +1890,7 @@ async function checkDomainAvailability(domain) {
 
 
 
-function validateDomain() {
 
-
-
-  const val = document.getElementById('domainInput').value.trim();
-
-
-
-  if (!val) return false;
-
-
-
-  const parts = val.split('.');
-
-
-
-  if (parts.length < 2 || !VALID_TLDS.includes(parts[parts.length-1].toLowerCase())) return false;
-
-
-
-  if (domainAvailable === false) return false;
-
-
-
-  return true;
-
-
-
-}
 
 
 
