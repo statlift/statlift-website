@@ -9807,22 +9807,6 @@
 
 
 
-                access_key: 'c319ac13-444b-4d07-a642-142d384f3767',
-
-
-
-                subject: 'Anfrage von Website Formular',
-
-
-
-                from_name: 'Statlift Website',
-
-
-
-                to_email: 'team@statlift.de',
-
-
-
                 Name:     document.getElementById('f-name').value,
 
 
@@ -9836,6 +9820,10 @@
 
 
                 Website:  document.getElementById('f-url').value,
+
+
+
+                Paket:    document.getElementById('f-paket') ? document.getElementById('f-paket').value : '',
 
 
 
@@ -9855,7 +9843,7 @@
 
 
 
-                const res  = await fetch('https://api.web3forms.com/submit', {
+                const res  = await fetch('https://admin.statlift.de/webhook/feedback', {
 
 
 
@@ -9863,7 +9851,7 @@
 
 
 
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    headers: { 'Content-Type': 'application/json' },
 
 
 
@@ -9875,11 +9863,7 @@
 
 
 
-                const data = await res.json();
-
-
-
-                if (data.success) {
+                if (res.ok) {
 
 
 
