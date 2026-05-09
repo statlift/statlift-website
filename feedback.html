@@ -593,6 +593,17 @@
 * { -webkit-tap-highlight-color: transparent; }
 button, a { outline: none; }
 </style>
+
+<style id="footer-style-inject">
+footer { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.07); padding: 32px 0; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 0.82rem; }
+.footer-links a { color: #64748b; text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: #f8fafc; }
+.footer-copy { font-size: 0.78rem; color: #475569; }
+.nav-logo { font-weight: 800; font-size: 1.1rem; color: #f8fafc; text-decoration: none; letter-spacing: -0.02em; }
+.nav-logo span { color: #4F46E5; }
+</style>
 </head>
 
 <body>
@@ -910,22 +921,20 @@ button, a { outline: none; }
 
 
 
-<footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.07);padding:24px;text-align:center;font-size:0.82rem;color:#64748b;margin-top:40px;">
-
-  <a href="https://statlift.de" style="color:#818cf8;text-decoration:none;">Statlift</a>
-
-  &middot;
-
-  <a href="#" onclick="openModal('modal-tos');return false;" style="color:#64748b;text-decoration:none;">AGB &amp; Widerruf</a>
-
-  &middot;
-
-  <a href="#" onclick="openModal('modal-impressum');return false;" style="color:#64748b;text-decoration:none;">Impressum</a>
-
-  &middot;
-
-  <a href="#" onclick="openModal('modal-datenschutz');return false;" style="color:#64748b;text-decoration:none;">Datenschutz</a>
-
+<footer>
+        <div class="container">
+            <div class="footer-inner">
+                <a href="https://statlift.de" class="nav-logo" style="font-size:1.1rem;">Stat<span>lift</span></a>
+                <div class="footer-links">
+                    <a href="#" onclick="openModal('modal-tos');return false;">AGB &amp; Widerruf</a>
+                    &middot;
+                    <a href="#" onclick="openModal('modal-impressum');return false;">Impressum</a>
+                    &middot;
+                    <a href="#" onclick="openModal('modal-datenschutz');return false;">Datenschutz</a>
+                </div>
+                <span class="footer-copy">&copy; 2026 Statlift. Alle Rechte vorbehalten.</span>
+            </div>
+        </div>
 </footer>
 
 
