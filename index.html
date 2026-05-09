@@ -8026,9 +8026,6 @@
 
 
         <div class="container">
-
-
-
             <div class="section-header center reveal">
                 <span class="eyebrow">Leistungspakete</span>
                 <h2>Passend für jedes Ziel.</h2>
@@ -8037,18 +8034,12 @@
 
             <!-- Pricing Toggle -->
             <div class="pricing-toggle-wrap reveal d1">
-                <button class="ptab active" id="ptab-abo" onclick="switchPricingTab('abo')">
-                    Abonnements
-                </button>
-                <button class="ptab" id="ptab-einmal" onclick="switchPricingTab('einmal')">
-                    Einmalige Projekte
-                </button>
+                <button class="ptab active" id="ptab-abo" onclick="switchPricingTab('abo')">Abonnements</button>
+                <button class="ptab" id="ptab-einmal" onclick="switchPricingTab('einmal')">Einmalige Projekte</button>
             </div>
 
-
-
             <div id="panel-abo" class="pricing-panel">
-            <div class="pricing-grid">
+                <div class="pricing-grid">
 
 
 
@@ -8360,29 +8351,15 @@
 
 
 
-            
-
-                
-
-
-
             </div>
-            </div><!-- /panel-abo -->
-
-
-
-            
+            </div>
 
             <div id="panel-einmal" class="pricing-panel" style="display:none">
-<div class="section-header center reveal" style="margin-top:80px; margin-bottom: 20px;">
-
-                <h2>Einmalige Projekte</h2>
-
-                <p class="section-sub">Für Unternehmen, die eine Website oder ein Logo brauchen — ohne laufende Kosten.</p>
-
-            </div>
-
-            <div class="pricing-grid einmal-grid" style="margin-top:30px;">
+                <div class="section-header center reveal" style="margin-top:40px;margin-bottom:20px;">
+                    <h2>Einmalige Projekte</h2>
+                    <p class="section-sub">Für Unternehmen, die eine Website oder ein Logo brauchen — ohne laufende Kosten.</p>
+                </div>
+                <div class="pricing-grid einmal-grid" style="margin-top:30px;">
 
                 <!-- Logo Erstellung -->
 
@@ -8485,11 +8462,7 @@
                 </div>
 
             </div>
-
-
-
-            </div><!-- /pricing-grid einmal -->
-            </div><!-- /panel-einmal -->
+            </div>
 
             <!-- Paket-Vergleichshinweis -->
 
@@ -10668,23 +10641,24 @@ nav a:hover { transform: translateY(-1px) !important; }
 .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 
-/* ── Scroll progress bar ── */
-#scroll-progress {
-  position: fixed; top: 0; left: 0; height: 3px;
-  background: linear-gradient(90deg, #4F46E5, #818cf8, #7C3AED);
-  width: 0%; z-index: 9999;
-  transition: width 0.1s linear;
-}
+/* ── Mobile tap highlight off ── */
+* { -webkit-tap-highlight-color: transparent; }
+button, a { outline: none; }
 </style>
 
-<div id="scroll-progress"></div>
-
 <script>
-/* ── Scroll Progress ── */
-window.addEventListener('scroll', () => {
-  const pct = (scrollY / (document.body.scrollHeight - innerHeight)) * 100;
-  document.getElementById('scroll-progress').style.width = pct + '%';
-}, { passive: true });
+/* ── Pricing Tab Switch ── */
+function switchPricingTab(tab) {
+  var abo    = document.getElementById('panel-abo');
+  var einmal = document.getElementById('panel-einmal');
+  var tabAbo    = document.getElementById('ptab-abo');
+  var tabEinmal = document.getElementById('ptab-einmal');
+  if (!abo || !einmal) return;
+  abo.style.display    = tab === 'abo'    ? '' : 'none';
+  einmal.style.display = tab === 'einmal' ? '' : 'none';
+  tabAbo.classList.toggle('active',    tab === 'abo');
+  tabEinmal.classList.toggle('active', tab === 'einmal');
+}
 
 /* ── Global Glow Orbs Background ── */
 (function() {
