@@ -340,6 +340,35 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 .success .icon{font-size:3rem;margin-bottom:1.2rem}
 .success h2{font-size:1.6rem;font-weight:800;margin-bottom:1rem;color:#f8fafc}
 .success p{color:#94a3b8;font-size:1rem;line-height:1.7}
+
+/* === Footer === */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 32px 0;
+  margin-top: 80px;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-links a {
+  font-size: 0.8rem;
+  color: var(--text-subtle, #94a3b8);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: #818cf8; }
+.footer-copy {
+  font-size: 0.78rem;
+  color: var(--text-subtle, #94a3b8);
+}
 </style>
 
 
@@ -3137,9 +3166,3 @@ function closeModal(id){var m=document.getElementById(id);if(m){m.style.display=
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('[id^="modal-"]').forEach(function(m){m.style.display='none';document.body.style.overflow='';});}});
 </script>
 </body>
-
-
-
-
-
-</html>
