@@ -707,12 +707,10 @@
 
 
 
-            <div class="msg-box success" id="successMsg">
-
-                <div class="msg-title">✓ Feedback erhalten.</div>
-
-                <div class="msg-text">Wir nehmen uns das zu Herzen.</div>
-
+            <div class="success" id="successMsg" style="display:none; text-align:center; padding: 2rem 0;">
+                <div class="icon" style="font-size:3rem; margin-bottom:1.2rem;">✅</div>
+                <h2 style="font-size:1.6rem; font-weight:800; margin-bottom:1rem; color:#f8fafc;">Feedback erhalten</h2>
+                <p style="color:#94a3b8; font-size:1rem; line-height:1.7;">Vielen Dank für Ihre Zeit!<br>Wir nehmen uns Ihr Feedback sehr zu Herzen.</p>
             </div>
 
 
@@ -866,6 +864,15 @@
                 // Show success regardless (webhook is fire-and-forget for UX)
 
                 document.getElementById('feedbackForm').style.display = 'none';
+
+                let eyebrow = document.querySelector('.eyebrow');
+                if (eyebrow) eyebrow.style.display = 'none';
+                
+                let h1 = document.querySelector('h1');
+                if (h1) h1.style.display = 'none';
+                
+                let subtitle = document.querySelector('.subtitle');
+                if (subtitle) subtitle.style.display = 'none';
 
                 successBox.style.display = 'block';
 
