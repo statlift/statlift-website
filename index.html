@@ -6306,7 +6306,18 @@
 
 
 
-    </style>
+    
+.einmal-grid {
+  grid-template-columns: repeat(2, minmax(0, 400px));
+  justify-content: center;
+}
+@media (max-width: 900px) {
+  .einmal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>
 
 
 
