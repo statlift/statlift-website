@@ -1,288 +1,573 @@
 <!DOCTYPE html>
+
 <html lang="de">
+
 <head>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
   <link rel="icon" type="image/png" href="/favicon.png">
 
+
+
     <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Feedback — Statlift</title>
+
     <meta name="description" content="Teilen Sie uns Ihr Feedback zu Statlift mit."><rect width='100' height='100' rx='18' fill='%234F46E5'/><text y='.9em' font-size='72' x='50%' text-anchor='middle' font-family='Inter,sans-serif' font-weight='800' fill='white'>S</text></svg>">
+
     <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
     <style>
+
         /* ══════════════════════════════
+
            RESET & BASE
+
         ══════════════════════════════ */
+
         *, *::before, *::after {
+
             box-sizing: border-box;
+
             margin: 0;
+
             padding: 0;
+
         }
+
         html { font-size: 16px; }
+
         body {
+
             background: #0a0a0a;
+
             color: #f8fafc;
+
             font-family: 'Inter', sans-serif;
+
             font-weight: 400;
+
             line-height: 1.7;
+
             min-height: 100vh;
+
             display: flex;
+
             flex-direction: column;
+
         }
+
+
 
         :root {
+
             --accent: #4F46E5;
+
             --accent-hover: #4338CA;
+
             --accent-glow: rgba(79, 70, 229, 0.30);
+
             --border: rgba(255, 255, 255, 0.07);
+
             --border-hover: rgba(255, 255, 255, 0.14);
+
             --surface: #111116;
+
             --surface-form: rgba(255, 255, 255, 0.02);
+
             --text-muted: #e2e8f0;
+
         }
 
+
+
         /* ══════════════════════════════
+
            NAVBAR
+
         ══════════════════════════════ */
+
         #navbar {
+
             padding: 18px 0;
+
             background: rgba(10, 10, 10, 0.90);
+
             backdrop-filter: blur(20px);
+
             border-bottom: 1px solid var(--border);
+
             position: fixed;
+
             inset: 0 0 auto 0;
+
             z-index: 200;
+
         }
+
         .container {
+
             max-width: 1080px;
+
             margin: 0 auto;
+
             padding: 0 24px;
+
         }
+
         .nav-inner { display: flex; align-items: center; }
+
         .nav-logo {
+
             font-size: 1.25rem;
+
             font-weight: 800;
+
             color: #f8fafc;
+
             text-decoration: none;
+
             letter-spacing: -0.04em;
+
         }
+
         .nav-logo span { color: #818cf8; }
 
-        /* ══════════════════════════════
-           MAIN
-        ══════════════════════════════ */
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 24px 60px;
-            position: relative;
-        }
+
 
         /* ══════════════════════════════
-           BACKGROUND ORBS
+
+           MAIN
+
         ══════════════════════════════ */
-        .hero-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.15;
-            z-index: 0;
-            pointer-events: none;
+
+        main {
+
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 100px 24px 60px;
+
+            position: relative;
+
         }
+
+
+
+        /* ══════════════════════════════
+
+           BACKGROUND ORBS
+
+        ══════════════════════════════ */
+
+        .hero-orb {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(100px);
+
+            opacity: 0.15;
+
+            z-index: 0;
+
+            pointer-events: none;
+
+        }
+
         .orb-a { background: #4F46E5; width: 400px; height: 400px; top: 10%; left: 0; }
+
         .orb-b { background: #3b82f6; width: 300px; height: 300px; bottom: 10%; right: 0; }
 
+
+
         /* ══════════════════════════════
+
            CARD
+
         ══════════════════════════════ */
+
         .form-card {
+
             position: relative;
+
             z-index: 10;
+
             background: var(--surface);
+
             border: 1px solid var(--border);
+
             border-radius: 12px;
+
             padding: 48px;
+
             max-width: 580px;
+
             width: 100%;
+
         }
+
+
 
         .eyebrow {
+
             display: inline-block;
+
             font-size: 0.72rem;
+
             font-weight: 700;
+
             letter-spacing: 0.14em;
+
             text-transform: uppercase;
+
             color: #818cf8;
+
             margin-bottom: 14px;
+
         }
+
+
 
         h1 {
+
             font-size: clamp(1.8rem, 4vw, 2.2rem);
+
             font-weight: 800;
+
             color: #f8fafc;
+
             line-height: 1.2;
+
             margin-bottom: 12px;
+
             letter-spacing: -0.025em;
+
         }
+
+
 
         .subtitle {
+
             font-size: 1.0rem;
+
             color: var(--text-muted);
+
             margin-bottom: 36px;
+
             line-height: 1.6;
+
         }
 
+
+
         /* ══════════════════════════════
+
            FORM FIELDS
+
         ══════════════════════════════ */
+
         .form-group { margin-bottom: 24px; text-align: left; }
 
+
+
         label {
+
             display: block;
+
             font-size: 0.85rem;
+
             font-weight: 500;
+
             color: #cbd5e1;
+
             margin-bottom: 8px;
+
         }
+
+
 
         input, textarea {
+
             width: 100%;
+
             background: var(--surface-form);
+
             border: 1px solid var(--border-hover);
+
             border-radius: 8px;
+
             padding: 14px 18px;
+
             font-family: inherit;
+
             font-size: 0.95rem;
+
             color: #f8fafc;
+
             outline: none;
+
             transition: all 0.25s ease;
+
             resize: vertical;
+
         }
+
         input::placeholder, textarea::placeholder { color: transparent; }
+
         input:focus, textarea:focus {
+
             border-color: rgba(79, 70, 229, 0.6);
+
             background: rgba(255, 255, 255, 0.04);
+
             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+
         }
+
         input:-webkit-autofill,
+
         input:-webkit-autofill:hover,
+
         input:-webkit-autofill:focus {
+
             -webkit-box-shadow: 0 0 0 30px #111116 inset !important;
+
             -webkit-text-fill-color: #f8fafc !important;
+
         }
+
         textarea { min-height: 120px; }
 
+
+
         /* ══════════════════════════════
+
            STAR RATING
+
         ══════════════════════════════ */
+
         .star-label {
+
             display: block;
+
             font-size: 0.85rem;
+
             font-weight: 500;
+
             color: #cbd5e1;
+
             margin-bottom: 12px;
+
         }
+
         .star-row {
+
             display: flex;
+
             gap: 8px;
+
             margin-bottom: 8px;
+
         }
+
         .star-btn {
+
             background: none;
+
             border: none;
+
             cursor: pointer;
+
             font-size: 2rem;
+
             line-height: 1;
+
             color: rgba(255,255,255,0.15);
+
             transition: color 0.15s ease, transform 0.15s ease;
+
             padding: 0;
+
             outline: none;
+
             user-select: none;
+
             -webkit-user-select: none;
+
             -webkit-tap-highlight-color: transparent;
+
         }
+
         .star-btn:hover, .star-btn.active {
+
             color: #fbbf24;
+
             transform: scale(1.15);
+
         }
+
         .star-hint {
+
             font-size: 0.8rem;
+
             color: #64748b;
+
             margin-top: 4px;
+
             min-height: 1.2em;
+
             transition: opacity 0.2s;
+
         }
 
+
+
         /* ══════════════════════════════
+
            BUTTON
+
         ══════════════════════════════ */
+
         .btn-submit {
+
             display: inline-flex;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 8px;
+
             width: 100%;
+
             padding: 14px 28px;
+
             border-radius: 8px;
+
             font-family: 'Inter', sans-serif;
+
             font-size: 1rem;
+
             font-weight: 600;
+
             background: var(--accent);
+
             color: #fff;
+
             border: none;
+
             cursor: pointer;
+
             transition: all 0.25s ease;
+
             box-shadow: 0 0 24px var(--accent-glow);
+
             margin-top: 8px;
-        }
-        .btn-submit:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px var(--accent-glow);
-        }
-        .btn-submit:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
+
         }
 
+        .btn-submit:hover {
+
+            background: var(--accent-hover);
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 8px 28px var(--accent-glow);
+
+        }
+
+        .btn-submit:disabled {
+
+            opacity: 0.5;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+        }
+
+
+
         /* ══════════════════════════════
+
            MESSAGES
+
         ══════════════════════════════ */
+
         .msg-box {
+
             display: none;
+
             padding: 24px;
+
             border-radius: 8px;
+
             margin-top: 24px;
+
         }
+
         .msg-box.success {
+
             background: rgba(34, 197, 94, 0.08);
+
             border: 1px solid rgba(34, 197, 94, 0.25);
+
         }
+
         .msg-box.error {
+
             background: rgba(239, 68, 68, 0.08);
+
             border: 1px solid rgba(239, 68, 68, 0.25);
+
         }
+
         .msg-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; color: #f8fafc; }
+
         .msg-text  { font-size: 0.9rem; color: #e2e8f0; line-height: 1.6; }
 
+
+
         /* Spinner */
+
         .spinner {
+
             width: 18px; height: 18px;
+
             border: 2px solid rgba(255,255,255,0.3);
+
             border-top-color: #fff;
+
             border-radius: 50%;
+
             animation: spin 0.7s linear infinite;
+
             display: none;
+
         }
+
         @keyframes spin { to { transform: rotate(360deg); } }
 
+
+
         @media (max-width: 600px) {
+
             .form-card { padding: 32px 20px; border: none; background: transparent; }
+
             main { padding: 80px 0 40px; align-items: flex-start; }
+
             #navbar { border-bottom: none; }
+
         }
+
     
 .form-group select optgroup {
     background-color: #1a1a2e;
@@ -295,36 +580,68 @@
     color: #f8fafc;
 }
 </style>
+
 </head>
+
 <body>
 
+
+
     <nav id="navbar">
+
         <div class="container">
+
             <div class="nav-inner">
+
                 <a href="https://statlift.de" class="nav-logo">Stat<span>lift</span></a>
+
             </div>
+
         </div>
+
     </nav>
 
+
+
     <main>
+
         <div class="hero-orb orb-a"></div>
+
         <div class="hero-orb orb-b"></div>
 
+
+
         <div class="form-card">
+
             <span class="eyebrow">Kundenfeedback</span>
+
             <h1>Was lief gut? Was nicht?</h1>
+
             <p class="subtitle">Ihre Rückmeldung zeigt uns direkt, wo wir besser werden müssen.</p>
 
+
+
             <form id="feedbackForm" novalidate>
-                <div class="form-group">
-                    <label for="firma">Firma / Name</label>
-                    <input type="text" id="firma" required>
-                </div>
 
                 <div class="form-group">
-                    <label for="email">E-Mail</label>
-                    <input type="email" id="email" required>
+
+                    <label for="firma">Firma / Name</label>
+
+                    <input type="text" id="firma" required>
+
                 </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="email">E-Mail</label>
+
+                    <input type="email" id="email" required>
+
+                </div>
+
+
 
                 <div class="form-group">
                     <label for="paket">Gebuchtes Paket</label>
@@ -343,245 +660,488 @@
                 </div>
 
                 <div class="form-group">
+
                     <span class="star-label">Gesamtbewertung</span>
+
                     <div class="star-row" id="starRow" role="group" aria-label="Bewertung">
+
                         <button type="button" class="star-btn" data-val="1" aria-label="1 Stern">★</button>
+
                         <button type="button" class="star-btn" data-val="2" aria-label="2 Sterne">★</button>
+
                         <button type="button" class="star-btn" data-val="3" aria-label="3 Sterne">★</button>
+
                         <button type="button" class="star-btn" data-val="4" aria-label="4 Sterne">★</button>
+
                         <button type="button" class="star-btn" data-val="5" aria-label="5 Sterne">★</button>
+
                     </div>
+
                     <p class="star-hint" id="starHint">Bitte wählen Sie eine Bewertung</p>
+
                     <input type="hidden" id="rating" value="">
+
                 </div>
+
+
 
                 <div class="form-group">
+
                     <label for="feedback">Ihr Feedback <span style="color:#64748b;font-weight:400;">(optional)</span></label>
+
                     <textarea id="feedback"></textarea>
+
                 </div>
 
+
+
                 <button type="submit" class="btn-submit" id="submitBtn">
+
                     <span id="btnText">Feedback absenden →</span>
+
                     <div class="spinner" id="spinner"></div>
+
                 </button>
+
             </form>
 
+
+
             <div class="msg-box success" id="successMsg">
+
                 <div class="msg-title">✓ Feedback erhalten.</div>
+
                 <div class="msg-text">Wir nehmen uns das zu Herzen.</div>
+
             </div>
+
+
 
             <div class="msg-box error" id="errorMsg">
+
                 <div class="msg-title">Fehler beim Senden</div>
+
                 <div class="msg-text" id="errorText">Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an <a href="mailto:team@statlift.de" style="color:#818cf8;">team@statlift.de</a>.</div>
+
             </div>
+
         </div>
+
     </main>
 
+
+
     <script>
+
         // ── Webhook URL ────────────────────────────────────────────────────
+
         // Der n8n Webhook sendet das Feedback als Telegram-Nachricht.
+
         // Die URL aktualisiert sich automatisch mit der aktuellen ngrok URL.
+
         const WEBHOOK_URL = 'https://admin.statlift.de/webhook/feedback';
 
+
+
         // ── Star Rating ────────────────────────────────────────────────────
+
         const hints = ['', 'Nicht zufrieden', 'Ausbaufähig', 'Gut', 'Sehr gut', 'Ausgezeichnet!'];
+
         let selectedRating = 0;
 
+
+
         document.querySelectorAll('.star-btn').forEach(btn => {
+
             btn.addEventListener('click', () => {
+
                 selectedRating = Number(btn.dataset.val);
+
                 document.getElementById('rating').value = selectedRating;
+
                 document.getElementById('starHint').textContent = hints[selectedRating];
+
                 updateStars(selectedRating);
+
             });
+
             btn.addEventListener('mouseenter', () => updateStars(Number(btn.dataset.val)));
+
             btn.addEventListener('mouseleave', () => updateStars(selectedRating));
+
         });
+
+
 
         function updateStars(val) {
+
             document.querySelectorAll('.star-btn').forEach(b => {
+
                 b.classList.toggle('active', Number(b.dataset.val) <= val);
+
             });
+
         }
 
+
+
         // ── Form Submit ────────────────────────────────────────────────────
+
         document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+
             e.preventDefault();
 
+
+
             const btn      = document.getElementById('submitBtn');
+
             const btnText  = document.getElementById('btnText');
+
             const spinner  = document.getElementById('spinner');
+
             const successBox = document.getElementById('successMsg');
+
             const errorBox   = document.getElementById('errorMsg');
 
+
+
             // Validate
+
             const firma    = document.getElementById('firma').value.trim();
+
             const email    = document.getElementById('email').value.trim();
+
             const rating   = document.getElementById('rating').value;
+
             const feedback = document.getElementById('feedback').value.trim();
 
+
+
             if (!firma || !email) {
+
                 errorBox.querySelector('#errorText').textContent = 'Bitte füllen Sie Firmenname und E-Mail-Adresse aus.';
+
                 errorBox.style.display = 'block';
+
                 return;
+
             }
+
             if (!rating) {
+
                 errorBox.querySelector('#errorText').textContent = 'Bitte wählen Sie eine Bewertung (Sterne).';
+
                 errorBox.style.display = 'block';
+
                 return;
+
             }
+
+
 
             successBox.style.display = 'none';
+
             errorBox.style.display = 'none';
+
             btn.disabled = true;
+
             btnText.textContent = 'Wird gesendet...';
+
             spinner.style.display = 'block';
 
+
+
             try {
+
                 await fetch(WEBHOOK_URL, {
+
                     method: 'POST',
+
                     headers: { 'Content-Type': 'application/json' },
+
                     body: JSON.stringify({ firma, email, rating: Number(rating), feedback })
+
                 });
+
                 // Show success regardless (webhook is fire-and-forget for UX)
+
                 document.getElementById('feedbackForm').style.display = 'none';
+
                 successBox.style.display = 'block';
+
             } catch (err) {
+
                 console.error(err);
+
                 btn.disabled = false;
+
                 btnText.textContent = 'Feedback absenden →';
+
                 spinner.style.display = 'none';
+
                 errorBox.style.display = 'block';
+
             }
+
         });
+
     </script>
 
+
+
 <footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.07);padding:24px;text-align:center;font-size:0.82rem;color:#64748b;margin-top:40px;">
+
   <a href="https://statlift.de" style="color:#818cf8;text-decoration:none;">Statlift</a>
+
   &middot;
+
   <a href="#" onclick="openModal('modal-tos');return false;" style="color:#64748b;text-decoration:none;">AGB &amp; Widerruf</a>
+
   &middot;
+
   <a href="#" onclick="openModal('modal-impressum');return false;" style="color:#64748b;text-decoration:none;">Impressum</a>
+
   &middot;
+
   <a href="#" onclick="openModal('modal-datenschutz');return false;" style="color:#64748b;text-decoration:none;">Datenschutz</a>
+
 </footer>
+
+
 
 <!-- IMPRESSUM MODAL -->
 
+
+
 <!-- AGB & WIDERRUF MODAL -->
+
 <div id="modal-tos" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;justify-content:center;align-items:flex-start;">
+
   <div style="max-width:720px;margin:60px auto;padding:0 24px 60px;width:100%;">
+
     <div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
+
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+
         <h2 style="font-size:1.6rem;color:#f8fafc;">AGB &amp; Widerrufsbelehrung</h2>
+
         <button onclick="closeModal('modal-tos')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+
       </div>
+
       <div style="font-size:0.88rem;color:#e2e8f0;line-height:1.9;">
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 1 Anbieter &amp; Geltungsbereich</h3>
+
         <p style="margin-bottom:20px;">Anbieter ist Statlift LLC, 30 N Gould St Ste N, Sheridan, WY 82801, USA (nachfolgend „Statlift"). Diese AGB gelten für alle Leistungen von Statlift, insbesondere für Content- und SEO-Abonnements. Abweichende Bedingungen des Kunden werden nicht anerkannt.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 2 Leistungsgegenstand</h3>
+
         <p style="margin-bottom:20px;">Statlift erbringt monatliche Content-Dienstleistungen (Fachartikel, SEO-Optimierung, ggf. Veröffentlichung auf der Kundenwebsite) gemäß dem jeweils gebuchten Abonnement-Modell. Der Leistungsumfang ergibt sich aus der zum Buchungszeitpunkt gültigen Leistungsbeschreibung auf statlift.de.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 3 Vertragsschluss</h3>
+
         <p style="margin-bottom:20px;">Der Vertrag kommt durch Abschluss des Zahlungsvorgangs über Stripe zustande. Mit der Zahlung bestätigt der Kunde diese AGB gelesen und akzeptiert zu haben.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 4 Laufzeit &amp; Kündigung</h3>
+
         <p style="margin-bottom:20px;">Abo 1 und Abo 2 laufen monatlich und sind jederzeit zum Ende des laufenden Abrechnungsmonats kündbar. Abo 3 hat eine Mindestlaufzeit von 12 Monaten und kann danach mit einer Frist von 30 Tagen zum Monatsende gekündigt werden. Die Kündigung erfolgt per E-Mail an team@statlift.de.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 5 Preise &amp; Zahlung</h3>
+
         <p style="margin-bottom:20px;">Alle Preise sind in EUR angegeben und verstehen sich zzgl. ggf. anfallender gesetzlicher Umsatzsteuer. Die Abrechnung erfolgt monatlich im Voraus über Stripe. Bei B2B-Leistungen an in Deutschland ansässige Unternehmen gilt das Reverse-Charge-Verfahren (§ 13b UStG), sofern keine abweichende steuerliche Regelung greift. Der Kunde ist für die korrekte steuerliche Behandlung in seinem Land verantwortlich.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 6 Widerrufsbelehrung</h3>
+
         <p style="margin-bottom:12px;"><strong style="color:#f8fafc;">Für Verbraucher (B2C):</strong> Sie haben das Recht, diesen Vertrag binnen 14 Tagen ohne Angabe von Gründen zu widerrufen. Die Widerrufsfrist beginnt mit Vertragsschluss. Zur Ausübung Ihres Widerrufsrechts wenden Sie sich an: team@statlift.de.</p>
+
         <p style="margin-bottom:20px;padding:12px 16px;background:rgba(255,255,255,0.04);border-radius:8px;font-size:0.82rem;color:#94a3b8;"><strong style="color:#818cf8;">Hinweis für Unternehmen (B2B):</strong> Unternehmer haben kein gesetzliches Widerrufsrecht. Mit Beginn der Leistungserbringung (Erstellung des ersten Artikels) durch Statlift erlischt ein etwaiges Widerrufsrecht auch für Verbraucher, sofern der Verbraucher ausdrücklich zugestimmt hat, dass mit der Ausführung vor Ablauf der Widerrufsfrist begonnen wird.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 7 Rückerstattungsrichtlinie (Refund Policy)</h3>
+
         <p style="margin-bottom:20px;">Da Statlift digitale Inhalte (Artikel, SEO-Texte) liefert, die nach der Erstellung nicht „zurückgegeben" werden können, sind bereits erbrachte Leistungen grundsätzlich nicht erstattungsfähig. Im Falle eines berechtigten Mangels (z. B. Nichtlieferung vereinbarter Artikel) wird Statlift entweder Nachlieferung oder anteilige Gutschrift anbieten. Anfragen an: team@statlift.de.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 8 Haftungsbeschränkung</h3>
+
         <p style="margin-bottom:20px;">Statlift haftet nur bei Vorsatz und grober Fahrlässigkeit. Die Haftung für mittelbare Schäden, entgangenen Gewinn und Datenverlust ist ausgeschlossen. Statlift übernimmt keine Garantie für bestimmte Suchmaschinenpositionen oder Umsatzentwicklungen.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 9 Anwendbares Recht &amp; Streitigkeiten</h3>
+
         <p>Es gilt das Recht des US-Bundesstaats Wyoming. Für Verbraucher in der EU bleiben zwingende Verbraucherschutzrechte des jeweiligen Aufenthaltslandes unberührt. Bei Streitigkeiten kann die EU-Streitschlichtungsplattform genutzt werden: <a href="https://ec.europa.eu/consumers/odr" style="color:#818cf8;" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. Unsere E-Mail für Schlichtungsanfragen: team@statlift.de</p>
 
+
+
       </div>
+
     </div>
+
   </div>
+
 </div>
+
+
 
 <div id="modal-impressum" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;justify-content:center;align-items:flex-start;">
+
   <div style="max-width:680px;margin:60px auto;padding:0 24px 60px;width:100%;">
+
     <div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
+
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+
         <h2 style="font-size:1.6rem;color:#f8fafc;">Impressum</h2>
+
         <button onclick="closeModal('modal-impressum')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+
       </div>
+
       <div style="font-size:0.9rem;color:#e2e8f0;line-height:1.9;">
+
         <h3 style="margin-bottom:10px;font-size:1rem;">Unternehmensangaben (US LLC)</h3>
+
         <p style="margin-bottom:20px;">
+
           Statlift LLC<br>
+
           Philip Exner<br>
+
           30 N Gould St Ste N<br>
+
           Sheridan, WY 82801<br>
+
           USA
+
         </p>
+
         <h3 style="margin-bottom:10px;font-size:1rem;">Gesellschaftsform &amp; Registrierung</h3>
+
         <p style="margin-bottom:20px;">
+
           Gesellschaftsform: Limited Liability Company (LLC)<br>
+
           Gründungsstaat: Wyoming, USA<br>
+
           Gründungsdatum: 01.05.2026<br>
+
           Aktenzeichen: 2026-001967147<br>
+
           Registered Agent: Northwest Registered Agent Service Inc
+
         </p>
+
         <h3 style="margin-bottom:10px;font-size:1rem;">Kontakt</h3>
+
         <p style="margin-bottom:20px;">E-Mail: team@statlift.de</p>
+
         <h3 style="margin-bottom:10px;font-size:1rem;">Verantwortlich für den Inhalt</h3>
+
         <p style="margin-bottom:20px;">Philip Exner<br>30 N Gould St Ste N, Sheridan, WY 82801, USA</p>
+
         <h3 style="margin-bottom:10px;font-size:1rem;">Haftungsausschluss</h3>
+
         <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>
+
       </div>
+
     </div>
+
   </div>
+
 </div>
+
+
 
 <!-- DATENSCHUTZ MODAL -->
+
 <div id="modal-datenschutz" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;justify-content:center;align-items:flex-start;">
+
   <div style="max-width:680px;margin:60px auto;padding:0 24px 60px;width:100%;">
+
     <div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
+
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+
         <h2 style="font-size:1.6rem;color:#f8fafc;">Datenschutzerklärung</h2>
+
         <button onclick="closeModal('modal-datenschutz')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+
       </div>
+
       <div style="font-size:0.9rem;color:#e2e8f0;line-height:1.9;">
+
         <h3 style="margin-bottom:10px;font-size:1rem;">1. Verantwortlicher</h3>
+
         <p style="margin-bottom:20px;">Verantwortlich im Sinne der DSGVO ist: Philip Exner, Statlift LLC, 30 N Gould St Ste N, Sheridan, WY 82801, USA — team@statlift.de</p>
+
         <h3 style="margin-bottom:10px;font-size:1rem;">2. Erhebung und Verarbeitung personenbezogener Daten</h3>
+
         <p style="margin-bottom:20px;">Wir erheben personenbezogene Daten nur, wenn Sie uns diese im Rahmen der Kontaktaufnahme freiwillig mitteilen (z. B. Name, E-Mail-Adresse, Website-URL). Diese Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben.</p>
+
         <h3 style="margin-bottom:10px;font-size:1rem;">3. Hosting</h3>
+
         <p style="margin-bottom:20px;">Diese Website wird über Vercel Inc., 340 Pine Street, Suite 701, San Francisco, CA 94104, USA gehostet. Vercel verarbeitet möglicherweise technische Verbindungsdaten (IP-Adresse, Zeitstempel). Weitere Informationen: vercel.com/legal/privacy-policy</p>
+
         <h3 style="margin-bottom:10px;font-size:1rem;">4. Google Fonts</h3>
+
         <p style="margin-bottom:20px;">Diese Website verwendet Google Fonts. Beim Aufruf der Seite wird die Schriftart vom Google-Server geladen, wobei Ihre IP-Adresse an Google übermittelt werden kann. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.</p>
+
         <h3 style="margin-bottom:10px;font-size:1rem;">5. Ihre Rechte</h3>
+
         <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie Datenübertragbarkeit. Kontakt: team@statlift.de
+
         <h3 style="margin-bottom:10px;font-size:1rem;">6. Zahlungsabwicklung (Stripe)</h3>
+
         <p style="margin-bottom:20px;">Für die Zahlungsabwicklung nutzen wir Stripe Payments Europe, Ltd., 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, Irland. Stripe verarbeitet Ihre Zahlungsdaten (z. B. Kreditkartennummer, Bankdaten) zur Abwicklung des Kaufvorgangs. Statlift erhält keinen Zugriff auf vollständige Zahlungsdaten. Weitere Informationen: <a href="https://stripe.com/de/privacy" style="color:#818cf8;" target="_blank" rel="noopener">stripe.com/de/privacy</a>. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</p>
+
       </div>
+
     </div>
+
   </div>
+
 </div>
 
+
+
 <script>
+
 function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+
 function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
 window.addEventListener('click', function(e) {
+
   if (e.target.id === 'modal-impressum' || e.target.id === 'modal-datenschutz') {
+
     e.target.style.display = 'none';
+
   }
+
 });
+
 </script>
 
+
+
 </body>
+
 </html>
+
