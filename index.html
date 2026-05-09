@@ -8030,21 +8030,19 @@
 
 
             <div class="section-header center reveal">
-
-
-
                 <span class="eyebrow">Leistungspakete</span>
+                <h2>Passend für jedes Ziel.</h2>
+                <p class="section-sub">Wählen Sie zwischen monatlichen Abonnements oder einmaligen Projekten.</p>
+            </div>
 
-
-
-                <h2>Drei Modelle. Klar definiert.</h2>
-
-
-
-                <p class="section-sub">Abo 1 &amp; 2 monatlich kündbar.</p>
-
-
-
+            <!-- Pricing Toggle -->
+            <div class="pricing-toggle-wrap reveal d1">
+                <button class="ptab active" id="ptab-abo" onclick="switchPricingTab('abo')">
+                    <span>📅</span> Abonnements
+                </button>
+                <button class="ptab" id="ptab-einmal" onclick="switchPricingTab('einmal')">
+                    <span>⚡</span> Einmalige Projekte
+                </button>
             </div>
 
 
@@ -8374,7 +8372,8 @@
 
             
 
-            <div class="section-header center reveal" style="margin-top:80px; margin-bottom: 20px;">
+            <div id="panel-einmal" class="pricing-panel" style="display:none">
+<div class="section-header center reveal" style="margin-top:80px; margin-bottom: 20px;">
 
                 <h2>Einmalige Projekte</h2>
 
@@ -10441,7 +10440,7 @@ nav a:hover { transform: translateY(-1px) !important; }
 </style>
 <style>
 /* ── Particle Canvas ── */
-#hero-canvas {
+#hero-canvas-old {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   pointer-events: none; z-index: 0;
@@ -10686,51 +10685,45 @@ window.addEventListener('scroll', () => {
   document.getElementById('scroll-progress').style.width = pct + '%';
 }, { passive: true });
 
-/* ── Global Particle Background ── */
+/* ── Global Glow Orbs Background ── */
 (function() {
   const canvas = document.getElementById('global-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let W, H, pts;
+  let W, H, orbs;
 
   function resize() {
     W = canvas.width = window.innerWidth;
     H = canvas.height = window.innerHeight;
-    pts = Array.from({length: 70}, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random()-0.5)*0.35, vy: (Math.random()-0.5)*0.35,
-      r: Math.random()*1.8+0.4,
-      a: Math.random() * 0.6 + 0.1
+    orbs = Array.from({length: 18}, (_, i) => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+      r: Math.random() * 180 + 60,
+      a: Math.random() * 0.07 + 0.025,
+      hue: Math.random() < 0.7 ? 245 : 260
     }));
   }
   resize();
   window.addEventListener('resize', resize);
 
   function draw() {
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
+    ctx.clearRect(0, 0, W, H);
+    orbs.forEach(o => {
+      o.x += o.vx; o.y += o.vy;
+      if (o.x < -o.r) o.x = W + o.r;
+      if (o.x > W + o.r) o.x = -o.r;
+      if (o.y < -o.r) o.y = H + o.r;
+      if (o.y > H + o.r) o.y = -o.r;
+      const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
+      g.addColorStop(0, 'hsla(' + o.hue + ',80%,60%,' + o.a + ')');
+      g.addColorStop(1, 'hsla(' + o.hue + ',80%,60%,0)');
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(79,70,229,' + (p.a * 0.5) + ')';
+      ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+      ctx.fillStyle = g;
       ctx.fill();
     });
-    for (let i = 0; i < pts.length; i++) {
-      for (let j = i+1; j < pts.length; j++) {
-        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-        const d = Math.sqrt(dx*dx+dy*dy);
-        if (d < 130) {
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.strokeStyle = 'rgba(79,70,229,' + (0.1*(1-d/130)) + ')';
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
-      }
-    }
     requestAnimationFrame(draw);
   }
   draw();
