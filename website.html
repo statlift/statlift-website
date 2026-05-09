@@ -510,6 +510,35 @@ select:-webkit-autofill {
   caret-color: #f1f5f9 !important;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+/* === Footer === */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 32px 0;
+  margin-top: 80px;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-links a {
+  font-size: 0.8rem;
+  color: var(--text-subtle, #94a3b8);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: #818cf8; }
+.footer-copy {
+  font-size: 0.78rem;
+  color: var(--text-subtle, #94a3b8);
+}
 </style>
 
 
@@ -908,21 +937,55 @@ select:-webkit-autofill {
 
 
 
-  <a href="https://statlift.de">Statlift</a> &middot;
+        <div class="container">
 
 
 
-  <a href="#" onclick="openModal('modal-tos');return false;">AGB &amp; Widerruf</a>
+            <div class="footer-inner">
+
+
+
+                <a href="#" class="nav-logo" style="font-size:1.1rem;;">Stat<span>lift</span></a>
+
+
+
+                <div class="footer-links">
+
+
+
+                    <a href="#" onclick="openModal('modal-tos');return false;">AGB &amp; Widerruf</a>
+
   &middot;
-  <a href="#" onclick="openModal('modal-impressum');return false;">Impressum</a> &middot;
+
+  <a href="#" onclick="openModal('modal-impressum');return false;">Impressum</a>
 
 
 
-  <a href="#" onclick="openModal('modal-datenschutz');return false;">Datenschutz</a>
+                    <a href="#" onclick="openModal('modal-datenschutz');return false;">Datenschutz</a>
 
 
 
-</footer>
+                    <a href="#kontakt">Kontakt</a>
+
+
+
+                </div>
+
+
+
+                <span class="footer-copy">© 2026 Statlift. Alle Rechte vorbehalten.</span>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </footer>
 
 
 
@@ -930,123 +993,159 @@ select:-webkit-autofill {
 
 
 
+    <!-- ══════ IMPRESSUM MODAL ══════ -->
+
+
+
+    
 
 <!-- AGB & WIDERRUF MODAL -->
+
 <div id="modal-tos" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;justify-content:center;align-items:flex-start;">
+
   <div style="max-width:720px;margin:60px auto;padding:0 24px 60px;width:100%;">
+
     <div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
+
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+
         <h2 style="font-size:1.6rem;color:#f8fafc;">AGB &amp; Widerrufsbelehrung</h2>
+
         <button onclick="closeModal('modal-tos')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+
       </div>
+
       <div style="font-size:0.88rem;color:#e2e8f0;line-height:1.9;">
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 1 Anbieter &amp; Geltungsbereich</h3>
+
         <p style="margin-bottom:20px;">Anbieter ist Statlift LLC, 30 N Gould St Ste N, Sheridan, WY 82801, USA (nachfolgend „Statlift"). Diese AGB gelten für alle Leistungen von Statlift, insbesondere für Content- und SEO-Abonnements. Abweichende Bedingungen des Kunden werden nicht anerkannt.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 2 Leistungsgegenstand</h3>
+
         <p style="margin-bottom:20px;">Statlift erbringt monatliche Content-Dienstleistungen (Fachartikel, SEO-Optimierung, ggf. Veröffentlichung auf der Kundenwebsite) gemäß dem jeweils gebuchten Abonnement-Modell. Der Leistungsumfang ergibt sich aus der zum Buchungszeitpunkt gültigen Leistungsbeschreibung auf statlift.de.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 3 Vertragsschluss</h3>
+
         <p style="margin-bottom:20px;">Der Vertrag kommt durch Abschluss des Zahlungsvorgangs über Stripe zustande. Mit der Zahlung bestätigt der Kunde diese AGB gelesen und akzeptiert zu haben.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 4 Laufzeit &amp; Kündigung</h3>
+
         <p style="margin-bottom:20px;">Abo 1 und Abo 2 laufen monatlich und sind jederzeit zum Ende des laufenden Abrechnungsmonats kündbar. Abo 3 hat eine Mindestlaufzeit von 12 Monaten und kann danach mit einer Frist von 30 Tagen zum Monatsende gekündigt werden. Die Kündigung erfolgt per E-Mail an team@statlift.de.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 5 Preise &amp; Zahlung</h3>
+
         <p style="margin-bottom:20px;">Alle Preise sind in EUR angegeben und verstehen sich zzgl. ggf. anfallender gesetzlicher Umsatzsteuer. Die Abrechnung erfolgt monatlich im Voraus über Stripe. Bei B2B-Leistungen an in Deutschland ansässige Unternehmen gilt das Reverse-Charge-Verfahren (§ 13b UStG), sofern keine abweichende steuerliche Regelung greift. Der Kunde ist für die korrekte steuerliche Behandlung in seinem Land verantwortlich.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 6 Widerrufsbelehrung</h3>
+
         <p style="margin-bottom:12px;"><strong style="color:#f8fafc;">Für Verbraucher (B2C):</strong> Sie haben das Recht, diesen Vertrag binnen 14 Tagen ohne Angabe von Gründen zu widerrufen. Die Widerrufsfrist beginnt mit Vertragsschluss. Zur Ausübung Ihres Widerrufsrechts wenden Sie sich an: team@statlift.de.</p>
+
         <p style="margin-bottom:20px;padding:12px 16px;background:rgba(255,255,255,0.04);border-radius:8px;font-size:0.82rem;color:#94a3b8;"><strong style="color:#818cf8;">Hinweis für Unternehmen (B2B):</strong> Unternehmer haben kein gesetzliches Widerrufsrecht. Mit Beginn der Leistungserbringung (Erstellung des ersten Artikels) durch Statlift erlischt ein etwaiges Widerrufsrecht auch für Verbraucher, sofern der Verbraucher ausdrücklich zugestimmt hat, dass mit der Ausführung vor Ablauf der Widerrufsfrist begonnen wird.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 7 Rückerstattungsrichtlinie (Refund Policy)</h3>
+
         <p style="margin-bottom:20px;">Da Statlift digitale Inhalte (Artikel, SEO-Texte) liefert, die nach der Erstellung nicht „zurückgegeben" werden können, sind bereits erbrachte Leistungen grundsätzlich nicht erstattungsfähig. Im Falle eines berechtigten Mangels (z. B. Nichtlieferung vereinbarter Artikel) wird Statlift entweder Nachlieferung oder anteilige Gutschrift anbieten. Anfragen an: team@statlift.de.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 8 Haftungsbeschränkung</h3>
+
         <p style="margin-bottom:20px;">Statlift haftet nur bei Vorsatz und grober Fahrlässigkeit. Die Haftung für mittelbare Schäden, entgangenen Gewinn und Datenverlust ist ausgeschlossen. Statlift übernimmt keine Garantie für bestimmte Suchmaschinenpositionen oder Umsatzentwicklungen.</p>
 
+
+
         <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 9 Anwendbares Recht &amp; Streitigkeiten</h3>
+
         <p>Es gilt das Recht des US-Bundesstaats Wyoming. Für Verbraucher in der EU bleiben zwingende Verbraucherschutzrechte des jeweiligen Aufenthaltslandes unberührt. Bei Streitigkeiten kann die EU-Streitschlichtungsplattform genutzt werden: <a href="https://ec.europa.eu/consumers/odr" style="color:#818cf8;" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. Unsere E-Mail für Schlichtungsanfragen: team@statlift.de</p>
 
+
+
       </div>
+
     </div>
+
   </div>
-</div>
-
-<div id="modal-impressum" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;">
-
-
-
-<div style="max-width:680px;margin:60px auto;padding:0 24px 60px;">
-
-
-
-<div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
-
-
-
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
-
-
-
-<h2 style="font-size:1.6rem;">Impressum</h2>
-
-
-
-<button onclick="closeModal('modal-impressum')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
-
-
 
 </div>
 
 
 
-<div style="font-size:0.9rem;color:#e2e8f0;line-height:1.9;">
+<div id="modal-impressum"
 
 
 
-<h3 style="margin-bottom:10px;font-size:1rem;">Unternehmensangaben (US LLC)</h3>
+        style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;">
 
 
 
-<p style="margin-bottom:20px;">
+        <div style="max-width:680px;margin:60px auto;padding:0 24px 60px;">
 
 
 
+            <div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
 
 
 
-
-                        Statlift<br/>
-
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
 
 
 
+                    <h2 style="font-size:1.6rem;">Impressum</h2>
 
 
 
-                        Philip Exner<br/>
+                    <button onclick="closeModal('modal-impressum')"
 
 
 
+                        style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
 
 
 
-
-                        30 N Gould St Ste N<br/>
-
+                </div>
 
 
 
+                <div style="font-size:0.9rem;color:#e2e8f0;line-height:1.9;">
 
 
 
-                        Sheridan, WY 82801<br/>
+                    <h3 style="margin-bottom:10px;font-size:1rem;">Unternehmensangaben (US LLC)</h3>
 
 
 
+                    <p style="margin-bottom:20px;">
 
+
+
+                        Statlift<br>
+
+
+
+                        Philip Exner<br>
+
+
+
+                        30 N Gould St Ste N<br>
+
+
+
+                        Sheridan, WY 82801<br>
 
 
 
@@ -1054,32 +1153,33 @@ select:-webkit-autofill {
 
 
 
-
-
-
-
                     </p>
 
 
 
-<h3 style="margin-bottom:10px;font-size:1rem;">Gesellschaftsform &amp; Registrierung</h3>
+                    <h3 style="margin-bottom:10px;font-size:1rem;">Gesellschaftsform &amp; Registrierung</h3>
+
                     <p style="margin-bottom:20px;">
+
                         Gesellschaftsform: Limited Liability Company (LLC)<br>
+
                         Gründungsstaat: Wyoming, USA<br>
+
                         Gründungsdatum: 01.05.2026<br>
+
                         Aktenzeichen: 2026-001967147<br>
+
                         Registered Agent: Northwest Registered Agent Service Inc
+
                     </p>
+
+
 
                     <h3 style="margin-bottom:10px;font-size:1rem;">Kontakt</h3>
 
 
 
-<p style="margin-bottom:20px;">
-
-
-
-
+                    <p style="margin-bottom:20px;">
 
 
 
@@ -1087,19 +1187,11 @@ select:-webkit-autofill {
 
 
 
-
-
-
-
                     </p>
 
 
 
-<h3 style="margin-bottom:10px;font-size:1rem;">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
-
-
-
-
+                    <h3 style="margin-bottom:10px;font-size:1rem;">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
 
 
 
@@ -1107,19 +1199,11 @@ select:-webkit-autofill {
 
 
 
-<p style="margin-bottom:20px;">
+                    <p style="margin-bottom:20px;">
 
 
 
-
-
-
-
-                        Philip Exner<br/>
-
-
-
-
+                        Philip Exner<br>
 
 
 
@@ -1127,23 +1211,15 @@ select:-webkit-autofill {
 
 
 
-
-
-
-
                     </p>
 
 
 
-<h3 style="margin-bottom:10px;font-size:1rem;">Haftungsausschluss</h3>
+                    <h3 style="margin-bottom:10px;font-size:1rem;">Haftungsausschluss</h3>
 
 
 
-<p style="margin-bottom:12px;">Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt
-
-
-
-
+                    <p style="margin-bottom:12px;">Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt
 
 
 
@@ -1151,75 +1227,87 @@ select:-webkit-autofill {
 
 
 
-
-
-
-
                         keine Gewähr übernehmen.</p>
 
 
 
-</div>
+                </div>
 
 
 
-</div>
+            </div>
 
 
 
-</div>
+        </div>
 
 
 
-</div>
-
-
-
-<div id="modal-datenschutz" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;">
-
-
-
-<div style="max-width:680px;margin:60px auto;padding:0 24px 60px;">
-
-
-
-<div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
-
-
-
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
-
-
-
-<h2 style="font-size:1.6rem;">Datenschutzerklärung</h2>
-
-
-
-<button onclick="closeModal('modal-datenschutz')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
-
-
-
-</div>
-
-
-
-<div style="font-size:0.9rem;color:#e2e8f0;line-height:1.9;">
-
-
-
-<h3 style="margin-bottom:10px;font-size:1rem;">1. Verantwortlicher</h3>
-
-
-
-<p style="margin-bottom:20px;">Verantwortlich im Sinne der DSGVO ist: Philip Exner, Statlift LLC, 30 N Gould St Ste N, Sheridan, WY 82801, USA — team@statlift.de</p>
-
-
-
-<h3 style="margin-bottom:10px;font-size:1rem;">2. Erhebung und Verarbeitung personenbezogener Daten
+    </div>
 
 
 
 
+
+
+
+    <!-- ══════ DATENSCHUTZ MODAL ══════ -->
+
+
+
+    <div id="modal-datenschutz"
+
+
+
+        style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;">
+
+
+
+        <div style="max-width:680px;margin:60px auto;padding:0 24px 60px;">
+
+
+
+            <div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
+
+
+
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+
+
+
+                    <h2 style="font-size:1.6rem;">Datenschutzerklärung</h2>
+
+
+
+                    <button onclick="closeModal('modal-datenschutz')"
+
+
+
+                        style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+
+
+
+                </div>
+
+
+
+                <div style="font-size:0.9rem;color:#e2e8f0;line-height:1.9;">
+
+
+
+                    <h3 style="margin-bottom:10px;font-size:1rem;">1. Verantwortlicher</h3>
+
+
+
+                    <p style="margin-bottom:20px;">Verantwortlich im Sinne der DSGVO ist: Philip Exner, Statlift LLC, 30 N Gould St Ste N, Sheridan, WY 82801, USA — team@statlift.de</p>
+
+
+
+
+
+
+
+                    <h3 style="margin-bottom:10px;font-size:1rem;">2. Erhebung und Verarbeitung personenbezogener Daten
 
 
 
@@ -1227,11 +1315,7 @@ select:-webkit-autofill {
 
 
 
-<p style="margin-bottom:20px;">Wir erheben personenbezogene Daten nur, wenn Sie uns diese im Rahmen
-
-
-
-
+                    <p style="margin-bottom:20px;">Wir erheben personenbezogene Daten nur, wenn Sie uns diese im Rahmen
 
 
 
@@ -1239,15 +1323,7 @@ select:-webkit-autofill {
 
 
 
-
-
-
-
                         werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben.
-
-
-
-
 
 
 
@@ -1255,15 +1331,15 @@ select:-webkit-autofill {
 
 
 
-<h3 style="margin-bottom:10px;font-size:1rem;">3. Hosting</h3>
-
-
-
-<p style="margin-bottom:20px;">Diese Website wird über Vercel Inc., 340 Pine Street, Suite 701, San
 
 
 
 
+                    <h3 style="margin-bottom:10px;font-size:1rem;">3. Hosting</h3>
+
+
+
+                    <p style="margin-bottom:20px;">Diese Website wird über Vercel Inc., 340 Pine Street, Suite 701, San
 
 
 
@@ -1271,15 +1347,7 @@ select:-webkit-autofill {
 
 
 
-
-
-
-
                         (IP-Adresse, Zeitstempel). Weitere Informationen finden Sie in der Datenschutzerklärung von
-
-
-
-
 
 
 
@@ -1287,15 +1355,15 @@ select:-webkit-autofill {
 
 
 
-<h3 style="margin-bottom:10px;font-size:1rem;">4. Google Fonts</h3>
-
-
-
-<p style="margin-bottom:20px;">Diese Website verwendet Google Fonts. Beim Aufruf der Seite wird die
 
 
 
 
+                    <h3 style="margin-bottom:10px;font-size:1rem;">4. Google Fonts</h3>
+
+
+
+                    <p style="margin-bottom:20px;">Diese Website verwendet Google Fonts. Beim Aufruf der Seite wird die
 
 
 
@@ -1303,15 +1371,7 @@ select:-webkit-autofill {
 
 
 
-
-
-
-
                         Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einheitlicher
-
-
-
-
 
 
 
@@ -1319,15 +1379,15 @@ select:-webkit-autofill {
 
 
 
-<h3 style="margin-bottom:10px;font-size:1rem;">5. Ihre Rechte</h3>
-
-
-
-<p style="margin-bottom:20px;">Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung,
 
 
 
 
+                    <h3 style="margin-bottom:10px;font-size:1rem;">5. Ihre Rechte</h3>
+
+
+
+                    <p style="margin-bottom:20px;">Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung,
 
 
 
@@ -1335,25 +1395,19 @@ select:-webkit-autofill {
 
 
 
-
-
-
-
                         personenbezogenen Daten. Wenden Sie sich dafür an: team@statlift.de</p>
-        <h3 style="margin-bottom:10px;font-size:1rem;">6. Zahlungsabwicklung (Stripe)</h3>
-        <p style="margin-bottom:20px;">Für die Zahlungsabwicklung nutzen wir Stripe Payments Europe, Ltd., 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, Irland. Stripe verarbeitet Ihre Zahlungsdaten zur Abwicklung des Kaufvorgangs. Weitere Informationen: <a href="https://stripe.com/de/privacy" style="color:#818cf8;" target="_blank" rel="noopener">stripe.com/de/privacy</a>. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.</p>
-
-
-
-<h3 style="margin-bottom:10px;font-size:1rem;">6. Beschwerderecht</h3>
-
-
-
-<p>Sie haben das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren, wenn Sie der
 
 
 
 
+
+
+
+                    <h3 style="margin-bottom:10px;font-size:1rem;">6. Beschwerderecht</h3>
+
+
+
+                    <p>Sie haben das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren, wenn Sie der
 
 
 
@@ -1361,836 +1415,946 @@ select:-webkit-autofill {
 
 
 
-</div>
+                </div>
 
 
 
-</div>
+            </div>
 
 
 
-</div>
+        </div>
 
 
 
-</div>
+    </div>
+
+
+
+
+
+
+
+    <script>
+
+
+
+        /* ── Navbar scroll ── */
+
+
+
+        const nav = document.getElementById('navbar');
+
+
+
+        window.addEventListener('scroll', () => {
+
+
+
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+
+
+
+        }, { passive: true });
+
+
+
+
+
+
+
+        /* ── Mobile menu ── */
+
+
+
+        const burger = document.getElementById('hamburger');
+
+
+
+        const mMenu = document.getElementById('mobile-menu');
+
+
+
+        burger.addEventListener('click', () => mMenu.classList.toggle('open'));
+
+
+
+        mMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mMenu.classList.remove('open')));
+
+
+
+
+
+
+
+        /* ── Smooth scroll ── */
+
+
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+
+
+
+            a.addEventListener('click', e => {
+
+
+
+                const id = a.getAttribute('href');
+
+
+
+                if (id === '#') return;
+
+
+
+                e.preventDefault();
+
+
+
+                const el = document.querySelector(id);
+
+
+
+                if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - 76, behavior: 'smooth' });
+
+
+
+            });
+
+
+
+        });
+
+
+
+
+
+
+
+        /* ── Reveal on scroll ── */
+
+
+
+        const ro = new IntersectionObserver(entries => {
+
+
+
+            entries.forEach(e => {
+
+
+
+                if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }
+
+
+
+            });
+
+
+
+        }, { threshold: 0.10 });
+
+
+
+        document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+
+
+
+
+
+
+        /* ── FAQ ── */
+
+
+
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+
+
+
+            btn.addEventListener('click', () => {
+
+
+
+                const item = btn.closest('.faq-item');
+
+
+
+                const body = item.querySelector('.faq-body');
+
+
+
+                const isOpen = item.classList.contains('open');
+
+
+
+
+
+
+
+                document.querySelectorAll('.faq-item.open').forEach(i => {
+
+
+
+                    i.classList.remove('open');
+
+
+
+                    i.querySelector('.faq-body').classList.remove('open');
+
+
+
+                    i.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+
+
+
+                });
+
+
+
+
+
+
+
+                if (!isOpen) {
+
+
+
+                    item.classList.add('open');
+
+
+
+                    body.classList.add('open');
+
+
+
+                    btn.setAttribute('aria-expanded', 'true');
+
+
+
+                }
+
+
+
+            });
+
+
+
+        });
+
+
+
+
+
+
+
+        /* ── Contact Form ── */
+
+
+
+        const form = document.getElementById('contact-form');
+
+
+
+        form.addEventListener('submit', async e => {
+
+
+
+            e.preventDefault();
+
+
+
+            let ok = true;
+
+
+
+
+
+
+
+            const rules = [
+
+
+
+                { id: 'f-name',    fn: v => v.trim().length >= 2 },
+
+
+
+                { id: 'f-company', fn: v => v.trim().length >= 2 },
+
+
+
+                { id: 'f-email',   fn: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+
+
+
+                { id: 'f-url',     fn: v => v.trim().length >= 4 },
+
+
+
+            ];
+
+
+
+
+
+
+
+            rules.forEach(r => {
+
+
+
+                const el = document.getElementById(r.id);
+
+
+
+                if (!el) return;
+
+
+
+                if (r.fn(el.value)) { el.classList.remove('error'); }
+
+
+
+                else { el.classList.add('error'); ok = false; }
+
+
+
+            });
+
+
+
+
+
+
+
+            if (!ok) return;
+
+
+
+
+
+
+
+            const btn = form.querySelector('button[type="submit"]');
+
+
+
+            btn.textContent = 'Wird gesendet...';
+
+
+
+            btn.disabled = true;
+
+
+
+
+
+
+
+            const payload = {
+
+
+
+                access_key: 'c319ac13-444b-4d07-a642-142d384f3767',
+
+
+
+                subject: 'Anfrage von Website Formular',
+
+
+
+                from_name: 'Statlift Website',
+
+
+
+                to_email: 'team@statlift.de',
+
+
+
+                Name:     document.getElementById('f-name').value,
+
+
+
+                Firma:    document.getElementById('f-company').value,
+
+
+
+                'E-Mail': document.getElementById('f-email').value,
+
+
+
+                Website:  document.getElementById('f-url').value,
+
+
+
+                Nachricht: (document.getElementById('f-msg') || {value: ''}).value || '(keine Nachricht)',
+
+
+
+            };
+
+
+
+
+
+
+
+            try {
+
+
+
+                const res  = await fetch('https://api.web3forms.com/submit', {
+
+
+
+                    method: 'POST',
+
+
+
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+
+
+
+                    body: JSON.stringify(payload),
+
+
+
+                });
+
+
+
+                const data = await res.json();
+
+
+
+                if (data.success) {
+
+
+
+                    form.style.display = 'none';
+
+
+
+                    document.getElementById('form-success').style.display = 'block';
+
+
+
+                } else {
+
+
+
+                    btn.textContent = 'Anfrage absenden';
+
+
+
+                    btn.disabled = false;
+
+
+
+                    alert('Fehler beim Senden. Bitte versuchen Sie es erneut.');
+
+
+
+                }
+
+
+
+            } catch {
+
+
+
+                btn.textContent = 'Anfrage absenden';
+
+
+
+                btn.disabled = false;
+
+
+
+                alert('Netzwerkfehler. Bitte versuchen Sie es erneut.');
+
+
+
+            }
+
+
+
+        });
+
+
+
+
+
+
+
+        document.querySelectorAll('#contact-form input').forEach(inp => {
+
+
+
+            inp.addEventListener('input', () => inp.classList.remove('error'));
+
+
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+        /* ── Gratis Form ── */
+
+
+
+        const GRATIS_WEBHOOK = 'https://admin.statlift.de/webhook/gratis-anfrage';
+
+
+
+        const gratisForm = document.getElementById('gratis-form');
+
+
+
+        if (gratisForm) {
+
+
+
+            function showGratisfeedback(id) {
+
+
+
+                gratisForm.style.display = 'none';
+
+
+
+                ['gratis-success','gratis-bearbeitung','gratis-erhalten'].forEach(d => {
+
+
+
+                    const el = document.getElementById(d);
+
+
+
+                    if (el) el.style.display = d === id ? 'block' : 'none';
+
+
+
+                });
+
+
+
+            }
+
+
+
+            gratisForm.addEventListener('submit', async e => {
+
+
+
+                e.preventDefault();
+
+
+
+                let ok = true;
+
+
+
+                [
+
+
+
+                    { id: 'gf-name',    fn: v => v.trim().length >= 2 },
+
+
+
+                    { id: 'gf-email',   fn: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+
+
+
+                    { id: 'gf-website', fn: v => v.trim().length >= 4 },
+
+
+
+                    { id: 'gf-branche', fn: v => v.trim().length >= 2 },
+
+
+
+                ].forEach(r => {
+
+
+
+                    const el = document.getElementById(r.id);
+
+
+
+                    if (!el) return;
+
+
+
+                    if (r.fn(el.value)) { el.classList.remove('error'); }
+
+
+
+                    else { el.classList.add('error'); ok = false; }
+
+
+
+                });
+
+
+
+                if (!ok) return;
+
+
+
+
+
+
+
+                const btn = gratisForm.querySelector('button[type="submit"]');
+
+
+
+                btn.textContent = 'Wird gesendet...';
+
+
+
+                btn.disabled = true;
+
+
+
+
+
+
+
+                const payload = {
+
+
+
+                    name:    document.getElementById('gf-name').value.trim(),
+
+
+
+                    email:   document.getElementById('gf-email').value.trim(),
+
+
+
+                    website: document.getElementById('gf-website').value.trim(),
+
+
+
+                    branche: document.getElementById('gf-branche').value.trim(),
+
+
+
+                };
+
+
+
+
+
+
+
+                try {
+
+
+
+                    const res = await fetch(GRATIS_WEBHOOK, {
+
+
+
+                        method: 'POST',
+
+
+
+                        headers: { 'Content-Type': 'application/json' },
+
+
+
+                        body: JSON.stringify(payload),
+
+
+
+                    });
+
+
+
+                    if (res.ok) {
+
+
+
+                        const data = await res.json().catch(() => ({}));
+
+
+
+                        if (data.duplicate && data.already_sent) {
+
+
+
+                            showGratisfeedback('gratis-erhalten');      // Blog schon zugestellt
+
+
+
+                        } else if (data.duplicate) {
+
+
+
+                            showGratisfeedback('gratis-bearbeitung');   // In Bearbeitung
+
+
+
+                        } else {
+
+
+
+                            showGratisfeedback('gratis-success');       // Neue Anfrage
+
+
+
+                        }
+
+
+
+                    } else {
+
+
+
+                        throw new Error('Server error: ' + res.status);
+
+
+
+                    }
+
+
+
+                } catch {
+
+
+
+                    btn.textContent = 'Kostenlosen Probe-Artikel anfordern \u2192';
+
+
+
+                    btn.disabled = false;
+
+
+
+                    alert('Netzwerkfehler. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt: team@statlift.de');
+
+
+
+                }
+
+
+
+            });
+
+
+
+            document.querySelectorAll('#gratis-form input').forEach(inp => {
+
+
+
+                inp.addEventListener('input', () => inp.classList.remove('error'));
+
+
+
+            });
+
+
+
+        }
+
+
+
+
+
+
+
+        /* ── Modals ── */
+
+
+
+        function openModal(id) {
+
+
+
+            document.getElementById(id).style.display = 'block';
+
+
+
+            document.body.style.overflow = 'hidden';
+
+
+
+        }
+
+
+
+        function closeModal(id) {
+
+
+
+            document.getElementById(id).style.display = 'none';
+
+
+
+            document.body.style.overflow = '';
+
+
+
+        }
+
+
+
+        document.addEventListener('keydown', e => {
+
+
+
+            if (e.key === 'Escape') {
+
+
+
+                ['modal-impressum', 'modal-datenschutz'].forEach(id => {
+
+
+
+                    const el = document.getElementById(id);
+
+
+
+                    if (el && el.style.display !== 'none') closeModal(id);
+
+
+
+                });
+
+
+
+            }
+
+
+
+        });
+
+
+
+        // Close modal on backdrop click
+
+
+
+        ['modal-impressum', 'modal-datenschutz'].forEach(id => {
+
+
+
+            const el = document.getElementById(id);
+
+
+
+            if (el) el.addEventListener('click', e => { if (e.target === el) closeModal(id); });
+
+
+
+        });
+
+
+
+
+
+
+
+        /* ── Article Overlay ── */
+
+
+
+        function openArticle(id) {
+
+
+
+            document.getElementById(id).classList.add('open');
+
+
+
+            document.body.style.overflow = 'hidden';
+
+
+
+        }
+
+
+
+        function closeArticle(id) {
+
+
+
+            document.getElementById(id).classList.remove('open');
+
+
+
+            document.body.style.overflow = '';
+
+
+
+        }
+
+
+
+        document.querySelectorAll('.article-overlay').forEach(overlay => {
+
+
+
+            overlay.addEventListener('click', e => {
+
+
+
+                if (e.target === overlay) closeArticle(overlay.id);
+
+
+
+            });
+
+
+
+        });
+
+
+
+        document.addEventListener('keydown', e => {
+
+
+
+            if (e.key === 'Escape') {
+
+
+
+                document.querySelectorAll('.article-overlay.open').forEach(o => closeArticle(o.id));
+
+
+
+            }
+
+
+
+        });
+
+
+
+    </script>
+
+
+
+
+
 
 
 
 <script>
-
-
-
-// --- CHIPS SELECTION LOGIC ---
-
-
-
-function selectSingleChip(element, groupName) {
-
-
-
-  // Unselect all in the group
-
-
-
-  document.querySelectorAll(`input[name="${groupName}"]`).forEach(inp => {
-
-
-
-    inp.checked = false;
-
-
-
-    inp.closest('.chip').classList.remove('on');
-
-
-
-  });
-
-
-
-  // Select the clicked one
-
-
-
-  const input = element.querySelector('input');
-
-
-
-  input.checked = true;
-
-
-
-  element.classList.add('on');
-
-
-
-}
-
-
-
-
-
-
-
-function toggleMultiChip(element) {
-
-
-
-  const input = element.querySelector('input');
-
-
-
-  input.checked = !input.checked;
-
-
-
-  element.classList.toggle('on', input.checked);
-
-
-
-}
-
-
-
-
-
-
-
-// --- CUSTOM PAGE ADDITION ---
-
-
-
-function showAddPage() {
-
-
-
-  const wrap = document.getElementById('addPageWrap');
-
-
-
-  wrap.style.display = wrap.style.display === 'flex' ? 'none' : 'flex';
-
-
-
-  if(wrap.style.display === 'flex') document.getElementById('customPageInput').focus();
-
-
-
-}
-
-
-
-
-
-
-
-function addCustomPage() {
-
-
-
-  const inp = document.getElementById('customPageInput');
-
-
-
-  const val = inp.value.trim();
-
-
-
-  if(!val) return;
-
-
-
-  const newChip = document.createElement('label');
-
-
-
-  newChip.className = 'chip on';
-
-
-
-  newChip.setAttribute('onclick', 'toggleMultiChip(this)');
-
-
-
-  newChip.innerHTML = `<input type="checkbox" name="seiten" value="${val}" checked><span>${val}</span>`;
-
-
-
-  const container = document.getElementById('seitenChips');
-
-
-
-  container.insertBefore(newChip, container.querySelector('.chip-add'));
-
-
-
-  inp.value = '';
-
-
-
-  document.getElementById('addPageWrap').style.display = 'none';
-
-
-
-}
-
-
-
-
-
-
-
-// --- LOGO LOGIC ---
-
-
-
-function setLogo(val) {
-  var descWrap = document.getElementById('logo-desc-wrap');
-  if (descWrap) descWrap.style.display = (val === 'no') ? 'block' : 'none';
-
-
-
-  document.getElementById('logo_choice').value = val;
-
-
-
-  document.getElementById('btn-logo-yes').classList.toggle('on', val === 'yes');
-
-
-
-  document.getElementById('btn-logo-no').classList.toggle('on', val === 'no');
-
-
-
-  document.getElementById('uploadZone').style.display = val === 'yes' ? 'block' : 'none';
-
-
-
-  if (val === 'no') {
-
-
-
-    removeFile(new Event('click'));
-
-
-
-  }
-
-
-
-}
-
-
-
-
-
-
-
-function handleFile(input) {
-
-
-
-  if (input.files && input.files[0]) {
-
-
-
-    document.getElementById('fileName').textContent = '✓ ' + input.files[0].name;
-
-
-
-    document.getElementById('uploadZone').classList.add('has-file');
-
-
-
-  }
-
-
-
-}
-
-
-
-
-
-
-
-function removeFile(e) {
-
-
-
-  e.stopPropagation();
-
-
-
-  const input = document.getElementById('logoFile');
-
-
-
-  input.value = '';
-
-
-
-  document.getElementById('fileName').textContent = '';
-
-
-
-  document.getElementById('uploadZone').classList.remove('has-file');
-
-
-
-}
-
-
-
-
-
-
-
-// --- DOMAIN VALIDATION ---
-
-
-
-// Strict TLD list based on common ones + typical European ones
-
-
-
-let domTimer;
-
-
-
-
-
-
-
-function clearEmailError() {
-
-
-
-  document.getElementById('emailInput').classList.remove('error');
-
-
-
-  const msg = document.getElementById('emailMsg');
-
-
-
-  msg.className = 'field-msg';
-
-
-
-  msg.textContent = '';
-
-
-
-}
-
-
-
-
-
-
-
-function onDomainInput(val) {
-
-
-
-  clearTimeout(domTimer);
-
-
-
-  domainAvailable = null;
-
-
-
-  const msg = document.getElementById('domMsg');
-
-
-
-  const inp = document.getElementById('domainInput');
-
-
-
-  const st = document.getElementById('domStatus');
-
-
-
-  val = val.trim().toLowerCase();
-
-
-
-  inp.classList.remove('error', 'ok');
-
-
-
-  st.innerHTML = '';
-
-
-
-  msg.className = 'field-msg';
-
-
-
-  msg.innerHTML = 'Geben Sie Ihre Wunsch-Domain mit Endung ein – z.&nbsp;B. <strong>meinefirma.de</strong>, <strong>.net</strong> oder <strong>.com</strong>';
-
-
-
-  
-
-
-
-  if (!val) return;
-
-
-
-  
-
-
-
-  const parts = val.split('.');
-
-
-
-  if (parts.length < 2 || parts[parts.length-1] === '') {
-
-
-
-    msg.className = 'field-msg err';
-
-
-
-    msg.textContent = 'Bitte geben Sie die Domain mit einer gültigen Endung an – z. B. .de oder .com';
-
-
-
-    inp.classList.add('error');
-
-
-
-    return;
-
-
-
-  }
-
-
-
-  
-
-
-
-  const tld = parts[parts.length-1];
-
-
-
-  if (!VALID_TLDS.includes(tld)) {
-
-
-
-    msg.className = 'field-msg err';
-
-
-
-    msg.textContent = `Die Endung .${tld} wird nicht unterstützt oder ist ungültig. Bitte wählen Sie eine gängige Endung wie .de, .com, .net.`;
-
-
-
-    inp.classList.add('error');
-
-
-
-    return;
-
-
-
-  }
-
-
-
-
-
-
-
-  st.innerHTML = '<span class="dot s-check"></span><span class="s-check">Prüfe…</span>';
-
-
-
-  domTimer = setTimeout(() => checkDomainAvailability(val), 700);
-
-
-
-}
-
-
-
-
-
-
-
-async function checkDomainAvailability(domain) {
-  const st  = document.getElementById('domStatus');
-  const inp = document.getElementById('domainInput');
-  const msg = document.getElementById('domMsg');
-
-  st.innerHTML = '<span style="color:#94a3b8;font-size:0.8rem;">⏳ Prüfe…</span>';
-  msg.className = 'field-msg';
-  msg.textContent = '';
-
-  try {
-    // Primary: Google DoH (DNS-over-HTTPS) — fast, CORS-safe, no API key
-    const gUrl = 'https://dns.google/resolve?name=' + encodeURIComponent(domain) + '&type=SOA';
-    const controller = new AbortController();
-    const t = setTimeout(() => controller.abort(), 5000);
-    const r = await fetch(gUrl, { signal: controller.signal, headers: { Accept: 'application/json' } });
-    clearTimeout(t);
-
-    if (!r.ok) throw new Error('DNS fetch failed');
-    const data = await r.json();
-
-    // Status 0 = NOERROR (domain exists), Status 3 = NXDOMAIN (not found = available)
-    if (data.Status === 3) {
-      // Double-check with Cloudflare DoH to be sure
-      try {
-        const cfUrl = 'https://cloudflare-dns.com/dns-query?name=' + encodeURIComponent(domain) + '&type=NS';
-        const r2 = await fetch(cfUrl, { headers: { Accept: 'application/dns-json' } });
-        const d2 = await r2.json();
-        if (d2.Status === 0 && d2.Answer && d2.Answer.length > 0) {
-          // Cloudflare says it exists
-          domainAvailable = false;
-          st.innerHTML = '<span class="dot s-bad"></span><span class="s-bad">Vergeben</span>';
-          inp.classList.add('error'); inp.classList.remove('ok');
-          msg.className = 'field-msg err';
-          msg.textContent = 'Diese Domain ist bereits registriert. Bitte wählen Sie eine andere.';
-          return;
-        }
-      } catch(e2) { /* Cloudflare fallback failed — trust Google result */ }
-
-      domainAvailable = true;
-      st.innerHTML = '<span class="dot s-ok"></span><span class="s-ok">Verfügbar</span>';
-      inp.classList.add('ok'); inp.classList.remove('error');
-      msg.className = 'field-msg ok';
-      msg.textContent = '✓ Diese Domain ist verfügbar!';
-
-    } else if (data.Status === 0) {
-      domainAvailable = false;
-      st.innerHTML = '<span class="dot s-bad"></span><span class="s-bad">Vergeben</span>';
-      inp.classList.add('error'); inp.classList.remove('ok');
-      msg.className = 'field-msg err';
-      msg.textContent = 'Diese Domain ist bereits registriert. Bitte wählen Sie eine andere.';
-
-    } else {
-      // Status 2 = SERVFAIL etc.
-      domainAvailable = null;
-      st.innerHTML = '';
-      msg.className = 'field-msg';
-      msg.textContent = 'Status konnte nicht ermittelt werden – bitte direkt beim Registrar prüfen.';
-    }
-
-  } catch(e) {
-    // Total fallback: show neutral status, don't block form
-    domainAvailable = null;
-    st.innerHTML = '';
-    msg.className = 'field-msg';
-    msg.textContent = 'Automatische Prüfung nicht möglich – Domain wird manuell geprüft.';
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function showError(title, text) {
-
-
-
-  const box = document.getElementById('formErrorBox');
-
-
-
-  document.getElementById('formErrorTitle').textContent = title;
-
-
-
-  document.getElementById('formErrorText').innerHTML = text;
-
-
-
-  box.style.display = 'block';
-
-
-
-  box.scrollIntoView({behavior: 'smooth', block: 'center'});
-
-
-
-}
-
-
-
-
-
-
-
-async function submitForm(e) {
-
-
-
-  e.preventDefault();
-
-
-
-  document.getElementById('formErrorBox').style.display = 'none';
-
-
-
-
-
-
-
-  // Submit UI
-
-
-
-  const btn = document.getElementById('submitBtn');
-
-
-
-  btn.disabled = true; btn.textContent = 'Wird geprüft & gesendet…';
-
-
-
-  
-
-
-
-  const fd = new FormData(e.target);
-
-
-
-  const data = Object.fromEntries(fd.entries());
-
-
-
-  
-
-
-
-  ['stil','farbe','seiten'].forEach(k => {
-
-
-
-    data[k] = Array.from(document.querySelectorAll(`[name="${k}"]:checked`)).map(i => i.value).join(', ');
-
-
-
-  });
-
-
-
-  
-
-
-
-  const lf = document.getElementById('logoFile');
-
-
-
-  if (lf && lf.files && lf.files[0]) {
-    data['logo_dateiname'] = lf.files[0].name;
-    // Read file as base64 for Telegram upload
-    await new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = (e) => { data['logo_base64'] = e.target.result.split(',')[1]; resolve(); };
-      reader.readAsDataURL(lf.files[0]);
-    });
-  }
-
-
-
-
-
-
-
-  try {
-
-
-
-    const res = await fetch('https://admin.statlift.de/webhook/submit-website-logo', {
-
-
-
-      method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
-
-
-
-    });
-
-
-
-    
-
-
-
-    // Fallback if not JSON or empty
-
-
-
-    let result = {};
-
-
-
-    try { result = await res.json(); } catch(err) {}
-
-
-
-
-
-
-
-    // Handle n8n logic responses
-
-
-
-    if (result.error === 'not_found') {
-
-      document.getElementById('emailInput').classList.add('error');
-
-      showError("Keine Zahlung gefunden", "Ihre E-Mail-Adresse wurde nicht in der Kunden-Datenbank gefunden. Bitte verwenden Sie exakt die E-Mail-Adresse, mit der Sie die Website bestellt haben.");
-
-      btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Übermitteln';
-
-      return;
-
-    }
-
-    
-
-    if (result.error === 'already_submitted') {
-
-
-
-      document.getElementById('emailInput').classList.add('error');
-
-
-
-      showError("Bereits eingereicht", 'Sie haben das Formular bereits abgeschickt! Falls Sie nachträglich etwas ändern möchten, schreiben Sie uns bitte an <a href="mailto:team@statlift.de">team@statlift.de</a>.');
-
-
-
-      btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Übermitteln';
-
-
-
-      return;
-
-
-
-    }
-
-
-
-
-
-
-
-    // Success
-
-
-
-    document.getElementById('form').style.display = 'none';
-
-
-
-    document.querySelector('.hero').style.display = 'none';
-
-
-
-    document.getElementById('successMsg').style.display = 'block';
-
-
-
-
-
-
-
-  } catch(err) {
-
-
-
-    showError("Verbindungsfehler", "Das Formular konnte nicht gesendet werden. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.");
-
-
-
-    btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Übermitteln';
-
-
-
-  }
-
-
-
-}
-
-
-
-
-
-
-
-function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-
-
-
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-
-
-window.addEventListener('click', function(event) {
-
-
-
-  if (event.target.id === 'modal-impressum' || event.target.id === 'modal-datenschutz') {
-
-
-
-    event.target.style.display = 'none';
-
-
-
-  }
-
-
-
-});
-
-
-
-
-
-
-
+function openModal(id){var m=document.getElementById(id);if(m){m.style.display='flex';document.body.style.overflow='hidden';}}
+function closeModal(id){var m=document.getElementById(id);if(m){m.style.display='none';document.body.style.overflow='';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('[id^="modal-"]').forEach(function(m){m.style.display='none';document.body.style.overflow='';});}});
 </script>
-
-
-
 </body>
-
-
-
-</html>
-
-
-
