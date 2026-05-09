@@ -2374,4 +2374,36 @@ function openModal(id){var m=document.getElementById(id);if(m){m.style.display='
 function closeModal(id){var m=document.getElementById(id);if(m){m.style.display='none';document.body.style.overflow='';}}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('[id^="modal-"]').forEach(function(m){m.style.display='none';document.body.style.overflow='';});}});
 </script>
+
+<script>
+function selectSingleChip(element, groupName) {
+    const inputs = document.querySelectorAll('input[name="' + groupName + '"]');
+    inputs.forEach(inp => {
+        inp.closest('.chip').classList.remove('on');
+    });
+    const input = element.querySelector('input');
+    input.checked = true;
+    element.classList.add('on');
+}
+
+function toggleMultiChip(element) {
+    const input = element.querySelector('input');
+    const groupName = input.name;
+    
+    // Prevent default click from triggering twice
+    if (window.event) window.event.preventDefault();
+
+    if (!input.checked) {
+        const limit = 5;
+        const checkedCount = document.querySelectorAll('input[name="' + groupName + '"]:checked').length;
+        if (checkedCount >= limit) {
+            alert('Sie können maximal ' + limit + ' Seiten auswählen.');
+            return;
+        }
+    }
+    
+    input.checked = !input.checked;
+    element.classList.toggle('on', input.checked);
+}
+</script>
 </body>
