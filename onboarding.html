@@ -1554,7 +1554,7 @@ input:-webkit-autofill:active {
 
 
 
-        <label class="chip on" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="startseite" checked><span>Startseite</span></label>
+        <label class="chip on" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="startseite" checked><span>Startseite</span></label>
 
 
 
@@ -1562,7 +1562,7 @@ input:-webkit-autofill:active {
 
 
 
-        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="leistungen"><span>Leistungen</span></label>
+        <label class="chip" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="leistungen"><span>Leistungen</span></label>
 
 
 
@@ -1570,7 +1570,7 @@ input:-webkit-autofill:active {
 
 
 
-        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="ueber"><span>Über uns</span></label>
+        <label class="chip" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="ueber"><span>Über uns</span></label>
 
 
 
@@ -1578,7 +1578,7 @@ input:-webkit-autofill:active {
 
 
 
-        <label class="chip on" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="blog" checked><span>Blog</span></label>
+        <label class="chip on" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="blog" checked><span>Blog</span></label>
 
 
 
@@ -1586,7 +1586,7 @@ input:-webkit-autofill:active {
 
 
 
-        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="kontakt"><span>Kontakt</span></label>
+        <label class="chip" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="kontakt"><span>Kontakt</span></label>
 
 
 
@@ -1594,7 +1594,7 @@ input:-webkit-autofill:active {
 
 
 
-        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="team"><span>Team</span></label>
+        <label class="chip" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="team"><span>Team</span></label>
 
 
 
@@ -1602,7 +1602,7 @@ input:-webkit-autofill:active {
 
 
 
-        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="referenzen"><span>Referenzen</span></label>
+        <label class="chip" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="referenzen"><span>Referenzen</span></label>
 
 
 
@@ -3178,8 +3178,8 @@ function selectSingleChip(element, groupName) {
 
 
 
-function toggleMultiChip(element) {
-  if (window.event) window.event.preventDefault();
+function toggleMultiChip(element, event) {
+  if (event) event.preventDefault();
   const input = element.querySelector('input');
   const groupName = input.name;
   
@@ -3319,7 +3319,7 @@ function addCustomPage() {
 
 
 
-  newChip.setAttribute('onclick', 'toggleMultiChip(this)');
+  newChip.setAttribute('onclick', 'toggleMultiChip(this, event)');
 
 
 
