@@ -70,6 +70,35 @@ select:-webkit-autofill {
   caret-color: #f1f5f9 !important;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+/* === Footer === */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 32px 0;
+  margin-top: 80px;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-links a {
+  font-size: 0.8rem;
+  color: var(--text-subtle, #94a3b8);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: #818cf8; }
+.footer-copy {
+  font-size: 0.78rem;
+  color: var(--text-subtle, #94a3b8);
+}
 </style>
 </head>
 <body>
@@ -1652,4 +1681,3 @@ function closeModal(id){var m=document.getElementById(id);if(m){m.style.display=
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('[id^="modal-"]').forEach(function(m){m.style.display='none';document.body.style.overflow='';});}});
 </script>
 </body>
-</html>
