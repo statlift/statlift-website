@@ -783,31 +783,31 @@ footer {
 
 
 
-        <label class="chip on" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="startseite" checked><span>Startseite</span></label>
+        <label class="chip on" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="startseite" checked><span>Startseite</span></label>
 
 
 
-        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="leistungen"><span>Leistungen</span></label>
+        <label class="chip" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="leistungen"><span>Leistungen</span></label>
 
 
 
-        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="ueber"><span>Über uns</span></label>
+        <label class="chip" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="ueber"><span>Über uns</span></label>
 
 
 
-        <label class="chip on" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="blog" checked><span>Blog</span></label>
+        <label class="chip on" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="blog" checked><span>Blog</span></label>
 
 
 
-        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="kontakt"><span>Kontakt</span></label>
+        <label class="chip" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="kontakt"><span>Kontakt</span></label>
 
 
 
-        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="team"><span>Team</span></label>
+        <label class="chip" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="team"><span>Team</span></label>
 
 
 
-        <label class="chip" onclick="toggleMultiChip(this)"><input type="checkbox" name="seiten" value="referenzen"><span>Referenzen</span></label>
+        <label class="chip" onclick="toggleMultiChip(this, event)"><input type="checkbox" name="seiten" value="referenzen"><span>Referenzen</span></label>
 
 
 
@@ -2386,12 +2386,12 @@ function selectSingleChip(element, groupName) {
     element.classList.add('on');
 }
 
-function toggleMultiChip(element) {
+function toggleMultiChip(element, event) {
     const input = element.querySelector('input');
     const groupName = input.name;
     
     // Prevent default click from triggering twice
-    if (window.event) window.event.preventDefault();
+    if (event) event.preventDefault();
 
     if (!input.checked) {
         const limit = 5;
