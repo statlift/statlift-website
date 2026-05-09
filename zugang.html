@@ -1,345 +1,345 @@
-<!DOCTYPE html>
-
-
-
-
-
-<html lang="de">
-
-
-
-
-
-<head>
-
-
-
-
-
-<meta charset="UTF-8">
-
-
-
-
-
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-
-
-
-
-<title>Website-Zugangsdaten — Statlift</title>
-
-
-
-
-
-
-
-
-
-
-<link rel="icon" type="image/png" href="/favicon.png">
-
-
-
-
-
-    <link rel="apple-touch-icon" href="/favicon.png">
-
-
-
-
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-
-
-
-
-<style>
-
-
-
-
-
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
-
-
-
-
-html{font-size:16px}
-
-
-
-
-
-body{background:#0a0a0a;color:#f8fafc;font-family:'Inter',sans-serif;line-height:1.7;min-height:100vh}
-
-
-
-
-
-:root{--accent:#4F46E5;--accent-h:#4338CA;--glow:rgba(79,70,229,.3);--border:rgba(255,255,255,.07);--surface:#111116;--muted:#e2e8f0}
-
-
-
-
-
-#navbar{padding:18px 0;background:rgba(10,10,10,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:fixed;inset:0 0 auto 0;z-index:200}
-
-
-
-
-
-.container{max-width:1080px;margin:0 auto;padding:0 24px}
-
-
-
-
-
-.nav-logo{font-size:1.25rem;font-weight:800;color:#f8fafc;text-decoration:none;letter-spacing:-.04em}
-
-
-
-
-
-.nav-logo span{color:#818cf8}
-
-
-
-
-
-main{padding:100px 24px 60px;display:flex;justify-content:center}
-
-
-
-
-
-.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:40px;max-width:720px;width:100%;position:relative}
-
-
-
-
-
-.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#818cf8;display:block;margin-bottom:12px}
-
-
-
-
-
-h1{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:800;letter-spacing:-.025em;margin-bottom:10px}
-
-
-
-
-
-.subtitle{color:var(--muted);margin-bottom:30px;font-size:1rem}
-
-
-
-
-
-.cms-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:28px}
-
-
-
-
-
-.cms-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;user-select:none;background:transparent}
-
-
-
-
-
-.cms-card:hover,.cms-card:focus{border-color:rgba(79,70,229,.5);background:rgba(79,70,229,.05);outline:none}
-
-
-
-
-
-.cms-card.active{border-color:var(--accent);background:rgba(79,70,229,.12);box-shadow:0 0 0 2px rgba(79,70,229,.2)}
-
-
-
-
-
-.cms-icon{width:48px;height:48px;border-radius:8px;border:1px solid transparent;display:flex;align-items:center;justify-content:center;font-size:1.4rem;padding:6px}
-
-
-.cms-icon img{width:100%;height:100%;object-fit:contain;display:block;opacity:1}
-
-
-.cms-icon.logo-chip{background:#ffffff!important;border-color:rgba(255,255,255,0.2)!important;padding:6px}
-
-
-
-
-
-.cms-label{font-size:.72rem;font-weight:600;text-align:center;color:#cbd5e1}
-
-
-
-
-
-.cms-section{margin-top:4px}
-
-
-
-
-
-.note-box{background:rgba(79,70,229,.06);border:1px solid rgba(79,70,229,.2);border-radius:8px;padding:14px 16px;font-size:.88rem;color:#a5b4fc;margin-bottom:20px;line-height:1.5}
-
-
-.note-box.warn-red{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.35);color:#fca5a5;display:none}
-
-
-.field-error{font-size:.78rem;color:#f87171;margin-top:5px;display:none}
-
-
-input.invalid{border-color:rgba(239,68,68,.6)!important;box-shadow:0 0 0 3px rgba(239,68,68,.12)!important}
-
-
-
-
-
-.form-group{margin-bottom:20px}
-
-
-
-
-
-label{display:block;font-size:.85rem;font-weight:500;color:#cbd5e1;margin-bottom:7px}
-
-
-
-
-
-input{width:100%;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:13px 16px;font-family:inherit;font-size:.95rem;color:#f8fafc;outline:none;transition:all .2s}
-
-
-
-
-
-input::placeholder{color:rgba(255,255,255,.2)}
-
-
-
-
-
-input:focus{border-color:rgba(79,70,229,.6);background:rgba(255,255,255,.04);box-shadow:0 0 0 3px rgba(79,70,229,.15)}
-
-
-
-
-
-input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 30px #111116 inset!important;-webkit-text-fill-color:#f8fafc!important}
-
-
-
-
-
-.guide{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-top:20px}
-
-
-
-
-
-.guide-title{font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#818cf8;margin-bottom:12px}
-
-
-
-
-
-.steps{padding-left:20px;display:flex;flex-direction:column;gap:7px}
-
-
-
-
-
-.steps li{font-size:.9rem;color:#cbd5e1;line-height:1.5}
-
-
-
-
-
-.steps li b{color:#f8fafc}
-
-
-
-
-
-
-
-
-
-
-
-.btn{width:100%;padding:14px;border-radius:8px;font-family:inherit;font-size:1rem;font-weight:600;background:var(--accent);color:#fff;border:none;cursor:pointer;transition:all .25s;box-shadow:0 0 24px var(--glow);margin-top:8px}
-
-
-
-
-
-.btn:hover{background:var(--accent-h);transform:translateY(-2px)}
-
-
-
-
-
-.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-
-
-
-
-
-.msg{display:none;padding:22px;border-radius:8px;margin-top:20px}
-
-
-
-
-
-.msg.ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3)}
-
-
-
-
-
-.msg.err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3)}
-
-
-
-
-
-.msg-t{font-weight:700;margin-bottom:6px}
-
-
-
-
-
-.msg-b{font-size:.92rem;color:var(--muted);line-height:1.5}
-
-
-
-
-
-@media(max-width:580px){.cms-grid{grid-template-columns:repeat(3,1fr)}.card{padding:28px 18px}}
-
-
-
-
-
-.disabled-cms{opacity:0.4;cursor:not-allowed;pointer-events:none;}
-
-
-#formContent{display:block;background:transparent;border:none;padding:0;margin:0}
-.success-page{display:flex;align-items:center;justify-content:center;min-height:70vh;text-align:center;padding:2rem}
-
-.success{display:none;text-align:center;padding:4rem 1.5rem;max-width:480px;margin:0 auto}
-.success .icon{font-size:3rem;margin-bottom:1.2rem}
-.success h2{font-size:1.6rem;font-weight:800;margin-bottom:1rem;color:#f8fafc}
-.success p{color:#94a3b8;font-size:1rem;line-height:1.7}
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="de">
+
+
+
+
+
+<head>
+
+
+
+
+
+<meta charset="UTF-8">
+
+
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+
+
+<title>Website-Zugangsdaten — Statlift</title>
+
+
+
+
+
+
+
+
+
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+
+
+
+
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+
+
+
+<style>
+
+
+
+
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+
+
+
+
+html{font-size:16px}
+
+
+
+
+
+body{background:#0a0a0a;color:#f8fafc;font-family:'Inter',sans-serif;line-height:1.7;min-height:100vh}
+
+
+
+
+
+:root{--accent:#4F46E5;--accent-h:#4338CA;--glow:rgba(79,70,229,.3);--border:rgba(255,255,255,.07);--surface:#111116;--muted:#e2e8f0}
+
+
+
+
+
+#navbar{padding:18px 0;background:rgba(10,10,10,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:fixed;inset:0 0 auto 0;z-index:200}
+
+
+
+
+
+.container{max-width:1080px;margin:0 auto;padding:0 24px}
+
+
+
+
+
+.nav-logo{font-size:1.25rem;font-weight:800;color:#f8fafc;text-decoration:none;letter-spacing:-.04em}
+
+
+
+
+
+.nav-logo span{color:#818cf8}
+
+
+
+
+
+main{padding:100px 24px 60px;display:flex;justify-content:center}
+
+
+
+
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:40px;max-width:720px;width:100%;position:relative}
+
+
+
+
+
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#818cf8;display:block;margin-bottom:12px}
+
+
+
+
+
+h1{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:800;letter-spacing:-.025em;margin-bottom:10px}
+
+
+
+
+
+.subtitle{color:var(--muted);margin-bottom:30px;font-size:1rem}
+
+
+
+
+
+.cms-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:28px}
+
+
+
+
+
+.cms-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;user-select:none;background:transparent}
+
+
+
+
+
+.cms-card:hover,.cms-card:focus{border-color:rgba(79,70,229,.5);background:rgba(79,70,229,.05);outline:none}
+
+
+
+
+
+.cms-card.active{border-color:var(--accent);background:rgba(79,70,229,.12);box-shadow:0 0 0 2px rgba(79,70,229,.2)}
+
+
+
+
+
+.cms-icon{width:48px;height:48px;border-radius:8px;border:1px solid transparent;display:flex;align-items:center;justify-content:center;font-size:1.4rem;padding:6px}
+
+
+.cms-icon img{width:100%;height:100%;object-fit:contain;display:block;opacity:1}
+
+
+.cms-icon.logo-chip{background:#ffffff!important;border-color:rgba(255,255,255,0.2)!important;padding:6px}
+
+
+
+
+
+.cms-label{font-size:.72rem;font-weight:600;text-align:center;color:#cbd5e1}
+
+
+
+
+
+.cms-section{margin-top:4px}
+
+
+
+
+
+.note-box{background:rgba(79,70,229,.06);border:1px solid rgba(79,70,229,.2);border-radius:8px;padding:14px 16px;font-size:.88rem;color:#a5b4fc;margin-bottom:20px;line-height:1.5}
+
+
+.note-box.warn-red{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.35);color:#fca5a5;display:none}
+
+
+.field-error{font-size:.78rem;color:#f87171;margin-top:5px;display:none}
+
+
+input.invalid{border-color:rgba(239,68,68,.6)!important;box-shadow:0 0 0 3px rgba(239,68,68,.12)!important}
+
+
+
+
+
+.form-group{margin-bottom:20px}
+
+
+
+
+
+label{display:block;font-size:.85rem;font-weight:500;color:#cbd5e1;margin-bottom:7px}
+
+
+
+
+
+input{width:100%;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:13px 16px;font-family:inherit;font-size:.95rem;color:#f8fafc;outline:none;transition:all .2s}
+
+
+
+
+
+input::placeholder{color:rgba(255,255,255,.2)}
+
+
+
+
+
+input:focus{border-color:rgba(79,70,229,.6);background:rgba(255,255,255,.04);box-shadow:0 0 0 3px rgba(79,70,229,.15)}
+
+
+
+
+
+input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 30px #111116 inset!important;-webkit-text-fill-color:#f8fafc!important}
+
+
+
+
+
+.guide{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-top:20px}
+
+
+
+
+
+.guide-title{font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#818cf8;margin-bottom:12px}
+
+
+
+
+
+.steps{padding-left:20px;display:flex;flex-direction:column;gap:7px}
+
+
+
+
+
+.steps li{font-size:.9rem;color:#cbd5e1;line-height:1.5}
+
+
+
+
+
+.steps li b{color:#f8fafc}
+
+
+
+
+
+
+
+
+
+
+
+.btn{width:100%;padding:14px;border-radius:8px;font-family:inherit;font-size:1rem;font-weight:600;background:var(--accent);color:#fff;border:none;cursor:pointer;transition:all .25s;box-shadow:0 0 24px var(--glow);margin-top:8px}
+
+
+
+
+
+.btn:hover{background:var(--accent-h);transform:translateY(-2px)}
+
+
+
+
+
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+
+
+
+
+.msg{display:none;padding:22px;border-radius:8px;margin-top:20px}
+
+
+
+
+
+.msg.ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3)}
+
+
+
+
+
+.msg.err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3)}
+
+
+
+
+
+.msg-t{font-weight:700;margin-bottom:6px}
+
+
+
+
+
+.msg-b{font-size:.92rem;color:var(--muted);line-height:1.5}
+
+
+
+
+
+@media(max-width:580px){.cms-grid{grid-template-columns:repeat(3,1fr)}.card{padding:28px 18px}}
+
+
+
+
+
+.disabled-cms{opacity:0.4;cursor:not-allowed;pointer-events:none;}
+
+
+#formContent{display:block;background:transparent;border:none;padding:0;margin:0}
+.success-page{display:flex;align-items:center;justify-content:center;min-height:70vh;text-align:center;padding:2rem}
+
+.success{display:none;text-align:center;padding:4rem 1.5rem;max-width:480px;margin:0 auto}
+.success .icon{font-size:3rem;margin-bottom:1.2rem}
+.success h2{font-size:1.6rem;font-weight:800;margin-bottom:1rem;color:#f8fafc}
+.success p{color:#94a3b8;font-size:1rem;line-height:1.7}
 
 /* === Footer === */
 footer {
@@ -386,1378 +386,1378 @@ footer {
 .nav-logo span {
     color: #818cf8;
 }
-</style>
-
-
-
-
-
-
-
-
-    <!-- Favicon and Social Previews -->
-
-
-
-
-
-    <link rel="icon" type="image/png" href="/favicon.png">
-
-
-
-
-
-    <link rel="apple-touch-icon" href="/favicon.png">
-
-
-
-
-
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-
-
-
-
-
-    <meta property="og:image" content="https://statlift.de/og-image.png">
-
-
-
-
-
-    <meta property="og:image:width" content="1200">
-
-
-
-
-
-    <meta property="og:image:height" content="630">
-
-
-
-
-
-    <meta name="twitter:image" content="https://statlift.de/og-image.png">
-
-
-
-
-
-    <meta name="twitter:card" content="summary_large_image">
-
-
-
-
-
-
-
-
-</head>
-
-
-
-
-
-<body>
-
-
-
-
-
-<nav id="navbar"><div class="container"><a href="/" class="nav-logo">Stat<span>lift</span></a></div></nav>
-
-
-
-
-
-<main><div class="card">
-<div id="formContent">
-
-
-
-
-
-<div style="text-align:center;margin-bottom:20px;">
-
-
-<span class="eyebrow" style="display:block;text-align:center;margin-bottom:10px;"><span style="color:#f8fafc;font-weight:400;">Abo 2 —</span> Professional</span>
-
-
-<h1 style="text-align:center;margin-bottom:12px;">CMS-Zugang einrichten</h1>
-
-
-<p class="subtitle" style="text-align:center;max-width:520px;margin:0 auto 8px;">Wählen Sie Ihr System, tragen Sie die Zugangsdaten ein — wir richten alles ein.</p>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="form-group"><label for="email">Ihre E-Mail-Adresse (Abo-Adresse)</label><input type="email" id="email" required placeholder=""></div>
-
-
-
-
-
-
-
-
-
-<div class="cms-grid">
-
-<div class="cms-card" data-cms="wordpress" onclick="selectCms('wordpress')" tabindex="0">
-  <div class="cms-icon logo-chip"><img src="/assets/logos/wordpresslogo.png" alt="WordPress"></div>
-  <div class="cms-label">WordPress</div>
-</div>
-
-<div class="cms-card" data-cms="wix" onclick="selectCms('wix')" tabindex="0">
-  <div class="cms-icon logo-chip"><img src="/assets/logos/wixlogo.png" alt="Wix"></div>
-  <div class="cms-label">Wix</div>
-</div>
-
-<div class="cms-card" data-cms="squarespace" onclick="selectCms('squarespace')" tabindex="0">
-  <div class="cms-icon logo-chip"><img src="/assets/logos/squarespacelogo.png" alt="Squarespace"></div>
-  <div class="cms-label">Squarespace</div>
-</div>
-
-<div class="cms-card disabled-cms" data-cms="hubspot">
-  <div class="cms-icon logo-chip"><img src="/assets/logos/hubspotlogo.jpg" alt="HubSpot"></div>
-  <div class="cms-label">HubSpot</div>
-</div>
-
-<div class="cms-card disabled-cms" data-cms="webflow">
-  <div class="cms-icon logo-chip"><img src="/assets/logos/webflowlogo.png" alt="Webflow"></div>
-  <div class="cms-label">Webflow</div>
-</div>
-
-<div class="cms-card disabled-cms" data-cms="typo3">
-  <div class="cms-icon logo-chip"><img src="/assets/logos/typo3logo.png" alt="TYPO3"></div>
-  <div class="cms-label">TYPO3</div>
-</div>
-
-<div class="cms-card disabled-cms" data-cms="contao">
-  <div class="cms-icon logo-chip"><img src="/assets/logos/contaologo.png" alt="Contao"></div>
-  <div class="cms-label">Contao</div>
-</div>
-
-<div class="cms-card disabled-cms" data-cms="drupal">
-  <div class="cms-icon logo-chip"><img src="/assets/logos/drupallogo.png" alt="Drupal"></div>
-  <div class="cms-label">Drupal</div>
-</div>
-
-<div class="cms-card disabled-cms" data-cms="shopify">
-  <div class="cms-icon logo-chip"><img src="/assets/logos/shopifylogo.png" alt="Shopify"></div>
-  <div class="cms-label">Shopify</div>
-</div>
-
-<div class="cms-card disabled-cms" data-cms="shopware">
-  <div class="cms-icon logo-chip"><img src="/assets/logos/shopwarelogo.png" alt="Shopware"></div>
-  <div class="cms-label">Shopware</div>
-</div>
-
-</div>
-
-
-
-
-
-
-<div style="text-align:center; font-size: 0.9rem; color: #a5b4fc; margin-bottom: 20px;">Wir arbeiten daran, weitere CMS Systeme hinzuzufügen.</div>
-
-
-
-
-
-<div id="cms-sections">
-
-
-
-
-
-  
-
-
-
-
-
-<div id="section_wordpress" class="cms-section" style="display:none">
-
-
-
-
-
-      <div class="note-box">⚠️ Kein normales Login-Passwort – bitte ein App-Passwort erstellen (Anleitung unten).</div>
-
-
-
-
-
-      <div class="note-box warn-red" id="wp_plugin_warning">🔴 <b>Plugin-Konflikt erkannt?</b> Manche Sicherheits-Plugins (z.B. Wordfence, iThemes Security) blockieren den Zugriff über App-Passwörter. Bitte überprüfen Sie, ob solche Plugins auf Ihrer Website aktiv sind und deaktivieren Sie diese vorübergehend oder erlauben Sie den API-Zugriff in den Plugin-Einstellungen.</div>
-
-
-
-
-
-      <div class="form-group">
-
-
-          <label for="wordpress_cms_url">Website-URL</label>
-
-
-          <input type="url" id="wordpress_cms_url" name="cms_url" placeholder="" autocomplete="off" oninput="clearWpError()">
-
-
-          <div class="field-error" id="wp_url_error">Bitte geben Sie eine gültige URL ein.</div>
-
-
-        </div>
-
-
-
-
-
-<div class="form-group">
-
-
-          <label for="wordpress_cms_user">Ihr WordPress-Benutzername (Admin-Account)</label>
-
-
-          <input type="text" id="wordpress_cms_user" name="cms_user" placeholder="" autocomplete="off">
-
-
-          <div class="field-error" id="wp_user_error">Bitte geben Sie Ihren WordPress-Benutzernamen ein.</div>
-
-
-        </div>
-
-
-
-
-
-<div class="form-group">
-
-
-          <label for="wordpress_cms_pass">App-Passwort</label>
-
-
-          <input type="password" id="wordpress_cms_pass" name="cms_pass" placeholder="" autocomplete="off" oninput="validateWpPass()">
-
-
-          <div class="field-error" id="wp_pass_error">Das App-Passwort hat nicht das richtige Format.</div>
-
-
-        </div>
-
-
-
-
-
-
-
-
-      <div class="guide">
-
-
-
-
-
-        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: WordPress</div>
-
-
-
-
-
-        <ol class="steps"><li>Bei WordPress einloggen</li><li>Gehen Sie zu <b>Benutzer → Ihr Profil</b></li><li>Notieren Sie Ihren <b>Benutzernamen</b> ganz oben auf der Seite – tragen Sie diesen im Feld „Ihr WordPress-Benutzername“ ein</li><li>Scrollen Sie runter zu <b>Anwendungspasswörter</b></li><li>Geben Sie einen beliebigen Namen (z.B. <b>Statlift</b>) ein und klicken Sie <b>Hinzufügen</b></li><li>Kopieren Sie das generierte Passwort – es wird nur einmal angezeigt!</li><li>Tragen Sie es oben als App-Passwort ein</li></ol>
-
-
-
-
-
-      </div>
-
-
-
-
-
-    </div>
-
-
-
-
-
-<div id="section_hubspot" class="cms-section" style="display:none">
-
-
-
-
-
-      <div class="note-box">⚠️ Benötigt: Scopes cms.blogs.read + cms.blogs.write.</div>
-
-
-
-
-
-      <div class="form-group">
-
-
-
-
-
-          <label for="hubspot_cms_api_key">Private App Access Token</label>
-
-
-
-
-
-          <input type="password" id="hubspot_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-<div class="form-group">
-
-
-
-
-
-          <label for="hubspot_cms_extra1">Blog-ID (Content Group ID)</label>
-
-
-
-
-
-          <input type="text" id="hubspot_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-      <div class="guide">
-
-
-
-
-
-        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: HubSpot</div>
-
-
-
-
-
-        <ol class="steps"><li>HubSpot Dashboard öffnen</li><li>Gehen Sie zu <b>Einstellungen → Integrationen → Private Apps</b></li><li>Klicken Sie auf <b>Private App erstellen</b></li><li>Name: Statlift, Scopes: <b>cms.blogs.read</b> + <b>cms.blogs.write</b></li><li>App erstellen → Access Token kopieren</li><li>Blog-ID: Marketing → Website → Blog → ID aus der URL</li></ol>
-
-
-
-
-
-      </div>
-
-
-
-
-
-    </div>
-
-
-
-
-
-<div id="section_webflow" class="cms-section" style="display:none">
-
-
-
-
-
-      <div class="note-box">⚠️ Token muss Scope cms:read + cms:write haben.</div>
-
-
-
-
-
-      <div class="form-group">
-
-
-
-
-
-          <label for="webflow_cms_api_key">API Token</label>
-
-
-
-
-
-          <input type="password" id="webflow_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-<div class="form-group">
-
-
-
-
-
-          <label for="webflow_cms_extra1">Collection ID</label>
-
-
-
-
-
-          <input type="text" id="webflow_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-      <div class="guide">
-
-
-
-
-
-        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Webflow</div>
-
-
-
-
-
-        <ol class="steps"><li>Webflow Dashboard öffnen</li><li>Ihre Website auswählen → <b>Site Settings</b></li><li>Navigieren Sie zu <b>Apps & Integrations → API Access</b></li><li>Klicken Sie auf <b>Generate API Token</b></li><li>Scopes: <b>cms:read</b> + <b>cms:write</b> wählen</li><li>Token sofort kopieren – wird nicht erneut angezeigt!</li><li>Collection ID: Im Designer → CMS → Blog-Collection → ID aus URL</li></ol>
-
-
-
-
-
-      </div>
-
-
-
-
-
-    </div>
-
-
-
-
-
-<div id="section_typo3" class="cms-section" style="display:none">
-
-
-
-
-
-      <div class="note-box">⚠️ Benötigt Extension EXT:headless oder EXT:rest.</div>
-
-
-
-
-
-      <div class="form-group">
-
-
-
-
-
-          <label for="typo3_cms_url">Website-URL</label>
-
-
-
-
-
-          <input type="url" id="typo3_cms_url" name="cms_url" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-<div class="form-group">
-
-
-
-
-
-          <label for="typo3_cms_api_key">API Token</label>
-
-
-
-
-
-          <input type="password" id="typo3_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-      <div class="guide">
-
-
-
-
-
-        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: TYPO3</div>
-
-
-
-
-
-        <ol class="steps"><li>TYPO3 Backend öffnen</li><li>Extension <b>EXT:headless</b> installieren (Extension Manager)</li><li>Im Backend: <b>System → API-Tokens</b></li><li>Neuen Token erstellen mit Schreibberechtigung</li><li>URL und Token oben eintragen</li></ol>
-
-
-
-
-
-      </div>
-
-
-
-
-
-    </div>
-
-
-
-
-
-<div id="section_contao" class="cms-section" style="display:none">
-
-
-
-
-
-      <div class="note-box">⚠️ Benötigt API-Bundle (z.B. oneup/contao-api-bundle).</div>
-
-
-
-
-
-      <div class="form-group">
-
-
-
-
-
-          <label for="contao_cms_url">Website-URL</label>
-
-
-
-
-
-          <input type="url" id="contao_cms_url" name="cms_url" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-<div class="form-group">
-
-
-
-
-
-          <label for="contao_cms_api_key">API-Schlüssel</label>
-
-
-
-
-
-          <input type="password" id="contao_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-      <div class="guide">
-
-
-
-
-
-        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Contao</div>
-
-
-
-
-
-        <ol class="steps"><li>Contao Manager öffnen</li><li>Extension <b>oneup/contao-api-bundle</b> installieren</li><li>Im Contao Backend: <b>System → API-Apps</b></li><li>Neue App erstellen mit Schreibrechten für News-Archive</li><li>API-Schlüssel kopieren und oben eintragen</li></ol>
-
-
-
-
-
-      </div>
-
-
-
-
-
-    </div>
-
-
-
-
-
-<div id="section_drupal" class="cms-section" style="display:none">
-
-
-
-
-
-      <div class="note-box">⚠️ REST-Modul + Basic Auth-Modul müssen aktiviert sein.</div>
-
-
-
-
-
-      <div class="form-group">
-
-
-
-
-
-          <label for="drupal_cms_url">Website-URL</label>
-
-
-
-
-
-          <input type="url" id="drupal_cms_url" name="cms_url" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-<div class="form-group">
-
-
-
-
-
-          <label for="drupal_cms_user">Benutzername</label>
-
-
-
-
-
-          <input type="text" id="drupal_cms_user" name="cms_user" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-<div class="form-group">
-
-
-
-
-
-          <label for="drupal_cms_pass">Passwort</label>
-
-
-
-
-
-          <input type="password" id="drupal_cms_pass" name="cms_pass" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-      <div class="guide">
-
-
-
-
-
-        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Drupal</div>
-
-
-
-
-
-        <ol class="steps"><li>Drupal Admin öffnen</li><li><b>Verwaltung → Module</b>: <b>RESTful Web Services</b> + <b>Basic Auth</b> aktivieren</li><li><b>Konfiguration → Web Services → REST</b> → Content-Endpunkt aktivieren</li><li>Benutzer mit Berechtigung <b>Inhalte erstellen</b> verwenden</li><li>URL, Benutzername und Passwort oben eintragen</li></ol>
-
-
-
-
-
-      </div>
-
-
-
-
-
-    </div>
-
-
-
-
-
-<div id="section_shopify" class="cms-section" style="display:none">
-
-
-      <div class="note-box">Wir senden dir so schnell wie möglich eine Anfrage über Shopify. Bitte nimm diese an. Sobald das geschehen ist, richten wir alles für dich ein.</div>
-
-
-      <div class="form-group">
-
-
-          <label for="shopify_cms_url">Shop-URL</label>
-
-
-          <input type="text" id="shopify_cms_url" name="cms_url" placeholder="" autocomplete="off">
-
-
-        </div>
-
-
-<div class="form-group">
-
-
-          <label for="shopify_cms_extra1">4-stelliger Code</label>
-
-
-          <input type="text" id="shopify_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
-
-
-        </div>
-
-
-
-
-
-      <div class="guide">
-
-
-        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Shopify</div>
-
-
-        <ol class="steps"><li>Shopify Admin öffnen</li><li>Gehe zu <b>Einstellungen → Nutzer und Berechtigungen → Sicherheit</b></li><li>Kopiere dort deinen <b>4-stelligen Collaborator-Code</b> (Mitarbeiter-Code)</li><li>Shop-URL und 4-stelligen Code hier eintragen</li></ol>
-
-
-      </div>
-
-
-    </div>
-
-
-
-
-
-<div id="section_shopware" class="cms-section" style="display:none">
-
-
-
-
-
-      <div class="note-box">⚠️ Integration unter Einstellungen > System > Integrationen erstellen.</div>
-
-
-
-
-
-      <div class="form-group">
-
-
-
-
-
-          <label for="shopware_cms_url">Shop-URL</label>
-
-
-
-
-
-          <input type="url" id="shopware_cms_url" name="cms_url" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-<div class="form-group">
-
-
-
-
-
-          <label for="shopware_cms_api_key">Access Key ID</label>
-
-
-
-
-
-          <input type="text" id="shopware_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-<div class="form-group">
-
-
-
-
-
-          <label for="shopware_cms_extra1">Secret Access Key</label>
-
-
-
-
-
-          <input type="password" id="shopware_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-      <div class="guide">
-
-
-
-
-
-        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Shopware</div>
-
-
-
-
-
-        <ol class="steps"><li>Shopware Admin öffnen</li><li><b>Einstellungen → System → Integrationen</b></li><li><b>Integration hinzufügen</b> → Name: Statlift</li><li>CMS-Berechtigungen aktivieren</li><li><b>Access Key ID</b> + <b>Secret Access Key</b> kopieren</li></ol>
-
-
-
-
-
-      </div>
-
-
-
-
-
-    </div>
-
-
-
-
-
-<div id="section_wix" class="cms-section" style="display:none">
-
-
-
-
-
-      <div class="note-box">ℹ️ Folgen Sie der Anleitung unten, um Ihren Wix API-Schlüssel zu erhalten und Ihre Website-URL einzufügen.</div>
-
-
-
-
-
-      <div class="form-group">
-
-
-          <label for="wix_cms_api_key">API-Schlüssel</label>
-
-
-          <input type="password" id="wix_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
-
-
-        </div>
-
-
-
-
-
-      <div class="form-group">
-
-
-          <label for="wix_cms_extra1">Website-URL oder Site-ID</label>
-
-
-          <input type="text" id="wix_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
-
-
-          <div class="field-error" id="wix_siteid_error">Bitte geben Sie Ihre Wix-URL oder Site-ID ein.</div>
-
-
-        </div>
-
-
-
-
-
-      <div class="guide">
-
-
-        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Wix</div>
-
-
-        <ol class="steps">
-
-
-          <li>Öffnen Sie Ihre <b>Wix-Website im Editor</b> und klicken Sie im linken Menü auf <b>Apps</b></li>
-
-
-          <li>Klicken Sie auf <b>App hinzufügen</b>, suchen Sie nach <b>Wix Blog</b> und fügen Sie die App hinzu (falls noch nicht vorhanden)</li>
-
-
-          <li>Gehen Sie zu den <b>Einstellungen</b> Ihrer Website → <b>Headless-Einstellungen</b> → <b>API-Schlüssel verwalten</b></li>
-
-
-          <li>Klicken Sie auf <b>API-Schlüssel generieren</b>, setzen Sie unter <b>Website-Berechtigungen</b> einen Haken bei <b>Wix Blog</b> und klicken Sie auf <b>Schlüssel generieren</b></li>
-
-
-          <li>Kopieren Sie den generierten <b>API-Schlüssel</b> in das Feld oben</li>
-
-
-          <li>Gehen Sie nun zu Ihrem <b>Wix Dashboard</b> (<a href="https://manage.wix.com" target="_blank" style="color:#818cf8;">manage.wix.com</a>), wählen Sie Ihre Website aus und kopieren Sie die <b>gesamte URL</b> aus der Adresszeile Ihres Browsers in das Feld „Website-URL oder Site-ID" – wir extrahieren die ID automatisch</li>
-
-
-        </ol>
-
-
-      </div>
-
-
-
-
-
-    </div>
-
-
-
-
-
-<div id="section_squarespace" class="cms-section" style="display:none">
-
-
-
-
-
-      <div class="note-box">⚠️ Unter Einstellungen > Entwicklertools > API-Schlüssel.</div>
-
-
-
-
-
-      <div class="form-group">
-
-
-
-
-
-          <label for="squarespace_cms_api_key">API-Schlüssel</label>
-
-
-
-
-
-          <input type="password" id="squarespace_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-<div class="form-group">
-
-
-
-
-
-          <label for="squarespace_cms_extra1">Collection ID (optional)</label>
-
-
-
-
-
-          <input type="text" id="squarespace_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
-
-
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-      <div class="guide">
-
-
-
-
-
-        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Squarespace</div>
-
-
-
-
-
-        <ol class="steps"><li>Squarespace Dashboard öffnen</li><li><b>Einstellungen → Entwicklertools → API-Schlüssel</b></li><li><b>API-Schlüssel generieren</b></li><li>Berechtigungen: Website → Inhalte lesen/schreiben</li><li>Schlüssel kopieren und oben eintragen</li></ol>
-
-
-
-
-
-      </div>
-
-
-
-
-
-    </div>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-  
-
-
-</div>
-
-
-
-
-
-<div id="submitWrap" style="display:none">
-
-
-
-
-
-  <button class="btn" id="submitBtn" onclick="submitForm()">Zugangsdaten übermitteln →</button>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-</div><!-- /formContent -->
-
-<div class="success" id="successMsg">
-  <div class="icon">✅</div>
-  <h2>Vielen Dank!</h2>
-  <p>Ihre Zugangsdaten wurden sicher übermittelt.<br>Wir melden uns bei Ihnen, sobald wir alles eingerichtet haben.</p>
-  <p style="margin-top:1.2rem;color:#818cf8;font-weight:700;font-size:1rem">team@statlift.de</p>
-</div>
-
-
-
-
-
-<div class="msg err" id="msgErr"><div class="msg-t">Ein Fehler ist aufgetreten</div><div class="msg-b" id="msgErrTxt">Bitte prüfen Sie Ihre Eingaben oder schreiben Sie uns an team@statlift.de.</div></div>
-
-
-
-
-
-</div></main>
-
-
-
-
-
-
-
-
-<script>
-const WEBHOOK = 'https://admin.statlift.de/submit/abo2';
-let selectedCms = null;
-
-function extractWixSiteId(value) {
-  value = (value || '').trim();
-  const match = value.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
-  return match ? match[0] : value;
-}
-
-function validateWpPass() {
-  const val = document.getElementById('wordpress_cms_pass').value;
-  const clean = val.replace(/\s+/g, '');
-  const errEl = document.getElementById('wp_pass_error');
-  const inp = document.getElementById('wordpress_cms_pass');
-  if (clean.length > 0 && clean.length !== 24) {
-    errEl.style.display = 'block';
-    inp.classList.add('invalid');
-  } else {
-    errEl.style.display = 'none';
-    inp.classList.remove('invalid');
-  }
-}
-
-function clearWpError() {
-  document.getElementById('wp_plugin_warning').style.display = 'none';
-}
-
-function wpPassIsValid() {
-  if (selectedCms !== 'wordpress') return true;
-  const clean = document.getElementById('wordpress_cms_pass').value.replace(/\s+/g, '');
-  return clean.length === 24;
-}
-
-function selectCms(id) {
-  selectedCms = id;
-  document.querySelectorAll('.cms-card').forEach(c => c.classList.toggle('active', c.dataset.cms === id));
-  document.querySelectorAll('.cms-section').forEach(s => s.style.display = 'none');
-  document.querySelector('.pick-hint') && (document.querySelector('.pick-hint').style.display = 'none');
-
-  const sec = document.getElementById('section_' + id);
-  if (sec) sec.style.display = 'block';
-
-  document.getElementById('submitWrap').style.display = 'block';
-  document.getElementById('msgOk') && (document.getElementById('msgOk').style.display = 'none');
-  document.getElementById('successMsg') && (document.getElementById('successMsg').style.display = 'none');
-  document.getElementById('msgErr') && (document.getElementById('msgErr').style.display = 'none');
-
-  setTimeout(() => {
-    const target = document.getElementById('cms-sections');
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 50);
-}
-
-async function submitForm() {
-  const email = document.getElementById('email').value.trim();
-  if (!email || !selectedCms) { alert('Bitte E-Mail und CMS-System auswählen.'); return; }
-
-  if (!wpPassIsValid()) {
-    document.getElementById('wp_pass_error').style.display = 'block';
-    document.getElementById('wordpress_cms_pass').classList.add('invalid');
-    document.getElementById('wordpress_cms_pass').focus();
-    return;
-  }
-
-  if (selectedCms === 'wordpress') {
-    const userVal = document.getElementById('wordpress_cms_user').value.trim();
-    const userErr = document.getElementById('wp_user_error');
-    if (!userVal) {
-      userErr.style.display = 'block';
-      document.getElementById('wordpress_cms_user').classList.add('invalid');
-      document.getElementById('wordpress_cms_user').focus();
-      return;
-    } else {
-      userErr.style.display = 'none';
-      document.getElementById('wordpress_cms_user').classList.remove('invalid');
-    }
-  }
-
-  if (selectedCms === 'wix') {
-    const rawVal = document.getElementById('wix_cms_extra1').value.trim();
-    const siteId = extractWixSiteId(rawVal);
-    const errEl = document.getElementById('wix_siteid_error');
-    const inp = document.getElementById('wix_cms_extra1');
-    if (!siteId) {
-      errEl.style.display = 'block';
-      inp.classList.add('invalid');
-      return;
-    }
-    errEl.style.display = 'none';
-    inp.classList.remove('invalid');
-    inp.value = siteId;
-  }
-
-  const payload = { email, cms_system: selectedCms };
-  const sec = document.getElementById('section_' + selectedCms);
-  if (sec) {
-    sec.querySelectorAll('input').forEach(inp => {
-      if (inp.name) payload[inp.name] = inp.value.trim();
-    });
-  }
-
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true; btn.textContent = 'Wird übermittelt...';
-
-  document.getElementById('msgOk') && (document.getElementById('msgOk').style.display = 'none');
-  document.getElementById('successMsg') && (document.getElementById('successMsg').style.display = 'none');
-  document.getElementById('msgErr') && (document.getElementById('msgErr').style.display = 'none');
-
-  try {
-    const res = await fetch(WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
-    const data = await res.json().catch(() => ({}));
-
-    if (!res.ok || data.success === false) {
-      if (data.error === 'not_found') {
-        document.getElementById('msgErrTxt').textContent = 'Fehler: Diese E-Mail-Adresse hat kein aktives Abo abgeschlossen.';
-      } else if (data.error === 'wrong_abo') {
-        document.getElementById('msgErrTxt').textContent = 'Fehler: Diese E-Mail-Adresse hat kein Abo 2 abgeschlossen.';
-      } else if (data.error === 'already_submitted') {
-        document.getElementById('msgErrTxt').innerHTML = 'Du hast uns bereits die Zugangsdaten übermittelt. Falls du diese anpassen möchtest, melde dich per E-Mail bei uns: <a href="mailto:team@statlift.de" style="color:#818cf8;text-decoration:none;">team@statlift.de</a>.';
-      } else if (data.error === 'invalid_credentials') {
-        if (selectedCms === 'wix') {
-          document.getElementById('msgErrTxt').innerHTML = '⚠️ <b>Zugangsdaten ungültig.</b><br>Bitte überprüfen Sie:<ul style="margin-top:8px;padding-left:18px;font-size:.88rem;"><li>Haben Sie unter Website-Berechtigungen die App <b>Wix Blog</b> angekreuzt?</li><li>Haben Sie den <b>API-Schlüssel</b> vollständig kopiert?</li><li>Ist die <b>Site-ID</b> korrekt eingetragen?</li></ul>Bitte korrigieren Sie die Daten und übermitteln Sie diese erneut.';
-          document.getElementById('wix_cms_api_key').value = '';
-        } else {
-          document.getElementById('msgErrTxt').innerHTML = '⚠️ <b>Zugangsdaten ungültig oder Plugin blockiert den Zugriff.</b><br>Bitte überprüfen Sie:<ul style="margin-top:8px;padding-left:18px;font-size:.88rem;"><li>Ist das App-Passwort korrekt kopiert?</li><li>Hat ein Sicherheits-Plugin (Wordfence, iThemes o.ä.) den Zugriff blockiert?</li><li>Ist die Website-URL exakt richtig (inkl. https://)?</li></ul>Bitte korrigieren Sie die Daten und übermitteln Sie diese erneut.';
-          if (selectedCms === 'wordpress') {
-            document.getElementById('wordpress_cms_pass').value = '';
-            document.getElementById('wordpress_cms_url').value = '';
-            document.getElementById('wordpress_cms_user').value = '';
-            document.getElementById('wp_plugin_warning').style.display = 'block';
-          }
-        }
-        document.getElementById('submitWrap').style.display = 'block';
-      } else {
-        document.getElementById('msgErrTxt').textContent = 'Bitte prüfen Sie Ihre Eingaben oder kontaktieren Sie team@statlift.de.';
-      }
-      document.getElementById('msgErr').style.display = 'block';
-    } else {
-      // Hide the entire card, show success fullscreen
-      const card = document.querySelector('main .card');
-      if (card) card.style.display = 'none';
-      document.getElementById('submitWrap').style.display = 'none';
-      const success = document.getElementById('successMsg');
-      if (success) {
-        success.classList.add('success-page');
-        success.style.display = 'flex';
-        success.style.flexDirection = 'column';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
-  } catch(e) {
-    document.getElementById('msgErrTxt').textContent = 'Verbindungsfehler. Bitte versuchen Sie es erneut.';
-    document.getElementById('msgErr').style.display = 'block';
-  }
-  btn.disabled = false; btn.textContent = 'Zugangsdaten übermitteln →';
-}
-</script>
-
-
-
-
-
+</style>
+
+
+
+
+
+
+
+
+    <!-- Favicon and Social Previews -->
+
+
+
+
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+
+
+
+
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+
+
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+
+
+
+
+    <meta property="og:image" content="https://statlift.de/og-image.png">
+
+
+
+
+
+    <meta property="og:image:width" content="1200">
+
+
+
+
+
+    <meta property="og:image:height" content="630">
+
+
+
+
+
+    <meta name="twitter:image" content="https://statlift.de/og-image.png">
+
+
+
+
+
+    <meta name="twitter:card" content="summary_large_image">
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+<body>
+
+
+
+
+
+<nav id="navbar"><div class="container"><a href="/" class="nav-logo">Stat<span>lift</span></a></div></nav>
+
+
+
+
+
+<main><div class="card">
+<div id="formContent">
+
+
+
+
+
+<div style="text-align:center;margin-bottom:20px;">
+
+
+<span class="eyebrow" style="display:block;text-align:center;margin-bottom:10px;"><span style="color:#f8fafc;font-weight:400;">Abo 2 —</span> Professional</span>
+
+
+<h1 style="text-align:center;margin-bottom:12px;">CMS-Zugang einrichten</h1>
+
+
+<p class="subtitle" style="text-align:center;max-width:520px;margin:0 auto 8px;">Wählen Sie Ihr System, tragen Sie die Zugangsdaten ein — wir richten alles ein.</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="form-group"><label for="email">Ihre E-Mail-Adresse (Abo-Adresse)</label><input type="email" id="email" required placeholder=""></div>
+
+
+
+
+
+
+
+
+
+<div class="cms-grid">
+
+<div class="cms-card" data-cms="wordpress" onclick="selectCms('wordpress')" tabindex="0">
+  <div class="cms-icon logo-chip"><img src="/assets/logos/wordpresslogo.png" alt="WordPress"></div>
+  <div class="cms-label">WordPress</div>
+</div>
+
+<div class="cms-card" data-cms="wix" onclick="selectCms('wix')" tabindex="0">
+  <div class="cms-icon logo-chip"><img src="/assets/logos/wixlogo.png" alt="Wix"></div>
+  <div class="cms-label">Wix</div>
+</div>
+
+<div class="cms-card" data-cms="squarespace" onclick="selectCms('squarespace')" tabindex="0">
+  <div class="cms-icon logo-chip"><img src="/assets/logos/squarespacelogo.png" alt="Squarespace"></div>
+  <div class="cms-label">Squarespace</div>
+</div>
+
+<div class="cms-card disabled-cms" data-cms="hubspot">
+  <div class="cms-icon logo-chip"><img src="/assets/logos/hubspotlogo.jpg" alt="HubSpot"></div>
+  <div class="cms-label">HubSpot</div>
+</div>
+
+<div class="cms-card disabled-cms" data-cms="webflow">
+  <div class="cms-icon logo-chip"><img src="/assets/logos/webflowlogo.png" alt="Webflow"></div>
+  <div class="cms-label">Webflow</div>
+</div>
+
+<div class="cms-card disabled-cms" data-cms="typo3">
+  <div class="cms-icon logo-chip"><img src="/assets/logos/typo3logo.png" alt="TYPO3"></div>
+  <div class="cms-label">TYPO3</div>
+</div>
+
+<div class="cms-card disabled-cms" data-cms="contao">
+  <div class="cms-icon logo-chip"><img src="/assets/logos/contaologo.png" alt="Contao"></div>
+  <div class="cms-label">Contao</div>
+</div>
+
+<div class="cms-card disabled-cms" data-cms="drupal">
+  <div class="cms-icon logo-chip"><img src="/assets/logos/drupallogo.png" alt="Drupal"></div>
+  <div class="cms-label">Drupal</div>
+</div>
+
+<div class="cms-card disabled-cms" data-cms="shopify">
+  <div class="cms-icon logo-chip"><img src="/assets/logos/shopifylogo.png" alt="Shopify"></div>
+  <div class="cms-label">Shopify</div>
+</div>
+
+<div class="cms-card disabled-cms" data-cms="shopware">
+  <div class="cms-icon logo-chip"><img src="/assets/logos/shopwarelogo.png" alt="Shopware"></div>
+  <div class="cms-label">Shopware</div>
+</div>
+
+</div>
+
+
+
+
+
+
+<div style="text-align:center; font-size: 0.9rem; color: #a5b4fc; margin-bottom: 20px;">Wir arbeiten daran, weitere CMS Systeme hinzuzufügen.</div>
+
+
+
+
+
+<div id="cms-sections">
+
+
+
+
+
+  
+
+
+
+
+
+<div id="section_wordpress" class="cms-section" style="display:none">
+
+
+
+
+
+      <div class="note-box">⚠️ Kein normales Login-Passwort – bitte ein App-Passwort erstellen (Anleitung unten).</div>
+
+
+
+
+
+      <div class="note-box warn-red" id="wp_plugin_warning">🔴 <b>Plugin-Konflikt erkannt?</b> Manche Sicherheits-Plugins (z.B. Wordfence, iThemes Security) blockieren den Zugriff über App-Passwörter. Bitte überprüfen Sie, ob solche Plugins auf Ihrer Website aktiv sind und deaktivieren Sie diese vorübergehend oder erlauben Sie den API-Zugriff in den Plugin-Einstellungen.</div>
+
+
+
+
+
+      <div class="form-group">
+
+
+          <label for="wordpress_cms_url">Website-URL</label>
+
+
+          <input type="url" id="wordpress_cms_url" name="cms_url" placeholder="" autocomplete="off" oninput="clearWpError()">
+
+
+          <div class="field-error" id="wp_url_error">Bitte geben Sie eine gültige URL ein.</div>
+
+
+        </div>
+
+
+
+
+
+<div class="form-group">
+
+
+          <label for="wordpress_cms_user">Ihr WordPress-Benutzername (Admin-Account)</label>
+
+
+          <input type="text" id="wordpress_cms_user" name="cms_user" placeholder="" autocomplete="off">
+
+
+          <div class="field-error" id="wp_user_error">Bitte geben Sie Ihren WordPress-Benutzernamen ein.</div>
+
+
+        </div>
+
+
+
+
+
+<div class="form-group">
+
+
+          <label for="wordpress_cms_pass">App-Passwort</label>
+
+
+          <input type="password" id="wordpress_cms_pass" name="cms_pass" placeholder="" autocomplete="off" oninput="validateWpPass()">
+
+
+          <div class="field-error" id="wp_pass_error">Das App-Passwort hat nicht das richtige Format.</div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+      <div class="guide">
+
+
+
+
+
+        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: WordPress</div>
+
+
+
+
+
+        <ol class="steps"><li>Bei WordPress einloggen</li><li>Gehen Sie zu <b>Benutzer → Ihr Profil</b></li><li>Notieren Sie Ihren <b>Benutzernamen</b> ganz oben auf der Seite – tragen Sie diesen im Feld „Ihr WordPress-Benutzername“ ein</li><li>Scrollen Sie runter zu <b>Anwendungspasswörter</b></li><li>Geben Sie einen beliebigen Namen (z.B. <b>Statlift</b>) ein und klicken Sie <b>Hinzufügen</b></li><li>Kopieren Sie das generierte Passwort – es wird nur einmal angezeigt!</li><li>Tragen Sie es oben als App-Passwort ein</li></ol>
+
+
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+<div id="section_hubspot" class="cms-section" style="display:none">
+
+
+
+
+
+      <div class="note-box">⚠️ Benötigt: Scopes cms.blogs.read + cms.blogs.write.</div>
+
+
+
+
+
+      <div class="form-group">
+
+
+
+
+
+          <label for="hubspot_cms_api_key">Private App Access Token</label>
+
+
+
+
+
+          <input type="password" id="hubspot_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+<div class="form-group">
+
+
+
+
+
+          <label for="hubspot_cms_extra1">Blog-ID (Content Group ID)</label>
+
+
+
+
+
+          <input type="text" id="hubspot_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+      <div class="guide">
+
+
+
+
+
+        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: HubSpot</div>
+
+
+
+
+
+        <ol class="steps"><li>HubSpot Dashboard öffnen</li><li>Gehen Sie zu <b>Einstellungen → Integrationen → Private Apps</b></li><li>Klicken Sie auf <b>Private App erstellen</b></li><li>Name: Statlift, Scopes: <b>cms.blogs.read</b> + <b>cms.blogs.write</b></li><li>App erstellen → Access Token kopieren</li><li>Blog-ID: Marketing → Website → Blog → ID aus der URL</li></ol>
+
+
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+<div id="section_webflow" class="cms-section" style="display:none">
+
+
+
+
+
+      <div class="note-box">⚠️ Token muss Scope cms:read + cms:write haben.</div>
+
+
+
+
+
+      <div class="form-group">
+
+
+
+
+
+          <label for="webflow_cms_api_key">API Token</label>
+
+
+
+
+
+          <input type="password" id="webflow_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+<div class="form-group">
+
+
+
+
+
+          <label for="webflow_cms_extra1">Collection ID</label>
+
+
+
+
+
+          <input type="text" id="webflow_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+      <div class="guide">
+
+
+
+
+
+        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Webflow</div>
+
+
+
+
+
+        <ol class="steps"><li>Webflow Dashboard öffnen</li><li>Ihre Website auswählen → <b>Site Settings</b></li><li>Navigieren Sie zu <b>Apps & Integrations → API Access</b></li><li>Klicken Sie auf <b>Generate API Token</b></li><li>Scopes: <b>cms:read</b> + <b>cms:write</b> wählen</li><li>Token sofort kopieren – wird nicht erneut angezeigt!</li><li>Collection ID: Im Designer → CMS → Blog-Collection → ID aus URL</li></ol>
+
+
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+<div id="section_typo3" class="cms-section" style="display:none">
+
+
+
+
+
+      <div class="note-box">⚠️ Benötigt Extension EXT:headless oder EXT:rest.</div>
+
+
+
+
+
+      <div class="form-group">
+
+
+
+
+
+          <label for="typo3_cms_url">Website-URL</label>
+
+
+
+
+
+          <input type="url" id="typo3_cms_url" name="cms_url" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+<div class="form-group">
+
+
+
+
+
+          <label for="typo3_cms_api_key">API Token</label>
+
+
+
+
+
+          <input type="password" id="typo3_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+      <div class="guide">
+
+
+
+
+
+        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: TYPO3</div>
+
+
+
+
+
+        <ol class="steps"><li>TYPO3 Backend öffnen</li><li>Extension <b>EXT:headless</b> installieren (Extension Manager)</li><li>Im Backend: <b>System → API-Tokens</b></li><li>Neuen Token erstellen mit Schreibberechtigung</li><li>URL und Token oben eintragen</li></ol>
+
+
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+<div id="section_contao" class="cms-section" style="display:none">
+
+
+
+
+
+      <div class="note-box">⚠️ Benötigt API-Bundle (z.B. oneup/contao-api-bundle).</div>
+
+
+
+
+
+      <div class="form-group">
+
+
+
+
+
+          <label for="contao_cms_url">Website-URL</label>
+
+
+
+
+
+          <input type="url" id="contao_cms_url" name="cms_url" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+<div class="form-group">
+
+
+
+
+
+          <label for="contao_cms_api_key">API-Schlüssel</label>
+
+
+
+
+
+          <input type="password" id="contao_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+      <div class="guide">
+
+
+
+
+
+        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Contao</div>
+
+
+
+
+
+        <ol class="steps"><li>Contao Manager öffnen</li><li>Extension <b>oneup/contao-api-bundle</b> installieren</li><li>Im Contao Backend: <b>System → API-Apps</b></li><li>Neue App erstellen mit Schreibrechten für News-Archive</li><li>API-Schlüssel kopieren und oben eintragen</li></ol>
+
+
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+<div id="section_drupal" class="cms-section" style="display:none">
+
+
+
+
+
+      <div class="note-box">⚠️ REST-Modul + Basic Auth-Modul müssen aktiviert sein.</div>
+
+
+
+
+
+      <div class="form-group">
+
+
+
+
+
+          <label for="drupal_cms_url">Website-URL</label>
+
+
+
+
+
+          <input type="url" id="drupal_cms_url" name="cms_url" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+<div class="form-group">
+
+
+
+
+
+          <label for="drupal_cms_user">Benutzername</label>
+
+
+
+
+
+          <input type="text" id="drupal_cms_user" name="cms_user" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+<div class="form-group">
+
+
+
+
+
+          <label for="drupal_cms_pass">Passwort</label>
+
+
+
+
+
+          <input type="password" id="drupal_cms_pass" name="cms_pass" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+      <div class="guide">
+
+
+
+
+
+        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Drupal</div>
+
+
+
+
+
+        <ol class="steps"><li>Drupal Admin öffnen</li><li><b>Verwaltung → Module</b>: <b>RESTful Web Services</b> + <b>Basic Auth</b> aktivieren</li><li><b>Konfiguration → Web Services → REST</b> → Content-Endpunkt aktivieren</li><li>Benutzer mit Berechtigung <b>Inhalte erstellen</b> verwenden</li><li>URL, Benutzername und Passwort oben eintragen</li></ol>
+
+
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+<div id="section_shopify" class="cms-section" style="display:none">
+
+
+      <div class="note-box">Wir senden dir so schnell wie möglich eine Anfrage über Shopify. Bitte nimm diese an. Sobald das geschehen ist, richten wir alles für dich ein.</div>
+
+
+      <div class="form-group">
+
+
+          <label for="shopify_cms_url">Shop-URL</label>
+
+
+          <input type="text" id="shopify_cms_url" name="cms_url" placeholder="" autocomplete="off">
+
+
+        </div>
+
+
+<div class="form-group">
+
+
+          <label for="shopify_cms_extra1">4-stelliger Code</label>
+
+
+          <input type="text" id="shopify_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
+
+
+        </div>
+
+
+
+
+
+      <div class="guide">
+
+
+        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Shopify</div>
+
+
+        <ol class="steps"><li>Shopify Admin öffnen</li><li>Gehe zu <b>Einstellungen → Nutzer und Berechtigungen → Sicherheit</b></li><li>Kopiere dort deinen <b>4-stelligen Collaborator-Code</b> (Mitarbeiter-Code)</li><li>Shop-URL und 4-stelligen Code hier eintragen</li></ol>
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+<div id="section_shopware" class="cms-section" style="display:none">
+
+
+
+
+
+      <div class="note-box">⚠️ Integration unter Einstellungen > System > Integrationen erstellen.</div>
+
+
+
+
+
+      <div class="form-group">
+
+
+
+
+
+          <label for="shopware_cms_url">Shop-URL</label>
+
+
+
+
+
+          <input type="url" id="shopware_cms_url" name="cms_url" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+<div class="form-group">
+
+
+
+
+
+          <label for="shopware_cms_api_key">Access Key ID</label>
+
+
+
+
+
+          <input type="text" id="shopware_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+<div class="form-group">
+
+
+
+
+
+          <label for="shopware_cms_extra1">Secret Access Key</label>
+
+
+
+
+
+          <input type="password" id="shopware_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+      <div class="guide">
+
+
+
+
+
+        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Shopware</div>
+
+
+
+
+
+        <ol class="steps"><li>Shopware Admin öffnen</li><li><b>Einstellungen → System → Integrationen</b></li><li><b>Integration hinzufügen</b> → Name: Statlift</li><li>CMS-Berechtigungen aktivieren</li><li><b>Access Key ID</b> + <b>Secret Access Key</b> kopieren</li></ol>
+
+
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+<div id="section_wix" class="cms-section" style="display:none">
+
+
+
+
+
+      <div class="note-box">ℹ️ Folgen Sie der Anleitung unten, um Ihren Wix API-Schlüssel zu erhalten und Ihre Website-URL einzufügen.</div>
+
+
+
+
+
+      <div class="form-group">
+
+
+          <label for="wix_cms_api_key">API-Schlüssel</label>
+
+
+          <input type="password" id="wix_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
+
+
+        </div>
+
+
+
+
+
+      <div class="form-group">
+
+
+          <label for="wix_cms_extra1">Website-URL oder Site-ID</label>
+
+
+          <input type="text" id="wix_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
+
+
+          <div class="field-error" id="wix_siteid_error">Bitte geben Sie Ihre Wix-URL oder Site-ID ein.</div>
+
+
+        </div>
+
+
+
+
+
+      <div class="guide">
+
+
+        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Wix</div>
+
+
+        <ol class="steps">
+
+
+          <li>Öffnen Sie Ihre <b>Wix-Website im Editor</b> und klicken Sie im linken Menü auf <b>Apps</b></li>
+
+
+          <li>Klicken Sie auf <b>App hinzufügen</b>, suchen Sie nach <b>Wix Blog</b> und fügen Sie die App hinzu (falls noch nicht vorhanden)</li>
+
+
+          <li>Gehen Sie zu den <b>Einstellungen</b> Ihrer Website → <b>Headless-Einstellungen</b> → <b>API-Schlüssel verwalten</b></li>
+
+
+          <li>Klicken Sie auf <b>API-Schlüssel generieren</b>, setzen Sie unter <b>Website-Berechtigungen</b> einen Haken bei <b>Wix Blog</b> und klicken Sie auf <b>Schlüssel generieren</b></li>
+
+
+          <li>Kopieren Sie den generierten <b>API-Schlüssel</b> in das Feld oben</li>
+
+
+          <li>Gehen Sie nun zu Ihrem <b>Wix Dashboard</b> (<a href="https://manage.wix.com" target="_blank" style="color:#818cf8;">manage.wix.com</a>), wählen Sie Ihre Website aus und kopieren Sie die <b>gesamte URL</b> aus der Adresszeile Ihres Browsers in das Feld „Website-URL oder Site-ID" – wir extrahieren die ID automatisch</li>
+
+
+        </ol>
+
+
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+<div id="section_squarespace" class="cms-section" style="display:none">
+
+
+
+
+
+      <div class="note-box">⚠️ Unter Einstellungen > Entwicklertools > API-Schlüssel.</div>
+
+
+
+
+
+      <div class="form-group">
+
+
+
+
+
+          <label for="squarespace_cms_api_key">API-Schlüssel</label>
+
+
+
+
+
+          <input type="password" id="squarespace_cms_api_key" name="cms_api_key" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+<div class="form-group">
+
+
+
+
+
+          <label for="squarespace_cms_extra1">Collection ID (optional)</label>
+
+
+
+
+
+          <input type="text" id="squarespace_cms_extra1" name="cms_extra1" placeholder="" autocomplete="off">
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+      <div class="guide">
+
+
+
+
+
+        <div class="guide-title">📋 Schritt-für-Schritt Anleitung: Squarespace</div>
+
+
+
+
+
+        <ol class="steps"><li>Squarespace Dashboard öffnen</li><li><b>Einstellungen → Entwicklertools → API-Schlüssel</b></li><li><b>API-Schlüssel generieren</b></li><li>Berechtigungen: Website → Inhalte lesen/schreiben</li><li>Schlüssel kopieren und oben eintragen</li></ol>
+
+
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+</div>
+
+
+
+
+
+<div id="submitWrap" style="display:none">
+
+
+
+
+
+  <button class="btn" id="submitBtn" onclick="submitForm()">Zugangsdaten übermitteln →</button>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+</div><!-- /formContent -->
+
+<div class="success" id="successMsg">
+  <div class="icon">✅</div>
+  <h2>Vielen Dank!</h2>
+  <p>Ihre Zugangsdaten wurden sicher übermittelt.<br>Wir melden uns bei Ihnen, sobald wir alles eingerichtet haben.</p>
+  <p style="margin-top:1.2rem;color:#818cf8;font-weight:700;font-size:1rem">team@statlift.de</p>
+</div>
+
+
+
+
+
+<div class="msg err" id="msgErr"><div class="msg-t">Ein Fehler ist aufgetreten</div><div class="msg-b" id="msgErrTxt">Bitte prüfen Sie Ihre Eingaben oder schreiben Sie uns an team@statlift.de.</div></div>
+
+
+
+
+
+</div></main>
+
+
+
+
+
+
+
+
+<script>
+const WEBHOOK = 'https://admin.statlift.de/webhook/abo2-zugangsdaten';
+let selectedCms = null;
+
+function extractWixSiteId(value) {
+  value = (value || '').trim();
+  const match = value.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
+  return match ? match[0] : value;
+}
+
+function validateWpPass() {
+  const val = document.getElementById('wordpress_cms_pass').value;
+  const clean = val.replace(/\s+/g, '');
+  const errEl = document.getElementById('wp_pass_error');
+  const inp = document.getElementById('wordpress_cms_pass');
+  if (clean.length > 0 && clean.length !== 24) {
+    errEl.style.display = 'block';
+    inp.classList.add('invalid');
+  } else {
+    errEl.style.display = 'none';
+    inp.classList.remove('invalid');
+  }
+}
+
+function clearWpError() {
+  document.getElementById('wp_plugin_warning').style.display = 'none';
+}
+
+function wpPassIsValid() {
+  if (selectedCms !== 'wordpress') return true;
+  const clean = document.getElementById('wordpress_cms_pass').value.replace(/\s+/g, '');
+  return clean.length === 24;
+}
+
+function selectCms(id) {
+  selectedCms = id;
+  document.querySelectorAll('.cms-card').forEach(c => c.classList.toggle('active', c.dataset.cms === id));
+  document.querySelectorAll('.cms-section').forEach(s => s.style.display = 'none');
+  document.querySelector('.pick-hint') && (document.querySelector('.pick-hint').style.display = 'none');
+
+  const sec = document.getElementById('section_' + id);
+  if (sec) sec.style.display = 'block';
+
+  document.getElementById('submitWrap').style.display = 'block';
+  document.getElementById('msgOk') && (document.getElementById('msgOk').style.display = 'none');
+  document.getElementById('successMsg') && (document.getElementById('successMsg').style.display = 'none');
+  document.getElementById('msgErr') && (document.getElementById('msgErr').style.display = 'none');
+
+  setTimeout(() => {
+    const target = document.getElementById('cms-sections');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
+}
+
+async function submitForm() {
+  const email = document.getElementById('email').value.trim();
+  if (!email || !selectedCms) { alert('Bitte E-Mail und CMS-System auswählen.'); return; }
+
+  if (!wpPassIsValid()) {
+    document.getElementById('wp_pass_error').style.display = 'block';
+    document.getElementById('wordpress_cms_pass').classList.add('invalid');
+    document.getElementById('wordpress_cms_pass').focus();
+    return;
+  }
+
+  if (selectedCms === 'wordpress') {
+    const userVal = document.getElementById('wordpress_cms_user').value.trim();
+    const userErr = document.getElementById('wp_user_error');
+    if (!userVal) {
+      userErr.style.display = 'block';
+      document.getElementById('wordpress_cms_user').classList.add('invalid');
+      document.getElementById('wordpress_cms_user').focus();
+      return;
+    } else {
+      userErr.style.display = 'none';
+      document.getElementById('wordpress_cms_user').classList.remove('invalid');
+    }
+  }
+
+  if (selectedCms === 'wix') {
+    const rawVal = document.getElementById('wix_cms_extra1').value.trim();
+    const siteId = extractWixSiteId(rawVal);
+    const errEl = document.getElementById('wix_siteid_error');
+    const inp = document.getElementById('wix_cms_extra1');
+    if (!siteId) {
+      errEl.style.display = 'block';
+      inp.classList.add('invalid');
+      return;
+    }
+    errEl.style.display = 'none';
+    inp.classList.remove('invalid');
+    inp.value = siteId;
+  }
+
+  const payload = { email, cms_system: selectedCms };
+  const sec = document.getElementById('section_' + selectedCms);
+  if (sec) {
+    sec.querySelectorAll('input').forEach(inp => {
+      if (inp.name) payload[inp.name] = inp.value.trim();
+    });
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = 'Wird übermittelt...';
+
+  document.getElementById('msgOk') && (document.getElementById('msgOk').style.display = 'none');
+  document.getElementById('successMsg') && (document.getElementById('successMsg').style.display = 'none');
+  document.getElementById('msgErr') && (document.getElementById('msgErr').style.display = 'none');
+
+  try {
+    const res = await fetch(WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok || data.success === false) {
+      if (data.error === 'not_found') {
+        document.getElementById('msgErrTxt').textContent = 'Fehler: Diese E-Mail-Adresse hat kein aktives Abo abgeschlossen.';
+      } else if (data.error === 'wrong_abo') {
+        document.getElementById('msgErrTxt').textContent = 'Fehler: Diese E-Mail-Adresse hat kein Abo 2 abgeschlossen.';
+      } else if (data.error === 'already_submitted') {
+        document.getElementById('msgErrTxt').innerHTML = 'Du hast uns bereits die Zugangsdaten übermittelt. Falls du diese anpassen möchtest, melde dich per E-Mail bei uns: <a href="mailto:team@statlift.de" style="color:#818cf8;text-decoration:none;">team@statlift.de</a>.';
+      } else if (data.error === 'invalid_credentials') {
+        if (selectedCms === 'wix') {
+          document.getElementById('msgErrTxt').innerHTML = '⚠️ <b>Zugangsdaten ungültig.</b><br>Bitte überprüfen Sie:<ul style="margin-top:8px;padding-left:18px;font-size:.88rem;"><li>Haben Sie unter Website-Berechtigungen die App <b>Wix Blog</b> angekreuzt?</li><li>Haben Sie den <b>API-Schlüssel</b> vollständig kopiert?</li><li>Ist die <b>Site-ID</b> korrekt eingetragen?</li></ul>Bitte korrigieren Sie die Daten und übermitteln Sie diese erneut.';
+          document.getElementById('wix_cms_api_key').value = '';
+        } else {
+          document.getElementById('msgErrTxt').innerHTML = '⚠️ <b>Zugangsdaten ungültig oder Plugin blockiert den Zugriff.</b><br>Bitte überprüfen Sie:<ul style="margin-top:8px;padding-left:18px;font-size:.88rem;"><li>Ist das App-Passwort korrekt kopiert?</li><li>Hat ein Sicherheits-Plugin (Wordfence, iThemes o.ä.) den Zugriff blockiert?</li><li>Ist die Website-URL exakt richtig (inkl. https://)?</li></ul>Bitte korrigieren Sie die Daten und übermitteln Sie diese erneut.';
+          if (selectedCms === 'wordpress') {
+            document.getElementById('wordpress_cms_pass').value = '';
+            document.getElementById('wordpress_cms_url').value = '';
+            document.getElementById('wordpress_cms_user').value = '';
+            document.getElementById('wp_plugin_warning').style.display = 'block';
+          }
+        }
+        document.getElementById('submitWrap').style.display = 'block';
+      } else {
+        document.getElementById('msgErrTxt').textContent = 'Bitte prüfen Sie Ihre Eingaben oder kontaktieren Sie team@statlift.de.';
+      }
+      document.getElementById('msgErr').style.display = 'block';
+    } else {
+      // Hide the entire card, show success fullscreen
+      const card = document.querySelector('main .card');
+      if (card) card.style.display = 'none';
+      document.getElementById('submitWrap').style.display = 'none';
+      const success = document.getElementById('successMsg');
+      if (success) {
+        success.classList.add('success-page');
+        success.style.display = 'flex';
+        success.style.flexDirection = 'column';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  } catch(e) {
+    document.getElementById('msgErrTxt').textContent = 'Verbindungsfehler. Bitte versuchen Sie es erneut.';
+    document.getElementById('msgErr').style.display = 'block';
+  }
+  btn.disabled = false; btn.textContent = 'Zugangsdaten übermitteln →';
+}
+</script>
+
+
+
+
+
 <footer>
 
 
