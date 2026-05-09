@@ -6379,6 +6379,7 @@
 
 
 <body>
+<canvas id="global-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.45;"></canvas>
 
 
 
@@ -8048,6 +8049,7 @@
 
 
 
+            <div id="panel-abo" class="pricing-panel">
             <div class="pricing-grid">
 
 
@@ -8485,6 +8487,9 @@
             </div>
 
 
+
+            </div><!-- /pricing-grid einmal -->
+            </div><!-- /panel-einmal -->
 
             <!-- Paket-Vergleichshinweis -->
 
@@ -10383,6 +10388,58 @@
 
 <!-- ══════ PREMIUM ANIMATIONS UPGRADE ══════ -->
 <style>
+/* ── Pricing toggle ── */
+.pricing-toggle-wrap {
+  display: flex; gap: 8px; justify-content: center;
+  margin: 32px auto 40px; background: #16161e;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 50px; padding: 6px;
+  width: fit-content;
+}
+.ptab {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 26px; border-radius: 40px;
+  border: none; background: transparent;
+  color: #64748b; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: all 0.3s ease;
+}
+.ptab:hover { color: #f8fafc; }
+.ptab.active {
+  background: linear-gradient(135deg, #4F46E5, #7C3AED);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(79,70,229,0.35);
+}
+.ptab span { font-size: 1.1rem; }
+.pricing-panel { transition: opacity 0.3s ease; }
+
+/* ── Hover animations on cards ── */
+.pricing-card {
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, border-color 0.3s !important;
+}
+.pricing-card:hover {
+  transform: translateY(-10px) scale(1.02) !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(79,70,229,0.25) !important;
+}
+.blog-card {
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease !important;
+}
+.blog-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4) !important;
+}
+.tl-content { transition: transform 0.3s ease, border-color 0.3s ease !important; }
+.tl-step:hover .tl-content {
+  transform: translateX(6px) !important;
+  border-color: rgba(79,70,229,0.4) !important;
+}
+.faq-item { transition: transform 0.25s ease !important; }
+.faq-item:hover { transform: translateX(4px) !important; }
+.btn { transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important; }
+.btn:hover { transform: translateY(-2px) scale(1.03) !important; box-shadow: 0 10px 30px rgba(79,70,229,0.3) !important; }
+nav a { transition: color 0.2s, transform 0.2s !important; }
+nav a:hover { transform: translateY(-1px) !important; }
+</style>
+<style>
 /* ── Particle Canvas ── */
 #hero-canvas {
   position: absolute; inset: 0;
@@ -10585,25 +10642,7 @@
 .tl-content h3 { font-size: 1.05rem; margin-bottom: 6px; }
 .tl-content p { font-size: 0.875rem; color: #94a3b8; line-height: 1.65; }
 
-/* ── Floating badge in hero ── */
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(79,70,229,0.12);
-  border: 1px solid rgba(79,70,229,0.3);
-  border-radius: 30px; padding: 6px 16px;
-  font-size: 0.78rem; color: #818cf8; font-weight: 600;
-  margin-bottom: 20px;
-  animation: pulseBadge 3s ease-in-out infinite;
-}
-@keyframes pulseBadge {
-  0%,100%{box-shadow:0 0 0 0 rgba(79,70,229,0.2)}
-  50%{box-shadow:0 0 0 8px rgba(79,70,229,0)}
-}
-.hero-badge-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: #4F46E5;
-  animation: blink 1.5s ease-in-out infinite;
-}
+/* hero-badge CSS removed */
 
 /* ── Gradient text animation ── */
 .headline-gradient {
@@ -10647,24 +10686,21 @@ window.addEventListener('scroll', () => {
   document.getElementById('scroll-progress').style.width = pct + '%';
 }, { passive: true });
 
-/* ── Hero Particles ── */
+/* ── Global Particle Background ── */
 (function() {
-  const hero = document.getElementById('hero');
-  if (!hero) return;
-  const canvas = document.createElement('canvas');
-  canvas.id = 'hero-canvas';
-  hero.prepend(canvas);
+  const canvas = document.getElementById('global-canvas');
+  if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let W, H, pts;
 
   function resize() {
-    W = canvas.width = hero.offsetWidth;
-    H = canvas.height = hero.offsetHeight;
-    pts = Array.from({length: 60}, () => ({
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    pts = Array.from({length: 70}, () => ({
       x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4,
-      r: Math.random()*1.5+0.5,
-      a: Math.random()
+      vx: (Math.random()-0.5)*0.35, vy: (Math.random()-0.5)*0.35,
+      r: Math.random()*1.8+0.4,
+      a: Math.random() * 0.6 + 0.1
     }));
   }
   resize();
@@ -10678,20 +10714,19 @@ window.addEventListener('scroll', () => {
       if (p.y < 0 || p.y > H) p.vy *= -1;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(79,70,229,${p.a * 0.5})`;
+      ctx.fillStyle = 'rgba(79,70,229,' + (p.a * 0.5) + ')';
       ctx.fill();
     });
-    // connections
     for (let i = 0; i < pts.length; i++) {
       for (let j = i+1; j < pts.length; j++) {
         const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
         const d = Math.sqrt(dx*dx+dy*dy);
-        if (d < 120) {
+        if (d < 130) {
           ctx.beginPath();
           ctx.moveTo(pts[i].x, pts[i].y);
           ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.strokeStyle = `rgba(79,70,229,${0.12*(1-d/120)})`;
-          ctx.lineWidth = 1;
+          ctx.strokeStyle = 'rgba(79,70,229,' + (0.1*(1-d/130)) + ')';
+          ctx.lineWidth = 0.8;
           ctx.stroke();
         }
       }
@@ -10701,15 +10736,7 @@ window.addEventListener('scroll', () => {
   draw();
 })();
 
-/* ── Hero Badge ── */
-(function() {
-  const inner = document.querySelector('.hero-inner');
-  if (!inner) return;
-  const badge = document.createElement('div');
-  badge.className = 'hero-badge';
-  badge.innerHTML = '<div class="hero-badge-dot"></div>KI-gestützte SEO-Content-Automatisierung';
-  inner.prepend(badge);
-})();
+/* Hero Badge removed */
 
 /* ── Typewriter for hero headline ── */
 (function() {
@@ -10744,8 +10771,10 @@ window.addEventListener('scroll', () => {
         ci++;
         setTimeout(tick, 75);
       } else {
-        // Done — keep static
+        // Done — cursor stops blinking
         h1.innerHTML = '<span class="headline-gradient">' + lines[0] + '</span><br>' + lines[1];
+        cursor.style.animation = 'none';
+        cursor.style.opacity = '0';
         h1.appendChild(cursor);
       }
     }
@@ -10792,40 +10821,11 @@ window.addEventListener('scroll', () => {
 
   // Stats row
   const statsHtml = `
-  <div class="problem-stats">
-    <div class="pstat"><div class="pstat-num" data-count="91">0</div><div class="pstat-label">% der Klicks gehen an Seite 1</div></div>
-    <div class="pstat"><div class="pstat-num" data-count="0.78">0</div><div class="pstat-label">% CTR auf Seite 2 (Ø)</div></div>
-    <div class="pstat"><div class="pstat-num" data-count="4">0</div><div class="pstat-label">von 5 Kunden googeln vor Kauf</div></div>
-  </div>`;
+`;
 
   // Animated search results
   const visualHtml = `
-  <div class="problem-visual">
-    <div class="search-result-card competitor">
-      <div class="rank-num bad">1</div>
-      <div class="result-info">
-        <div class="result-title">Elektriker München – Schnell &amp; Zuverlässig | elektro-meier.de</div>
-        <div class="result-url">elektro-meier.de › notfallservice</div>
-      </div>
-      <div class="result-badge hot">🔥 Ihre Konkurrenz</div>
-    </div>
-    <div class="search-result-card competitor">
-      <div class="rank-num bad">2</div>
-      <div class="result-info">
-        <div class="result-title">Elektroinstallation München – 24/7 Notdienst | blitz-elektro.de</div>
-        <div class="result-url">blitz-elektro.de › service</div>
-      </div>
-      <div class="result-badge hot">🔥 Ihre Konkurrenz</div>
-    </div>
-    <div class="search-result-card you">
-      <div class="rank-num good">14</div>
-      <div class="result-info">
-        <div class="result-title">Elektriker – Ihr Betrieb | ihr-betrieb.de</div>
-        <div class="result-url bad">ihr-betrieb.de</div>
-      </div>
-      <div class="result-badge yours">← Sie (Seite 2)</div>
-    </div>
-  </div>`;
+`;
 
   container.insertAdjacentHTML('beforeend', statsHtml + visualHtml);
 })();
