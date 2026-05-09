@@ -10381,7 +10381,532 @@
 
 
 
+<!-- ══════ PREMIUM ANIMATIONS UPGRADE ══════ -->
+<style>
+/* ── Particle Canvas ── */
+#hero-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+.hero-inner { position: relative; z-index: 1; }
 
+/* ── Typewriter cursor ── */
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px; height: 1em;
+  background: #4F46E5;
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  animation: blink 0.9s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ── Hero floating mockup ── */
+.hero-mockup {
+  width: min(560px, 90vw);
+  margin: 48px auto 0;
+  background: #16161e;
+  border: 1px solid rgba(79,70,229,0.25);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(79,70,229,0.1);
+  animation: floatCard 5s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes floatCard {
+  0%,100%{transform:translateY(0) rotate(-0.5deg)}
+  50%{transform:translateY(-12px) rotate(0.5deg)}
+}
+.mockup-bar {
+  background: #1e1e2a;
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.mockup-dot { width:10px;height:10px;border-radius:50%; }
+.mockup-dot.r{background:#ff5f57;} .mockup-dot.y{background:#febc2e;} .mockup-dot.g{background:#28c840;}
+.mockup-url {
+  margin-left: 10px; flex: 1;
+  background: #0d0d14; border-radius: 6px;
+  padding: 4px 10px; font-size: 0.72rem;
+  color: #64748b; font-family: monospace;
+}
+.mockup-body { padding: 20px 22px 22px; }
+.mockup-rank-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 12px;
+}
+.mockup-rank-badge {
+  background: linear-gradient(135deg,#4F46E5,#7C3AED);
+  color: #fff; font-size: 0.72rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px; letter-spacing:0.05em;
+}
+.mockup-rank-label { color: #64748b; font-size: 0.75rem; }
+.mockup-line {
+  height: 10px; border-radius: 8px;
+  background: #23232f; margin-bottom: 8px;
+  position: relative; overflow: hidden;
+}
+.mockup-line::after {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(90deg,transparent,rgba(255,255,255,0.04),transparent);
+  animation: shimmer 2s infinite;
+}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.mockup-line.w80{width:80%} .mockup-line.w60{width:60%} .mockup-line.w90{width:90%}
+.mockup-stat-row {
+  display: flex; gap: 10px; margin-top: 16px;
+}
+.mockup-stat {
+  flex:1; background: #1e1e2a; border-radius: 8px;
+  padding: 10px; text-align: center;
+  border: 1px solid rgba(79,70,229,0.12);
+}
+.mockup-stat .val {
+  font-size: 1.2rem; font-weight: 800;
+  background: linear-gradient(135deg,#4F46E5,#818cf8);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.mockup-stat .lbl { font-size: 0.65rem; color: #64748b; margin-top: 2px; }
+
+/* ── Animated Google search bars (problem) ── */
+.problem-visual {
+  max-width: 700px; margin: 48px auto 0;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.search-result-card {
+  background: #16161e;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px; padding: 16px 20px;
+  display: flex; align-items: center; gap: 14px;
+  opacity: 0; transform: translateX(-30px);
+  transition: all 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+.search-result-card.vis { opacity:1; transform:translateX(0); }
+.search-result-card.competitor {
+  border-color: rgba(239,68,68,0.25);
+  background: rgba(239,68,68,0.04);
+}
+.search-result-card.you {
+  border-color: rgba(79,70,229,0.35);
+  background: rgba(79,70,229,0.05);
+}
+.rank-num {
+  font-size: 1.4rem; font-weight: 900;
+  min-width: 36px; text-align: center;
+}
+.rank-num.bad { color: #ef4444; }
+.rank-num.good {
+  background: linear-gradient(135deg,#4F46E5,#818cf8);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.result-info { flex:1; }
+.result-title { font-size: 0.85rem; font-weight: 600; color: #f8fafc; margin-bottom:2px;}
+.result-url { font-size: 0.72rem; color: #4ade80; }
+.result-url.bad { color: #64748b; }
+.result-badge {
+  font-size: 0.65rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 20px;
+  white-space: nowrap;
+}
+.result-badge.hot { background: rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3);}
+.result-badge.yours { background: rgba(79,70,229,0.15); color:#818cf8; border:1px solid rgba(79,70,229,0.3);}
+
+/* ── Animated counter stats ── */
+.problem-stats {
+  display: flex; gap: 24px; justify-content: center;
+  flex-wrap: wrap; margin: 40px auto 0; max-width: 700px;
+}
+.pstat {
+  text-align: center; flex: 1; min-width: 160px;
+  background: #16161e;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px; padding: 24px 20px;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.7s ease;
+}
+.pstat.vis { opacity:1; transform:translateY(0); }
+.pstat-num {
+  font-size: 2.4rem; font-weight: 900;
+  background: linear-gradient(135deg, #4F46E5, #818cf8);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.pstat-label { font-size: 0.78rem; color: #64748b; margin-top: 6px; }
+
+/* ── Methode animated timeline ── */
+.methode-timeline {
+  position: relative;
+  max-width: 700px; margin: 56px auto 0;
+}
+.methode-timeline::before {
+  content:''; position:absolute;
+  left: 32px; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(to bottom, #4F46E5, #7C3AED, rgba(79,70,229,0));
+}
+.tl-step {
+  display: flex; gap: 24px; align-items: flex-start;
+  margin-bottom: 40px; position: relative;
+  opacity: 0; transform: translateX(-24px);
+  transition: all 0.6s cubic-bezier(0.34,1.2,0.64,1);
+}
+.tl-step.vis { opacity:1; transform:translateX(0); }
+.tl-icon {
+  width: 64px; height: 64px;
+  background: linear-gradient(135deg, #1e1e30, #252535);
+  border: 2px solid rgba(79,70,229,0.35);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; flex-shrink: 0;
+  position: relative; z-index: 1;
+  box-shadow: 0 0 0 6px rgba(79,70,229,0.08), 0 0 20px rgba(79,70,229,0.12);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.tl-step:hover .tl-icon {
+  box-shadow: 0 0 0 8px rgba(79,70,229,0.15), 0 0 40px rgba(79,70,229,0.25);
+  transform: scale(1.08);
+}
+.tl-content {
+  flex: 1; padding-top: 10px;
+  background: #16161e;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px; padding: 20px 22px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.tl-step:hover .tl-content {
+  border-color: rgba(79,70,229,0.3);
+  transform: translateX(4px);
+}
+.tl-num {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+  color: #4F46E5; text-transform: uppercase; margin-bottom: 4px;
+}
+.tl-content h3 { font-size: 1.05rem; margin-bottom: 6px; }
+.tl-content p { font-size: 0.875rem; color: #94a3b8; line-height: 1.65; }
+
+/* ── Floating badge in hero ── */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(79,70,229,0.12);
+  border: 1px solid rgba(79,70,229,0.3);
+  border-radius: 30px; padding: 6px 16px;
+  font-size: 0.78rem; color: #818cf8; font-weight: 600;
+  margin-bottom: 20px;
+  animation: pulseBadge 3s ease-in-out infinite;
+}
+@keyframes pulseBadge {
+  0%,100%{box-shadow:0 0 0 0 rgba(79,70,229,0.2)}
+  50%{box-shadow:0 0 0 8px rgba(79,70,229,0)}
+}
+.hero-badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #4F46E5;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+/* ── Gradient text animation ── */
+.headline-gradient {
+  background: linear-gradient(135deg, #f8fafc 0%, #818cf8 50%, #f8fafc 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s ease infinite;
+}
+@keyframes gradientShift {
+  0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
+}
+
+/* ── Orb pulse ── */
+.orb-a { animation: orbFloat 8s ease-in-out infinite; }
+.orb-b { animation: orbFloat 10s ease-in-out infinite reverse; }
+@keyframes orbFloat {
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(30px,-20px) scale(1.05)}
+  66%{transform:translate(-20px,15px) scale(0.95)}
+}
+
+/* ── Section transitions ── */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── Scroll progress bar ── */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, #4F46E5, #818cf8, #7C3AED);
+  width: 0%; z-index: 9999;
+  transition: width 0.1s linear;
+}
+</style>
+
+<div id="scroll-progress"></div>
+
+<script>
+/* ── Scroll Progress ── */
+window.addEventListener('scroll', () => {
+  const pct = (scrollY / (document.body.scrollHeight - innerHeight)) * 100;
+  document.getElementById('scroll-progress').style.width = pct + '%';
+}, { passive: true });
+
+/* ── Hero Particles ── */
+(function() {
+  const hero = document.getElementById('hero');
+  if (!hero) return;
+  const canvas = document.createElement('canvas');
+  canvas.id = 'hero-canvas';
+  hero.prepend(canvas);
+  const ctx = canvas.getContext('2d');
+  let W, H, pts;
+
+  function resize() {
+    W = canvas.width = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+    pts = Array.from({length: 60}, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4,
+      r: Math.random()*1.5+0.5,
+      a: Math.random()
+    }));
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(79,70,229,${p.a * 0.5})`;
+      ctx.fill();
+    });
+    // connections
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i+1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+        const d = Math.sqrt(dx*dx+dy*dy);
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = `rgba(79,70,229,${0.12*(1-d/120)})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── Hero Badge ── */
+(function() {
+  const inner = document.querySelector('.hero-inner');
+  if (!inner) return;
+  const badge = document.createElement('div');
+  badge.className = 'hero-badge';
+  badge.innerHTML = '<div class="hero-badge-dot"></div>KI-gestützte SEO-Content-Automatisierung';
+  inner.prepend(badge);
+})();
+
+/* ── Typewriter for hero headline ── */
+(function() {
+  const h1 = document.querySelector('.hero-headline');
+  if (!h1) return;
+  const lines = ['Ihre Website.', 'Endlich sichtbar.'];
+  const cursor = document.createElement('span');
+  cursor.className = 'typewriter-cursor';
+  h1.innerHTML = '';
+  h1.appendChild(cursor);
+
+  let li = 0, ci = 0, deleting = false, phase = 0;
+  const full = lines.join(' ');
+
+  function tick() {
+    if (phase === 0) {
+      // Type line 1
+      if (ci <= lines[0].length) {
+        h1.innerHTML = '<span class="headline-gradient">' + lines[0].slice(0,ci) + '</span>';
+        h1.appendChild(cursor);
+        ci++;
+        setTimeout(tick, ci === 1 ? 500 : 65);
+      } else {
+        phase = 1; ci = 0;
+        setTimeout(tick, 400);
+      }
+    } else if (phase === 1) {
+      // Type line 2
+      if (ci <= lines[1].length) {
+        h1.innerHTML = '<span class="headline-gradient">' + lines[0] + '</span><br>' + lines[1].slice(0,ci);
+        h1.appendChild(cursor);
+        ci++;
+        setTimeout(tick, 75);
+      } else {
+        // Done — keep static
+        h1.innerHTML = '<span class="headline-gradient">' + lines[0] + '</span><br>' + lines[1];
+        h1.appendChild(cursor);
+      }
+    }
+  }
+  setTimeout(tick, 800);
+})();
+
+/* ── Hero Floating Mockup ── */
+(function() {
+  const inner = document.querySelector('.hero-inner');
+  if (!inner) return;
+  const mockup = document.createElement('div');
+  mockup.className = 'hero-mockup reveal d4';
+  mockup.innerHTML = `
+    <div class="mockup-bar">
+      <div class="mockup-dot r"></div>
+      <div class="mockup-dot y"></div>
+      <div class="mockup-dot g"></div>
+      <div class="mockup-url">statlift.de — Google Suche</div>
+    </div>
+    <div class="mockup-body">
+      <div class="mockup-rank-row">
+        <div class="mockup-rank-badge">↑ Rang #1</div>
+        <div class="mockup-rank-label">Suchbegriff: "Elektriker Hamburg"</div>
+      </div>
+      <div class="mockup-line w90"></div>
+      <div class="mockup-line w80"></div>
+      <div class="mockup-line w60"></div>
+      <div class="mockup-stat-row">
+        <div class="mockup-stat"><div class="val" data-count="2847">0</div><div class="lbl">Besucher/Monat</div></div>
+        <div class="mockup-stat"><div class="val" data-count="34">0</div><div class="lbl">Neue Anfragen</div></div>
+        <div class="mockup-stat"><div class="val" data-percent="true">Top 3</div><div class="lbl">Google-Position</div></div>
+      </div>
+    </div>`;
+  inner.appendChild(mockup);
+})();
+
+/* ── Problem Section: Visual Search Results ── */
+(function() {
+  const probSec = document.getElementById('problem');
+  if (!probSec) return;
+  const container = probSec.querySelector('.container');
+  if (!container) return;
+
+  // Stats row
+  const statsHtml = `
+  <div class="problem-stats">
+    <div class="pstat"><div class="pstat-num" data-count="91">0</div><div class="pstat-label">% der Klicks gehen an Seite 1</div></div>
+    <div class="pstat"><div class="pstat-num" data-count="0.78">0</div><div class="pstat-label">% CTR auf Seite 2 (Ø)</div></div>
+    <div class="pstat"><div class="pstat-num" data-count="4">0</div><div class="pstat-label">von 5 Kunden googeln vor Kauf</div></div>
+  </div>`;
+
+  // Animated search results
+  const visualHtml = `
+  <div class="problem-visual">
+    <div class="search-result-card competitor">
+      <div class="rank-num bad">1</div>
+      <div class="result-info">
+        <div class="result-title">Elektriker München – Schnell &amp; Zuverlässig | elektro-meier.de</div>
+        <div class="result-url">elektro-meier.de › notfallservice</div>
+      </div>
+      <div class="result-badge hot">🔥 Ihre Konkurrenz</div>
+    </div>
+    <div class="search-result-card competitor">
+      <div class="rank-num bad">2</div>
+      <div class="result-info">
+        <div class="result-title">Elektroinstallation München – 24/7 Notdienst | blitz-elektro.de</div>
+        <div class="result-url">blitz-elektro.de › service</div>
+      </div>
+      <div class="result-badge hot">🔥 Ihre Konkurrenz</div>
+    </div>
+    <div class="search-result-card you">
+      <div class="rank-num good">14</div>
+      <div class="result-info">
+        <div class="result-title">Elektriker – Ihr Betrieb | ihr-betrieb.de</div>
+        <div class="result-url bad">ihr-betrieb.de</div>
+      </div>
+      <div class="result-badge yours">← Sie (Seite 2)</div>
+    </div>
+  </div>`;
+
+  container.insertAdjacentHTML('beforeend', statsHtml + visualHtml);
+})();
+
+/* ── Methode Section: Timeline ── */
+(function() {
+  const sec = document.getElementById('methode');
+  if (!sec) return;
+  const grid = sec.querySelector('.methode-grid');
+  if (!grid) return;
+
+  const steps = [
+    { icon: '🔍', num: '01 — Deep Research', title: 'Wir finden die Lücken in Ihrem Markt.', text: 'Wir analysieren, welche Suchbegriffe in Ihrer Branche tatsächlich Anfragen bringen — und welche Themen Ihre Konkurrenz noch nicht abdeckt. Jeder Artikel entsteht datenbasiert.' },
+    { icon: '✍️', num: '02 — Experten-Redaktion', title: 'Professionelle Inhalte auf Branchen-Niveau.', text: 'Jeder Artikel wird gezielt recherchiert und verfasst. Kein generischer Content — sondern hochwertige Inhalte, die Autorität aufbauen und Ihre Zielgruppe wirklich überzeugen.' },
+    { icon: '🚀', num: '03 — Veröffentlichung', title: 'Online — ohne einen Klick Ihrerseits.', text: 'Je nach Paket laden wir den Artikel direkt in Ihr CMS — oder schicken ihn fertig formatiert per E-Mail. Sie müssen nichts anfassen.' },
+    { icon: '📈', num: '04 — Nachhaltiges Wachstum', title: 'Sichtbarkeit, die über Jahre bleibt.', text: 'Jeder veröffentlichte Artikel bleibt dauerhaft auf Ihrer Website und zieht weiter Besucher an. Kein Werbebudget nötig — die Wirkung wächst mit der Zeit.' },
+  ];
+
+  const tl = document.createElement('div');
+  tl.className = 'methode-timeline';
+  tl.innerHTML = steps.map((s,i) => `
+    <div class="tl-step" style="transition-delay:${i*0.12}s">
+      <div class="tl-icon">${s.icon}</div>
+      <div class="tl-content">
+        <div class="tl-num">${s.num}</div>
+        <h3>${s.title}</h3>
+        <p>${s.text}</p>
+      </div>
+    </div>`).join('');
+
+  grid.parentNode.insertBefore(tl, grid);
+  grid.style.display = 'none';
+})();
+
+/* ── IntersectionObserver for new animated elements ── */
+(function() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('vis');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.search-result-card, .pstat, .tl-step, .hero-mockup').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.12) + 's';
+    obs.observe(el);
+  });
+})();
+
+/* ── Animated counter ── */
+(function() {
+  function animCount(el, target, isDecimal) {
+    const duration = 1600;
+    const start = performance.now();
+    function step(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1-p, 3);
+      const val = target * ease;
+      el.textContent = isDecimal ? val.toFixed(2) : Math.round(val);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const countObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('[data-count]').forEach(el => {
+          const v = parseFloat(el.dataset.count);
+          animCount(el, v, el.dataset.count.includes('.'));
+        });
+        countObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.problem-stats, .hero-mockup').forEach(el => countObs.observe(el));
+})();
+</script>
 
 
 
