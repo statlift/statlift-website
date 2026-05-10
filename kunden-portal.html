@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+  <title>Blog-Portal | Statlift</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#818cf8;--primary-d:#6366f1;--primary-glow:rgba(129,140,248,.15);
+      --bg:#0a0a14;--bg2:#0d0d1a;--bg3:#111128;
+      --surface:rgba(255,255,255,.04);--surface-h:rgba(255,255,255,.07);
+      --border:rgba(129,140,248,.15);--border-s:rgba(255,255,255,.06);
+      --text:#f8fafc;--muted:#94a3b8;--muted2:#64748b;
+      --success:#10b981;--warning:#f59e0b;--danger:#ef4444;
+      --r:14px;--r-sm:8px;--r-lg:20px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:var(--bg2)}
+    ::-webkit-scrollbar-thumb{background:var(--primary-d);border-radius:99px}
+
+    /* ── Noise bg ── */
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(99,102,241,.18),transparent),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(129,140,248,.08),transparent);pointer-events:none;z-index:0}
+
+    /* ── NAV ── */
+    nav{position:sticky;top:0;z-index:100;background:rgba(10,10,20,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-s);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+    .logo{font-size:1.2rem;font-weight:800;letter-spacing:-.04em;color:var(--text);text-decoration:none}
+    .logo span{color:var(--primary)}
+    .nav-right{display:flex;align-items:center;gap:12px}
+    .badge-portal{background:var(--primary-glow);border:1px solid var(--border);color:var(--primary);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .7rem;border-radius:99px}
+
+    /* ── HERO ── */
+    .hero{position:relative;z-index:1;padding:60px 24px 40px;max-width:1100px;margin:0 auto}
+    .hero-label{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:12px}
+    .hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.04em;line-height:1.15;margin-bottom:10px}
+    .hero h1 span{color:var(--primary)}
+    .hero-sub{color:var(--muted);font-size:.95rem;max-width:560px}
+
+    /* ── STATS ROW ── */
+    .stats-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:32px}
+    .stat-card{background:var(--surface);border:1px solid var(--border-s);border-radius:var(--r-sm);padding:16px 24px;flex:1;min-width:140px}
+    .stat-card .sv{font-size:1.8rem;font-weight:800;color:var(--primary);letter-spacing:-.03em}
+    .stat-card .sl{font-size:.75rem;color:var(--muted);margin-top:2px}
+
+    /* ── FILTER BAR ── */
+    .filter-bar{position:relative;z-index:1;background:var(--bg2);border-top:1px solid var(--border-s);border-bottom:1px solid var(--border-s);padding:16px 24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .filter-bar input,.filter-bar select{background:var(--surface);border:1px solid var(--border-s);border-radius:var(--r-sm);color:var(--text);padding:.6rem 1rem;font-family:inherit;font-size:.85rem;outline:none;transition:border-color .2s}
+    .filter-bar input::placeholder{color:var(--muted2)}
+    .filter-bar input:focus,.filter-bar select:focus{border-color:var(--primary)}
+    .filter-bar select option{background:var(--bg2)}
+    #searchInput{flex:1;min-width:200px}
+    .filter-count{margin-left:auto;color:var(--muted);font-size:.8rem}
+
+    /* ── CONTENT AREA ── */
+    .content{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+
+    /* ── ARTICLE CARDS ── */
+    .articles-grid{display:flex;flex-direction:column;gap:16px}
+    .article-card{background:var(--surface);border:1px solid var(--border-s);border-radius:var(--r);padding:24px 28px;transition:border-color .25s,background .25s,transform .2s;position:relative;overflow:hidden}
+    .article-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--primary-d),var(--primary));opacity:0;transition:opacity .25s}
+    .article-card:hover{border-color:var(--border);background:var(--surface-h);transform:translateY(-1px)}
+    .article-card:hover::before{opacity:1}
+    .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+    .card-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .abo-badge{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .6rem;border-radius:99px}
+    .abo-badge.abo1{background:rgba(16,185,129,.12);color:#10b981;border:1px solid rgba(16,185,129,.2)}
+    .abo-badge.abo2{background:rgba(245,158,11,.12);color:#f59e0b;border:1px solid rgba(245,158,11,.2)}
+    .abo-badge.abo3{background:rgba(129,140,248,.15);color:var(--primary);border:1px solid var(--border)}
+    .card-date{font-size:.75rem;color:var(--muted2);display:flex;align-items:center;gap:4px}
+    .blog-nr{font-size:.72rem;color:var(--muted2)}
+    .card-actions{display:flex;gap:8px;flex-shrink:0}
+
+    /* Copy buttons */
+    .btn-copy{display:flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--border-s);border-radius:var(--r-sm);color:var(--muted);cursor:pointer;font-family:inherit;font-size:.75rem;font-weight:500;padding:.4rem .8rem;transition:all .2s;white-space:nowrap}
+    .btn-copy:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-glow)}
+    .btn-copy.copied{border-color:var(--success);color:var(--success);background:rgba(16,185,129,.1)}
+    .btn-copy svg{width:13px;height:13px;flex-shrink:0}
+
+    .card-title{font-size:1.1rem;font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:10px;color:var(--text)}
+    .card-excerpt{font-size:.875rem;color:var(--muted);line-height:1.7;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+    .card-expand{background:none;border:none;color:var(--primary);font-size:.75rem;font-family:inherit;cursor:pointer;margin-top:6px;padding:0;transition:opacity .2s}
+    .card-expand:hover{opacity:.7}
+
+    /* ── LOADING / EMPTY / ERROR ── */
+    .state-box{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;text-align:center;gap:16px}
+    .state-box svg{opacity:.3}
+    .state-box h2{font-size:1.2rem;font-weight:700;color:var(--text)}
+    .state-box p{color:var(--muted);font-size:.875rem;max-width:380px}
+
+    /* Spinner */
+    .spinner{width:40px;height:40px;border:3px solid var(--border-s);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ── TOAST ── */
+    #toast{position:fixed;bottom:28px;right:28px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:.75rem 1.2rem;font-size:.82rem;color:var(--success);box-shadow:0 8px 32px rgba(0,0,0,.4);transform:translateY(20px);opacity:0;transition:all .3s;z-index:999;pointer-events:none}
+    #toast.show{transform:translateY(0);opacity:1}
+
+    /* ── DATE SEPARATOR ── */
+    .month-sep{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);padding:20px 0 8px;border-bottom:1px solid var(--border-s);margin-bottom:4px}
+    .month-sep:first-child{padding-top:0}
+
+    @media(max-width:600px){
+      .card-actions{width:100%}
+      .stats-row .stat-card{min-width:calc(50% - 8px)}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://www.statlift.de" class="logo">Stat<span>lift</span></a>
+  <div class="nav-right">
+    <span class="badge-portal">Kunden-Portal</span>
+  </div>
+</nav>
+
+<div id="hero-section" style="display:none">
+  <div class="hero">
+    <div class="hero-label">Ihr persönliches Blog-Archiv</div>
+    <h1>Blog-Übersicht für<br><span id="firma-name">Ihr Unternehmen</span></h1>
+    <p class="hero-sub">Alle Artikel, die Statlift für Sie erstellt und veröffentlicht hat — übersichtlich auf einen Blick.</p>
+    <div class="stats-row">
+      <div class="stat-card"><div class="sv" id="stat-total">0</div><div class="sl">Artikel gesamt</div></div>
+      <div class="stat-card"><div class="sv" id="stat-month">0</div><div class="sl">Diesen Monat</div></div>
+      <div class="stat-card"><div class="sv" id="stat-last">—</div><div class="sl">Letzter Artikel</div></div>
+      <div class="stat-card"><div class="sv" id="stat-abo">—</div><div class="sl">Ihr Paket</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="filter-bar" id="filter-bar" style="display:none">
+  <input id="searchInput" type="text" placeholder="🔍  Artikel suchen …" oninput="filterArticles()">
+  <select id="filterAbo" onchange="filterArticles()">
+    <option value="">Alle Pakete</option>
+    <option value="Abo 1">Abo 1</option>
+    <option value="Abo 2">Abo 2</option>
+    <option value="Abo 3">Abo 3</option>
+  </select>
+  <select id="filterMonth" onchange="filterArticles()">
+    <option value="">Alle Zeiträume</option>
+  </select>
+  <span class="filter-count" id="filter-count"></span>
+</div>
+
+<div class="content">
+  <div id="loading-state" class="state-box">
+    <div class="spinner"></div>
+    <h2>Wird geladen …</h2>
+    <p>Ihre Artikel werden abgerufen.</p>
+  </div>
+  <div id="error-state" class="state-box" style="display:none">
+    <svg width="56" height="56" fill="none" viewBox="0 0 24 24" stroke="#ef4444" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+    <h2>Zugang nicht gefunden</h2>
+    <p>Dieser Link ist ungültig oder abgelaufen. Bitte wenden Sie sich an team@statlift.de</p>
+  </div>
+  <div id="empty-state" class="state-box" style="display:none">
+    <svg width="56" height="56" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h4"/></svg>
+    <h2>Noch keine Artikel</h2>
+    <p>Ihr erster Artikel ist in Arbeit. Sobald er fertig ist, erscheint er hier automatisch.</p>
+  </div>
+  <div id="articles-grid" class="articles-grid" style="display:none"></div>
+</div>
+
+<div id="toast">✓ In die Zwischenablage kopiert</div>
+
+<script>
+const WEBHOOK = 'https://admin.statlift.de/webhook/kunden-portal-daten';
+let allArticles = [];
+let currentExpanded = {};
+
+const COPY_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>`;
+const CHECK_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
+
+function showToast(msg = '✓ In die Zwischenablage kopiert') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+async function copyText(text, btn) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+  }
+  btn.classList.add('copied');
+  btn.innerHTML = CHECK_ICON + ' Kopiert';
+  showToast();
+  setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = COPY_ICON + ' ' + btn.dataset.label; }, 2000);
+}
+
+function aboClass(abo) {
+  if (!abo) return 'abo1';
+  const a = abo.toLowerCase();
+  if (a.includes('2')) return 'abo2';
+  if (a.includes('3')) return 'abo3';
+  return 'abo1';
+}
+
+function formatDate(ds) {
+  if (!ds) return '—';
+  try {
+    return new Date(ds).toLocaleDateString('de-DE', {day:'2-digit',month:'2-digit',year:'numeric'});
+  } catch { return ds; }
+}
+
+function excerpt(text, len = 400) {
+  if (!text) return '';
+  const clean = text.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+  return clean.length > len ? clean.slice(0, len) + ' …' : clean;
+}
+
+function monthKey(ds) {
+  if (!ds) return 'Unbekannt';
+  try {
+    return new Date(ds).toLocaleDateString('de-DE', {month:'long',year:'numeric'});
+  } catch { return ds; }
+}
+
+function renderCard(art, idx) {
+  const isExpanded = currentExpanded[idx];
+  const cleanContent = (art.inhalt||'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+  const kurzfassung = art.kurzfassung || excerpt(art.inhalt, 350);
+  const showMore = cleanContent.length > 400;
+
+  return `
+  <div class="article-card" id="card-${idx}">
+    <div class="card-head">
+      <div class="card-meta">
+        <span class="abo-badge ${aboClass(art.abo_typ)}">${art.abo_typ||'Abo 1'}</span>
+        <span class="blog-nr">#${art.blog_nr||idx+1}</span>
+        <span class="card-date">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          ${formatDate(art.versand_datum || art.erstellt_am)}
+        </span>
+      </div>
+      <div class="card-actions">
+        <button class="btn-copy" data-label="Kurzfassung" onclick="copyText(${JSON.stringify(kurzfassung)}, this)">
+          ${COPY_ICON} <span>Kurzfassung</span>
+        </button>
+        <button class="btn-copy" data-label="Artikel kopieren" onclick="copyText(${JSON.stringify(cleanContent)}, this)">
+          ${COPY_ICON} <span>Artikel kopieren</span>
+        </button>
+      </div>
+    </div>
+    <h2 class="card-title">${art.blog_titel||'Kein Titel'}</h2>
+    <p class="card-excerpt" id="excerpt-${idx}" style="${isExpanded?'-webkit-line-clamp:unset':''}">${kurzfassung || excerpt(art.inhalt)}</p>
+    ${showMore ? `<button class="card-expand" onclick="toggleExpand(${idx})">${isExpanded?'Weniger anzeigen ↑':'Vollständig lesen ↓'}</button>` : ''}
+  </div>`;
+}
+
+function toggleExpand(idx) {
+  currentExpanded[idx] = !currentExpanded[idx];
+  filterArticles();
+}
+
+function getMonths(articles) {
+  const seen = new Set();
+  articles.forEach(a => {
+    const mk = monthKey(a.versand_datum || a.erstellt_am);
+    seen.add(mk);
+  });
+  return [...seen];
+}
+
+function filterArticles() {
+  const q = (document.getElementById('searchInput').value||'').toLowerCase();
+  const aboF = document.getElementById('filterAbo').value;
+  const monthF = document.getElementById('filterMonth').value;
+
+  let filtered = allArticles.filter(a => {
+    const matchQ = !q || (a.blog_titel||'').toLowerCase().includes(q) || (a.inhalt||'').toLowerCase().includes(q);
+    const matchAbo = !aboF || (a.abo_typ||'') === aboF;
+    const matchMonth = !monthF || monthKey(a.versand_datum || a.erstellt_am) === monthF;
+    return matchQ && matchAbo && matchMonth;
+  });
+
+  document.getElementById('filter-count').textContent = `${filtered.length} Artikel`;
+
+  // Group by month
+  const groups = {};
+  filtered.forEach((a, i) => {
+    const mk = monthKey(a.versand_datum || a.erstellt_am);
+    if (!groups[mk]) groups[mk] = [];
+    groups[mk].push({art: a, origIdx: allArticles.indexOf(a)});
+  });
+
+  const grid = document.getElementById('articles-grid');
+  let html = '';
+  for (const [month, items] of Object.entries(groups)) {
+    html += `<div class="month-sep">${month}</div>`;
+    items.forEach(({art, origIdx}) => { html += renderCard(art, origIdx); });
+  }
+  grid.innerHTML = html || '<div class="state-box" style="padding:40px 0"><p style="color:var(--muted)">Keine Artikel gefunden.</p></div>';
+
+  if (filtered.length > 0) {
+    grid.style.display = 'flex';
+  }
+}
+
+async function loadPortal() {
+  const k = new URLSearchParams(window.location.search).get('k');
+  if (!k) {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('error-state').style.display = 'flex';
+    return;
+  }
+
+  try {
+    const res = await fetch(`${WEBHOOK}?k=${encodeURIComponent(k)}`);
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
+
+    if (!data || data.error || !data.firma) throw new Error('invalid');
+
+    allArticles = (data.articles || []).sort((a,b) => {
+      const da = new Date(b.versand_datum || b.erstellt_am || 0);
+      const db = new Date(a.versand_datum || a.erstellt_am || 0);
+      return da - db;
+    });
+
+    // Update hero
+    document.getElementById('firma-name').textContent = data.firma;
+    document.getElementById('stat-total').textContent = allArticles.length;
+    document.getElementById('stat-abo').textContent = data.abo || '—';
+
+    const thisMonth = allArticles.filter(a => {
+      const d = new Date(a.versand_datum || a.erstellt_am || 0);
+      const now = new Date();
+      return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    }).length;
+    document.getElementById('stat-month').textContent = thisMonth;
+
+    if (allArticles.length > 0) {
+      document.getElementById('stat-last').textContent = formatDate(allArticles[0].versand_datum || allArticles[0].erstellt_am);
+    }
+
+    // Populate month filter
+    const months = getMonths(allArticles);
+    const sel = document.getElementById('filterMonth');
+    months.forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m; opt.textContent = m;
+      sel.appendChild(opt);
+    });
+
+    document.title = `Blog-Archiv ${data.firma} | Statlift`;
+
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('hero-section').style.display = 'block';
+    document.getElementById('filter-bar').style.display = 'flex';
+
+    if (allArticles.length === 0) {
+      document.getElementById('empty-state').style.display = 'flex';
+    } else {
+      document.getElementById('articles-grid').style.display = 'flex';
+      filterArticles();
+    }
+
+  } catch (e) {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('error-state').style.display = 'flex';
+  }
+}
+
+loadPortal();
+</script>
+</body>
+</html>
