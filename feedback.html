@@ -921,20 +921,18 @@ footer { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.07); padd
 
 
 
-<footer>
-        <div class="container">
-            <div class="footer-inner">
-                <a href="https://statlift.de" class="nav-logo" style="font-size:1.1rem;">Stat<span>lift</span></a>
-                <div class="footer-links">
-                    <a href="#" onclick="openModal('modal-tos');return false;">AGB &amp; Widerruf</a>
-                    &middot;
-                    <a href="#" onclick="openModal('modal-impressum');return false;">Impressum</a>
-                    &middot;
-                    <a href="#" onclick="openModal('modal-datenschutz');return false;">Datenschutz</a>
-                </div>
-                <span class="footer-copy">&copy; 2026 Statlift. Alle Rechte vorbehalten.</span>
-            </div>
-        </div>
+<footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.07);padding:28px 0;position:relative;z-index:1;">
+  <div style="max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <a href="https://statlift.de" style="font-family:Inter,-apple-system,sans-serif;font-weight:800;font-size:1.1rem;color:#f8fafc;text-decoration:none;letter-spacing:-0.02em;">Stat<span style="color:#4F46E5;">lift</span></a>
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:0.82rem;">
+      <a href="#" onclick="openModal('modal-tos');return false;" style="color:#64748b;text-decoration:none;">AGB &amp; Widerruf</a>
+      <span style="color:#334155;">&middot;</span>
+      <a href="#" onclick="openModal('modal-impressum');return false;" style="color:#64748b;text-decoration:none;">Impressum</a>
+      <span style="color:#334155;">&middot;</span>
+      <a href="#" onclick="openModal('modal-datenschutz');return false;" style="color:#64748b;text-decoration:none;">Datenschutz</a>
+    </div>
+    <span style="font-size:0.78rem;color:#475569;">&copy; 2026 Statlift. Alle Rechte vorbehalten.</span>
+  </div>
 </footer>
 
 
