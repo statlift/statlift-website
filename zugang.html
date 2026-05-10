@@ -866,11 +866,10 @@ footer {
 #global-canvas {
   position: fixed; inset: 0;
   width: 100%; height: 100%;
-  pointer-events: none; z-index: 0;
+  pointer-events: none; z-index: -1;
   opacity: 0.45;
 }
 * { -webkit-tap-highlight-color: transparent; }
-button, a { outline: none; }
 </style>
 </head>
 
@@ -885,7 +884,7 @@ button, a { outline: none; }
 
 
 <body>
-<canvas id="global-canvas"></canvas>
+<canvas id="global-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1;opacity:0.45;"></canvas>
 
 
 
