@@ -1,47 +1,5 @@
 {
   "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "statlift.net"
-        }
-      ],
-      "destination": "/en/$1"
-    },
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.statlift.net"
-        }
-      ],
-      "destination": "/en/$1"
-    },
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "statlift.de"
-        }
-      ],
-      "destination": "/de/$1"
-    },
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.statlift.de"
-        }
-      ],
-      "destination": "/de/$1"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
