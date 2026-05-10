@@ -1,19 +1,76 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/(.*)", "has": [{ "type": "host", "value": "statlift.net" }], "destination": "/en/$1" },
-    { "source": "/(.*)", "has": [{ "type": "host", "value": "www.statlift.net" }], "destination": "/en/$1" },
-    { "source": "/(.*)", "has": [{ "type": "host", "value": "statlift.de" }], "destination": "/de/$1" },
-    { "source": "/(.*)", "has": [{ "type": "host", "value": "www.statlift.de" }], "destination": "/de/$1" }
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "statlift.net"
+        }
+      ],
+      "destination": "/en/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.statlift.net"
+        }
+      ],
+      "destination": "/en/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "statlift.de"
+        }
+      ],
+      "destination": "/de/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.statlift.de"
+        }
+      ],
+      "destination": "/de/$1"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/de/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/en/:path*",
+      "destination": "/:path*",
+      "permanent": true
     }
   ]
 }
