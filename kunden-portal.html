@@ -85,8 +85,32 @@
     .btn-copy svg{width:13px;height:13px;flex-shrink:0}
 
     .card-title{font-size:1.1rem;font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:10px;color:var(--text)}
-    .card-excerpt{font-size:.875rem;color:var(--muted);line-height:1.7;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-    .card-expand{background:none;border:none;color:var(--primary);font-size:.75rem;font-family:inherit;cursor:pointer;margin-top:6px;padding:0;transition:opacity .2s}
+
+    /* Preview = kurzfassung as teaser */
+    .card-preview{font-size:.875rem;color:var(--muted);line-height:1.7}
+
+    /* Expanded full content (hidden by default) */
+    .card-full{display:none;margin-top:18px;border-top:1px solid var(--border-s);padding-top:18px;animation:fadeIn .25s ease}
+    .card-full.open{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+    /* Full blog rendered HTML */
+    .blog-body{font-size:.9rem;color:var(--muted);line-height:1.85;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border-s)}
+    .blog-body h1,.blog-body h2,.blog-body h3{color:var(--text);margin:1.2em 0 .5em;font-weight:700;line-height:1.3}
+    .blog-body h1{font-size:1.3rem}
+    .blog-body h2{font-size:1.1rem}
+    .blog-body h3{font-size:.95rem}
+    .blog-body p{margin-bottom:.85em}
+    .blog-body ul,.blog-body ol{margin:.5em 0 .85em 1.4em}
+    .blog-body li{margin-bottom:.3em}
+    .blog-body strong{color:var(--text);font-weight:600}
+
+    /* Kurzfassung box inside expanded */
+    .kurzfassung-box{background:rgba(129,140,248,.06);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 16px;margin-top:4px}
+    .kurzfassung-label{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+    .kurzfassung-text{font-size:.85rem;color:var(--muted);line-height:1.7;white-space:pre-wrap}
+
+    .card-expand{background:none;border:none;color:var(--primary);font-size:.75rem;font-family:inherit;cursor:pointer;margin-top:10px;padding:0;transition:opacity .2s;display:block}
     .card-expand:hover{opacity:.7}
 
     /* ── LOADING / EMPTY / ERROR ── */
@@ -227,7 +251,6 @@ function renderCard(art, idx) {
   const isExpanded = currentExpanded[idx];
   const cleanContent = (art.inhalt||'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
   const kurzfassung = art.kurzfassung || excerpt(art.inhalt, 350);
-  const showMore = cleanContent.length > 400;
 
   return `
   <div class="article-card" id="card-${idx}">
@@ -241,23 +264,42 @@ function renderCard(art, idx) {
         </span>
       </div>
       <div class="card-actions">
-        <button class="btn-copy" data-label="Kurzfassung" onclick="copyText(${JSON.stringify(kurzfassung)}, this)">
+        <button class="btn-copy" data-label="Kurzfassung" onclick="copyFromData(this,'kurz-${idx}')">
           ${COPY_ICON} <span>Kurzfassung</span>
         </button>
-        <button class="btn-copy" data-label="Artikel kopieren" onclick="copyText(${JSON.stringify(cleanContent)}, this)">
+        <button class="btn-copy" data-label="Artikel kopieren" onclick="copyFromData(this,'blog-${idx}')">
           ${COPY_ICON} <span>Artikel kopieren</span>
         </button>
       </div>
     </div>
     <h2 class="card-title">${art.blog_titel||'Kein Titel'}</h2>
-    <p class="card-excerpt" id="excerpt-${idx}" style="${isExpanded?'-webkit-line-clamp:unset':''}">${kurzfassung || excerpt(art.inhalt)}</p>
-    ${showMore ? `<button class="card-expand" onclick="toggleExpand(${idx})">${isExpanded?'Weniger anzeigen ↑':'Vollständig lesen ↓'}</button>` : ''}
+    <p class="card-preview">${kurzfassung || excerpt(art.inhalt)}</p>
+    <button class="card-expand" id="expand-btn-${idx}" onclick="toggleExpand(${idx})">${isExpanded?'Weniger anzeigen ↑':'Vollständig lesen ↓'}</button>
+    <div class="card-full${isExpanded?' open':''}" id="card-full-${idx}">
+      <div class="blog-body">${art.inhalt||''}</div>
+      <div class="kurzfassung-label">Kurzfassung</div>
+      <div class="kurzfassung-box">
+        <div class="kurzfassung-text">${kurzfassung}</div>
+      </div>
+    </div>
+    <textarea id="kurz-${idx}" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">${kurzfassung}</textarea>
+    <textarea id="blog-${idx}" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">${cleanContent}</textarea>
   </div>`;
 }
 
+function copyFromData(btn, sourceId) {
+  const el = document.getElementById(sourceId);
+  const text = el ? el.value : '';
+  copyText(text, btn);
+}
+
 function toggleExpand(idx) {
-  currentExpanded[idx] = !currentExpanded[idx];
-  filterArticles();
+  const fullDiv = document.getElementById('card-full-' + idx);
+  const btn = document.getElementById('expand-btn-' + idx);
+  if (!fullDiv) return;
+  const isNowOpen = fullDiv.classList.toggle('open');
+  currentExpanded[idx] = isNowOpen;
+  if (btn) btn.textContent = isNowOpen ? 'Weniger anzeigen ↑' : 'Vollständig lesen ↓';
 }
 
 function getMonths(articles) {
