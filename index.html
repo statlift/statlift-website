@@ -1250,7 +1250,7 @@
 
 
 
-            padding: 120px 0 20px;
+            padding: 120px 0 8px;
 
 
 
@@ -1422,11 +1422,13 @@
 
 
 
-            margin-bottom: 40px;
+            margin: 0 auto 40px;
 
 
 
             line-height: 1.8;
+
+            text-align: center;
 
 
 
@@ -1491,6 +1493,8 @@
 
 
             border-bottom: 1px solid var(--border);
+
+            padding-top: 0;
 
 
 
@@ -1567,10 +1571,6 @@
 
 
             border-color: rgba(79, 70, 229, 0.25);
-
-
-
-            transform: translateY(-4px);
 
 
 
@@ -2291,10 +2291,6 @@
 
 
         .pricing-card:hover {
-
-
-
-            transform: translateY(-6px);
 
 
 
@@ -4934,10 +4930,6 @@
 
 
 
-            transform: translateY(-5px);
-
-
-
             border-color: rgba(79,70,229,0.3);
 
 
@@ -6379,7 +6371,7 @@
 
 
 <body>
-<canvas id="global-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.45;"></canvas>
+<canvas id="global-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:1;will-change:transform;"></canvas>
 
 
 
@@ -6525,7 +6517,7 @@
 
 
 
-                <span class="eyebrow reveal">Exklusive Fachartikel · B2B</span>
+                <span class="eyebrow reveal">SEO-Content für B2B-Unternehmen</span>
 
 
 
@@ -6541,41 +6533,39 @@
 
 
 
+                <p class="hero-value reveal d1" style="font-size:1.15rem;font-weight:500;color:#c7d2fe;margin:6px auto 16px;max-width:560px;line-height:1.5;text-align:center;">
+                    Während Sie Ihr Geschäft führen, bringen wir Sie bei Google nach oben.
+                </p>
+
                 <p class="hero-sub reveal d2">
-
-
-
-                    Statlift schreibt Ihnen strategische Fachartikel, die Ihr Unternehmen bei Google sichtbar machen —
-
-
-
-                    recherchiert, verfasst und je nach Paket automatisch auf Ihrer Website veröffentlicht.
-
-
-
-                    Noch keine Website? Wir bauen Ihnen eine — inkl. Domain und Hosting.
-
-
-
+                    Wir schreiben strategische Fachartikel, die Ihre Zielgruppe findet — recherchiert, SEO-optimiert und auf Wunsch direkt in Ihr CMS eingespielt.
                 </p>
 
 
 
                 <div class="hero-ctas reveal d3" style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
 
-
-
                     <a href="#gratis" class="btn btn-primary">Gratis testen</a>
-
-
 
                     <a href="#preis" class="btn btn-outline">Pakete ansehen</a>
 
-
-
                 </div>
 
-
+                <!-- ── Service Pills ── -->
+                <div class="hero-pills reveal d4">
+                  <div class="hero-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    Artikelverfassung
+                  </div>
+                  <div class="hero-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+                    Logo Erstellung
+                  </div>
+                  <div class="hero-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                    Website Erstellung
+                  </div>
+                </div>
 
             </div>
 
@@ -6610,7 +6600,7 @@
 
 
 
-                <h2>Ihr Markt sucht online. Ihre Konkurrenz wird gefunden.</h2>
+                <h2>Täglich suchen Ihre Kunden bei Google. Gefunden wird Ihre Konkurrenz.</h2>
 
 
 
@@ -6630,7 +6620,7 @@
 
 
 
-                    <p>Google bewertet Aktualität. Ohne frische Inhalte rutschen Sie auf Seite 2 — und bleiben dort.</p>
+                    <p>Google belohnt Websites, die regelmäßig publizieren. Ohne neuen Content verlieren Sie Schritt für Schritt an Sichtbarkeit.</p>
 
 
 
@@ -6646,7 +6636,7 @@
 
 
 
-                    <p>Gute Fachartikel brauchen Research, Struktur und Zeit — die Sie im Tagesgeschäft nicht haben.
+                    <p>Ein fundierter Fachartikel kostet Stunden. Zeit, die Sie besser in Ihr Kerngeschäft investieren.
 
 
 
@@ -6662,7 +6652,7 @@
 
 
 
-                    <h3>Seite 2 bringt keine Anfragen</h3>
+                    <h3>Auf Seite 2 klickt niemand</h3>
 
 
 
@@ -6706,7 +6696,7 @@
 
 
 
-            <span class="bridge-line reveal">Das ist ein lösbares Problem.</span>
+            <span class="bridge-line reveal">Es gibt eine einfachere Lösung.</span>
 
 
 
@@ -6746,7 +6736,7 @@
 
 
 
-                <p class="section-sub">So arbeiten wir — für jeden Kunden, jeden Monat.</p>
+                <p class="section-sub">Vier Schritte. Kein Aufwand Ihrerseits.</p>
 
 
 
@@ -7735,23 +7725,11 @@
 
 
 
-                <h2 class="reveal d1" style="margin-bottom:20px;">Überzeugen Sie sich selbst.<br>Kostenloser
+                <h2 class="reveal d1" style="margin-bottom:20px;">Qualität spricht für sich.<br>Ihr erster Artikel — kostenlos.</h2>
 
 
 
-                    Probe-Artikel.</h2>
-
-
-
-                <p class="reveal d2" style="color:#e2e8f0;margin-bottom:36px;font-size:1.05rem;">Bevor Sie sich für ein
-
-
-
-                    Paket entscheiden, liefern wir Ihnen einen vollständigen Fachartikel — kostenlos, unverbindlich und
-
-
-
-                    auf Ihre Branche zugeschnitten. Kein Risiko, keine Verpflichtung.</p>
+                <p class="reveal d2" style="color:#e2e8f0;margin-bottom:36px;font-size:1.05rem;">Wir liefern Ihnen einen vollständigen, branchenspezifischen Fachartikel — bevor Sie einen Cent ausgeben. Kein Kleingedrucktes, keine Verpflichtung.</p>
 
 
 
@@ -8022,8 +8000,8 @@
         <div class="container">
             <div class="section-header center reveal">
                 <span class="eyebrow">Leistungspakete</span>
-                <h2>Passend für jedes Ziel.</h2>
-                <p class="section-sub">Wählen Sie zwischen monatlichen Abonnements oder einmaligen Projekten.</p>
+                <h2>Ihr Paket. Ihr Tempo.</h2>
+                <p class="section-sub">Ob laufender Content-Aufbau oder einmaliges Projekt — wir haben das passende Modell.</p>
             </div>
 
             <!-- Pricing Toggle -->
@@ -8093,7 +8071,7 @@
 
 
 
-                        <div class="pricing-tagline">Sie haben eine Website. Wir liefern den Content dafür.</div>
+                        <div class="pricing-tagline">Sie veröffentlichen selbst — wir liefern den fertigen Artikel.</div>
 
 
 
@@ -8189,7 +8167,7 @@
 
 
 
-                        <div class="pricing-tagline">Content, SEO &amp; Veröffentlichung — vollständig in unseren Händen.</div>
+                        <div class="pricing-tagline">Wir schreiben, optimieren und veröffentlichen — Sie lehnen sich zurück.</div>
 
 
 
@@ -8673,7 +8651,7 @@
 
 
 
-                    <h2>Haben Sie noch Fragen?</h2>
+                    <h2>Sprechen wir kurz.</h2>
 
 
 
@@ -10377,18 +10355,8 @@
 
 /* ── Hover animations on cards ── */
 .pricing-card {
-  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, border-color 0.3s !important;
-}
-.pricing-card:hover {
-  transform: translateY(-10px) scale(1.02) !important;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(79,70,229,0.25) !important;
 }
 .blog-card {
-  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease !important;
-}
-.blog-card:hover {
-  transform: translateY(-8px) !important;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.4) !important;
 }
 .tl-content { transition: transform 0.3s ease, border-color 0.3s ease !important; }
 .tl-step:hover .tl-content {
@@ -10425,7 +10393,7 @@ nav a:hover { transform: translateY(-1px) !important; }
 /* ── Hero floating mockup ── */
 .hero-mockup {
   width: min(560px, 90vw);
-  margin: 48px auto 0;
+  margin: 24px auto 0;
   background: #16161e;
   border: 1px solid rgba(79,70,229,0.25);
   border-radius: 16px;
@@ -10607,6 +10575,40 @@ nav a:hover { transform: translateY(-1px) !important; }
 
 /* hero-badge CSS removed */
 
+/* ── Hero Service Pills ── */
+.hero-pills {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.hero-pill svg {
+  color: #818cf8;
+  flex-shrink: 0;
+}
+.hero-pill:hover {
+  border-color: rgba(129,140,248,0.3);
+  background: rgba(129,140,248,0.06);
+  color: #e2e8f0;
+}
+
 /* ── Gradient text animation ── */
 .headline-gradient {
   background: linear-gradient(135deg, #f8fafc 0%, #818cf8 50%, #f8fafc 100%);
@@ -10650,45 +10652,104 @@ function switchPricingTab(tab) {
   tabEinmal.classList.toggle('active', tab === 'einmal');
 }
 
-/* ── Global Glow Orbs Background ── */
+/* ── Ambient Background — full-page aurora glow ── */
 (function() {
   const canvas = document.getElementById('global-canvas');
   if (!canvas) return;
+
+  canvas.style.filter       = 'blur(80px)';
+  canvas.style.opacity      = '0.42';
+  canvas.style.mixBlendMode = 'screen';
+
   const ctx = canvas.getContext('2d');
-  let W, H, orbs;
+  let W, H, blobs, dpr;
+
+  const PALETTES = [
+    { h: 245, s: 75, l: 57 },  // #4F46E5 statlift-indigo
+  ];
 
   function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-    orbs = Array.from({length: 18}, (_, i) => ({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
-      r: Math.random() * 180 + 60,
-      a: Math.random() * 0.07 + 0.025,
-      hue: Math.random() < 0.7 ? 245 : 260
-    }));
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width  = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.scale(dpr, dpr);
   }
+
+  /* Each blob lives in normalised page-space:
+     nx ∈ [0,1] across viewport width
+     ny ∈ [0,1] across FULL page height          */
+  function mkBlob(nyHint) {
+    const c     = PALETTES[Math.floor(Math.random() * PALETTES.length)];
+    const speed = 0.06 + Math.random() * 0.10;   // slower = smoother
+    const angle = Math.random() * Math.PI * 2;
+    return {
+      nx:  Math.random(),                          // 0..1 normalised x
+      ny:  nyHint !== undefined ? nyHint : Math.random(), // 0..1 page y
+      vnx: Math.cos(angle) * speed / window.innerWidth,
+      vny: Math.sin(angle) * speed / Math.max(document.body.scrollHeight, window.innerHeight * 3),
+      rFrac: 0.30 + Math.random() * 0.20,         // radius as fraction of W
+      h: c.h, s: c.s, l: c.l,
+      a: 0.32 + Math.random() * 0.18,
+      phase: Math.random() * Math.PI * 2,
+      breatheSpeed: 0.0015 + Math.random() * 0.002,
+    };
+  }
+
+  function initBlobs() {
+    const N = 10; // more blobs = better page coverage
+    blobs = Array.from({ length: N }, (_, i) => mkBlob(i / N));
+  }
+
   resize();
-  window.addEventListener('resize', resize);
+  initBlobs();
+  window.addEventListener('resize', () => { resize(); });
+
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => { lastScroll = window.scrollY; }, { passive: true });
 
   function draw() {
+    const pageH  = Math.max(document.body.scrollHeight, H * 3);
+    const scrollY = lastScroll;
+
     ctx.clearRect(0, 0, W, H);
-    orbs.forEach(o => {
-      o.x += o.vx; o.y += o.vy;
-      if (o.x < -o.r) o.x = W + o.r;
-      if (o.x > W + o.r) o.x = -o.r;
-      if (o.y < -o.r) o.y = H + o.r;
-      if (o.y > H + o.r) o.y = -o.r;
-      const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
-      g.addColorStop(0, 'hsla(' + o.hue + ',80%,60%,' + o.a + ')');
-      g.addColorStop(1, 'hsla(' + o.hue + ',80%,60%,0)');
+
+    blobs.forEach(b => {
+      // drift in normalised space
+      b.nx += b.vnx;
+      b.ny += b.vny;
+      // wrap
+      if (b.nx < -0.3) b.nx = 1.2;
+      if (b.nx >  1.2) b.nx = -0.3;
+      if (b.ny < -0.1) b.ny = 1.1;
+      if (b.ny >  1.1) b.ny = -0.1;
+
+      // breathe
+      b.phase += b.breatheSpeed;
+      const breathe = 0.88 + 0.12 * Math.sin(b.phase);
+
+      const px = b.nx * W;                     // pixel x (screen space)
+      const py = b.ny * pageH - scrollY;       // pixel y (screen space, scroll-adjusted)
+      const r  = b.rFrac * W * breathe;
+      const alpha = b.a * breathe;
+
+      // skip blobs far outside viewport (perf)
+      if (py + r < -r * 0.5 || py - r > H + r * 0.5) return;
+
+      const g = ctx.createRadialGradient(px, py, 0, px, py, r);
+      g.addColorStop(0,    `hsla(${b.h},${b.s}%,${b.l}%,${alpha})`);
+      g.addColorStop(0.45, `hsla(${b.h},${b.s}%,${b.l}%,${(alpha * 0.35).toFixed(3)})`);
+      g.addColorStop(1,    `hsla(${b.h},${b.s}%,${b.l}%,0)`);
+
       ctx.beginPath();
-      ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+      ctx.arc(px, py, r, 0, Math.PI * 2);
       ctx.fillStyle = g;
       ctx.fill();
     });
+
     requestAnimationFrame(draw);
   }
   draw();
@@ -10865,6 +10926,166 @@ function switchPricingTab(tab) {
   document.querySelectorAll('.problem-stats, .hero-mockup').forEach(el => countObs.observe(el));
 })();
 </script>
+
+
+
+
+<!-- ══════ COOKIE BANNER (DSGVO) ══════ -->
+<div id="cookie-banner" role="dialog" aria-label="Cookie-Einstellungen" aria-modal="true" style="
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  max-width: 720px;
+  background: #1a1a24;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  padding: 24px 28px;
+  z-index: 9000;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.55);
+  animation: cookieSlideUp 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+">
+  <style>
+    @keyframes cookieSlideUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(24px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    #cookie-banner .cb-inner {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    #cookie-banner .cb-text {
+      flex: 1;
+      min-width: 220px;
+    }
+    #cookie-banner .cb-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 5px;
+    }
+    #cookie-banner .cb-desc {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      line-height: 1.55;
+    }
+    #cookie-banner .cb-desc a {
+      color: #818cf8;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    #cookie-banner .cb-actions {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    #cookie-banner .cb-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      white-space: nowrap;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    #cookie-banner .cb-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    #cookie-banner .cb-btn:active { transform: translateY(0); }
+    #cookie-banner .cb-accept {
+      background: #4F46E5;
+      color: #fff;
+    }
+    #cookie-banner .cb-essential {
+      background: rgba(255,255,255,0.07);
+      color: #cbd5e1;
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    #cookie-banner .cb-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px 6px;
+      line-height: 1;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+    #cookie-banner .cb-close:hover { color: #e2e8f0; background: rgba(255,255,255,0.06); }
+    @media (max-width: 520px) {
+      #cookie-banner { bottom: 12px; padding: 18px 18px 20px; }
+      #cookie-banner .cb-actions { width: 100%; }
+      #cookie-banner .cb-btn { flex: 1; text-align: center; }
+    }
+  </style>
+
+  <button class="cb-close" onclick="cookieDismiss()" aria-label="Schließen">✕</button>
+
+  <div class="cb-inner">
+    <div class="cb-text">
+      <div class="cb-title">🍪 Diese Website nutzt Cookies</div>
+      <div class="cb-desc">
+        Wir setzen technisch notwendige Cookies ein, die den Betrieb der Website ermöglichen. Mit Klick auf „Alle akzeptieren" stimmen Sie zusätzlich dem Einsatz optionaler Cookies zu. Weitere Infos in unserer
+        <a href="#" onclick="openModal('modal-datenschutz');cookieDismiss();return false;">Datenschutzerklärung</a>.
+      </div>
+    </div>
+    <div class="cb-actions">
+      <button class="cb-btn cb-essential" onclick="cookieEssential()">Nur notwendige</button>
+      <button class="cb-btn cb-accept"    onclick="cookieAcceptAll()">Alle akzeptieren</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var COOKIE_KEY = 'statlift_cookie_consent';
+
+  function getCookie(name) {
+    var v = document.cookie.match('(^|;)\s*' + name + '\s*=\s*([^;]+)');
+    return v ? v.pop() : null;
+  }
+  function setCookie(name, value, days) {
+    var d = new Date();
+    d.setTime(d.getTime() + days * 86400000);
+    document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+  }
+
+  function showBanner() {
+    var b = document.getElementById('cookie-banner');
+    if (b) b.style.display = 'block';
+  }
+  function hideBanner() {
+    var b = document.getElementById('cookie-banner');
+    if (b) {
+      b.style.animation = 'none';
+      b.style.transition = 'opacity 0.25s, transform 0.25s';
+      b.style.opacity = '0';
+      b.style.transform = 'translateX(-50%) translateY(16px)';
+      setTimeout(function() { b.style.display = 'none'; }, 260);
+    }
+  }
+
+  window.cookieAcceptAll  = function() { setCookie(COOKIE_KEY, 'all',       365); hideBanner(); };
+  window.cookieEssential  = function() { setCookie(COOKIE_KEY, 'essential',  365); hideBanner(); };
+  window.cookieDismiss    = function() { hideBanner(); };
+
+  // Show after short delay if no consent stored
+  if (!getCookie(COOKIE_KEY)) {
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(showBanner, 800);
+    });
+  }
+})();
+</script>
+
 
 
 
