@@ -1026,6 +1026,12 @@ footer { background: #0a0a0a !important; border-top: 1px solid rgba(255,255,255,
 }
 * { -webkit-tap-highlight-color: transparent; }
 </style>
+<style id="ambient-scroll-css">
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#0a0a14}
+::-webkit-scrollbar-thumb{background:#6366f1;border-radius:99px}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(99,102,241,.18),transparent),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(129,140,248,.08),transparent);pointer-events:none;z-index:0;pointer-events:none}
+</style>
 </head>
 
 
@@ -4969,43 +4975,64 @@ window.addEventListener('click', function(event) {
 
 
 
-<script id="glow-orbs-js">
+<script id="ambient-glow-js">
+/* Ambient aurora glow — same as index.html */
 (function() {
-  var canvas = document.getElementById('global-canvas');
+  const canvas = document.getElementById('global-canvas');
   if (!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var W, H, orbs;
+  canvas.style.filter       = 'blur(80px)';
+  canvas.style.opacity      = '0.42';
+  canvas.style.mixBlendMode = 'screen';
+  const ctx = canvas.getContext('2d');
+  let W, H, blobs, dpr;
+  const PALETTES = [{ h: 245, s: 75, l: 57 }];
   function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-    orbs = Array.from({length: 18}, function() {
-      return {
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25,
-        r: Math.random() * 180 + 60,
-        a: Math.random() * 0.07 + 0.025,
-        hue: Math.random() < 0.7 ? 245 : 260
-      };
-    });
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width  = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.scale(dpr, dpr);
   }
-  resize();
+  function mkBlob(nyHint) {
+    const c = PALETTES[Math.floor(Math.random() * PALETTES.length)];
+    const speed = 0.06 + Math.random() * 0.10;
+    const angle = Math.random() * Math.PI * 2;
+    return {
+      nx: Math.random(), ny: nyHint !== undefined ? nyHint : Math.random(),
+      vnx: Math.cos(angle) * speed / window.innerWidth,
+      vny: Math.sin(angle) * speed / Math.max(document.body.scrollHeight, window.innerHeight * 3),
+      rFrac: 0.30 + Math.random() * 0.20,
+      h: c.h, s: c.s, l: c.l,
+      a: 0.32 + Math.random() * 0.18,
+      phase: Math.random() * Math.PI * 2,
+      breatheSpeed: 0.0015 + Math.random() * 0.002,
+    };
+  }
+  function initBlobs() { blobs = Array.from({ length: 10 }, (_, i) => mkBlob(i / 10)); }
+  resize(); initBlobs();
   window.addEventListener('resize', resize);
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => { lastScroll = window.scrollY; }, { passive: true });
   function draw() {
+    const pageH = Math.max(document.body.scrollHeight, H * 3);
     ctx.clearRect(0, 0, W, H);
-    orbs.forEach(function(o) {
-      o.x += o.vx; o.y += o.vy;
-      if (o.x < -o.r) o.x = W + o.r;
-      if (o.x > W + o.r) o.x = -o.r;
-      if (o.y < -o.r) o.y = H + o.r;
-      if (o.y > H + o.r) o.y = -o.r;
-      var g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
-      g.addColorStop(0, 'hsla(' + o.hue + ',80%,60%,' + o.a + ')');
-      g.addColorStop(1, 'hsla(' + o.hue + ',80%,60%,0)');
-      ctx.beginPath();
-      ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
-      ctx.fillStyle = g;
-      ctx.fill();
+    blobs.forEach(b => {
+      b.nx += b.vnx; b.ny += b.vny;
+      if (b.nx < -0.3) b.nx = 1.2; if (b.nx > 1.2) b.nx = -0.3;
+      if (b.ny < -0.1) b.ny = 1.1; if (b.ny > 1.1) b.ny = -0.1;
+      b.phase += b.breatheSpeed;
+      const breathe = 0.88 + 0.12 * Math.sin(b.phase);
+      const px = b.nx * W;
+      const py = b.ny * pageH - lastScroll;
+      const r = b.rFrac * W * breathe;
+      const alpha = b.a * breathe;
+      if (py + r < -r * 0.5 || py - r > H + r * 0.5) return;
+      const g = ctx.createRadialGradient(px, py, 0, px, py, r);
+      g.addColorStop(0,    `hsla(${b.h},${b.s}%,${b.l}%,${alpha})`);
+      g.addColorStop(0.45, `hsla(${b.h},${b.s}%,${b.l}%,${(alpha*0.35).toFixed(3)})`);
+      g.addColorStop(1,    `hsla(${b.h},${b.s}%,${b.l}%,0)`);
+      ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI * 2);
+      ctx.fillStyle = g; ctx.fill();
     });
     requestAnimationFrame(draw);
   }
