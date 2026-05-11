@@ -1,21 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
-    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#c0c0c0;stop-opacity:1"/>
-      <stop offset="40%" style="stop-color:#808080;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1"/>
+    <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
     </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="0.8" result="blur"/>
-      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-    </filter>
   </defs>
   <rect width="64" height="64" rx="12" fill="#0a0a0a"/>
-  <!-- S shape with arrow -->
-  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
-    font-family="Arial Black, sans-serif" font-size="42" font-weight="900"
-    fill="url(#metal)" filter="url(#glow)"
-    stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.4">S</text>
-  <!-- Arrow tip pointing up -->
-  <polygon points="42,10 46,18 38,18" fill="url(#metal)" stroke="#ffffff" stroke-width="0.3" stroke-opacity="0.4"/>
+  <path d="M52,10 C40,10 14,10 12,10 C6,10 4,16 4,22 C4,30 10,35 22,37 L40,40 C52,43 60,49 60,57 C60,62 54,56 38,56 L12,56" stroke="url(#sg)" stroke-width="11" stroke-linecap="butt" fill="none"/>
 </svg>
