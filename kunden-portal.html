@@ -34,7 +34,7 @@
     body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(99,102,241,.18),transparent),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(129,140,248,.08),transparent);pointer-events:none;z-index:0}
 
     /* ── NAV ── */
-    nav{position:sticky;top:0;z-index:100;background:rgba(10,10,20,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-s);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+    nav{position:sticky;top:0;z-index:100;background:rgba(10,10,20,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-s);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;min-height:64px}
     .logo{font-size:1.2rem;font-weight:800;letter-spacing:-.04em;color:var(--text);text-decoration:none}
     .logo span{color:var(--primary)}
     .nav-right{display:flex;align-items:center;gap:12px}
@@ -424,5 +424,99 @@ async function loadPortal() {
 
 loadPortal();
 </script>
+
+<footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.07);padding:28px 0;position:relative;z-index:1;">
+  <div style="max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <a href="https://statlift.de" style="text-decoration:none;display:inline-block;"><img src="/header.png" alt="Statlift" style="height:auto;max-height:64px;max-width:55vw;width:auto;display:block;"></a>
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:0.82rem;">
+      <a href="#" onclick="openModal('modal-tos');return false;" style="color:#64748b;text-decoration:none;">AGB &amp; Widerruf</a>
+      <span style="color:#334155;">&middot;</span>
+      <a href="#" onclick="openModal('modal-impressum');return false;" style="color:#64748b;text-decoration:none;">Impressum</a>
+      <span style="color:#334155;">&middot;</span>
+      <a href="#" onclick="openModal('modal-datenschutz');return false;" style="color:#64748b;text-decoration:none;">Datenschutz</a>
+    </div>
+    <span style="font-size:0.78rem;color:#475569;">&copy; 2026 Statlift. Alle Rechte vorbehalten.</span>
+  </div>
+</footer>
+
+<div id="modal-tos" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;justify-content:center;align-items:flex-start;">
+  <div style="max-width:720px;margin:60px auto;padding:0 24px 60px;width:100%;">
+    <div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+        <h2 style="font-size:1.6rem;color:#f8fafc;">AGB &amp; Widerrufsbelehrung</h2>
+        <button onclick="closeModal('modal-tos')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+      </div>
+      <div style="font-size:0.88rem;color:#e2e8f0;line-height:1.9;">
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 1 Anbieter &amp; Geltungsbereich</h3>
+        <p style="margin-bottom:20px;">Anbieter ist Statlift LLC, 30 N Gould St Ste N, Sheridan, WY 82801, USA (nachfolgend „Statlift"). Diese AGB gelten für alle Leistungen von Statlift, insbesondere für Content- und SEO-Abonnements. Abweichende Bedingungen des Kunden werden nicht anerkannt.</p>
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 2 Leistungsgegenstand</h3>
+        <p style="margin-bottom:20px;">Statlift erbringt monatliche Content-Dienstleistungen (Fachartikel, SEO-Optimierung, ggf. Veröffentlichung auf der Kundenwebsite) gemäß dem jeweils gebuchten Abonnement-Modell. Der Leistungsumfang ergibt sich aus der zum Buchungszeitpunkt gültigen Leistungsbeschreibung auf statlift.de.</p>
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 3 Vertragsschluss</h3>
+        <p style="margin-bottom:20px;">Der Vertrag kommt durch Abschluss des Zahlungsvorgangs über Stripe zustande. Mit der Zahlung bestätigt der Kunde diese AGB gelesen und akzeptiert zu haben.</p>
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 4 Laufzeit &amp; Kündigung</h3>
+        <p style="margin-bottom:20px;">Abo 1 und Abo 2 laufen monatlich und sind jederzeit zum Ende des laufenden Abrechnungsmonats kündbar. Abo 3 hat eine Mindestlaufzeit von 12 Monaten und kann danach mit einer Frist von 30 Tagen zum Monatsende gekündigt werden. Die Kündigung erfolgt per E-Mail an team@statlift.de.</p>
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 5 Preise &amp; Zahlung</h3>
+        <p style="margin-bottom:20px;">Alle Preise sind in EUR angegeben und verstehen sich zzgl. ggf. anfallender gesetzlicher Umsatzsteuer. Die Abrechnung erfolgt monatlich im Voraus über Stripe.</p>
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 6 Widerrufsbelehrung</h3>
+        <p style="margin-bottom:12px;"><strong style="color:#f8fafc;">Für Verbraucher (B2C):</strong> Sie haben das Recht, diesen Vertrag binnen 14 Tagen ohne Angabe von Gründen zu widerrufen. Zur Ausübung wenden Sie sich an: team@statlift.de.</p>
+        <h3 style="margin-bottom:8px;font-size:1rem;color:#f8fafc;">§ 7 Haftungsbeschränkung</h3>
+        <p>Statlift haftet nur bei Vorsatz und grober Fahrlässigkeit. Die Haftung für mittelbare Schäden ist ausgeschlossen.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-impressum" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;justify-content:center;align-items:flex-start;">
+  <div style="max-width:680px;margin:60px auto;padding:0 24px 60px;width:100%;">
+    <div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+        <h2 style="font-size:1.6rem;color:#f8fafc;">Impressum</h2>
+        <button onclick="closeModal('modal-impressum')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+      </div>
+      <div style="font-size:0.9rem;color:#e2e8f0;line-height:1.9;">
+        <h3 style="margin-bottom:10px;font-size:1rem;">Unternehmensangaben (US LLC)</h3>
+        <p style="margin-bottom:20px;">Statlift LLC<br>Philip Exner<br>30 N Gould St Ste N<br>Sheridan, WY 82801<br>USA</p>
+        <h3 style="margin-bottom:10px;font-size:1rem;">Gesellschaftsform &amp; Registrierung</h3>
+        <p style="margin-bottom:20px;">Gesellschaftsform: Limited Liability Company (LLC)<br>Gründungsstaat: Wyoming, USA<br>Aktenzeichen: 2026-001967147<br>Registered Agent: Northwest Registered Agent Service Inc</p>
+        <h3 style="margin-bottom:10px;font-size:1rem;">Kontakt</h3>
+        <p style="margin-bottom:20px;">E-Mail: team@statlift.de</p>
+        <h3 style="margin-bottom:10px;font-size:1rem;">Verantwortlich für den Inhalt</h3>
+        <p>Philip Exner<br>30 N Gould St Ste N, Sheridan, WY 82801, USA</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-datenschutz" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;justify-content:center;align-items:flex-start;">
+  <div style="max-width:680px;margin:60px auto;padding:0 24px 60px;width:100%;">
+    <div style="background:#111116;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:40px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;">
+        <h2 style="font-size:1.6rem;color:#f8fafc;">Datenschutzerklärung</h2>
+        <button onclick="closeModal('modal-datenschutz')" style="background:rgba(255,255,255,0.06);border:none;color:#94a3b8;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+      </div>
+      <div style="font-size:0.9rem;color:#e2e8f0;line-height:1.9;">
+        <h3 style="margin-bottom:10px;font-size:1rem;">1. Verantwortlicher</h3>
+        <p style="margin-bottom:20px;">Philip Exner, Statlift LLC, 30 N Gould St Ste N, Sheridan, WY 82801, USA — team@statlift.de</p>
+        <h3 style="margin-bottom:10px;font-size:1rem;">2. Erhebung und Verarbeitung personenbezogener Daten</h3>
+        <p style="margin-bottom:20px;">Wir erheben personenbezogene Daten nur, wenn Sie uns diese im Rahmen der Kontaktaufnahme freiwillig mitteilen. Diese Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben.</p>
+        <h3 style="margin-bottom:10px;font-size:1rem;">3. Hosting</h3>
+        <p style="margin-bottom:20px;">Diese Website wird über Vercel Inc., San Francisco, USA gehostet. Vercel verarbeitet möglicherweise technische Verbindungsdaten.</p>
+        <h3 style="margin-bottom:10px;font-size:1rem;">4. Ihre Rechte</h3>
+        <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Datenübertragbarkeit. Kontakt: team@statlift.de</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+window.addEventListener('click', function(e) {
+  ['modal-tos','modal-impressum','modal-datenschutz'].forEach(function(id) {
+    if (e.target.id === id) e.target.style.display = 'none';
+  });
+});
+</script>
+
 </body>
 </html>
