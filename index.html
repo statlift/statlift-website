@@ -11046,16 +11046,13 @@ function switchPricingTab(tab) {
 
 <script>
 (function() {
-  var COOKIE_KEY = 'statlift_cookie_consent';
+  var KEY = 'statlift_cookie_consent';
 
-  function getCookie(name) {
-    var v = document.cookie.match('(^|;)\s*' + name + '\s*=\s*([^;]+)');
-    return v ? v.pop() : null;
+  function getConsent() {
+    try { return localStorage.getItem(KEY); } catch(e) { return null; }
   }
-  function setCookie(name, value, days) {
-    var d = new Date();
-    d.setTime(d.getTime() + days * 86400000);
-    document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+  function setConsent(value) {
+    try { localStorage.setItem(KEY, value); } catch(e) {}
   }
 
   function showBanner() {
@@ -11073,12 +11070,11 @@ function switchPricingTab(tab) {
     }
   }
 
-  window.cookieAcceptAll  = function() { setCookie(COOKIE_KEY, 'all',       365); hideBanner(); };
-  window.cookieEssential  = function() { setCookie(COOKIE_KEY, 'essential',  365); hideBanner(); };
-  window.cookieDismiss    = function() { hideBanner(); };
+  window.cookieAcceptAll  = function() { setConsent('all');       hideBanner(); };
+  window.cookieEssential  = function() { setConsent('essential'); hideBanner(); };
+  window.cookieDismiss    = function() { setConsent('dismissed'); hideBanner(); };
 
-  // Show after short delay if no consent stored
-  if (!getCookie(COOKIE_KEY)) {
+  if (!getConsent()) {
     window.addEventListener('DOMContentLoaded', function() {
       setTimeout(showBanner, 800);
     });
