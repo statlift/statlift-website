@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 
 
@@ -6331,6 +6331,9 @@
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:#0a0a14}
 ::-webkit-scrollbar-thumb{background:#6366f1;border-radius:99px}
+html,body{scrollbar-width:thin;scrollbar-color:#6366f1 #0a0a14}
+html{overflow-y:scroll}
+html.modal-open,body.modal-open{overflow:hidden!important}
 </style>
 
 
@@ -10177,11 +10180,7 @@
 
 
 
-            document.getElementById(id).style.display = 'block';
-
-
-
-            document.body.style.overflow = 'hidden';
+            document.getElementById(id).style.display = 'flex'; document.documentElement.classList.add('modal-open');
 
 
 
@@ -10193,15 +10192,12 @@
 
 
 
-            document.getElementById(id).style.display = 'none';
+            document.documentElement.classList.remove('modal-open');
+document.getElementById(id).style.display = 'none';
 
 
 
-            document.body.style.overflow = '';
-
-
-
-        }
+            }
 
 
 
@@ -10289,11 +10285,7 @@
 
 
 
-            document.body.style.overflow = '';
-
-
-
-        }
+            }
 
 
 
