@@ -68,7 +68,8 @@
 
     /* ── ARTICLE CARDS ── */
     .articles-grid{display:flex;flex-direction:column;gap:16px}
-    .article-card{background:var(--surface);border:1px solid var(--border-s);border-radius:var(--r);padding:24px 28px;transition:border-color .25s,background .25s,transform .2s;position:relative;overflow:hidden;cursor:pointer}
+    .article-card{background:var(--surface);border:1px solid var(--border-s);border-radius:var(--r);padding:24px 28px;transition:border-color .25s,background .25s,transform .2s;position:relative;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;outline:none}
+    .article-card:focus,.article-card:focus-visible,.article-card:active{outline:none;-webkit-tap-highlight-color:transparent}
     .article-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--primary-d),var(--primary));opacity:0;transition:opacity .25s}
     .article-card:hover{border-color:var(--border);background:var(--surface-h);transform:translateY(-1px)}
     .article-card:hover::before{opacity:1}
