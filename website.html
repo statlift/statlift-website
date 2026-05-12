@@ -583,6 +583,10 @@ html,body{scrollbar-width:thin;scrollbar-color:#6366f1 #0a0a14}
 html{overflow-y:scroll}
 /* Hide page scrollbar when modal is open — only modal scrollbar shows */
 html.modal-open,body.modal-open{overflow:hidden!important}
+/* No blue tap highlight on ANY clickable element (mobile fix) */
+*{-webkit-tap-highlight-color:transparent}
+a,button,input,select,textarea,label,[onclick],[role="button"],[tabindex]{-webkit-tap-highlight-color:transparent}
+a:focus,button:focus,[onclick]:focus,[role="button"]:focus{outline:none}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(99,102,241,.18),transparent),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(129,140,248,.08),transparent);pointer-events:none;z-index:0;pointer-events:none}
 </style>
 <style id="mobile-logo-css">
