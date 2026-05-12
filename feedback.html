@@ -604,9 +604,16 @@ footer { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.07); padd
 .nav-logo span { color: #818cf8; }
 </style>
 <style id="ambient-scroll-css">
+/* Custom scrollbar — WebKit (Chrome, Edge, Safari Android) */
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:#0a0a14}
 ::-webkit-scrollbar-thumb{background:#6366f1;border-radius:99px}
+/* Firefox + modern browsers */
+html,body{scrollbar-width:thin;scrollbar-color:#6366f1 #0a0a14}
+/* Ensure scrollbar always visible (mobile fix) */
+html{overflow-y:scroll}
+/* Hide page scrollbar when modal is open — only modal scrollbar shows */
+html.modal-open,body.modal-open{overflow:hidden!important}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(99,102,241,.18),transparent),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(129,140,248,.08),transparent);pointer-events:none;z-index:0;pointer-events:none}
 </style>
 <style id="mobile-logo-css">
@@ -1167,9 +1174,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <script>
 
-function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function openModal(id) { document.getElementById(id).style.display = 'flex'; document.documentElement.classList.add('modal-open'); }
 
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; document.documentElement.classList.remove('modal-open'); }
 
 window.addEventListener('click', function(e) {
 
