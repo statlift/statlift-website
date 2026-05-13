@@ -6342,17 +6342,6 @@
   border-color: rgba(245,158,11,0.68);
   box-shadow: 0 24px 70px rgba(245,158,11,0.16);
 }
-.service-icon {
-  width: 46px;
-  height: 46px;
-  display: grid;
-  place-items: center;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.10);
-  font-size: 1.45rem;
-  flex: 0 0 46px;
-}
 .service-card-kicker {
   display: inline-flex;
   margin-bottom: 8px;
@@ -8121,7 +8110,6 @@ html.modal-open,body.modal-open{overflow:hidden!important}
             <!-- Sichtbare Leistungsübersicht: keine versteckten Projekte mehr -->
             <div class="pricing-service-overview reveal d1" aria-label="Unsere Hauptleistungen">
                 <a href="#panel-abo" class="pricing-service-card">
-                    <span class="service-icon" aria-hidden="true">✍️</span>
                     <span>
                         <span class="service-card-kicker">Laufender Content</span>
                         <h3>SEO-Artikel im Abo</h3>
@@ -8130,20 +8118,15 @@ html.modal-open,body.modal-open{overflow:hidden!important}
                     </span>
                 </a>
                 <a href="#panel-einmal" class="pricing-service-card featured-onetime">
-                    <span class="service-icon" aria-hidden="true">🚀</span>
                     <span>
                         <span class="service-card-kicker">Auch einzeln buchbar</span>
                         <h3>Logo & Website Entwicklung</h3>
-                        <p>Logo Design ab 99 € und professionelle Website Entwicklung ab 999 € — ohne Abo.</p>
-                        <span class="service-card-link">Logo & Website direkt ansehen ↓</span>
+                        <p>Wir gestalten Ihr Logo und entwickeln eine moderne Website, die professionell wirkt und Kunden klar durch Ihr Angebot führt.</p>
+                        <span class="service-card-link">Logo & Website ansehen ↓</span>
                     </span>
                 </a>
             </div>
 
-            <div class="pricing-toggle-wrap reveal d1" aria-label="Schnellauswahl Preise">
-                <a class="ptab active" id="ptab-abo" href="#panel-abo">Abo Modelle</a>
-                <a class="ptab onetime-tab" id="ptab-einmal" href="#panel-einmal">Logo & Website</a>
-            </div>
 
             <div id="panel-abo" class="pricing-panel">
                 <div class="section-header center reveal" style="margin-top:40px;margin-bottom:20px;">
@@ -8494,7 +8477,7 @@ html.modal-open,body.modal-open{overflow:hidden!important}
                 <div class="section-header center reveal" style="margin-top:22px;margin-bottom:20px;">
                     <span class="eyebrow" style="color:#f59e0b;">Logo & Website</span>
                     <h2>Logo Design und Website Entwicklung</h2>
-                    <p class="section-sub">Nicht im versteckten Reiter: Diese Leistungen können Sie direkt als einmaliges Projekt buchen — ohne laufende Kosten.</p>
+                    <p class="section-sub">Diese Leistungen können Sie direkt als einmaliges Projekt buchen — ohne laufende Kosten.</p>
                 </div>
                 <div class="pricing-grid einmal-grid" style="margin-top:30px;">
 
@@ -10479,30 +10462,6 @@ document.getElementById(id).style.display = 'none';
 
 <!-- ══════ PREMIUM ANIMATIONS UPGRADE ══════ -->
 <style>
-/* ── Pricing toggle ── */
-.pricing-toggle-wrap {
-  display: flex; gap: 8px; justify-content: center;
-  margin: 32px auto 40px; background: #16161e;
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 50px; padding: 6px;
-  width: fit-content;
-}
-.ptab {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 26px; border-radius: 40px;
-  border: none; background: transparent;
-  color: #64748b; font-size: 0.9rem; font-weight: 600;
-  cursor: pointer; transition: all 0.3s ease;
-}
-.ptab:hover { color: #f8fafc; }
-.ptab.active {
-  background: linear-gradient(135deg, #4F46E5, #7C3AED);
-  color: #fff;
-  box-shadow: 0 4px 20px rgba(79,70,229,0.35);
-}
-.ptab span { font-size: 1.1rem; }
-.pricing-panel { transition: opacity 0.3s ease; }
-
 /* ── Hover animations on cards ── */
 .pricing-card {
 }
@@ -10789,12 +10748,6 @@ button, a { outline: none; }
 </style>
 
 <script>
-/* ── Pricing Tab Switch ── */
-function switchPricingTab(tab) {
-  var target = document.getElementById(tab === 'einmal' ? 'panel-einmal' : 'panel-abo');
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
 /* ── Ambient Background — full-page aurora glow ── */
 (function() {
   const canvas = document.getElementById('global-canvas');
