@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
@@ -252,6 +252,18 @@ function selectSingle(el, name) {
   el.classList.add('on');
 }
 
+function showFinalOverlay(title, message, icon = '✅') {
+  const overlay = document.getElementById('successOverlay');
+  if (!overlay) return;
+  const iconEl = overlay.querySelector('.modal-icon');
+  const titleEl = overlay.querySelector('h2');
+  const textEl = overlay.querySelector('.modal p');
+  if (iconEl) iconEl.textContent = icon;
+  if (titleEl) titleEl.textContent = title;
+  if (textEl) textEl.innerHTML = message;
+  overlay.classList.add('show');
+}
+
 function showError(title, msg) {
   const box = document.getElementById('errBox');
   document.getElementById('errTitle').textContent = title;
@@ -290,21 +302,17 @@ async function submitLogo() {
     try { result = await res.json(); } catch(e) {}
     
     if (result.error === 'not_found') {
-      document.getElementById('email').classList.add('error');
-      showError('Keine Zahlung gefunden', 'Ihre E-Mail-Adresse wurde nicht in der Kunden-Datenbank gefunden. Bitte verwenden Sie exakt die E-Mail-Adresse, mit der Sie das Logo bestellt haben.');
-      btn.disabled = false; btn.textContent = 'Übermitteln';
+      showFinalOverlay('Kein Auftrag gefunden', 'Diese E-Mail-Adresse wurde bei uns nicht für dieses Formular gefunden.<br>Bitte verwenden Sie exakt die E-Mail-Adresse aus Ihrer Bestellung. Wenn Sie Hilfe brauchen, schreiben Sie uns an team@statlift.de.', 'ℹ️');
       return;
     }
     
     if (result.error === 'already_submitted') {
-      document.getElementById('email').classList.add('error');
-      showError('Bereits eingereicht', 'Sie haben das Formular bereits abgeschickt! Falls Sie nachträglich etwas ändern möchten, schreiben Sie uns bitte an team@statlift.de.');
-      btn.disabled = false; btn.textContent = 'Übermitteln';
+      showFinalOverlay('Bereits eingereicht', 'Ihre Angaben wurden bereits übermittelt.<br>Falls Sie etwas ändern möchten, schreiben Sie uns bitte an team@statlift.de.', 'ℹ️');
       return;
     }
 
-    if (result.success || res.ok) {
-      document.getElementById('successOverlay').classList.add('show');
+    if (result.success === true) {
+      showFinalOverlay('Angaben erhalten.', '<span style="color:#818cf8;font-weight:700">team@statlift.de</span>', '✅');
     } else {
       throw new Error('Server error');
     }
