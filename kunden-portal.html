@@ -14,7 +14,7 @@
   <style>
     :root{
       --primary:#818cf8;--primary-d:#6366f1;--primary-glow:rgba(129,140,248,.15);
-      --bg:#0a0a14;--bg2:#0d0d1a;--bg3:#111128;
+      --bg:#0a0a0a;--bg2:#0f0f12;--bg3:#15151a;
       --surface:rgba(255,255,255,.04);--surface-h:rgba(255,255,255,.07);
       --border:rgba(129,140,248,.15);--border-s:rgba(255,255,255,.06);
       --text:#f8fafc;--muted:#94a3b8;--muted2:#64748b;
@@ -31,11 +31,11 @@
     ::-webkit-scrollbar-track{background:var(--bg2)}
     ::-webkit-scrollbar-thumb{background:var(--primary-d);border-radius:99px}
 
-    /* ── Noise bg ── */
-    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(99,102,241,.18),transparent),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(129,140,248,.08),transparent);pointer-events:none;z-index:0}
+    /* ── Subtle bg accent (dezent, neutral wie restliche Seiten) ── */
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 40% at 50% -10%,rgba(99,102,241,.06),transparent);pointer-events:none;z-index:0}
 
     /* ── NAV ── */
-    nav{position:sticky;top:0;z-index:100;background:rgba(10,10,20,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-s);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;min-height:64px}
+    nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-s);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;min-height:64px}
     .logo{font-size:1.2rem;font-weight:800;letter-spacing:-.04em;color:var(--text);text-decoration:none}
     .logo span{color:var(--primary)}
     .nav-right{display:flex;align-items:center;gap:12px}
