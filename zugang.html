@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 
 
@@ -3257,6 +3257,27 @@ function wpPassIsValid() {
 
 
 
+function showFinalMessage(title, message, icon = '✅') {
+  const form = document.getElementById('formContent');
+  const success = document.getElementById('successMsg');
+  const submitWrap = document.getElementById('submitWrap');
+  const err = document.getElementById('msgErr');
+  if (form) form.style.display = 'none';
+  if (submitWrap) submitWrap.style.display = 'none';
+  if (err) err.style.display = 'none';
+  if (success) {
+    const iconEl = success.querySelector('.icon');
+    const titleEl = success.querySelector('h2');
+    const textEl = success.querySelector('p');
+    if (iconEl) iconEl.textContent = icon;
+    if (titleEl) titleEl.textContent = title;
+    if (textEl) textEl.innerHTML = message;
+    success.classList.remove('success-page');
+    success.style.display = 'block';
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function selectCms(id) {
 
   selectedCms = id;
@@ -3415,19 +3436,22 @@ async function submitForm() {
 
 
 
-    if (!res.ok || data.success === false) {
+    if (!res.ok || data.success === false || data.error) {
 
       if (data.error === 'not_found') {
 
-        document.getElementById('msgErrTxt').textContent = 'Fehler: Diese E-Mail-Adresse hat kein aktives Abo abgeschlossen.';
+        showFinalMessage('Kein Abo gefunden', 'Diese E-Mail-Adresse wurde bei uns nicht als aktiver Statlift-Kunde gefunden.<br>Bitte nutzen Sie exakt die E-Mail-Adresse aus Ihrer Bestellung oder schreiben Sie uns an team@statlift.de.', 'ℹ️');
+        return;
 
       } else if (data.error === 'wrong_abo') {
 
-        document.getElementById('msgErrTxt').textContent = 'Fehler: Diese E-Mail-Adresse hat kein Abo 2 abgeschlossen.';
+        showFinalMessage('Falsches Formular', 'Diese E-Mail-Adresse gehört nicht zum richtigen Abo für dieses Formular.<br>Das Zugangsdaten-Formular ist nur für Abo 2. Bei Fragen schreiben Sie uns an team@statlift.de.', 'ℹ️');
+        return;
 
       } else if (data.error === 'already_submitted') {
 
-        document.getElementById('msgErrTxt').innerHTML = 'Du hast uns bereits die Zugangsdaten übermittelt. Falls du diese anpassen möchtest, melde dich per E-Mail bei uns: <a href="mailto:team@statlift.de" style="color:#818cf8;text-decoration:none;">team@statlift.de</a>.';
+        showFinalMessage('Bereits eingereicht', 'Ihre Zugangsdaten wurden bereits übermittelt.<br>Falls Sie etwas ändern möchten, schreiben Sie uns bitte an team@statlift.de.', 'ℹ️');
+        return;
 
       } else if (data.error === 'invalid_credentials') {
 
@@ -3467,27 +3491,7 @@ async function submitForm() {
 
     } else {
 
-      // Hide the entire card, show success fullscreen
-
-      const card = document.querySelector('main .card');
-
-      if (card) card.style.display = 'none';
-
-      document.getElementById('submitWrap').style.display = 'none';
-
-      const success = document.getElementById('successMsg');
-
-      if (success) {
-
-        success.classList.add('success-page');
-
-        success.style.display = 'flex';
-
-        success.style.flexDirection = 'column';
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      }
+      showFinalMessage('Vielen Dank!', 'Ihre Zugangsdaten wurden sicher übermittelt.<br>Wir melden uns bei Ihnen, sobald wir alles eingerichtet haben.', '✅');
 
     }
 
