@@ -6307,14 +6307,111 @@
 
 
     
+.pricing-service-overview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 940px;
+  margin: 34px auto 18px;
+}
+.pricing-service-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px;
+  border-radius: 16px;
+  border: 1px solid rgba(129,140,248,0.28);
+  background: linear-gradient(135deg, rgba(79,70,229,0.12), rgba(255,255,255,0.025));
+  box-shadow: 0 18px 55px rgba(0,0,0,0.22);
+  color: #f8fafc;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.pricing-service-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(129,140,248,0.58);
+  box-shadow: 0 24px 70px rgba(79,70,229,0.18);
+}
+.pricing-service-card.featured-onetime {
+  border-color: rgba(245,158,11,0.42);
+  background: linear-gradient(135deg, rgba(245,158,11,0.16), rgba(79,70,229,0.05));
+}
+.pricing-service-card.featured-onetime:hover {
+  border-color: rgba(245,158,11,0.68);
+  box-shadow: 0 24px 70px rgba(245,158,11,0.16);
+}
+.service-icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.10);
+  font-size: 1.45rem;
+  flex: 0 0 46px;
+}
+.service-card-kicker {
+  display: inline-flex;
+  margin-bottom: 8px;
+  padding: 4px 9px;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.08);
+  color: #c4b5fd;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.featured-onetime .service-card-kicker { color: #fcd34d; }
+.pricing-service-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.18rem;
+  letter-spacing: -0.03em;
+}
+.pricing-service-card p {
+  margin: 0 0 12px;
+  color: #cbd5e1;
+  font-size: .9rem;
+  line-height: 1.65;
+}
+.service-card-link {
+  color: #a5b4fc;
+  font-weight: 700;
+  font-size: .86rem;
+}
+.featured-onetime .service-card-link { color: #fbbf24; }
+.pricing-divider-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 940px;
+  margin: 42px auto 8px;
+  color: #f8fafc;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-size: .78rem;
+}
+.pricing-divider-label::before,
+.pricing-divider-label::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
+}
 .einmal-grid {
   grid-template-columns: repeat(2, minmax(0, 400px));
   justify-content: center;
 }
 @media (max-width: 900px) {
+  .pricing-service-overview,
   .einmal-grid {
     grid-template-columns: 1fr;
   }
+  .pricing-service-card { padding: 18px; }
 }
 
 
@@ -8021,16 +8118,37 @@ html.modal-open,body.modal-open{overflow:hidden!important}
                 <p class="section-sub">Ob laufender Content-Aufbau oder einmaliges Projekt — wir haben das passende Modell.</p>
             </div>
 
-            <!-- Pricing Toggle -->
-            <div class="pricing-toggle-wrap reveal d1">
-                <button class="ptab active" id="ptab-abo" onclick="switchPricingTab('abo')">Abo Modelle</button>
-                <button class="ptab" id="ptab-einmal" onclick="switchPricingTab('einmal')">Einmalige Projekte</button>
+            <!-- Sichtbare Leistungsübersicht: keine versteckten Projekte mehr -->
+            <div class="pricing-service-overview reveal d1" aria-label="Unsere Hauptleistungen">
+                <a href="#panel-abo" class="pricing-service-card">
+                    <span class="service-icon" aria-hidden="true">✍️</span>
+                    <span>
+                        <span class="service-card-kicker">Laufender Content</span>
+                        <h3>SEO-Artikel im Abo</h3>
+                        <p>Regelmäßige Fachartikel, auf Wunsch direkt auf Ihrer Website veröffentlicht.</p>
+                        <span class="service-card-link">Abo-Pakete ansehen ↓</span>
+                    </span>
+                </a>
+                <a href="#panel-einmal" class="pricing-service-card featured-onetime">
+                    <span class="service-icon" aria-hidden="true">🚀</span>
+                    <span>
+                        <span class="service-card-kicker">Auch einzeln buchbar</span>
+                        <h3>Logo & Website Entwicklung</h3>
+                        <p>Logo Design ab 99 € und professionelle Website Entwicklung ab 999 € — ohne Abo.</p>
+                        <span class="service-card-link">Logo & Website direkt ansehen ↓</span>
+                    </span>
+                </a>
+            </div>
+
+            <div class="pricing-toggle-wrap reveal d1" aria-label="Schnellauswahl Preise">
+                <a class="ptab active" id="ptab-abo" href="#panel-abo">Abo Modelle</a>
+                <a class="ptab onetime-tab" id="ptab-einmal" href="#panel-einmal">Logo & Website</a>
             </div>
 
             <div id="panel-abo" class="pricing-panel">
                 <div class="section-header center reveal" style="margin-top:40px;margin-bottom:20px;">
                     <h2>Monatliche Abo Modelle</h2>
-                    <p class="section-sub">Abo 1 &amp; 2 monatlich k&uuml;ndbar &ndash; Abo 3 mit 12 Monaten Mindestlaufzeit.</p>
+                    <p class="section-sub">Für laufenden SEO-Content. Abo 1 &amp; 2 monatlich k&uuml;ndbar &ndash; Abo 3 inklusive Website, Logo und Hosting.</p>
                 </div>
                 <div class="pricing-grid">
 
@@ -8371,10 +8489,12 @@ html.modal-open,body.modal-open{overflow:hidden!important}
             </div>
             </div>
 
-            <div id="panel-einmal" class="pricing-panel" style="display:none">
-                <div class="section-header center reveal" style="margin-top:40px;margin-bottom:20px;">
-                    <h2>Einmalige Projekte</h2>
-                    <p class="section-sub">Für Unternehmen, die eine Website oder ein Logo brauchen — ohne laufende Kosten.</p>
+            <div id="panel-einmal" class="pricing-panel">
+                <div class="pricing-divider-label reveal d1">Einmalige Projekte</div>
+                <div class="section-header center reveal" style="margin-top:22px;margin-bottom:20px;">
+                    <span class="eyebrow" style="color:#f59e0b;">Logo & Website</span>
+                    <h2>Logo Design und Website Entwicklung</h2>
+                    <p class="section-sub">Nicht im versteckten Reiter: Diese Leistungen können Sie direkt als einmaliges Projekt buchen — ohne laufende Kosten.</p>
                 </div>
                 <div class="pricing-grid einmal-grid" style="margin-top:30px;">
 
@@ -10671,15 +10791,8 @@ button, a { outline: none; }
 <script>
 /* ── Pricing Tab Switch ── */
 function switchPricingTab(tab) {
-  var abo    = document.getElementById('panel-abo');
-  var einmal = document.getElementById('panel-einmal');
-  var tabAbo    = document.getElementById('ptab-abo');
-  var tabEinmal = document.getElementById('ptab-einmal');
-  if (!abo || !einmal) return;
-  abo.style.display    = tab === 'abo'    ? '' : 'none';
-  einmal.style.display = tab === 'einmal' ? '' : 'none';
-  tabAbo.classList.toggle('active',    tab === 'abo');
-  tabEinmal.classList.toggle('active', tab === 'einmal');
+  var target = document.getElementById(tab === 'einmal' ? 'panel-einmal' : 'panel-abo');
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ── Ambient Background — full-page aurora glow ── */
