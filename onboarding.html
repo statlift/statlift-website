@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 
 
@@ -4223,6 +4223,26 @@ function validateDomain() {
 
 
 
+function showFinalMessage(title, message, icon = '✅') {
+  const form = document.getElementById('form');
+  const hero = document.querySelector('.hero');
+  const errorBox = document.getElementById('formErrorBox');
+  const success = document.getElementById('successMsg');
+  if (form) form.style.display = 'none';
+  if (hero) hero.style.display = 'none';
+  if (errorBox) errorBox.style.display = 'none';
+  if (success) {
+    const iconEl = success.querySelector('.icon');
+    const titleEl = success.querySelector('h2');
+    const textEl = success.querySelector('p');
+    if (iconEl) iconEl.textContent = icon;
+    if (titleEl) titleEl.textContent = title;
+    if (textEl) textEl.innerHTML = message;
+    success.style.display = 'block';
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function showError(title, text) {
 
 
@@ -4696,25 +4716,8 @@ async function submitForm(e) {
 
 
     if (result.error === 'wrong_abo') {
-
-
-
-      document.getElementById('emailInput').classList.add('error');
-
-
-
-      showError("Falsches Abo", "Sie haben keinen Zugriff auf diese Übermittlung. Bitte prüfen Sie, ob Sie die korrekte E-Mail-Adresse angegeben haben. Bei Fragen wenden Sie sich an team@statlift.de.");
-
-
-
-      btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Onboarding abschließen';
-
-
-
+      showFinalMessage('Falsches Formular', 'Diese E-Mail-Adresse gehört nicht zum richtigen Abo für dieses Formular.<br>Das Onboarding-Formular ist nur für Abo 3. Bitte nutzen Sie das Formular aus Ihrer Statlift-E-Mail oder schreiben Sie uns an team@statlift.de.', 'ℹ️');
       return;
-
-
-
     }
 
 
@@ -4724,45 +4727,8 @@ async function submitForm(e) {
 
 
     if (result.error === 'not_found') {
-
-
-
-
-
-
-
-      document.getElementById('emailInput').classList.add('error');
-
-
-
-
-
-
-
-      showError("E-Mail nicht gefunden", "Diese E-Mail-Adresse konnte nicht in unserer Datenbank gefunden werden. Bitte verwenden Sie exakt die E-Mail, mit der Sie das Abo abgeschlossen haben.");
-
-
-
-
-
-
-
-      btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Onboarding abschließen';
-
-
-
-
-
-
-
+      showFinalMessage('Kein Abo gefunden', 'Diese E-Mail-Adresse wurde bei uns nicht als aktiver Statlift-Kunde gefunden.<br>Bitte verwenden Sie exakt die E-Mail-Adresse, mit der Sie das Abo abgeschlossen haben. Wenn Sie Hilfe brauchen, schreiben Sie uns an team@statlift.de.', 'ℹ️');
       return;
-
-
-
-
-
-
-
     }
 
 
@@ -4780,45 +4746,8 @@ async function submitForm(e) {
 
 
     if (result.error === 'already_submitted') {
-
-
-
-
-
-
-
-      document.getElementById('emailInput').classList.add('error');
-
-
-
-
-
-
-
-      showError("Bereits eingereicht", 'Sie haben das Onboarding bereits abgeschlossen! Falls Sie nachträglich etwas ändern möchten, schreiben Sie uns bitte direkt an <a href="mailto:team@statlift.de">team@statlift.de</a>.');
-
-
-
-
-
-
-
-      btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Onboarding abschließen';
-
-
-
-
-
-
-
+      showFinalMessage('Bereits eingereicht', 'Ihre Angaben wurden bereits übermittelt.<br>Falls Sie etwas ändern möchten, schreiben Sie uns bitte an team@statlift.de.', 'ℹ️');
       return;
-
-
-
-
-
-
-
     }
 
 
@@ -4837,29 +4766,7 @@ async function submitForm(e) {
 
     // Success
 
-
-
-
-
-
-
-    document.getElementById('form').style.display = 'none';
-
-
-
-
-
-
-
-    document.querySelector('.hero').style.display = 'none';
-
-
-
-
-
-
-
-    document.getElementById('successMsg').style.display = 'block';
+    showFinalMessage('Perfekt — wir legen los!', 'Ihre Daten wurden erfolgreich übermittelt. Wir melden uns bei Ihnen, sobald wir alles eingerichtet haben.', '✅');
 
 
 
