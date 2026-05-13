@@ -291,7 +291,7 @@ async function submitLogo() {
   const btn = document.getElementById('submitBtn');
   btn.disabled = true; btn.textContent = 'Wird übermittelt…';
 
-  const payload = { email, stil: stil.value, typ: typ.value, beschreibung, inspiration };
+  const payload = { email, project_type: 'logo', stil: stil.value, typ: typ.value, beschreibung, inspiration };
 
   try {
     const res = await fetch('https://admin.statlift.de/webhook/submit-website-logo', {
