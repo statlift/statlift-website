@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 
 
@@ -992,6 +992,119 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 
 
+
+<script id="statlift-website-form-js">
+const WEBSITE_WEBHOOK = 'https://admin.statlift.de/webhook/submit-website-logo';
+function showWebsiteFinalMessage(title, message, icon = '✅') {
+  const form = document.getElementById('form');
+  const hero = document.querySelector('.hero');
+  const errorBox = document.getElementById('formErrorBox');
+  const success = document.getElementById('successMsg');
+  if (form) form.style.display = 'none';
+  if (hero) hero.style.display = 'none';
+  if (errorBox) errorBox.style.display = 'none';
+  if (success) {
+    const iconEl = success.querySelector('.icon');
+    const titleEl = success.querySelector('h2');
+    const textEl = success.querySelector('p');
+    if (iconEl) iconEl.textContent = icon;
+    if (titleEl) titleEl.textContent = title;
+    if (textEl) textEl.innerHTML = message;
+    success.style.display = 'block';
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function showWebsiteError(title, text) {
+  const box = document.getElementById('formErrorBox');
+  if (!box) return alert(text);
+  document.getElementById('formErrorTitle').textContent = title;
+  document.getElementById('formErrorText').innerHTML = text;
+  box.style.display = 'block';
+  box.scrollIntoView({behavior:'smooth', block:'center'});
+}
+function clearEmailError() {
+  const email = document.getElementById('emailInput');
+  const msg = document.getElementById('emailMsg');
+  if (email) email.classList.remove('error');
+  if (msg) msg.textContent = '';
+}
+function selectSingleChip(element, groupName) {
+  document.querySelectorAll(`input[name="${groupName}"]`).forEach(inp => {
+    inp.checked = false;
+    const chip = inp.closest('.chip');
+    if (chip) chip.classList.remove('on');
+  });
+  const input = element.querySelector('input');
+  if (input) input.checked = true;
+  element.classList.add('on');
+}
+function toggleMultiChip(element, event) {
+  if (event) event.preventDefault();
+  const input = element.querySelector('input');
+  if (!input) return;
+  input.checked = !input.checked;
+  element.classList.toggle('on', input.checked);
+}
+function showAddPage() {
+  const wrap = document.getElementById('addPageWrap');
+  if (!wrap) return;
+  wrap.style.display = wrap.style.display === 'flex' ? 'none' : 'flex';
+  if (wrap.style.display === 'flex') document.getElementById('customPageInput')?.focus();
+}
+function addCustomPage() {
+  const inp = document.getElementById('customPageInput');
+  const val = (inp?.value || '').trim();
+  if (!val) return;
+  const newChip = document.createElement('label');
+  newChip.className = 'chip on';
+  newChip.setAttribute('onclick', 'toggleMultiChip(this, event)');
+  newChip.innerHTML = `<input type="checkbox" name="seiten" value="${val.replace(/"/g, '&quot;')}" checked><span>${val}</span>`;
+  const container = document.getElementById('seitenChips');
+  container.insertBefore(newChip, container.querySelector('.chip-add'));
+  inp.value = '';
+  document.getElementById('addPageWrap').style.display = 'none';
+}
+async function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('formErrorBox').style.display = 'none';
+  const emailEl = document.getElementById('emailInput');
+  const email = emailEl.value.trim();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    emailEl.classList.add('error');
+    return showWebsiteError('Ungültige E-Mail', 'Bitte geben Sie eine gültige E-Mail-Adresse an.');
+  }
+  if (!document.querySelector('[name="stil"]:checked')) return showWebsiteError('Fehlende Angabe', 'Bitte wählen Sie einen Website-Stil aus.');
+  if (!document.querySelector('[name="farbe"]:checked')) return showWebsiteError('Fehlende Angabe', 'Bitte wählen Sie eine Farbrichtung aus.');
+  const beschreibung = e.target.querySelector('[name="beschreibung"]').value.trim();
+  if (!beschreibung) return showWebsiteError('Fehlende Angabe', 'Bitte beschreiben Sie kurz Ihre Website-Vorstellungen.');
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Wird übermittelt…';
+  const fd = new FormData(e.target);
+  const payload = Object.fromEntries(fd.entries());
+  payload.typ = 'website';
+  payload.seiten = Array.from(document.querySelectorAll('[name="seiten"]:checked')).map(i => i.value).join(', ');
+  try {
+    const res = await fetch(WEBSITE_WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+    const result = await res.json().catch(() => ({}));
+    if (result.error === 'not_found') {
+      showWebsiteFinalMessage('Kein Auftrag gefunden', 'Diese E-Mail-Adresse wurde bei uns nicht für dieses Formular gefunden.<br>Bitte verwenden Sie exakt die E-Mail-Adresse aus Ihrer Bestellung. Wenn Sie Hilfe brauchen, schreiben Sie uns an team@statlift.de.', 'ℹ️');
+      return;
+    }
+    if (result.error === 'already_submitted') {
+      showWebsiteFinalMessage('Bereits eingereicht', 'Ihre Angaben wurden bereits übermittelt.<br>Falls Sie etwas ändern möchten, schreiben Sie uns bitte an team@statlift.de.', 'ℹ️');
+      return;
+    }
+    if (!res.ok || result.success === false || result.error) throw new Error('Server error');
+    showWebsiteFinalMessage('Perfekt — wir legen los!', 'Ihre Daten wurden erfolgreich übermittelt.', '✅');
+  } catch(err) {
+    showWebsiteError('Verbindungsfehler', 'Bitte versuchen Sie es erneut oder schreiben Sie uns an team@statlift.de.');
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Übermitteln';
+  }
+}
+</script>
+
 <footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.07);padding:28px 0;position:relative;z-index:1;">
   <div style="max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
     <a href="https://statlift.de" style="font-family:Inter,-apple-system,sans-serif;font-weight:800;font-size:1.1rem;color:#f8fafc;text-decoration:none;letter-spacing:-0.02em;display:inline-flex;align-items:center;gap:8px;"><img src="/header.png" alt="Statlift" style="height:auto;max-height:64px;max-width:55vw;width:auto;display:block;"></a>
@@ -1674,7 +1787,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 
 
-        form.addEventListener('submit', async e => {
+        if (form) form.addEventListener('submit', async e => {
 
 
 
