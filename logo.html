@@ -255,6 +255,8 @@ function selectSingle(el, name) {
 function showFinalOverlay(title, message, icon = '✅') {
   const overlay = document.getElementById('successOverlay');
   if (!overlay) return;
+  overlay.style.alignItems = 'center';
+  overlay.style.justifyContent = 'center';
   const iconEl = overlay.querySelector('.modal-icon');
   const titleEl = overlay.querySelector('h2');
   const textEl = overlay.querySelector('.modal p');
