@@ -1004,6 +1004,10 @@ function showWebsiteFinalMessage(title, message, icon = '✅') {
   if (hero) hero.style.display = 'none';
   if (errorBox) errorBox.style.display = 'none';
   if (success) {
+    success.style.width = '100%';
+    success.style.maxWidth = '480px';
+    success.style.marginLeft = 'auto';
+    success.style.marginRight = 'auto';
     const iconEl = success.querySelector('.icon');
     const titleEl = success.querySelector('h2');
     const textEl = success.querySelector('p');
