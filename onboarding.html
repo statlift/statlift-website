@@ -379,6 +379,7 @@ input.ok{border-color:var(--success)!important}
 
 
 .field-msg.ok{color:var(--success)}
+.page-limit-msg{display:none;color:var(--warn);font-size:.8rem;margin-top:.65rem;font-weight:600}
 
 
 
@@ -1705,6 +1706,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 
       </div>
+      <p class="page-limit-msg" id="seitenLimitMsg">Sie können maximal 5 Seiten auswählen.</p>
 
 
 
@@ -3208,22 +3210,39 @@ function selectSingleChip(element, groupName) {
 
 
 
+const PAGE_LIMIT = 5;
+function showPageLimitMessage() {
+  const msg = document.getElementById('seitenLimitMsg');
+  if (!msg) return;
+  msg.textContent = 'Sie können maximal ' + PAGE_LIMIT + ' Seiten auswählen.';
+  msg.style.display = 'block';
+  window.clearTimeout(showPageLimitMessage._timer);
+  showPageLimitMessage._timer = window.setTimeout(() => { msg.style.display = 'none'; }, 4500);
+}
+function hidePageLimitMessage() {
+  const msg = document.getElementById('seitenLimitMsg');
+  if (msg) msg.style.display = 'none';
+}
+function selectedPageCount() {
+  return document.querySelectorAll('input[name="seiten"]:checked').length;
+}
 function toggleMultiChip(element, event) {
   if (event) event.preventDefault();
   const input = element.querySelector('input');
   const groupName = input.name;
   
   if (!input.checked) {
-      const limit = 8;
+      const limit = PAGE_LIMIT;
       const checkedCount = document.querySelectorAll('input[name="' + groupName + '"]:checked').length;
       if (checkedCount >= limit) {
-          alert('Sie können maximal ' + limit + ' Seiten auswählen.');
+          showPageLimitMessage();
           return;
       }
   }
 
   input.checked = !input.checked;
   element.classList.toggle('on', input.checked);
+  if (input.checked || selectedPageCount() < PAGE_LIMIT) hidePageLimitMessage();
 }
 
 
@@ -3322,6 +3341,10 @@ function addCustomPage() {
 
 
   if(!val) return;
+  if (selectedPageCount() >= PAGE_LIMIT) {
+    showPageLimitMessage();
+    return;
+  }
 
 
 
