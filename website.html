@@ -190,6 +190,7 @@ input.ok{border-color:var(--success)!important}
 
 
 .field-msg.ok{color:var(--success)}
+.page-limit-msg{display:none;color:var(--warn);font-size:.8rem;margin-top:.65rem;font-weight:600}
 
 
 
@@ -874,6 +875,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 
       </div>
+      <p class="page-limit-msg" id="seitenLimitMsg">Sie können maximal 5 Seiten auswählen.</p>
 
 
 
@@ -1048,6 +1050,7 @@ function toggleMultiChip(element, event) {
   if (!input) return;
   input.checked = !input.checked;
   element.classList.toggle('on', input.checked);
+  if (input.checked || selectedPageCount() < PAGE_LIMIT) hidePageLimitMessage();
 }
 function showAddPage() {
   const wrap = document.getElementById('addPageWrap');
@@ -1059,6 +1062,10 @@ function addCustomPage() {
   const inp = document.getElementById('customPageInput');
   const val = (inp?.value || '').trim();
   if (!val) return;
+  if (selectedPageCount() >= PAGE_LIMIT) {
+    showPageLimitMessage();
+    return;
+  }
   const newChip = document.createElement('label');
   newChip.className = 'chip on';
   newChip.setAttribute('onclick', 'toggleMultiChip(this, event)');
@@ -2506,6 +2513,22 @@ function selectSingleChip(element, groupName) {
     element.classList.add('on');
 }
 
+const PAGE_LIMIT = 5;
+function showPageLimitMessage() {
+  const msg = document.getElementById('seitenLimitMsg');
+  if (!msg) return;
+  msg.textContent = 'Sie können maximal ' + PAGE_LIMIT + ' Seiten auswählen.';
+  msg.style.display = 'block';
+  window.clearTimeout(showPageLimitMessage._timer);
+  showPageLimitMessage._timer = window.setTimeout(() => { msg.style.display = 'none'; }, 4500);
+}
+function hidePageLimitMessage() {
+  const msg = document.getElementById('seitenLimitMsg');
+  if (msg) msg.style.display = 'none';
+}
+function selectedPageCount() {
+  return document.querySelectorAll('input[name="seiten"]:checked').length;
+}
 function toggleMultiChip(element, event) {
     const input = element.querySelector('input');
     const groupName = input.name;
@@ -2514,16 +2537,17 @@ function toggleMultiChip(element, event) {
     if (event) event.preventDefault();
 
     if (!input.checked) {
-        const limit = 5;
+        const limit = PAGE_LIMIT;
         const checkedCount = document.querySelectorAll('input[name="' + groupName + '"]:checked').length;
         if (checkedCount >= limit) {
-            alert('Sie können maximal ' + limit + ' Seiten auswählen.');
+            showPageLimitMessage();
             return;
         }
     }
     
     input.checked = !input.checked;
     element.classList.toggle('on', input.checked);
+    if (input.checked || selectedPageCount() < PAGE_LIMIT) hidePageLimitMessage();
 }
 </script>
 
