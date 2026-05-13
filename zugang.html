@@ -3263,9 +3263,15 @@ function showFinalMessage(title, message, icon = '✅') {
   const submitWrap = document.getElementById('submitWrap');
   const err = document.getElementById('msgErr');
   if (form) form.style.display = 'none';
+  const card = form ? form.closest('.card') : document.querySelector('main .card');
+  if (card) card.style.display = 'none';
   if (submitWrap) submitWrap.style.display = 'none';
   if (err) err.style.display = 'none';
   if (success) {
+    success.style.width = '100%';
+    success.style.maxWidth = '480px';
+    success.style.marginLeft = 'auto';
+    success.style.marginRight = 'auto';
     const iconEl = success.querySelector('.icon');
     const titleEl = success.querySelector('h2');
     const textEl = success.querySelector('p');
