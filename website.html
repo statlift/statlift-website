@@ -1087,6 +1087,7 @@ async function submitForm(e) {
   const fd = new FormData(e.target);
   const payload = Object.fromEntries(fd.entries());
   payload.typ = 'website';
+  payload.project_type = 'website';
   payload.seiten = Array.from(document.querySelectorAll('[name="seiten"]:checked')).map(i => i.value).join(', ');
   try {
     const res = await fetch(WEBSITE_WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
