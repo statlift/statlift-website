@@ -144,7 +144,7 @@
 
     /* ── PORTAL OVERLAY MODAL ── */
     .portal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);backdrop-filter:blur(12px);justify-content:center;align-items:flex-start;padding:24px;overflow-y:auto}
-    .portal-overlay.open{display:flex}
+    .portal-overlay.open{display:flex!important}
     .portal-modal{width:100%;max-width:680px;margin:auto;background:#111117;border:1px solid rgba(255,255,255,.1);border-radius:20px;box-shadow:0 32px 80px rgba(0,0,0,.6);animation:slideUp .22s ease}
     @keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
     .portal-modal-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px 0}
@@ -349,7 +349,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="content">
 
 <!-- ── PORTAL OVERLAY ── -->
-<div id="portal-overlay" class="portal-overlay" style="display:none" onclick="if(event.target.id==='portal-overlay')closePortalOverlay()">
+<div id="portal-overlay" class="portal-overlay" onclick="if(event.target.id==='portal-overlay')closePortalOverlay()">
   <div class="portal-modal">
     <div class="portal-modal-head">
       <h2 id="portal-overlay-title">Status</h2>
@@ -852,7 +852,9 @@ async function loadPortal() {
     if (!data || data.error || !data.firma) throw new Error('invalid');
     currentPortal = data;
 
-    allArticles = (data.articles || []).sort((a,b) => {
+    allArticles = (data.articles || [])
+      .filter(a => String(a.status || '').toLowerCase() === 'gesendet')
+      .sort((a,b) => {
       const da = new Date(b.versand_datum || b.erstellt_am || 0);
       const db = new Date(a.versand_datum || a.erstellt_am || 0);
       return da - db;
