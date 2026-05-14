@@ -245,7 +245,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 </style>
 </head>
 <body>
-<!-- portal-v1778787298 -->
+<!-- portal-v1778787426 -->
 
 <nav>
   <a href="https://www.statlift.de" class="logo" style="display:inline-block;"><img src="/header.png" alt="Statlift" style="height:auto;max-height:80px;max-width:40vw;width:auto;display:block;"></a>
@@ -313,7 +313,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
       <!-- SUPPORT -->
       <div id="overlay-support" style="display:none">
-        <p class="muted-line" style="margin-bottom:14px">Ihre Kundendaten werden automatisch mitgeschickt.</p>
         <input id="support-subject" class="modal-input" placeholder="Betreff *" style="margin-bottom:0">
         <textarea id="support-message" class="modal-input" style="min-height:110px;resize:vertical;margin-top:8px" placeholder="Ihre Nachricht *"></textarea>
         <button id="support-submit-btn" class="btn-neutral" onclick="submitSupport()" style="margin-top:10px;min-width:150px;transition:all .2s">Anfrage senden</button>
@@ -766,12 +765,7 @@ async function loadPortal() {
     // Update hero
     document.getElementById('firma-name').textContent = data.firma;
     document.getElementById('stat-total').textContent = allArticles.length;
-    let aboName = data.abo || '—';
-    if (aboName.toLowerCase().includes('1')) aboName = 'Einsteiger';
-    else if (aboName.toLowerCase().includes('2')) aboName = 'Professionell';
-    else if (aboName.toLowerCase().includes('3')) aboName = 'Rundum-Sorglos';
-    
-    document.getElementById('stat-abo').textContent = aboName;
+    document.getElementById('stat-abo').textContent = aboDisplayName(data.abo || data.plan || data.price_id || data.package || data.abo_typ || '');
 
     const thisMonth = allArticles.filter(a => {
       const d = new Date(a.versand_datum || a.erstellt_am || 0);
