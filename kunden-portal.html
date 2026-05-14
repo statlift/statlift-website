@@ -245,7 +245,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 </style>
 </head>
 <body>
-<!-- portal-v1778790767 -->
+<!-- portal-v1778791191 -->
 
 <nav>
   <a href="https://www.statlift.de" class="logo" style="display:inline-block;"><img src="/header.png" alt="Statlift" style="height:auto;max-height:80px;max-width:40vw;width:auto;display:block;"></a>
@@ -253,7 +253,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <button class="nav-btn" id="navbtn-status"   onclick="openPortalOverlay('status')">Status</button>
     <button class="nav-btn" id="navbtn-invoices" onclick="openPortalOverlay('invoices')">Rechnungen</button>
     <button class="nav-btn" id="navbtn-support"  onclick="openPortalOverlay('support')">Support</button>
-    <button class="nav-btn-danger"               onclick="openCancelModal()">Abo kündigen</button>
+    <button id="cancel-btn" class="nav-btn-danger"               onclick="openCancelModal()">Abo kündigen</button>
     <span class="badge-portal">Kunden-Portal</span>
   </div>
   <div class="nav-right" id="nav-loading-badge">
@@ -572,8 +572,9 @@ async function loadAccountExtras() {
 
 function renderAccountStatus(data) {
   const s = data.subscription || {};
+  const isCancelled = s.cancel_at_period_end || (s.status !== 'active' && s.status !== 'trialing');
   const statusText = s.cancel_at_period_end ? 'Kündigung vorgemerkt' : (s.status === 'active' ? 'Aktiv' : (s.status || 'Unbekannt'));
-  const endText = s.cancel_at_period_end ? (s.current_period_end || s.cancel_at || 'zum Periodenende') : (s.current_period_end || '—');
+  const endText = s.current_period_end ? s.current_period_end : (s.cancel_at_period_end ? 'zum Periodenende' : '—');
   const rawAbo = data.abo || data.plan || data.price_id || data.package || '';
   const paketName = aboDisplayName(rawAbo);
   
@@ -586,10 +587,26 @@ function renderAccountStatus(data) {
     }
   }
 
+  // Update cancel button if already cancelled
+  const cancelBtn = document.getElementById('cancel-btn');
+  if (cancelBtn) {
+    if (isCancelled) {
+      cancelBtn.textContent = 'Abo gekündigt';
+      cancelBtn.onclick = null;
+      cancelBtn.style.opacity = '0.5';
+      cancelBtn.style.cursor = 'not-allowed';
+    } else {
+      cancelBtn.textContent = 'Abo kündigen';
+      cancelBtn.onclick = openCancelModal;
+      cancelBtn.style.opacity = '1';
+      cancelBtn.style.cursor = 'pointer';
+    }
+  }
+
   document.getElementById('account-status-box').innerHTML = `
     <div class="info-tile"><div class="label">Paket</div><div class="value">${paketName}</div></div>
     <div class="info-tile"><div class="label">Status</div><div class="value">${statusText}</div></div>
-    <div class="info-tile"><div class="label">Nächste Abrechnung / Ende</div><div class="value">${endText}</div></div>
+    <div class="info-tile"><div class="label">${isCancelled ? 'Abo endet am' : 'Nächste Abrechnung'}</div><div class="value">${endText}</div></div>
     ${extraTiles}
     <div class="info-tile"><div class="label">Website</div><div class="value">${data.website || '—'}</div></div>`;
 }
