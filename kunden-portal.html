@@ -245,7 +245,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 </style>
 </head>
 <body>
-<!-- portal-v1778787426 -->
+<!-- portal-v1778788156 -->
 
 <nav>
   <a href="https://www.statlift.de" class="logo" style="display:inline-block;"><img src="/header.png" alt="Statlift" style="height:auto;max-height:80px;max-width:40vw;width:auto;display:block;"></a>
@@ -525,10 +525,10 @@ function filterArticles() {
 
 function aboDisplayName(raw) {
   if (!raw) return '—';
-  const r = String(raw).toLowerCase();
-  if (r.includes('price_abo_1') || r.includes('abo_1') || r.includes('abo 1') || r.includes('einsteiger') || r === 'abo1') return 'Einsteiger';
-  if (r.includes('price_abo_2') || r.includes('abo_2') || r.includes('abo 2') || r.includes('professionell') || r === 'abo2') return 'Professionell';
-  if (r.includes('price_abo_3') || r.includes('abo_3') || r.includes('abo 3') || r.includes('rundum') || r === 'abo3') return 'Rundum-Sorglos';
+  const r = String(raw).toLowerCase().replace(/_/g,'').replace(/\s/g,'');
+  if (r.includes('priceabo1') || r.includes('abo1') || r.includes('einsteiger') || r === '1') return 'Einsteiger';
+  if (r.includes('priceabo2') || r.includes('abo2') || r.includes('professionell') || r === '2') return 'Professionell';
+  if (r.includes('priceabo3') || r.includes('abo3') || r.includes('rundum') || r === '3') return 'Rundum-Sorglos';
   return raw;
 }
 
