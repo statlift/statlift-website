@@ -251,9 +251,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .auth-tabs{display:flex;background:rgba(255,255,255,.04);border-radius:10px;padding:4px;margin-bottom:24px;gap:4px}
 .auth-tab{flex:1;padding:9px;border:none;border-radius:8px;background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;transition:all .2s}
 .auth-tab.active{background:rgba(99,102,241,.25);color:var(--primary);border:1px solid rgba(99,102,241,.35)}
-.auth-google-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:var(--text);cursor:pointer;font-family:inherit;font-size:.88rem;font-weight:600;transition:all .18s;margin-bottom:4px}
-.auth-google-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.18)}
-.auth-google-btn svg{flex-shrink:0}
+.google-custom-btn{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;padding:13px 22px;background:#fff;border:none;border-radius:50px;
+  color:#3c4043;cursor:pointer;font-family:inherit;font-size:.9rem;font-weight:600;
+  transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.28);letter-spacing:.01em;
+}
+.google-custom-btn:hover{box-shadow:0 5px 22px rgba(0,0,0,.38);transform:translateY(-1px);background:#f6f6f6}
+.google-custom-btn:active{transform:translateY(0);box-shadow:0 2px 8px rgba(0,0,0,.2)}
 .auth-divider{display:flex;align-items:center;gap:10px;color:var(--muted2);font-size:.75rem;margin:18px 0 16px}
 .auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.07)}
 .auth-input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:var(--text);padding:12px 14px;font-family:inherit;font-size:.88rem;outline:none;transition:border-color .2s;margin-bottom:10px}
@@ -1068,14 +1073,12 @@ async function loadPortal() {
   function _renderGoogleButton(mode) {
     const container = document.getElementById('google-btn-container');
     if (!container) return;
-    container.innerHTML = '';
-    // Google-Callback hier setzen damit er den aktuellen Modus kennt
+    // Callback setzen
     window._authGoogleCallback = async function(credential) {
       clearErrs();
       try {
         const r = await fetch(AUTH + '/auth-google', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
+          method: 'POST', headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({google_token: credential, portal_slug: getSlug(), device_id: getDeviceId()})
         });
         const d = await r.json();
@@ -1083,39 +1086,28 @@ async function loadPortal() {
         else showErr(_authMode === 'login' ? 'login-error' : 'reg-error', d.error || 'Google-Anmeldung fehlgeschlagen.');
       } catch { showErr(_authMode === 'login' ? 'login-error' : 'reg-error', 'Verbindungsfehler.'); }
     };
-    const tryRender = () => {
-      if (window.google?.accounts?.id) {
-        google.accounts.id.initialize({
-          client_id: GOOGLE_CLIENT_ID,
-          callback: handleGoogleCredential,
-          auto_select: false,
-          cancel_on_tap_outside: true,
-        });
-        google.accounts.id.renderButton(container, {
-          theme: 'filled_black',
-          size: 'large',
-          width: container.offsetWidth || 348,
-          text: mode === 'login' ? 'signin_with' : 'signup_with',
-          shape: 'rectangular',
-          logo_alignment: 'left',
-        });
-      } else {
-        // SDK noch nicht geladen → Fallback-Button
-        container.innerHTML =
-          '<button class="auth-google-btn" onclick="_googleFallback()" style="width:100%;cursor:pointer">' +
-          '<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>' +
-          'Mit Google ' + (mode === 'login' ? 'anmelden' : 'registrieren') + '</button>';
-        setTimeout(() => _renderGoogleButton(mode), 500);
-      }
-    };
-    setTimeout(tryRender, 80);
+    const label = mode === 'login' ? 'Mit Google anmelden' : 'Mit Google registrieren';
+    container.innerHTML =
+      '<button class="google-custom-btn" onclick="_triggerGoogle()" type="button">' +
+      '<svg width="20" height="20" viewBox="0 0 48 48" style="flex-shrink:0">' +
+      '<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>' +
+      '<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>' +
+      '<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>' +
+      '<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>' +
+      '</svg>' + label + '</button>';
   }
 
-  window._googleFallback = function() {
-    if (window.google?.accounts?.id) {
-      google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential });
-      google.accounts.id.prompt();
-    }
+  window._triggerGoogle = function() {
+    if (!window.google?.accounts?.id) { setTimeout(_triggerGoogle, 300); return; }
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential, auto_select: false,
+    });
+    google.accounts.id.prompt(n => {
+      if (n.isNotDisplayed() || n.isSkippedMoment()) {
+        showErr(_authMode === 'login' ? 'login-error' : 'reg-error',
+          'Google-Anmeldung konnte nicht geöffnet werden. Bitte Popup-Blocker deaktivieren.');
+      }
+    });
   };
 
   function hideOverlay() {
