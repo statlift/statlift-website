@@ -136,16 +136,16 @@
     #toast.show{transform:translateY(0);opacity:1}
 
 
-    /* ── ACCOUNT / KÜNDIGUNG ── */
-    .account-card{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.035));border:1px solid var(--border-s);border-radius:var(--r);padding:22px 24px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
-    .account-card h2{font-size:1rem;font-weight:750;letter-spacing:-.02em;margin-bottom:4px;color:var(--text)}
-    .account-card p{font-size:.84rem;color:var(--muted);max-width:680px}
-    .account-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    /* ── PORTAL TAB NAV ── */
+    .portal-nav-wrapper{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.03));border:1px solid var(--border-s);border-radius:var(--r);padding:18px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .portal-nav-pills{display:flex;gap:3px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:4px;flex-shrink:0}
+    .portal-tab-btn{background:transparent;border:1px solid transparent;border-radius:7px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.83rem;font-weight:600;padding:.5rem 1.1rem;transition:background .18s,color .18s,border-color .18s;white-space:nowrap;min-width:88px;text-align:center}
+    .portal-tab-btn:hover{color:var(--text);background:rgba(255,255,255,.07)}
+    .portal-tab-btn.active{background:rgba(99,102,241,.22);border-color:rgba(99,102,241,.55);color:#a5b4fc}
 
-    /* ── ACTIVE BUTTON STATE ── */
-    .btn-neutral{background:rgba(255,255,255,.06);border:1px solid var(--border-s);border-radius:10px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;padding:.72rem 1rem;transition:all .2s}
-    .btn-neutral:hover{background:rgba(129,140,248,.12);border-color:rgba(129,140,248,.35);color:var(--primary);transform:translateY(-1px)}
-    .btn-neutral.active{background:rgba(99,102,241,.22);border-color:rgba(99,102,241,.7);color:#a5b4fc;box-shadow:0 0 0 2px rgba(99,102,241,.18)}
+    /* ── ACCOUNT / KÜNDIGUNG ── */
+    .btn-neutral{background:rgba(255,255,255,.06);border:1px solid var(--border-s);border-radius:10px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;padding:.68rem 1rem;transition:all .2s;white-space:nowrap}
+    .btn-neutral:hover{background:rgba(129,140,248,.1);border-color:rgba(129,140,248,.3);color:var(--primary)}
     .btn-danger-soft{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.28);border-radius:var(--r-sm);color:#fca5a5;cursor:pointer;font-family:inherit;font-size:.82rem;font-weight:650;padding:.68rem 1rem;transition:all .2s;white-space:nowrap}
     .btn-danger-soft:hover{background:rgba(239,68,68,.14);border-color:rgba(239,68,68,.45);color:#fecaca;transform:translateY(-1px)}
     .modal-shell{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.86);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:24px}
@@ -252,40 +252,50 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <div class="content">
 
-  <div id="account-section" class="account-card" style="display:none">
-    <div class="account-actions">
-      <button class="btn-neutral active" id="tab-btn-status" onclick="showPortalTab('status')">Status</button>
-      <button class="btn-neutral" id="tab-btn-invoices" onclick="showPortalTab('invoices')">Rechnungen</button>
-      <button class="btn-neutral" id="tab-btn-support" onclick="showPortalTab('support')">Support</button>
+  <!-- ── PORTAL ACCOUNT SECTION (über dem Blog) ── -->
+  <div id="account-section" style="display:none">
+
+    <!-- Tab-Navigation Bar -->
+    <div class="portal-nav-wrapper">
+      <div class="portal-nav-pills">
+        <button class="portal-tab-btn active" id="tab-btn-status"   onclick="showPortalTab('status')">Status</button>
+        <button class="portal-tab-btn"        id="tab-btn-invoices" onclick="showPortalTab('invoices')">Rechnungen</button>
+        <button class="portal-tab-btn"        id="tab-btn-support"  onclick="showPortalTab('support')">Support</button>
+      </div>
       <button class="btn-danger-soft" onclick="openCancelModal()">Abo kündigen</button>
     </div>
-  </div>
 
-  <div id="portal-tabs" class="portal-tabs" style="display:none">
-    <section id="tab-status" class="portal-tab-panel">
-      <h2>Abo-Status</h2>
-      <div id="account-status-box" class="info-grid"><div class="muted-line">Wird geladen …</div></div>
-    </section>
+    <!-- Tab-Inhalt -->
+    <div id="portal-tabs" class="portal-tabs">
 
-    <section id="tab-invoices" class="portal-tab-panel" style="display:none">
-      <div class="tab-head">
-        <div><h2>Rechnungen</h2><p>Wählen Sie Rechnungen aus und laden Sie sie herunter.</p></div>
-        <div class="tab-actions">
-          <button class="btn-neutral" onclick="toggleAllInvoices()" id="toggle-invoices-btn">Alle auswählen</button>
-          <button class="btn-neutral" onclick="downloadSelectedInvoices()" id="download-selected-btn">Herunterladen</button>
+      <!-- STATUS -->
+      <section id="tab-status" class="portal-tab-panel">
+        <div class="tab-head"><div><h2>Abo-Status</h2><p class="muted-line">Ihre aktuellen Vertragsinformationen auf einen Blick.</p></div></div>
+        <div id="account-status-box" class="info-grid"><div class="muted-line">Wird geladen …</div></div>
+      </section>
+
+      <!-- RECHNUNGEN -->
+      <section id="tab-invoices" class="portal-tab-panel" style="display:none">
+        <div class="tab-head">
+          <div><h2>Rechnungen</h2><p class="muted-line">Rechnungen auswählen und als PDF herunterladen.</p></div>
+          <div class="tab-actions">
+            <button class="btn-neutral" onclick="toggleAllInvoices()" id="toggle-invoices-btn">Alle auswählen</button>
+            <button class="btn-neutral" onclick="downloadSelectedInvoices()">⬇ Herunterladen</button>
+          </div>
         </div>
-      </div>
-      <div id="invoice-list" class="invoice-list"><div class="muted-line">Rechnungen werden geladen …</div></div>
-    </section>
+        <div id="invoice-list" class="invoice-list"><div class="muted-line">Rechnungen werden geladen …</div></div>
+      </section>
 
-    <section id="tab-support" class="portal-tab-panel" style="display:none">
-      <h2>Support-Anfrage</h2>
-      <p class="muted-line">Schreiben Sie uns direkt aus dem Portal. Ihre Kundendaten werden automatisch mitgeschickt.</p>
-      <input id="support-subject" class="modal-input" placeholder="Betreff">
-      <textarea id="support-message" class="modal-input" style="min-height:110px;resize:vertical" placeholder="Ihre Nachricht"></textarea>
-      <button class="btn-neutral" onclick="submitSupport()">Support-Anfrage senden</button>
-      <div id="support-result" class="form-result"></div>
-    </section>
+      <!-- SUPPORT -->
+      <section id="tab-support" class="portal-tab-panel" style="display:none">
+        <div class="tab-head"><div><h2>Support-Anfrage</h2><p class="muted-line">Ihre Kundendaten werden automatisch mitgeschickt.</p></div></div>
+        <input id="support-subject" class="modal-input" placeholder="Betreff" style="margin-top:12px">
+        <textarea id="support-message" class="modal-input" style="min-height:110px;resize:vertical;margin-top:8px" placeholder="Ihre Nachricht"></textarea>
+        <button class="btn-neutral" onclick="submitSupport()" style="margin-top:8px">Anfrage senden</button>
+        <div id="support-result" class="form-result"></div>
+      </section>
+
+    </div>
   </div>
   <div id="loading-state" class="state-box">
     <div class="spinner"></div>
@@ -495,6 +505,9 @@ function showPortalTab(name) {
     const btn = document.getElementById('tab-btn-' + t);
     if (btn) btn.classList.toggle('active', t === name);
   });
+  // Scroll account section into view smoothly on tab switch
+  const acc = document.getElementById('account-section');
+  if (acc) acc.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
 async function loadAccountExtras() {
@@ -702,6 +715,11 @@ async function loadPortal() {
 
     document.getElementById('loading-state').style.display = 'none';
     document.getElementById('hero-section').style.display = 'block';
+
+    // Account-Bereich ÜBER dem Blog anzeigen
+    document.getElementById('account-section').style.display = 'block';
+    loadAccountExtras();
+
     document.getElementById('filter-bar').style.display = 'flex';
 
     if (allArticles.length === 0) {
@@ -710,10 +728,6 @@ async function loadPortal() {
       document.getElementById('articles-grid').style.display = 'flex';
       filterArticles();
     }
-
-    // Account-Section unterhalb der Blog-Artikel anzeigen
-    document.getElementById('account-section').style.display = 'flex';
-    loadAccountExtras();
 
   } catch (e) {
     document.getElementById('loading-state').style.display = 'none';
