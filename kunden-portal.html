@@ -232,14 +232,77 @@ a,button,input,select,textarea,label,[onclick],[role="button"],[tabindex]{-webki
 a:focus,button:focus,[onclick]:focus,[role="button"]:focus{outline:none}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 40% at 50% -10%,rgba(99,102,241,.06),transparent);pointer-events:none;z-index:0}
 </style>
-<style id="mobile-logo-css">
+<style id="mobile-portal-css">
 @media (max-width: 768px) {
+  /* Logo kompakter damit Buttons Platz haben */
   nav img[alt="Statlift"],
   #navbar img[alt="Statlift"] {
-    max-height: 58px !important;
-    max-width: 72vw !important;
+    max-height: 44px !important;
+    max-width: 38vw !important;
     height: auto !important;
     width: auto !important;
+  }
+  /* Nav darf umbrechen, Buttons unter dem Logo */
+  nav {
+    padding: 10px 14px !important;
+    min-height: auto !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  /* Logo links, Buttons in eigene Zeile unten */
+  nav .logo {
+    order: 1;
+    flex: 0 0 auto;
+  }
+  .nav-right {
+    order: 2 !important;
+    flex-basis: 100% !important;
+    width: 100% !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    flex-wrap: nowrap !important;
+    padding-bottom: 4px;
+  }
+  /* Badge "Kunden-Portal" raus auf Handy - frisst nur Platz */
+  .badge-portal {
+    display: none !important;
+  }
+  /* Buttons gleichmaessig verteilen und kompakter */
+  .nav-btn, .nav-btn-danger {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    font-size: 0.72rem !important;
+    padding: 0.55rem 0.35rem !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* Hero etwas kompakter */
+  .hero {
+    padding: 32px 18px 24px !important;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 6vw, 2.4rem) !important;
+  }
+  /* Stat-Cards in Mobile: 2 pro Zeile */
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  /* Filter-Bar mobile: stapelweise */
+  .filter-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 14px !important;
+  }
+  /* Modal-Cards mobile: weniger Padding */
+  .modal-card, .portal-modal {
+    padding: 0 !important;
+  }
+  .portal-modal-body, .modal-card > * {
+    padding-left: 18px;
+    padding-right: 18px;
   }
 }
 </style>
