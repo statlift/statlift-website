@@ -245,7 +245,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 </style>
 </head>
 <body>
-<!-- portal-v1778791715 -->
+<!-- portal-v1778791898 -->
 
 <nav>
   <a href="https://www.statlift.de" class="logo" style="display:inline-block;"><img src="/header.png" alt="Statlift" style="height:auto;max-height:80px;max-width:40vw;width:auto;display:block;"></a>
@@ -604,7 +604,6 @@ function renderAccountStatus(data) {
   }
 
   document.getElementById('account-status-box').innerHTML = `
-    <div class="info-tile" style="grid-column: 1 / -1; font-size: 10px; word-break: break-all; background: #fee2e2; padding: 4px; border-radius: 4px;">DEBUG: ${JSON.stringify(s)}</div>
     <div class="info-tile"><div class="label">Paket</div><div class="value">${paketName}</div></div>
     <div class="info-tile"><div class="label">Status</div><div class="value">${statusText}</div></div>
     <div class="info-tile"><div class="label">${isCancelled ? 'Abo endet am' : 'Nächste Abrechnung'}</div><div class="value">${endText}</div></div>
