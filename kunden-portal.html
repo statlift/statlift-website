@@ -35,11 +35,17 @@
     body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 40% at 50% -10%,rgba(99,102,241,.06),transparent);pointer-events:none;z-index:0}
 
     /* ── NAV ── */
-    nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-s);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;min-height:64px}
+    nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-s);padding:0 24px;display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:12px}
     .logo{font-size:1.2rem;font-weight:800;letter-spacing:-.04em;color:var(--text);text-decoration:none}
     .logo span{color:var(--primary)}
-    .nav-right{display:flex;align-items:center;gap:12px}
-    .badge-portal{background:var(--primary-glow);border:1px solid var(--border);color:var(--primary);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .7rem;border-radius:99px}
+    .nav-right{display:flex;align-items:center;gap:8px;flex-wrap:nowrap}
+    .badge-portal{background:var(--primary-glow);border:1px solid var(--border);color:var(--primary);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .7rem;border-radius:99px;white-space:nowrap}
+    .nav-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.78rem;font-weight:600;padding:.42rem .9rem;transition:background .15s,color .15s,border-color .15s;white-space:nowrap}
+    .nav-btn:hover{background:rgba(129,140,248,.14);border-color:rgba(129,140,248,.3);color:var(--primary)}
+    .nav-btn.active{background:rgba(99,102,241,.22);border-color:rgba(99,102,241,.5);color:#a5b4fc}
+    .nav-btn-danger{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:8px;color:#fca5a5;cursor:pointer;font-family:inherit;font-size:.78rem;font-weight:600;padding:.42rem .9rem;transition:all .15s;white-space:nowrap}
+    .nav-btn-danger:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.45)}
+    @media(max-width:600px){.nav-btn,.nav-btn-danger{font-size:.7rem;padding:.38rem .6rem}.badge-portal{display:none}}
 
     /* ── HERO ── */
     .hero{position:relative;z-index:1;padding:60px 24px 40px;max-width:1100px;margin:0 auto}
@@ -136,12 +142,16 @@
     #toast.show{transform:translateY(0);opacity:1}
 
 
-    /* ── PORTAL TAB NAV ── */
-    .portal-nav-wrapper{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.03));border:1px solid var(--border-s);border-radius:var(--r);padding:18px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-    .portal-nav-pills{display:flex;gap:3px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:4px;flex-shrink:0}
-    .portal-tab-btn{background:transparent;border:1px solid transparent;border-radius:7px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.83rem;font-weight:600;padding:.5rem 1.1rem;transition:background .18s,color .18s,border-color .18s;white-space:nowrap;min-width:88px;text-align:center}
-    .portal-tab-btn:hover{color:var(--text);background:rgba(255,255,255,.07)}
-    .portal-tab-btn.active{background:rgba(99,102,241,.22);border-color:rgba(99,102,241,.55);color:#a5b4fc}
+    /* ── PORTAL OVERLAY MODAL ── */
+    .portal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);backdrop-filter:blur(12px);justify-content:center;align-items:flex-start;padding:24px;overflow-y:auto}
+    .portal-overlay.open{display:flex}
+    .portal-modal{width:100%;max-width:680px;margin:auto;background:#111117;border:1px solid rgba(255,255,255,.1);border-radius:20px;box-shadow:0 32px 80px rgba(0,0,0,.6);animation:slideUp .22s ease}
+    @keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .portal-modal-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px 0}
+    .portal-modal-head h2{font-size:1.15rem;font-weight:700;letter-spacing:-.02em}
+    .portal-modal-close{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:var(--muted);cursor:pointer;font-size:1.1rem;width:34px;height:34px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+    .portal-modal-close:hover{background:rgba(255,255,255,.13);color:var(--text)}
+    .portal-modal-body{padding:20px 24px 26px}
 
     /* ── ACCOUNT / KÜNDIGUNG ── */
     .btn-neutral{background:rgba(255,255,255,.06);border:1px solid var(--border-s);border-radius:10px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;padding:.68rem 1rem;transition:all .2s;white-space:nowrap}
@@ -219,11 +229,18 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 </style>
 </head>
 <body>
-<!-- portal-v1778786673 -->
+<!-- portal-v1778787015 -->
 
 <nav>
-  <a href="https://www.statlift.de" class="logo" style="display:inline-block;"><img src="/header.png" alt="Statlift" style="height:auto;max-height:80px;max-width:55vw;width:auto;display:block;vertical-align:middle;"></a>
-  <div class="nav-right">
+  <a href="https://www.statlift.de" class="logo" style="display:inline-block;"><img src="/header.png" alt="Statlift" style="height:auto;max-height:80px;max-width:40vw;width:auto;display:block;"></a>
+  <div class="nav-right" id="nav-portal-btns" style="display:none">
+    <button class="nav-btn" id="navbtn-status"   onclick="openPortalOverlay('status')">Status</button>
+    <button class="nav-btn" id="navbtn-invoices" onclick="openPortalOverlay('invoices')">Rechnungen</button>
+    <button class="nav-btn" id="navbtn-support"  onclick="openPortalOverlay('support')">Support</button>
+    <button class="nav-btn-danger"               onclick="openCancelModal()">Abo kündigen</button>
+    <span class="badge-portal">Kunden-Portal</span>
+  </div>
+  <div class="nav-right" id="nav-loading-badge">
     <span class="badge-portal">Kunden-Portal</span>
   </div>
 </nav>
@@ -252,51 +269,44 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <div class="content">
 
-  <!-- ── PORTAL ACCOUNT SECTION (über dem Blog) ── -->
-  <div id="account-section" style="display:none">
-
-    <!-- Tab-Navigation Bar -->
-    <div class="portal-nav-wrapper">
-      <div class="portal-nav-pills">
-        <button class="portal-tab-btn active" id="tab-btn-status"   onclick="showPortalTab('status')">Status</button>
-        <button class="portal-tab-btn"        id="tab-btn-invoices" onclick="showPortalTab('invoices')">Rechnungen</button>
-        <button class="portal-tab-btn"        id="tab-btn-support"  onclick="showPortalTab('support')">Support</button>
-      </div>
-      <button class="btn-danger-soft" onclick="openCancelModal()">Abo kündigen</button>
+<!-- ── PORTAL OVERLAY ── -->
+<div id="portal-overlay" class="portal-overlay" onclick="if(event.target.id==='portal-overlay')closePortalOverlay()">
+  <div class="portal-modal">
+    <div class="portal-modal-head">
+      <h2 id="portal-overlay-title">Status</h2>
+      <button class="portal-modal-close" onclick="closePortalOverlay()" title="Schließen">✕</button>
     </div>
-
-    <!-- Tab-Inhalt -->
-    <div id="portal-tabs" class="portal-tabs">
+    <div class="portal-modal-body">
 
       <!-- STATUS -->
-      <section id="tab-status" class="portal-tab-panel">
-        <div class="tab-head"><div><h2>Abo-Status</h2><p class="muted-line">Ihre aktuellen Vertragsinformationen auf einen Blick.</p></div></div>
+      <div id="overlay-status">
         <div id="account-status-box" class="info-grid"><div class="muted-line">Wird geladen …</div></div>
-      </section>
+      </div>
 
       <!-- RECHNUNGEN -->
-      <section id="tab-invoices" class="portal-tab-panel" style="display:none">
-        <div class="tab-head">
-          <div><h2>Rechnungen</h2><p class="muted-line">Rechnungen auswählen und als PDF herunterladen.</p></div>
-          <div class="tab-actions">
+      <div id="overlay-invoices" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+          <p class="muted-line">Rechnungen auswählen und als PDF herunterladen.</p>
+          <div style="display:flex;gap:8px">
             <button class="btn-neutral" onclick="toggleAllInvoices()" id="toggle-invoices-btn">Alle auswählen</button>
             <button class="btn-neutral" onclick="downloadSelectedInvoices()">⬇ Herunterladen</button>
           </div>
         </div>
         <div id="invoice-list" class="invoice-list"><div class="muted-line">Rechnungen werden geladen …</div></div>
-      </section>
+      </div>
 
       <!-- SUPPORT -->
-      <section id="tab-support" class="portal-tab-panel" style="display:none">
-        <div class="tab-head"><div><h2>Support-Anfrage</h2><p class="muted-line">Ihre Kundendaten werden automatisch mitgeschickt.</p></div></div>
-        <input id="support-subject" class="modal-input" placeholder="Betreff" style="margin-top:12px">
+      <div id="overlay-support" style="display:none">
+        <p class="muted-line" style="margin-bottom:14px">Ihre Kundendaten werden automatisch mitgeschickt.</p>
+        <input id="support-subject" class="modal-input" placeholder="Betreff">
         <textarea id="support-message" class="modal-input" style="min-height:110px;resize:vertical;margin-top:8px" placeholder="Ihre Nachricht"></textarea>
-        <button class="btn-neutral" onclick="submitSupport()" style="margin-top:8px">Anfrage senden</button>
+        <button class="btn-neutral" onclick="submitSupport()" style="margin-top:10px">Anfrage senden</button>
         <div id="support-result" class="form-result"></div>
-      </section>
+      </div>
 
     </div>
   </div>
+</div>
   <div id="loading-state" class="state-box">
     <div class="spinner"></div>
     <h2>Wird geladen …</h2>
@@ -498,16 +508,35 @@ function filterArticles() {
 
 
 
-function showPortalTab(name) {
+function aboDisplayName(raw) {
+  if (!raw) return '—';
+  const r = String(raw).toLowerCase();
+  if (r.includes('price_abo_1') || r.includes('abo_1') || r.includes('abo 1') || r.includes('einsteiger') || r === 'abo1') return 'Einsteiger';
+  if (r.includes('price_abo_2') || r.includes('abo_2') || r.includes('abo 2') || r.includes('professionell') || r === 'abo2') return 'Professionell';
+  if (r.includes('price_abo_3') || r.includes('abo_3') || r.includes('abo 3') || r.includes('rundum') || r === 'abo3') return 'Rundum-Sorglos';
+  return raw;
+}
+
+function openPortalOverlay(name) {
+  const titles = {status:'Abo-Status', invoices:'Rechnungen', support:'Support-Anfrage'};
+  document.getElementById('portal-overlay-title').textContent = titles[name] || name;
   ['status','invoices','support'].forEach(t => {
-    const el = document.getElementById('tab-' + t);
-    if (el) el.style.display = (t === name ? 'block' : 'none');
-    const btn = document.getElementById('tab-btn-' + t);
+    const el = document.getElementById('overlay-' + t);
+    if (el) el.style.display = t === name ? 'block' : 'none';
+    const btn = document.getElementById('navbtn-' + t);
     if (btn) btn.classList.toggle('active', t === name);
   });
-  // Scroll account section into view smoothly on tab switch
-  const acc = document.getElementById('account-section');
-  if (acc) acc.scrollIntoView({behavior:'smooth', block:'nearest'});
+  document.getElementById('portal-overlay').classList.add('open');
+  document.documentElement.classList.add('modal-open');
+}
+
+function closePortalOverlay() {
+  document.getElementById('portal-overlay').classList.remove('open');
+  document.documentElement.classList.remove('modal-open');
+  ['status','invoices','support'].forEach(t => {
+    const btn = document.getElementById('navbtn-' + t);
+    if (btn) btn.classList.remove('active');
+  });
 }
 
 async function loadAccountExtras() {
@@ -520,28 +549,18 @@ async function loadAccountExtras() {
     portalAccount = data;
     renderAccountStatus(data);
     renderInvoices(data.invoices || []);
-    document.getElementById('portal-tabs').style.display = 'block';
-    showPortalTab('status');
   } catch (err) {
     const box = document.getElementById('account-status-box');
     if (box) box.innerHTML = `<div class="muted-line">${err.message}</div>`;
   }
 }
 
-function aboDisplayName(raw) {
-  if (!raw) return '—';
-  const r = raw.toLowerCase();
-  if (r.includes('price_abo_1') || r.includes('abo_1') || r.includes('abo 1') || r.includes('einsteiger')) return 'Einsteiger';
-  if (r.includes('price_abo_2') || r.includes('abo_2') || r.includes('abo 2') || r.includes('professionell')) return 'Professionell';
-  if (r.includes('price_abo_3') || r.includes('abo_3') || r.includes('abo 3') || r.includes('rundum')) return 'Rundum-Sorglos';
-  return raw;
-}
-
 function renderAccountStatus(data) {
   const s = data.subscription || {};
   const statusText = s.cancel_at_period_end ? 'Kündigung vorgemerkt' : (s.status === 'active' ? 'Aktiv' : (s.status || 'Unbekannt'));
   const endText = s.cancel_at_period_end ? (s.current_period_end || s.cancel_at || 'zum Periodenende') : (s.current_period_end || '—');
-  const paketName = aboDisplayName(data.abo || data.plan || data.price_id || '');
+  const rawAbo = data.abo || data.plan || data.price_id || data.package || '';
+  const paketName = aboDisplayName(rawAbo);
   document.getElementById('account-status-box').innerHTML = `
     <div class="info-tile"><div class="label">Paket</div><div class="value">${paketName}</div></div>
     <div class="info-tile"><div class="label">Status</div><div class="value">${statusText}</div></div>
@@ -715,12 +734,12 @@ async function loadPortal() {
 
     document.getElementById('loading-state').style.display = 'none';
     document.getElementById('hero-section').style.display = 'block';
-
-    // Account-Bereich ÜBER dem Blog anzeigen
-    document.getElementById('account-section').style.display = 'block';
-    loadAccountExtras();
-
     document.getElementById('filter-bar').style.display = 'flex';
+
+    // Nav-Buttons anzeigen, Lade-Badge verstecken
+    document.getElementById('nav-portal-btns').style.display = 'flex';
+    document.getElementById('nav-loading-badge').style.display = 'none';
+    loadAccountExtras();
 
     if (allArticles.length === 0) {
       document.getElementById('empty-state').style.display = 'flex';
