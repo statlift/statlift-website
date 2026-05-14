@@ -247,7 +247,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 #auth-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;padding:20px}
 .auth-card{background:#0f0f15;border:1px solid rgba(129,140,248,.2);border-radius:20px;width:100%;max-width:420px;padding:40px 36px;position:relative;box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03)}
 .auth-logo{display:flex;align-items:center;justify-content:center;margin-bottom:28px}
-.auth-logo img{height:44px;width:auto;filter:brightness(1.1)}
+.auth-logo img{height:88px;width:auto;filter:brightness(1.1)}
 .auth-tabs{display:flex;background:rgba(255,255,255,.04);border-radius:10px;padding:4px;margin-bottom:24px;gap:4px}
 .auth-tab{flex:1;padding:9px;border:none;border-radius:8px;background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;transition:all .2s}
 .auth-tab.active{background:rgba(99,102,241,.25);color:var(--primary);border:1px solid rgba(99,102,241,.35)}
@@ -259,6 +259,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .auth-input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:var(--text);padding:12px 14px;font-family:inherit;font-size:.88rem;outline:none;transition:border-color .2s;margin-bottom:10px}
 .auth-input:focus{border-color:rgba(99,102,241,.5);background:rgba(99,102,241,.05)}
 .auth-input::placeholder{color:var(--muted2)}
+.auth-input:-webkit-autofill,.auth-input:-webkit-autofill:hover,
+.auth-input:-webkit-autofill:focus,.auth-input:-webkit-autofill:active{
+  -webkit-box-shadow:0 0 0 1000px #0f0f15 inset !important;
+  -webkit-text-fill-color:#f8fafc !important;
+  caret-color:#f8fafc;
+  transition:background-color 9999s ease-in-out 0s;
+  border-color:rgba(99,102,241,.5) !important;
+}
 .auth-pw-wrap{position:relative;margin-bottom:10px}
 .auth-pw-wrap .auth-input{margin-bottom:0;padding-right:44px;width:100%}
 .auth-pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;padding:4px;display:flex;align-items:center}
@@ -304,20 +312,19 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <img src="/header.png" alt="Statlift">
     </div>
 
-    <!-- ── Haupt-State: Login + Registrieren ── -->
+    <!-- ── Haupt-State: Login ODER Registrieren (kein Tab-Wechsel) ── -->
     <div id="auth-state-main">
-      <div class="auth-tabs">
-        <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Anmelden</button>
-        <button class="auth-tab"        id="tab-register" onclick="switchAuthTab('register')">Registrieren</button>
+      <div id="auth-mode-header" style="margin-bottom:20px">
+        <div id="auth-mode-title" style="font-size:1.15rem;font-weight:700;margin-bottom:4px"></div>
+        <div id="auth-mode-sub" style="font-size:.82rem;color:var(--muted)"></div>
       </div>
 
+      <!-- Google Button Container (wird vom SDK gerendert) -->
+      <div id="google-btn-container" style="margin-bottom:4px;min-height:44px"></div>
+      <div class="auth-divider">oder mit E-Mail</div>
+
       <!-- LOGIN -->
-      <div id="form-login">
-        <button class="auth-google-btn" onclick="triggerGoogleSignIn('login')">
-          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-          Mit Google anmelden
-        </button>
-        <div class="auth-divider">oder mit E-Mail</div>
+      <div id="form-login" style="display:none">
         <input class="auth-input" type="email" id="login-email" placeholder="E-Mail-Adresse" autocomplete="email">
         <div class="auth-pw-wrap">
           <input class="auth-input" type="password" id="login-pw" placeholder="Passwort" autocomplete="current-password">
@@ -331,11 +338,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
       <!-- REGISTRIEREN -->
       <div id="form-register" style="display:none">
-        <button class="auth-google-btn" onclick="triggerGoogleSignIn('register')">
-          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-          Mit Google registrieren
-        </button>
-        <div class="auth-divider">oder mit E-Mail</div>
         <input class="auth-input" type="email" id="reg-email" placeholder="E-Mail-Adresse" autocomplete="email">
         <div class="auth-pw-wrap">
           <input class="auth-input" type="password" id="reg-pw" placeholder="Passwort" autocomplete="new-password" oninput="updatePwStrength(this.value)">
@@ -372,7 +374,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div class="auth-pulse"><span></span><span></span><span></span></div>
       <p class="auth-state-text" style="font-size:.75rem;margin-top:12px">Warten auf Bestätigung…</p>
       <div id="auth-resend">
-        <button class="auth-link" onclick="switchAuthTab('register')">Andere E-Mail verwenden</button>
+        <button class="auth-link" onclick="showOverlayState('main','register')">Andere E-Mail verwenden</button>
       </div>
     </div>
 
@@ -1024,7 +1026,9 @@ async function loadPortal() {
   function getSession()        { return localStorage.getItem(SESSION_KEY); }
   function clearSession()      { localStorage.removeItem(SESSION_KEY); }
 
-  function showOverlayState(state) {
+  let _authMode = 'login'; // 'login' | 'register'
+
+  function showOverlayState(state, mode) {
     const overlay = document.getElementById('auth-overlay');
     overlay.style.display = 'flex';
     ['auth-state-main','auth-state-verify-pending','auth-state-verified-other'].forEach(id => {
@@ -1037,7 +1041,82 @@ async function loadPortal() {
       'verified-other': 'auth-state-verified-other',
     }[state];
     if (target) document.getElementById(target).style.display = 'block';
+    if (state === 'main' && mode) _showAuthMode(mode);
   }
+
+  function _showAuthMode(mode) {
+    _authMode = mode;
+    // Titel setzen
+    const titles = {
+      login:    ['Willkommen zurück', 'Melden Sie sich bei Ihrem Portal an.'],
+      register: ['Zugang erstellen',  'Registrieren Sie sich für Ihr persönliches Portal.'],
+    };
+    const [title, sub] = titles[mode] || titles.login;
+    const t = document.getElementById('auth-mode-title');
+    const s = document.getElementById('auth-mode-sub');
+    if (t) t.textContent = title;
+    if (s) s.textContent = sub;
+    // Formulare ein-/ausblenden
+    const fl = document.getElementById('form-login');
+    const fr = document.getElementById('form-register');
+    if (fl) fl.style.display = mode === 'login'    ? 'block' : 'none';
+    if (fr) fr.style.display = mode === 'register' ? 'block' : 'none';
+    // Google Button rendern
+    _renderGoogleButton(mode);
+  }
+
+  function _renderGoogleButton(mode) {
+    const container = document.getElementById('google-btn-container');
+    if (!container) return;
+    container.innerHTML = '';
+    // Google-Callback hier setzen damit er den aktuellen Modus kennt
+    window._authGoogleCallback = async function(credential) {
+      clearErrs();
+      try {
+        const r = await fetch(AUTH + '/auth-google', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({google_token: credential, portal_slug: getSlug(), device_id: getDeviceId()})
+        });
+        const d = await r.json();
+        if (d.success) { storeSession(d.session_token); hideOverlay(); loadPortal(); }
+        else showErr(_authMode === 'login' ? 'login-error' : 'reg-error', d.error || 'Google-Anmeldung fehlgeschlagen.');
+      } catch { showErr(_authMode === 'login' ? 'login-error' : 'reg-error', 'Verbindungsfehler.'); }
+    };
+    const tryRender = () => {
+      if (window.google?.accounts?.id) {
+        google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: handleGoogleCredential,
+          auto_select: false,
+          cancel_on_tap_outside: true,
+        });
+        google.accounts.id.renderButton(container, {
+          theme: 'filled_black',
+          size: 'large',
+          width: container.offsetWidth || 348,
+          text: mode === 'login' ? 'signin_with' : 'signup_with',
+          shape: 'rectangular',
+          logo_alignment: 'left',
+        });
+      } else {
+        // SDK noch nicht geladen → Fallback-Button
+        container.innerHTML =
+          '<button class="auth-google-btn" onclick="_googleFallback()" style="width:100%;cursor:pointer">' +
+          '<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>' +
+          'Mit Google ' + (mode === 'login' ? 'anmelden' : 'registrieren') + '</button>';
+        setTimeout(() => _renderGoogleButton(mode), 500);
+      }
+    };
+    setTimeout(tryRender, 80);
+  }
+
+  window._googleFallback = function() {
+    if (window.google?.accounts?.id) {
+      google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential });
+      google.accounts.id.prompt();
+    }
+  };
 
   function hideOverlay() {
     const el = document.getElementById('auth-overlay');
@@ -1068,18 +1147,15 @@ async function loadPortal() {
     });
   }
 
-  /* ─── Tab-Wechsel ─── */
-  window.switchAuthTab = function(tab) {
-    clearErrs();
-    document.getElementById('form-login').style.display    = tab === 'login'    ? 'block' : 'none';
-    document.getElementById('form-register').style.display = tab === 'register' ? 'block' : 'none';
-    document.getElementById('tab-login').classList.toggle('active',    tab === 'login');
-    document.getElementById('tab-register').classList.toggle('active', tab === 'register');
-    if (tab === 'register') {
-      document.getElementById('pw-strength-bar-wrap').style.display = '';
-      document.getElementById('pw-req').style.display = '';
-    }
-  };
+  /* ─── Auth-Status für Portal prüfen (registriert oder nicht) ─── */
+  async function getAuthMode(slug) {
+    if (!slug) return 'register';
+    try {
+      const r = await fetch(`${AUTH}/auth-status?slug=${encodeURIComponent(slug)}`);
+      const d = await r.json();
+      return d.has_account ? 'login' : 'register';
+    } catch { return 'register'; }
+  }
 
   /* ─── Passwort anzeigen ─── */
   window.togglePw = function(inputId, btn) {
@@ -1256,9 +1332,10 @@ async function loadPortal() {
           return;
         }
       } catch {}
-      // Token ungültig → Login-Formular + Fehlermeldung
-      showOverlayState('main');
-      showErr('login-error', 'Der Bestätigungslink ist abgelaufen oder ungültig. Bitte erneut registrieren.');
+      // Token ungültig → passendes Formular + Fehlermeldung
+      const mode = await getAuthMode(getSlug());
+      showOverlayState('main', mode);
+      showErr(mode === 'login' ? 'login-error' : 'reg-error', 'Der Bestätigungslink ist abgelaufen oder ungültig.');
       return;
     }
 
@@ -1273,8 +1350,9 @@ async function loadPortal() {
       clearSession();
     }
 
-    // ③ Kein gültiger Token → Login zeigen
-    showOverlayState('main');
+    // ③ Kein gültiger Token → Status prüfen und richtiges Formular zeigen
+    const mode = await getAuthMode(getSlug());
+    showOverlayState('main', mode);
   }
 
   // Starten
