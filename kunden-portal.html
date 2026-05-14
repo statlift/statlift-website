@@ -182,13 +182,26 @@
     .info-tile{background:rgba(255,255,255,.035);border:1px solid var(--border-s);border-radius:12px;padding:14px}
     .info-tile .label{font-size:.72rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
     .info-tile .value{font-size:.95rem;color:var(--text);font-weight:700}
-    .invoice-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-    .invoice-row{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;background:rgba(255,255,255,.035);border:1px solid var(--border-s);border-radius:12px;padding:12px 14px}
-    .invoice-row input{width:18px;height:18px;accent-color:#6366f1}
-    .invoice-meta{display:flex;flex-direction:column;gap:2px}.invoice-meta strong{font-size:.9rem}.invoice-meta span{font-size:.78rem;color:var(--muted)}
-    .invoice-amount{font-weight:700;color:var(--text);font-size:.88rem}.invoice-link{font-size:.8rem;color:var(--primary);text-decoration:none}
-    .form-result{display:none;margin-top:12px;font-size:.86rem}.form-result.ok{display:block;color:#86efac}.form-result.err{display:block;color:#fca5a5}
-    @media(max-width:640px){.invoice-row{grid-template-columns:auto 1fr}.invoice-amount,.invoice-link{grid-column:2}.tab-actions{width:100%}.tab-actions button{flex:1}}
+    .invoice-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+    .invoice-row{display:grid;grid-template-columns:28px 1fr auto auto;gap:14px;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px 16px;cursor:pointer;transition:background .15s,border-color .15s;user-select:none;-webkit-user-select:none}
+    .invoice-row:hover{background:rgba(129,140,248,.07);border-color:rgba(129,140,248,.2)}
+    .invoice-row.checked{background:rgba(99,102,241,.1);border-color:rgba(99,102,241,.35)}
+    /* Custom checkbox */
+    .invoice-row input[type=checkbox]{display:none}
+    .inv-check-box{width:20px;height:20px;border-radius:6px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
+    .invoice-row.checked .inv-check-box{background:#6366f1;border-color:#818cf8;box-shadow:0 0 0 2px rgba(99,102,241,.25)}
+    .inv-check-icon{display:none;color:#fff;font-size:12px;line-height:1}
+    .invoice-row.checked .inv-check-icon{display:block}
+    .invoice-meta{display:flex;flex-direction:column;gap:3px}
+    .invoice-meta strong{font-size:.9rem;color:var(--text)}
+    .invoice-meta span{font-size:.75rem;color:var(--muted)}
+    .invoice-amount{font-weight:700;color:var(--text);font-size:.9rem;white-space:nowrap}
+    .invoice-dl-btn{display:inline-flex;align-items:center;gap:5px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.28);border-radius:7px;padding:.3rem .75rem;color:#a5b4fc;text-decoration:none;font-size:.75rem;font-weight:600;transition:all .15s;white-space:nowrap}
+    .invoice-dl-btn:hover{background:rgba(99,102,241,.22);border-color:rgba(99,102,241,.5)}
+    .form-result{display:none;margin-top:12px;font-size:.86rem;border-radius:8px;padding:10px 14px}
+    .form-result.ok{display:block;color:#86efac;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2)}
+    .form-result.err{display:block;color:#fca5a5;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2)}
+    @media(max-width:640px){.invoice-row{grid-template-columns:28px 1fr auto}.invoice-dl-btn{display:none}}
 
     /* ── DATE SEPARATOR ── */
     .month-sep{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);padding:20px 0 8px;border-bottom:1px solid var(--border-s);margin-bottom:4px}
@@ -198,6 +211,9 @@
       .card-actions{width:100%}
       .stats-row .stat-card{min-width:calc(50% - 8px)}
     }
+    /* No blue highlight anywhere */
+    *{-webkit-user-select:none;user-select:none}
+    input,textarea,select{-webkit-user-select:text;user-select:text}
   </style>
 <style id="ambient-scroll-css">
 /* Custom scrollbar — WebKit (Chrome, Edge, Safari Android) */
@@ -229,7 +245,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 </style>
 </head>
 <body>
-<!-- portal-v1778787015 -->
+<!-- portal-v1778787298 -->
 
 <nav>
   <a href="https://www.statlift.de" class="logo" style="display:inline-block;"><img src="/header.png" alt="Statlift" style="height:auto;max-height:80px;max-width:40vw;width:auto;display:block;"></a>
@@ -298,9 +314,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <!-- SUPPORT -->
       <div id="overlay-support" style="display:none">
         <p class="muted-line" style="margin-bottom:14px">Ihre Kundendaten werden automatisch mitgeschickt.</p>
-        <input id="support-subject" class="modal-input" placeholder="Betreff">
-        <textarea id="support-message" class="modal-input" style="min-height:110px;resize:vertical;margin-top:8px" placeholder="Ihre Nachricht"></textarea>
-        <button class="btn-neutral" onclick="submitSupport()" style="margin-top:10px">Anfrage senden</button>
+        <input id="support-subject" class="modal-input" placeholder="Betreff *" style="margin-bottom:0">
+        <textarea id="support-message" class="modal-input" style="min-height:110px;resize:vertical;margin-top:8px" placeholder="Ihre Nachricht *"></textarea>
+        <button id="support-submit-btn" class="btn-neutral" onclick="submitSupport()" style="margin-top:10px;min-width:150px;transition:all .2s">Anfrage senden</button>
         <div id="support-result" class="form-result"></div>
       </div>
 
@@ -572,20 +588,30 @@ function renderInvoices(invoices) {
   const list = document.getElementById('invoice-list');
   if (!invoices.length) { list.innerHTML = '<div class="muted-line">Noch keine Rechnungen gefunden.</div>'; return; }
   list.innerHTML = invoices.map(i => `
-    <label class="invoice-row" style="cursor:pointer">
-      <input type="checkbox" class="invoice-check" value="${i.pdf || i.url || '#'}" data-id="${i.id}">
-      <span class="invoice-meta"><strong>${i.nummer || i.id}</strong><span>${i.datum || '—'} · ${i.status || ''}</span></span>
-      <span class="invoice-amount">${i.betrag || ''}</span>
-      <a class="invoice-link" href="${i.pdf || i.url || '#'}" download target="_blank" onclick="event.stopPropagation()" style="display:inline-flex;align-items:center;gap:4px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);border-radius:6px;padding:.3rem .7rem;color:#a5b4fc;text-decoration:none;font-size:.78rem;font-weight:600;transition:all .2s" onmouseover="this.style.background='rgba(99,102,241,.22)'" onmouseout="this.style.background='rgba(99,102,241,.12)'">⬇ Download</a>
-    </label>`).join('');
+    <div class="invoice-row" onclick="toggleInvoiceRow(this)" data-url="${i.pdf || i.url || '#'}">
+      <input type="checkbox" class="invoice-check" value="${i.pdf || i.url || '#'}" data-id="${i.id || ''}">
+      <div class="inv-check-box"><span class="inv-check-icon">✓</span></div>
+      <div class="invoice-meta"><strong>${i.nummer || i.id}</strong><span>${i.datum || '—'} · ${i.status || ''}</span></div>
+      <div class="invoice-amount">${i.betrag || ''}</div>
+      <a class="invoice-dl-btn" href="${i.pdf || i.url || '#'}" download target="_blank" onclick="event.stopPropagation()">⬇ Download</a>
+    </div>`).join('');
+  updateInvoiceToggleLabel();
+}
+
+function toggleInvoiceRow(row) {
+  const cb = row.querySelector('.invoice-check');
+  if (!cb) return;
+  cb.checked = !cb.checked;
+  row.classList.toggle('checked', cb.checked);
   updateInvoiceToggleLabel();
 }
 
 function toggleAllInvoices() {
-  const checks = [...document.querySelectorAll('.invoice-check')];
+  const rows = [...document.querySelectorAll('.invoice-row')];
+  const checks = rows.map(r => r.querySelector('.invoice-check')).filter(Boolean);
   if (!checks.length) return;
   const allSelected = checks.every(c => c.checked);
-  checks.forEach(c => c.checked = !allSelected);
+  checks.forEach(c => { c.checked = !allSelected; c.closest('.invoice-row').classList.toggle('checked', !allSelected); });
   updateInvoiceToggleLabel();
 }
 
@@ -595,8 +621,6 @@ function updateInvoiceToggleLabel() {
   if (!btn || !checks.length) return;
   btn.textContent = checks.every(c => c.checked) ? 'Alle abwählen' : 'Alle auswählen';
 }
-
-document.addEventListener('change', e => { if (e.target.classList && e.target.classList.contains('invoice-check')) updateInvoiceToggleLabel(); });
 
 function downloadSelectedInvoices() {
   const selected = [...document.querySelectorAll('.invoice-check:checked')].map(c => c.value);
@@ -626,8 +650,47 @@ async function postPortalForm(url, payload, resultId) {
   } catch (err) { result.className = 'form-result err'; result.textContent = err.message; }
 }
 
-function submitSupport() {
-  postPortalForm(SUPPORT_WEBHOOK, {subject:document.getElementById('support-subject').value, message:document.getElementById('support-message').value}, 'support-result');
+async function submitSupport() {
+  const subject = document.getElementById('support-subject').value.trim();
+  const message = document.getElementById('support-message').value.trim();
+  const result = document.getElementById('support-result');
+  const btn = document.getElementById('support-submit-btn');
+
+  // Validation
+  if (!subject || !message) {
+    result.className = 'form-result err';
+    result.textContent = 'Bitte füllen Sie alle Felder aus (Betreff & Nachricht).';
+    return;
+  }
+
+  // Loading state
+  btn.disabled = true;
+  btn.textContent = 'Wird gesendet …';
+  btn.style.opacity = '.7';
+  result.className = 'form-result'; result.textContent = '';
+
+  const k = new URLSearchParams(window.location.search).get('k');
+  const body = new URLSearchParams();
+  body.set('k', k || ''); body.set('subject', subject); body.set('message', message);
+
+  try {
+    const res = await fetch(SUPPORT_WEBHOOK, {method: 'POST', body});
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.success) throw new Error(data.message || 'Die Anfrage konnte nicht gesendet werden.');
+    btn.textContent = '✓ Gesendet';
+    btn.style.opacity = '1';
+    btn.style.background = 'rgba(16,185,129,.15)';
+    btn.style.borderColor = 'rgba(16,185,129,.4)';
+    btn.style.color = '#86efac';
+    document.getElementById('support-subject').value = '';
+    document.getElementById('support-message').value = '';
+    result.className = 'form-result ok';
+    result.textContent = 'Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns in Kürze!';
+    setTimeout(() => { btn.disabled=false; btn.textContent='Anfrage senden'; btn.style.background=''; btn.style.borderColor=''; btn.style.color=''; btn.style.opacity='1'; }, 4000);
+  } catch (err) {
+    btn.disabled = false; btn.textContent = 'Anfrage senden'; btn.style.opacity = '1';
+    result.className = 'form-result err'; result.textContent = err.message;
+  }
 }
 
 /* Abo-Wechsel entfernt */
