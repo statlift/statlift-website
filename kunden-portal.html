@@ -245,7 +245,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 </style>
 </head>
 <body>
-<!-- portal-v1778788156 -->
+<!-- portal-v1778790767 -->
 
 <nav>
   <a href="https://www.statlift.de" class="logo" style="display:inline-block;"><img src="/header.png" alt="Statlift" style="height:auto;max-height:80px;max-width:40vw;width:auto;display:block;"></a>
@@ -576,10 +576,21 @@ function renderAccountStatus(data) {
   const endText = s.cancel_at_period_end ? (s.current_period_end || s.cancel_at || 'zum Periodenende') : (s.current_period_end || '—');
   const rawAbo = data.abo || data.plan || data.price_id || data.package || '';
   const paketName = aboDisplayName(rawAbo);
+  
+  let extraTiles = '';
+  if (paketName === 'Rundum-Sorglos' && data.start_datum) {
+    const start = new Date(data.start_datum);
+    if (!isNaN(start)) {
+      start.setMonth(start.getMonth() + 6);
+      extraTiles = `<div class="info-tile"><div class="label">Mindestlaufzeit bis</div><div class="value">${start.toLocaleDateString('de-DE')}</div></div>`;
+    }
+  }
+
   document.getElementById('account-status-box').innerHTML = `
     <div class="info-tile"><div class="label">Paket</div><div class="value">${paketName}</div></div>
     <div class="info-tile"><div class="label">Status</div><div class="value">${statusText}</div></div>
     <div class="info-tile"><div class="label">Nächste Abrechnung / Ende</div><div class="value">${endText}</div></div>
+    ${extraTiles}
     <div class="info-tile"><div class="label">Website</div><div class="value">${data.website || '—'}</div></div>`;
 }
 
