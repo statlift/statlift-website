@@ -286,7 +286,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="content">
 
 <!-- ── PORTAL OVERLAY ── -->
-<div id="portal-overlay" class="portal-overlay" onclick="if(event.target.id==='portal-overlay')closePortalOverlay()">
+<div id="portal-overlay" class="portal-overlay" style="display:none" onclick="if(event.target.id==='portal-overlay')closePortalOverlay()">
   <div class="portal-modal">
     <div class="portal-modal-head">
       <h2 id="portal-overlay-title">Status</h2>
@@ -582,8 +582,13 @@ function renderAccountStatus(data) {
   if (paketName === 'Rundum-Sorglos' && data.start_datum) {
     const start = new Date(data.start_datum);
     if (!isNaN(start)) {
-      start.setMonth(start.getMonth() + 6);
-      extraTiles = `<div class="info-tile"><div class="label">Mindestlaufzeit bis</div><div class="value">${start.toLocaleDateString('de-DE')}</div></div>`;
+      // Abo 3 hat 12 Monate Mindestlaufzeit
+      const earliestCancel = new Date(start.getTime());
+      earliestCancel.setFullYear(earliestCancel.getFullYear() + 1);
+      const today = new Date();
+      const stillLocked = earliestCancel > today;
+      const dateStr = earliestCancel.toLocaleDateString('de-DE');
+      extraTiles = `<div class="info-tile"><div class="label">${stillLocked ? 'Fr&uuml;hestens k&uuml;ndbar ab' : 'K&uuml;ndbar seit'}</div><div class="value">${dateStr}</div></div><div class="info-tile"><div class="label">Mindestlaufzeit</div><div class="value">12 Monate</div></div>`;
     }
   }
 
@@ -819,7 +824,10 @@ async function loadPortal() {
 
     document.getElementById('loading-state').style.display = 'none';
     document.getElementById('hero-section').style.display = 'block';
-    document.getElementById('filter-bar').style.display = 'flex';
+    // Filter-Bar nur zeigen wenn Artikel vorhanden
+    if (allArticles.length > 0) {
+      document.getElementById('filter-bar').style.display = 'flex';
+    }
 
     // Nav-Buttons anzeigen, Lade-Badge verstecken
     document.getElementById('nav-portal-btns').style.display = 'flex';
