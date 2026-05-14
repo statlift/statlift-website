@@ -158,6 +158,23 @@
     #cancel-result.ok{display:block;color:#86efac}
     #cancel-result.err{display:block;color:#fca5a5}
 
+    .portal-tabs{background:var(--surface);border:1px solid var(--border-s);border-radius:var(--r);padding:24px;margin-bottom:26px}
+    .portal-tab-panel h2{font-size:1.05rem;margin-bottom:8px;letter-spacing:-.02em}
+    .tab-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap;margin-bottom:16px}
+    .tab-head p,.muted-line{color:var(--muted);font-size:.86rem;line-height:1.7}
+    .tab-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px}
+    .info-tile{background:rgba(255,255,255,.035);border:1px solid var(--border-s);border-radius:12px;padding:14px}
+    .info-tile .label{font-size:.72rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+    .info-tile .value{font-size:.95rem;color:var(--text);font-weight:700}
+    .invoice-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+    .invoice-row{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;background:rgba(255,255,255,.035);border:1px solid var(--border-s);border-radius:12px;padding:12px 14px}
+    .invoice-row input{width:18px;height:18px;accent-color:#6366f1}
+    .invoice-meta{display:flex;flex-direction:column;gap:2px}.invoice-meta strong{font-size:.9rem}.invoice-meta span{font-size:.78rem;color:var(--muted)}
+    .invoice-amount{font-weight:700;color:var(--text);font-size:.88rem}.invoice-link{font-size:.8rem;color:var(--primary);text-decoration:none}
+    .form-result{display:none;margin-top:12px;font-size:.86rem}.form-result.ok{display:block;color:#86efac}.form-result.err{display:block;color:#fca5a5}
+    @media(max-width:640px){.invoice-row{grid-template-columns:auto 1fr}.invoice-amount,.invoice-link{grid-column:2}.tab-actions{width:100%}.tab-actions button{flex:1}}
+
     /* ── DATE SEPARATOR ── */
     .month-sep{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);padding:20px 0 8px;border-bottom:1px solid var(--border-s);margin-bottom:4px}
     .month-sep:first-child{padding-top:0}
@@ -232,12 +249,49 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
   <div id="account-section" class="account-card" style="display:none">
     <div>
-      <h2>Vertrag &amp; Kündigung</h2>
-      <p>Hier können Sie Ihr Statlift-Abonnement direkt über Ihr Kundenportal kündigen. Die Kündigung wird automatisch in Stripe zum Ende des aktuellen Abrechnungszeitraums vorgemerkt.</p>
+      <h2>Vertrag &amp; Kundenbereich</h2>
+      <p>Alles Wichtige zu Ihrem Abo, Ihren Rechnungen und direkten Kontaktmöglichkeiten an einem Ort.</p>
     </div>
     <div class="account-actions">
+      <button class="btn-neutral" onclick="showPortalTab('status')">Status</button>
+      <button class="btn-neutral" onclick="showPortalTab('invoices')">Rechnungen</button>
+      <button class="btn-neutral" onclick="showPortalTab('support')">Support</button>
+      <button class="btn-neutral" onclick="showPortalTab('switch')">Abo wechseln</button>
       <button class="btn-danger-soft" onclick="openCancelModal()">Abo kündigen</button>
     </div>
+  </div>
+
+  <div id="portal-tabs" class="portal-tabs" style="display:none">
+    <section id="tab-status" class="portal-tab-panel">
+      <h2>Abo-Status</h2>
+      <div id="account-status-box" class="info-grid"><div class="muted-line">Wird geladen …</div></div>
+    </section>
+
+    <section id="tab-invoices" class="portal-tab-panel" style="display:none">
+      <div class="tab-head">
+        <div><h2>Rechnungen</h2><p>Wählen Sie einzelne Rechnungen aus oder markieren Sie alle. Die ausgewählten Rechnungen werden Ihnen per E-Mail gesendet.</p></div>
+        <div class="tab-actions"><button class="btn-neutral" onclick="toggleAllInvoices()" id="toggle-invoices-btn">Alle auswählen</button><button class="btn-neutral" onclick="sendSelectedInvoices()">Ausgewählte senden</button></div>
+      </div>
+      <div id="invoice-list" class="invoice-list"><div class="muted-line">Rechnungen werden geladen …</div></div>
+    </section>
+
+    <section id="tab-support" class="portal-tab-panel" style="display:none">
+      <h2>Support-Anfrage</h2>
+      <p class="muted-line">Schreiben Sie uns direkt aus dem Portal. Ihre Kundendaten werden automatisch mitgeschickt.</p>
+      <input id="support-subject" class="modal-input" placeholder="Betreff">
+      <textarea id="support-message" class="modal-input" style="min-height:110px;resize:vertical" placeholder="Ihre Nachricht"></textarea>
+      <button class="btn-neutral" onclick="submitSupport()">Support-Anfrage senden</button>
+      <div id="support-result" class="form-result"></div>
+    </section>
+
+    <section id="tab-switch" class="portal-tab-panel" style="display:none">
+      <h2>Abo-Wechsel anfragen</h2>
+      <p class="muted-line">Wählen Sie Ihr gewünschtes Paket. Wir prüfen die Umstellung und melden uns.</p>
+      <select id="switch-package" class="modal-input"><option value="Abo 1 Einsteiger">Abo 1 Einsteiger</option><option value="Abo 2 Professionell">Abo 2 Professionell</option><option value="Abo 3 Rundum-Sorglos">Abo 3 Rundum-Sorglos</option></select>
+      <textarea id="switch-message" class="modal-input" style="min-height:90px;resize:vertical" placeholder="Optional: Was möchten Sie ändern?"></textarea>
+      <button class="btn-neutral" onclick="submitAboSwitch()">Abo-Wechsel anfragen</button>
+      <div id="switch-result" class="form-result"></div>
+    </section>
   </div>
   <div id="loading-state" class="state-box">
     <div class="spinner"></div>
@@ -277,6 +331,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <script>
 const WEBHOOK = 'https://admin.statlift.de/webhook/kunden-portal-daten';
 const CANCEL_WEBHOOK = 'https://admin.statlift.de/webhook/kunden-portal-kuendigung';
+const ACCOUNT_WEBHOOK = 'https://admin.statlift.de/webhook/kunden-portal-account';
+const INVOICE_SEND_WEBHOOK = 'https://admin.statlift.de/webhook/kunden-portal-rechnungen-senden';
+const SUPPORT_WEBHOOK = 'https://admin.statlift.de/webhook/kunden-portal-support';
+const ABO_SWITCH_WEBHOOK = 'https://admin.statlift.de/webhook/kunden-portal-abo-wechsel';
+let portalAccount = null;
 let allArticles = [];
 let currentPortal = null;
 let currentExpanded = {};
@@ -434,6 +493,108 @@ function filterArticles() {
 }
 
 
+
+function showPortalTab(name) {
+  ['status','invoices','support','switch'].forEach(t => {
+    const el = document.getElementById('tab-' + t);
+    if (el) el.style.display = (t === name ? 'block' : 'none');
+  });
+}
+
+async function loadAccountExtras() {
+  const k = new URLSearchParams(window.location.search).get('k');
+  if (!k) return;
+  try {
+    const res = await fetch(`${ACCOUNT_WEBHOOK}?k=${encodeURIComponent(k)}`);
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.message || 'Accountdaten konnten nicht geladen werden.');
+    portalAccount = data;
+    renderAccountStatus(data);
+    renderInvoices(data.invoices || []);
+    document.getElementById('portal-tabs').style.display = 'block';
+    showPortalTab('status');
+  } catch (err) {
+    const box = document.getElementById('account-status-box');
+    if (box) box.innerHTML = `<div class="muted-line">${err.message}</div>`;
+  }
+}
+
+function renderAccountStatus(data) {
+  const s = data.subscription || {};
+  const statusText = s.cancel_at_period_end ? 'Kündigung vorgemerkt' : (s.status === 'active' ? 'Aktiv' : (s.status || 'Unbekannt'));
+  const endText = s.cancel_at_period_end ? (s.current_period_end || s.cancel_at || 'zum Periodenende') : (s.current_period_end || '—');
+  document.getElementById('account-status-box').innerHTML = `
+    <div class="info-tile"><div class="label">Paket</div><div class="value">${data.abo || '—'}</div></div>
+    <div class="info-tile"><div class="label">Status</div><div class="value">${statusText}</div></div>
+    <div class="info-tile"><div class="label">Nächste Abrechnung / Ende</div><div class="value">${endText}</div></div>
+    <div class="info-tile"><div class="label">Website</div><div class="value">${data.website || '—'}</div></div>`;
+}
+
+function renderInvoices(invoices) {
+  const list = document.getElementById('invoice-list');
+  if (!invoices.length) { list.innerHTML = '<div class="muted-line">Noch keine Rechnungen gefunden.</div>'; return; }
+  list.innerHTML = invoices.map(i => `
+    <label class="invoice-row">
+      <input type="checkbox" class="invoice-check" value="${i.id}">
+      <span class="invoice-meta"><strong>${i.nummer || i.id}</strong><span>${i.datum || '—'} · ${i.status || ''}</span></span>
+      <span class="invoice-amount">${i.betrag || ''}</span>
+      <a class="invoice-link" href="${i.pdf || i.url || '#'}" target="_blank" onclick="event.stopPropagation()">Öffnen</a>
+    </label>`).join('');
+  updateInvoiceToggleLabel();
+}
+
+function toggleAllInvoices() {
+  const checks = [...document.querySelectorAll('.invoice-check')];
+  if (!checks.length) return;
+  const allSelected = checks.every(c => c.checked);
+  checks.forEach(c => c.checked = !allSelected);
+  updateInvoiceToggleLabel();
+}
+
+function updateInvoiceToggleLabel() {
+  const btn = document.getElementById('toggle-invoices-btn');
+  const checks = [...document.querySelectorAll('.invoice-check')];
+  if (!btn || !checks.length) return;
+  btn.textContent = checks.every(c => c.checked) ? 'Alle abwählen' : 'Alle auswählen';
+}
+
+document.addEventListener('change', e => { if (e.target.classList && e.target.classList.contains('invoice-check')) updateInvoiceToggleLabel(); });
+
+async function sendSelectedInvoices() {
+  const k = new URLSearchParams(window.location.search).get('k');
+  const selected = [...document.querySelectorAll('.invoice-check:checked')].map(c => c.value);
+  if (!selected.length) { showToast('Bitte mindestens eine Rechnung auswählen'); return; }
+  const body = new URLSearchParams(); body.set('k', k || ''); body.set('selected', selected.join(','));
+  try {
+    const res = await fetch(INVOICE_SEND_WEBHOOK, {method:'POST', body});
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.success) throw new Error(data.message || 'Rechnungen konnten nicht gesendet werden.');
+    showToast('✓ Rechnungen wurden per E-Mail gesendet');
+  } catch (err) { showToast(err.message); }
+}
+
+async function postPortalForm(url, payload, resultId) {
+  const k = new URLSearchParams(window.location.search).get('k');
+  const body = new URLSearchParams(); body.set('k', k || '');
+  Object.entries(payload).forEach(([a,b]) => body.set(a,b || ''));
+  const result = document.getElementById(resultId);
+  result.className = 'form-result'; result.style.display = 'none'; result.textContent = '';
+  try {
+    const res = await fetch(url, {method:'POST', body});
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.success) throw new Error(data.message || 'Die Anfrage konnte nicht gesendet werden.');
+    result.className = 'form-result ok'; result.textContent = data.message || 'Anfrage wurde gesendet.';
+  } catch (err) { result.className = 'form-result err'; result.textContent = err.message; }
+}
+
+function submitSupport() {
+  postPortalForm(SUPPORT_WEBHOOK, {subject:document.getElementById('support-subject').value, message:document.getElementById('support-message').value}, 'support-result');
+}
+
+function submitAboSwitch() {
+  postPortalForm(ABO_SWITCH_WEBHOOK, {paket:document.getElementById('switch-package').value, message:document.getElementById('switch-message').value}, 'switch-result');
+}
+
 function openCancelModal() {
   document.getElementById('cancel-modal').style.display = 'flex';
   document.documentElement.classList.add('modal-open');
@@ -537,6 +698,7 @@ async function loadPortal() {
     document.getElementById('loading-state').style.display = 'none';
     document.getElementById('hero-section').style.display = 'block';
     document.getElementById('account-section').style.display = 'flex';
+    loadAccountExtras();
     document.getElementById('filter-bar').style.display = 'flex';
 
     if (allArticles.length === 0) {
