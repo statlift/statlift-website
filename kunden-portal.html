@@ -379,7 +379,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div class="auth-pulse"><span></span><span></span><span></span></div>
       <p class="auth-state-text" style="font-size:.75rem;margin-top:12px">Warten auf Bestätigung…</p>
       <div id="auth-resend">
-        <button class="auth-link" onclick="showOverlayState('main','register')">Andere E-Mail verwenden</button>
+        <button class="auth-link" onclick="stopPolling();clearErrs();document.getElementById('reg-email').value='';document.getElementById('reg-pw').value='';document.getElementById('reg-pw2').value='';showOverlayState('main','register')">Andere E-Mail verwenden</button>
       </div>
     </div>
 
@@ -1073,6 +1073,7 @@ async function loadPortal() {
   function _renderGoogleButton(mode) {
     const container = document.getElementById('google-btn-container');
     if (!container) return;
+    container.innerHTML = '';
     // Callback setzen
     window._authGoogleCallback = async function(credential) {
       clearErrs();
@@ -1086,28 +1087,51 @@ async function loadPortal() {
         else showErr(_authMode === 'login' ? 'login-error' : 'reg-error', d.error || 'Google-Anmeldung fehlgeschlagen.');
       } catch { showErr(_authMode === 'login' ? 'login-error' : 'reg-error', 'Verbindungsfehler.'); }
     };
-    const label = mode === 'login' ? 'Mit Google anmelden' : 'Mit Google registrieren';
-    container.innerHTML =
-      '<button class="google-custom-btn" onclick="_triggerGoogle()" type="button">' +
-      '<svg width="20" height="20" viewBox="0 0 48 48" style="flex-shrink:0">' +
-      '<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>' +
-      '<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>' +
-      '<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>' +
-      '<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>' +
-      '</svg>' + label + '</button>';
+    // Google SDK renderButton (kein Popup — wird nicht vom Browser geblockt)
+    const tryRender = () => {
+      if (!window.google?.accounts?.id) { setTimeout(tryRender, 250); return; }
+      try {
+        google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: handleGoogleCredential,
+          auto_select: false,
+          cancel_on_tap_outside: true,
+          ux_mode: 'popup',
+        });
+        container.innerHTML = '';
+        google.accounts.id.renderButton(container, {
+          theme: 'filled_black',
+          size: 'large',
+          width: Math.min((container.offsetWidth || 348), 400),
+          text: mode === 'login' ? 'signin_with' : 'signup_with',
+          shape: 'pill',
+          logo_alignment: 'left',
+        });
+      } catch(e) {
+        // Fallback: custom button
+        const label = mode === 'login' ? 'Mit Google anmelden' : 'Mit Google registrieren';
+        container.innerHTML =
+          '<button class="google-custom-btn" onclick="window._gFallback()" type="button">' +
+          '<svg width="20" height="20" viewBox="0 0 48 48" style="flex-shrink:0">' +
+          '<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>' +
+          '<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>' +
+          '<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>' +
+          '<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>' +
+          '</svg>' + label + '</button>';
+      }
+    };
+    setTimeout(tryRender, 80);
   }
 
-  window._triggerGoogle = function() {
-    if (!window.google?.accounts?.id) { setTimeout(_triggerGoogle, 300); return; }
-    google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential, auto_select: false,
-    });
-    google.accounts.id.prompt(n => {
-      if (n.isNotDisplayed() || n.isSkippedMoment()) {
-        showErr(_authMode === 'login' ? 'login-error' : 'reg-error',
-          'Google-Anmeldung konnte nicht geöffnet werden. Bitte Popup-Blocker deaktivieren.');
-      }
-    });
+  window._gFallback = function() {
+    if (!window.google?.accounts?.id) return;
+    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential });
+    google.accounts.id.prompt();
+  };
+
+  /* ─── Polling stoppen (global zugänglich) ─── */
+  window.stopPolling = function() {
+    if (_pollTimer) { clearInterval(_pollTimer); _pollTimer = null; }
   };
 
   function hideOverlay() {
