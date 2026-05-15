@@ -1045,24 +1045,23 @@ async function loadPortal() {
   function showOverlayState(state, mode, provider) {
     const overlay = document.getElementById('auth-overlay');
     overlay.style.display = 'flex';
-    // Provider-Sichtbarkeit: nur die registrierte Methode zeigen (nur im Login-Mode)
+    // Provider-Sichtbarkeit:
+    //   provider='google' -> nur Google (kein Email/PW Feld) - Google-only Konten
+    //   provider='email' oder 'both' oder null -> beides zeigen (Email-User koennen auch Google nutzen)
     const overlayEl = document.getElementById('auth-overlay');
     const googleBox = overlayEl && overlayEl.querySelector('#google-btn-container');
     const divider = overlayEl && overlayEl.querySelector('.auth-divider');
     const formLogin = document.getElementById('form-login');
-    if (mode === 'login' && provider === 'email') {
-      // Nur Email-Login
-      if (googleBox) googleBox.style.display = 'none';
-      if (divider) divider.style.display = 'none';
-    } else if (mode === 'login' && provider === 'google') {
-      // Nur Google-Login
+    if (mode === 'login' && provider === 'google') {
+      // Nur Google-Login (kein Email/PW Feld)
       if (googleBox) googleBox.style.display = '';
       if (divider) divider.style.display = 'none';
       if (formLogin) formLogin.style.display = 'none';
     } else {
-      // both / register / unbekannt -> alles wieder einblenden
+      // Default: alles zeigen (Email-User darf zusaetzlich Google nutzen)
       if (googleBox) googleBox.style.display = '';
       if (divider) divider.style.display = '';
+      // formLogin Sichtbarkeit wird vom showOverlayState mode-toggle gesetzt
     }
     ['auth-state-main','auth-state-verify-pending','auth-state-verified-other'].forEach(id => {
       const el = document.getElementById(id);
