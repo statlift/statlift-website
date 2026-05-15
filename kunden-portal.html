@@ -1044,9 +1044,24 @@ async function loadPortal() {
 
   let _authMode = 'login'; // 'login' | 'register'
 
-  function showOverlayState(state, mode) {
+  function showOverlayState(state, mode, provider) {
     const overlay = document.getElementById('auth-overlay');
     overlay.style.display = 'flex';
+    // Provider-Sichtbarkeit: zeige nur die Methode mit der man registriert ist
+    if (mode === 'login' && provider) {
+      const emailForm = document.getElementById('form-login');
+      const googleBtn = document.getElementById('google-btn-login');
+      const divider = document.getElementById('login-divider');
+      if (emailForm) emailForm.style.display = (provider === 'google') ? 'none' : '';
+      if (googleBtn) googleBtn.style.display = (provider === 'email') ? 'none' : '';
+      if (divider) divider.style.display = (provider === 'both') ? '' : 'none';
+    } else {
+      // register oder unbekannter provider -> alles zeigen
+      ['form-login','form-register','google-btn-login','google-btn-register','login-divider','register-divider'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = '';
+      });
+    }
     ['auth-state-main','auth-state-verify-pending','auth-state-verified-other'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.style.display = 'none';
@@ -1176,12 +1191,15 @@ async function loadPortal() {
 
   /* ─── Auth-Status für Portal prüfen (registriert oder nicht) ─── */
   async function getAuthMode(slug) {
-    if (!slug) return 'register';
+    if (!slug) return { mode: 'register', provider: null };
     try {
       const r = await fetch(`${AUTH}/auth-status?slug=${encodeURIComponent(slug)}`);
       const d = await r.json();
-      return d.has_account ? 'login' : 'register';
-    } catch { return 'register'; }
+      return {
+        mode: d.has_account ? 'login' : 'register',
+        provider: d.provider || null  // 'email' | 'google' | 'both' | null
+      };
+    } catch { return { mode: 'register', provider: null }; }
   }
 
   /* ─── Passwort anzeigen ─── */
@@ -1313,12 +1331,15 @@ async function loadPortal() {
   }
 
   /* ─── LOGOUT ─── */
-  window.logoutPortal = function() {
-    clearSession();
+  window.logoutPortal = async function() {
     if (_pollTimer) clearInterval(_pollTimer);
-    // Session serverseitig invalidieren (best-effort)
+    // Token VOR clearSession lesen
     const tok = getSession();
-    if (tok) fetch(AUTH + '/auth-logout?token=' + tok).catch(() => {});
+    // Serverseitig invalidieren UND auf Antwort warten
+    if (tok) {
+      try { await fetch(AUTH + '/auth-logout?token=' + encodeURIComponent(tok)); } catch {}
+    }
+    clearSession();
     window.location.reload();
   };
 
@@ -1360,22 +1381,35 @@ async function loadPortal() {
         }
       } catch {}
       // Token ungültig → passendes Formular + Fehlermeldung
-      const mode = await getAuthMode(getSlug());
-      showOverlayState('main', mode);
+      const { mode, provider } = await getAuthMode(getSlug());
+      showOverlayState('main', mode, provider);
       showErr(mode === 'login' ? 'login-error' : 'reg-error', 'Der Bestätigungslink ist abgelaufen oder ungültig.');
       return;
     }
 
-    // ② Gespeicherte Session vorhanden → Portal sofort laden
+    // ② Gespeicherte Session vorhanden -> serverseitig validieren
     const token = getSession();
     if (token) {
-      loadPortal();
-      return;
+      try {
+        const r = await fetch(`${AUTH}/auth-session?token=${encodeURIComponent(token)}`);
+        const d = await r.json();
+        if (d && d.valid) {
+          // Session gueltig - Portal laden, Session wird serverseitig automatisch verlaengert
+          loadPortal();
+          return;
+        }
+        // Token abgelaufen / ungueltig -> Session loeschen, weiter zu Login
+        clearSession();
+      } catch {
+        // Netzwerkfehler beim Validieren -> trotzdem Portal versuchen (offline-tolerant)
+        loadPortal();
+        return;
+      }
     }
 
-    // ③ Kein Token → Login/Register anzeigen
-    const mode = await getAuthMode(getSlug());
-    showOverlayState('main', mode);
+    // ③ Kein gueltiger Token -> Login/Register anzeigen
+    const { mode, provider } = await getAuthMode(getSlug());
+    showOverlayState('main', mode, provider);
   }
 
   // Starten
