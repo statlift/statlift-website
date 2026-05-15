@@ -741,7 +741,7 @@ function renderAccountStatus(data) {
   if (paketName === 'Rundum-Sorglos' && data.start_datum) {
     const start = new Date(data.start_datum);
     if (!isNaN(start)) {
-      start.setMonth(start.getMonth() + 6);
+      start.setMonth(start.getMonth() + 12);
       extraTiles = `<div class="info-tile"><div class="label">Mindestlaufzeit bis</div><div class="value">${start.toLocaleDateString('de-DE')}</div></div>`;
     }
   }
