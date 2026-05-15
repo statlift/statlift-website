@@ -378,9 +378,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div class="auth-spinner"></div>
       <div class="auth-pulse"><span></span><span></span><span></span></div>
       <p class="auth-state-text" style="font-size:.75rem;margin-top:12px">Warten auf Bestätigung…</p>
-      <div id="auth-resend">
-        <button class="auth-link" onclick="stopPolling();clearErrs();document.getElementById('reg-email').value='';document.getElementById('reg-pw').value='';document.getElementById('reg-pw2').value='';showOverlayState('main','register')">Andere E-Mail verwenden</button>
-      </div>
+      
     </div>
 
     <!-- ── State: E-Mail auf anderem Gerät bestätigt ── -->
@@ -1407,8 +1405,8 @@ async function loadPortal() {
           // Wirklich expired/invalid -> Session loeschen
           clearSession();
         }
-        // Bei slug_mismatch: Session bleibt fuer das Original-Portal gueltig,
-        // wir zeigen hier nur Login fuer das aktuelle Portal an.
+        // Bei slug_mismatch: Session bleibt für das Original-Portal gültig,
+        // wir zeigen hier nur Login für das aktuelle Portal an.
       } catch {
         // Netzwerkfehler beim Validieren -> trotzdem Portal versuchen (offline-tolerant)
         loadPortal();
