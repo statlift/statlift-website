@@ -323,6 +323,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <div id="auth-mode-title" style="font-size:1.15rem;font-weight:700;margin-bottom:4px"></div>
         <div id="auth-mode-sub" style="font-size:.82rem;color:var(--muted)"></div>
       </div>
+      <div id="auth-error-global" class="auth-error" style="margin-bottom:12px"></div>
 
       <!-- Google Button Container (wird vom SDK gerendert) -->
       <div id="google-btn-container" style="margin-bottom:4px;min-height:44px"></div>
@@ -1117,8 +1118,8 @@ async function loadPortal() {
         });
         const d = await r.json();
         if (d.success) { storeSession(d.session_token); hideOverlay(); loadPortal(); }
-        else showErr(_authMode === 'login' ? 'login-error' : 'reg-error', d.error || 'Google-Anmeldung fehlgeschlagen.');
-      } catch { showErr(_authMode === 'login' ? 'login-error' : 'reg-error', 'Verbindungsfehler.'); }
+        else showErr('auth-error-global', d.error || 'Google-Anmeldung fehlgeschlagen.');
+      } catch { showErr('auth-error-global', 'Verbindungsfehler.'); }
     };
     // Google SDK renderButton (kein Popup — wird nicht vom Browser geblockt)
     const tryRender = () => {
@@ -1180,7 +1181,7 @@ async function loadPortal() {
   }
 
   function clearErrs() {
-    ['login-error','reg-error'].forEach(id => {
+    ['login-error','reg-error','auth-error-global'].forEach(id => {
       const el = document.getElementById(id);
       if (el) { el.textContent = ''; el.classList.remove('show'); }
     });
@@ -1308,8 +1309,8 @@ async function loadPortal() {
         });
         const d = await r.json();
         if (d.success) { storeSession(d.session_token); hideOverlay(); loadPortal(); }
-        else showErr(mode === 'login' ? 'login-error' : 'reg-error', d.error || 'Google-Anmeldung fehlgeschlagen.');
-      } catch { showErr(mode === 'login' ? 'login-error' : 'reg-error','Verbindungsfehler.'); }
+        else showErr('auth-error-global', d.error || 'Google-Anmeldung fehlgeschlagen.');
+      } catch { showErr('auth-error-global','Verbindungsfehler.'); }
     };
     google.accounts.id.initialize({
       client_id: GOOGLE_CLIENT_ID,
@@ -1390,7 +1391,7 @@ async function loadPortal() {
       // Token ungültig → passendes Formular + Fehlermeldung
       const { mode, provider } = await getAuthMode(getSlug());
       showOverlayState('main', mode, provider);
-      showErr(mode === 'login' ? 'login-error' : 'reg-error', 'Der Bestätigungslink ist abgelaufen oder ungültig.');
+      showErr('auth-error-global', 'Der Bestätigungslink ist abgelaufen oder ungültig.');
       return;
     }
 
