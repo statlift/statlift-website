@@ -1047,20 +1047,24 @@ async function loadPortal() {
   function showOverlayState(state, mode, provider) {
     const overlay = document.getElementById('auth-overlay');
     overlay.style.display = 'flex';
-    // Provider-Sichtbarkeit: zeige nur die Methode mit der man registriert ist
-    if (mode === 'login' && provider) {
-      const emailForm = document.getElementById('form-login');
-      const googleBtn = document.getElementById('google-btn-login');
-      const divider = document.getElementById('login-divider');
-      if (emailForm) emailForm.style.display = (provider === 'google') ? 'none' : '';
-      if (googleBtn) googleBtn.style.display = (provider === 'email') ? 'none' : '';
-      if (divider) divider.style.display = (provider === 'both') ? '' : 'none';
+    // Provider-Sichtbarkeit: nur die registrierte Methode zeigen (nur im Login-Mode)
+    const overlayEl = document.getElementById('auth-overlay');
+    const googleBox = overlayEl && overlayEl.querySelector('#google-btn-container');
+    const divider = overlayEl && overlayEl.querySelector('.auth-divider');
+    const formLogin = document.getElementById('form-login');
+    if (mode === 'login' && provider === 'email') {
+      // Nur Email-Login
+      if (googleBox) googleBox.style.display = 'none';
+      if (divider) divider.style.display = 'none';
+    } else if (mode === 'login' && provider === 'google') {
+      // Nur Google-Login
+      if (googleBox) googleBox.style.display = '';
+      if (divider) divider.style.display = 'none';
+      if (formLogin) formLogin.style.display = 'none';
     } else {
-      // register oder unbekannter provider -> alles zeigen
-      ['form-login','form-register','google-btn-login','google-btn-register','login-divider','register-divider'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = '';
-      });
+      // both / register / unbekannt -> alles wieder einblenden
+      if (googleBox) googleBox.style.display = '';
+      if (divider) divider.style.display = '';
     }
     ['auth-state-main','auth-state-verify-pending','auth-state-verified-other'].forEach(id => {
       const el = document.getElementById(id);
