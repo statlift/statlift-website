@@ -1395,7 +1395,7 @@ async function loadPortal() {
     const token = getSession();
     if (token) {
       try {
-        const r = await fetch(`${AUTH}/auth-session?token=${encodeURIComponent(token)}`);
+        const r = await fetch(`${AUTH}/auth-session?token=${encodeURIComponent(token)}&slug=${encodeURIComponent(getSlug())}`);
         const d = await r.json();
         if (d && d.valid) {
           // Session gueltig - Portal laden, Session wird serverseitig automatisch verlaengert
