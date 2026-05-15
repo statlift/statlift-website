@@ -1027,9 +1027,20 @@ async function loadPortal() {
     return new URLSearchParams(window.location.search).get('k') || '';
   }
 
-  function storeSession(token) { localStorage.setItem(SESSION_KEY, token); }
-  function getSession()        { return localStorage.getItem(SESSION_KEY); }
-  function clearSession()      { localStorage.removeItem(SESSION_KEY); }
+  const COOKIE_KEY = 'sl_sess';
+  function storeSession(token) {
+    try { localStorage.setItem(SESSION_KEY, token); } catch(e) {}
+    try { document.cookie = COOKIE_KEY + '=' + token + '; path=/; max-age=' + (90*24*3600) + '; SameSite=Lax'; } catch(e) {}
+  }
+  function getSession() {
+    try { const t = localStorage.getItem(SESSION_KEY); if (t) return t; } catch(e) {}
+    try { const m = document.cookie.match(new RegExp(COOKIE_KEY + '=([^;]+)')); if (m) return m[1]; } catch(e) {}
+    return null;
+  }
+  function clearSession() {
+    try { localStorage.removeItem(SESSION_KEY); } catch(e) {}
+    try { document.cookie = COOKIE_KEY + '=; path=/; max-age=0'; } catch(e) {}
+  }
 
   let _authMode = 'login'; // 'login' | 'register'
 
