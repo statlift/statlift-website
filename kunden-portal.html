@@ -1355,22 +1355,18 @@ async function loadPortal() {
       return;
     }
 
-    // ② Gespeicherte Session prüfen
+    // ② Gespeicherte Session vorhanden → Portal sofort laden
     const token = getSession();
     if (token) {
-      try {
-        const r = await fetch(`${AUTH}/auth-session?token=${encodeURIComponent(token)}`);
-        const d = await r.json();
-        if (d.valid) { loadPortal(); return; }
-        // Server sagt explizit ungültig → Session löschen
-        clearSession();
-      } catch {
-        // Netzwerkfehler → Session NICHT löschen, trotzdem Login zeigen
-        // Token bleibt erhalten für nächsten Reload
-      }
+      loadPortal();
+      // Hintergrund-Validierung: Token prüfen und ggf. invalidieren
+      fetch(`${AUTH}/auth-session?token=${encodeURIComponent(token)}`, { cache: 'no-store' })
+        .then(r => r.json()).then(d => { if (!d.valid) clearSession(); })
+        .catch(() => {});
+      return;
     }
 
-    // ③ Kein gültiger Token → Status prüfen und richtiges Formular zeigen
+    // ③ Kein Token → Login/Register anzeigen
     const mode = await getAuthMode(getSlug());
     showOverlayState('main', mode);
   }
