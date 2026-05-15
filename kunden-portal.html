@@ -1096,7 +1096,6 @@ async function loadPortal() {
           callback: handleGoogleCredential,
           auto_select: false,
           cancel_on_tap_outside: true,
-          ux_mode: 'popup',
         });
         container.innerHTML = '';
         google.accounts.id.renderButton(container, {
