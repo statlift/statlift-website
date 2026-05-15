@@ -307,6 +307,83 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 #auth-resend{text-align:center;margin-top:16px}
 </style>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
+<style id="mobile-portal-css">
+@media (max-width: 768px) {
+  /* Logo kompakter damit die Nav-Buttons Platz haben */
+  nav img[alt="Statlift"],
+  #navbar img[alt="Statlift"] {
+    max-height: 44px !important;
+    max-width: 38vw !important;
+    height: auto !important;
+    width: auto !important;
+  }
+  /* Nav-Bar darf umbrechen, Buttons in eigener Zeile unter dem Logo */
+  nav {
+    padding: 10px 14px !important;
+    min-height: auto !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  nav .logo {
+    order: 1;
+    flex: 0 0 auto;
+  }
+  /* Nav-Right voll auf eigene Zeile */
+  .nav-right {
+    order: 2 !important;
+    flex-basis: 100% !important;
+    width: 100% !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+    padding-bottom: 4px;
+  }
+  /* Badge auf Mobile aus */
+  .badge-portal {
+    display: none !important;
+  }
+  /* Buttons gleichmaessig verteilt, mit Wrap auf zweite Zeile wenn noetig */
+  .nav-btn, .nav-btn-danger {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    font-size: 0.72rem !important;
+    padding: 0.55rem 0.45rem !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+  /* Abo kuendigen Button auf Mobile als Voll-Breite zweite Zeile damit es auffaellt */
+  #cancel-btn {
+    flex-basis: 100% !important;
+    margin-top: 4px;
+  }
+  /* Hero kompakter */
+  .hero {
+    padding: 32px 18px 24px !important;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 6vw, 2.4rem) !important;
+  }
+  /* Stat-Cards: 2 pro Zeile statt 4 */
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  /* Filter-Bar mobile: vertikal */
+  .filter-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 14px !important;
+  }
+  /* Modal mobile: weniger Padding */
+  .modal-card, .portal-modal {
+    padding: 0 !important;
+  }
+  .portal-modal-body, .modal-card > * {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+</style>
 </head>
 <body>
 
