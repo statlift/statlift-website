@@ -1362,8 +1362,12 @@ async function loadPortal() {
         const r = await fetch(`${AUTH}/auth-session?token=${encodeURIComponent(token)}`);
         const d = await r.json();
         if (d.valid) { loadPortal(); return; }
-      } catch {}
-      clearSession();
+        // Server sagt explizit ungültig → Session löschen
+        clearSession();
+      } catch {
+        // Netzwerkfehler → Session NICHT löschen, trotzdem Login zeigen
+        // Token bleibt erhalten für nächsten Reload
+      }
     }
 
     // ③ Kein gültiger Token → Status prüfen und richtiges Formular zeigen
