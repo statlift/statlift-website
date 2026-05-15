@@ -1402,8 +1402,13 @@ async function loadPortal() {
           loadPortal();
           return;
         }
-        // Token abgelaufen / ungueltig -> Session loeschen, weiter zu Login
-        clearSession();
+        // Token ungueltig oder gehoert zu anderem Portal
+        if (!d || !d.slug_mismatch) {
+          // Wirklich expired/invalid -> Session loeschen
+          clearSession();
+        }
+        // Bei slug_mismatch: Session bleibt fuer das Original-Portal gueltig,
+        // wir zeigen hier nur Login fuer das aktuelle Portal an.
       } catch {
         // Netzwerkfehler beim Validieren -> trotzdem Portal versuchen (offline-tolerant)
         loadPortal();
