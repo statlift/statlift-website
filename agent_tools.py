@@ -58,7 +58,7 @@ def _get_piapi_key() -> str:
 
 def _piapi_headers() -> dict[str, str]:
     return {
-        "Authorization": f"Bearer {_get_piapi_key()}",
+        "x-api-key": _get_piapi_key(),
         "Content-Type": "application/json",
         "Accept": "application/json",
     }
@@ -116,6 +116,22 @@ def _extract_video_url(task_data: dict[str, Any]) -> str | None:
         container = task_data.get(container_key)
         if isinstance(container, dict):
             candidates.extend([container.get("video_url"), container.get("url"), container.get("output_url")])
+    output = task_data.get("output")
+    if isinstance(output, dict):
+        video = output.get("video")
+        if isinstance(video, str):
+            candidates.append(video)
+        if isinstance(video, dict):
+            candidates.extend([video.get("resource_without_watermark"), video.get("resource"), video.get("url")])
+        works = output.get("works")
+        if isinstance(works, list):
+            for work in works:
+                if isinstance(work, dict):
+                    video = work.get("video")
+                    if isinstance(video, dict):
+                        candidates.extend([video.get("resource_without_watermark"), video.get("resource"), video.get("url")])
+                    elif isinstance(video, str):
+                        candidates.append(video)
     for list_key in ("videos", "assets", "files"):
         value = task_data.get(list_key)
         if isinstance(value, list):
@@ -132,7 +148,7 @@ def generate_kling_asset(
     prompt: str,
     output_name: str,
     *,
-    model: str = "kling-3.0",
+    model: str = "kling",
     duration: int = 5,
     aspect_ratio: str = "16:9",
     poll_interval_seconds: int = 8,
@@ -165,6 +181,10 @@ def generate_kling_asset(
             "prompt": prompt,
             "duration": duration,
             "aspect_ratio": aspect_ratio,
+            "enable_audio": False,
+            "prefer_multi_shots": False,
+            "mode": "std",
+            "version": "3.0",
         },
     }
 
