@@ -811,8 +811,14 @@ async function loadAccountExtras() {
 
 function renderAccountStatus(data) {
   const s = data.subscription || {};
-  const isCancelled = s.cancel_at_period_end || (s.status !== 'active' && s.status !== 'trialing');
-  const statusText = s.cancel_at_period_end ? 'Kündigung vorgemerkt' : (s.status === 'active' ? 'Aktiv' : (s.status || 'Unbekannt'));
+  // Strict cancelled detection: nur wenn Stripe explizit cancelled/canceled meldet
+  // ODER cancel_at_period_end=true. Leere subscription -> NICHT als cancelled werten,
+  // damit der Cancel-Button bei Stripe-Lookup-Fehlern weiterhin klickbar bleibt.
+  const explicitlyCancelled = s.cancel_at_period_end === true
+    || s.status === 'canceled' || s.status === 'cancelled'
+    || s.status === 'incomplete_expired' || s.status === 'unpaid';
+  const isCancelled = explicitlyCancelled;
+  const statusText = s.cancel_at_period_end ? 'Kündigung vorgemerkt' : (s.status === 'active' ? 'Aktiv' : (s.status === 'trialing' ? 'Testphase' : (s.status || 'Aktiv')));
   const endText = s.current_period_end ? s.current_period_end : (s.cancel_at_period_end ? 'zum Periodenende' : '—');
   const rawAbo = data.abo || data.plan || data.price_id || data.package || '';
   const paketName = aboDisplayName(rawAbo);
@@ -826,14 +832,16 @@ function renderAccountStatus(data) {
     }
   }
 
-  // Update cancel button if already cancelled
+  // Update cancel button. WICHTIG: onclick NIEMALS auf null setzen - sonst kann
+  // der User nicht mehr klicken wenn renderAccountStatus mit unvollstaendigen
+  // Stripe-Daten aufgerufen wird. Stattdessen Klick-Verhalten konditional.
   const cancelBtn = document.getElementById('cancel-btn');
   if (cancelBtn) {
     if (isCancelled) {
       cancelBtn.textContent = 'Abo gekündigt';
-      cancelBtn.onclick = null;
-      cancelBtn.style.opacity = '0.5';
-      cancelBtn.style.cursor = 'not-allowed';
+      cancelBtn.onclick = function(){ showToast('Ihr Abo ist bereits gekündigt.'); };
+      cancelBtn.style.opacity = '0.55';
+      cancelBtn.style.cursor = 'default';
     } else {
       cancelBtn.textContent = 'Abo kündigen';
       cancelBtn.onclick = openCancelModal;
@@ -999,6 +1007,25 @@ async function submitCancellation() {
     result.textContent = data.message || 'Ihre Kündigung wurde bestätigt.';
     btn.textContent = 'Gekündigt';
     showToast('✓ Kündigung wurde bestätigt');
+
+    // Sofortiges UI-Update: Cancel-Btn im Nav umstellen, ohne auf Reload zu warten.
+    const navBtn = document.getElementById('cancel-btn');
+    if (navBtn) {
+      navBtn.textContent = 'Abo gekündigt';
+      navBtn.onclick = function(){ showToast('Ihr Abo ist bereits gekündigt.'); };
+      navBtn.style.opacity = '0.55';
+      navBtn.style.cursor = 'default';
+    }
+    // Account-Status-Box optimistisch markieren (Stripe-Webhook propagiert ggf. erst spaeter)
+    if (typeof portalAccount === 'object' && portalAccount) {
+      portalAccount.subscription = portalAccount.subscription || {};
+      portalAccount.subscription.cancel_at_period_end = true;
+      if (data.endet_am) portalAccount.subscription.current_period_end = data.endet_am;
+      try { renderAccountStatus(portalAccount); } catch(e){}
+    }
+
+    // Modal nach 2.5 Sek automatisch schliessen
+    setTimeout(closeCancelModal, 2500);
   } catch (err) {
     result.className = 'err';
     result.textContent = err.message || 'Es ist ein Fehler aufgetreten. Bitte kontaktieren Sie team@statlift.de.';
