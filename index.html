@@ -6428,10 +6428,12 @@ html.modal-open,body.modal-open{overflow:hidden!important}
         .motion-showcase {
             position: relative;
             height: 420vh;
+            min-height: 100vh;
             background: #000;
             overflow: clip;
-            border-top: 1px solid rgba(255,255,255,0.08);
+            border-top: 0;
             border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-top: 0;
         }
         .motion-sticky {
             position: sticky;
@@ -6464,11 +6466,12 @@ html.modal-open,body.modal-open{overflow:hidden!important}
             z-index: 2;
             width: min(1120px, calc(100% - 40px));
             margin: 0 auto;
-            padding-top: min(26vh, 240px);
+            padding-top: min(18vh, 170px);
             text-align: center;
             transform: translateY(var(--motion-copy-y, 0));
             opacity: var(--motion-copy-opacity, 1);
-            transition: opacity .12s linear;
+            transition: opacity .12s linear, transform .12s linear;
+            will-change: transform, opacity;
         }
         .motion-copy h2 {
             max-width: 980px;
@@ -6553,6 +6556,20 @@ html.modal-open,body.modal-open{overflow:hidden!important}
             .motion-copy h2 { font-size: clamp(2.4rem, 13vw, 4.8rem); }
             .motion-copy p { font-size: 1rem; }
             .motion-pill-row span { font-size: .68rem; }
+        }
+
+        .problem-card,
+        .methode-col,
+        .pricing-card,
+        .faq-item,
+        .blog-card {
+            will-change: transform, opacity;
+        }
+
+        .problem-card:hover,
+        .pricing-card:hover,
+        .faq-item:hover {
+            transform: translateY(-4px);
         }
         @media (prefers-reduced-motion: reduce) {
             .motion-showcase { height: auto; min-height: 100vh; }
@@ -6706,6 +6723,8 @@ html.modal-open,body.modal-open{overflow:hidden!important}
 
 
 
+            <a href="#motion-showcase">Motion</a>
+
             <a href="#methode">Methode</a>
 
 
@@ -6734,6 +6753,32 @@ html.modal-open,body.modal-open{overflow:hidden!important}
 
 
 
+
+
+    <!-- ══════ MOTION WEBSITE SHOWCASE ══════ -->
+
+    <section id="motion-showcase" class="motion-showcase" aria-label="Premium Website Animation Demo">
+        <div class="motion-sticky">
+            <canvas id="motion-canvas" width="1600" height="900" aria-label="Scrollgesteuerte Premium-Webdesign Animation"></canvas>
+            <div class="motion-vignette"></div>
+            <div class="motion-copy">
+                <span class="eyebrow">Neu: Website Motion</span>
+                <h2>Websites, die nicht nur sichtbar sind. Sondern im Kopf bleiben.</h2>
+                <p>Für Kunden, die sofort hochwertig wirken wollen: klare Strategie, schnelle Technik und Apple-artige Scroll-Erlebnisse mit individuellen 3D-Visuals.</p>
+                <div class="motion-pill-row">
+                    <span>HTML/CSS</span>
+                    <span>Canvas Scroll</span>
+                    <span>3D Motion</span>
+                    <span>Vercel Deployment</span>
+                </div>
+                <div class="motion-actions">
+                    <a href="#panel-einmal" class="btn btn-glow">Website-Pakete ansehen →</a>
+                    <a href="#gratis" class="btn btn-outline">Kostenlos starten</a>
+                </div>
+            </div>
+            <div class="motion-progress" aria-hidden="true"><span></span></div>
+        </div>
+    </section>
 
 
     <!-- ══════ HERO ══════ -->
@@ -6827,31 +6872,6 @@ html.modal-open,body.modal-open{overflow:hidden!important}
 
 
 
-
-    <!-- ══════ MOTION WEBSITE SHOWCASE ══════ -->
-
-    <section id="motion-showcase" class="motion-showcase" aria-label="Premium Website Animation Demo">
-        <div class="motion-sticky">
-            <canvas id="motion-canvas" width="1600" height="900" aria-label="Scrollgesteuerte Premium-Webdesign Animation"></canvas>
-            <div class="motion-vignette"></div>
-            <div class="motion-copy">
-                <span class="eyebrow">Neu: Website Motion</span>
-                <h2>Websites, die nicht nur sichtbar sind. Sondern im Kopf bleiben.</h2>
-                <p>Für Kunden, die sofort hochwertig wirken wollen: klare Strategie, schnelle Technik und Apple-artige Scroll-Erlebnisse mit KI-generierten 3D-Visuals.</p>
-                <div class="motion-pill-row">
-                    <span>HTML/CSS</span>
-                    <span>Canvas Scroll</span>
-                    <span>Kling AI 3D</span>
-                    <span>Vercel Deployment</span>
-                </div>
-                <div class="motion-actions">
-                    <a href="#panel-einmal" class="btn btn-glow">Website-Pakete ansehen →</a>
-                    <a href="#gratis" class="btn btn-outline">Kostenlos starten</a>
-                </div>
-            </div>
-            <div class="motion-progress" aria-hidden="true"><span></span></div>
-        </div>
-    </section>
 
     <!-- ══════ PROBLEM ══════ -->
 
@@ -8758,7 +8778,7 @@ html.modal-open,body.modal-open{overflow:hidden!important}
 
                             <li><span class="ck" style="color:#fbbf24;">✓</span> Scroll-Animationen, Reveal-Effekte und hochwertige Interaktionen</li>
 
-                            <li><span class="ck" style="color:#fbbf24;">✓</span> KI-generierte 3D-/Motion-Assets via Kling AI, passend zu Ihrer Marke</li>
+                            <li><span class="ck" style="color:#fbbf24;">✓</span> Individuelle 3D-/Motion-Assets, passend zu Ihrer Marke</li>
 
                             <li><span class="ck" style="color:#fbbf24;">✓</span> Canvas-Sequenzen für flüssige Produkt- oder Marken-Reveals</li>
 
@@ -8766,7 +8786,7 @@ html.modal-open,body.modal-open{overflow:hidden!important}
 
                         </ul>
 
-                        <div style="margin-top:auto;padding:12px 14px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.24);border-radius:8px;font-size:0.8rem;color:#f8fafc;line-height:1.7;margin-bottom:12px;"><strong style="color:#fbbf24;">Einrichtung:</strong> Wir definieren Look, Bewegung und Storyboard. Kling AI rendert die visuellen Assets, danach bauen wir die Scroll-Erfahrung sauber in die Website ein.<br><span style="color:#9ca3af;font-size:0.75rem;">Nur nach dem Abschluss erforderlich.</span><br><a href="website.html" style="color:#fbbf24;text-decoration:none;font-weight:700;">Motion-Briefing starten ➔</a></div>
+                        <div style="margin-top:auto;padding:12px 14px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.24);border-radius:8px;font-size:0.8rem;color:#f8fafc;line-height:1.7;margin-bottom:12px;"><strong style="color:#fbbf24;">Einrichtung:</strong> Wir definieren Look, Bewegung und Storyboard. Danach bauen wir die Scroll-Erfahrung sauber, performant und markengerecht in die Website ein.<br><span style="color:#9ca3af;font-size:0.75rem;">Nur nach dem Abschluss erforderlich.</span><br><a href="website.html" style="color:#fbbf24;text-decoration:none;font-weight:700;">Motion-Briefing starten ➔</a></div>
 
                         <a href="https://buy.stripe.com/7sY6oGdHGb7U15o19e8k807" class="btn btn-glow" style="width:100%;justify-content:center;">Jetzt anfragen →</a>
 
@@ -11376,26 +11396,76 @@ button, a { outline: none; }
   const section = document.getElementById('motion-showcase');
   const canvas = document.getElementById('motion-canvas');
   if (!section || !canvas || !canvas.getContext) return;
-  const ctx = canvas.getContext('2d');
-  const frameCount = 101; // Echte Kling/FFmpeg-Frames für die Statlift Motion Demo.
+
+  const ctx = canvas.getContext('2d', { alpha: false });
+  const frameCount = 101;
   const frameBase = 'assets/frames/statlift-motion/frame_';
-  const images = [];
+  const images = new Array(frameCount);
+  const requested = new Set();
+  const loaded = new Set();
   let currentFrame = 0;
+  let lastDrawnFrame = -1;
   let ticking = false;
+  let canvasW = 0;
+  let canvasH = 0;
 
   function clamp(v,min,max){ return Math.min(Math.max(v,min),max); }
-  function resize(){
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.floor(window.innerWidth * dpr);
-    canvas.height = Math.floor(window.innerHeight * dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    draw(progress());
-  }
+  function frameUrl(index){ return frameBase + String(index + 1).padStart(6,'0') + '.jpg'; }
+
   function progress(){
     const rect = section.getBoundingClientRect();
     const scrollable = section.offsetHeight - window.innerHeight;
     return clamp(-rect.top / Math.max(scrollable, 1), 0, 1);
   }
+
+  function resize(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvasW = window.innerWidth;
+    canvasH = window.innerHeight;
+    canvas.width = Math.floor(canvasW * dpr);
+    canvas.height = Math.floor(canvasH * dpr);
+    canvas.style.width = canvasW + 'px';
+    canvas.style.height = canvasH + 'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    requestTick();
+  }
+
+  function requestFrame(index){
+    index = clamp(index, 0, frameCount - 1);
+    if (requested.has(index)) return;
+    requested.add(index);
+    const img = new Image();
+    img.decoding = 'async';
+    img.onload = function(){
+      if (img.naturalWidth > 0) {
+        loaded.add(index);
+        requestTick();
+      }
+    };
+    img.onerror = function(){ requested.delete(index); };
+    img.src = frameUrl(index);
+    images[index] = img;
+  }
+
+  function requestAround(index){
+    requestFrame(index);
+    for (let d = 1; d <= 4; d++) {
+      if (index - d >= 0) requestFrame(index - d);
+      if (index + d < frameCount) requestFrame(index + d);
+    }
+  }
+
+  function nearestLoaded(index){
+    if (loaded.has(index)) return index;
+    for (let d = 1; d < frameCount; d++) {
+      const before = index - d;
+      const after = index + d;
+      if (before >= 0 && loaded.has(before)) return before;
+      if (after < frameCount && loaded.has(after)) return after;
+    }
+    return -1;
+  }
+
   function roundRect(x,y,w,h,r){
     const rr = Math.min(r,w/2,h/2);
     ctx.beginPath();
@@ -11406,29 +11476,25 @@ button, a { outline: none; }
     ctx.arcTo(x,y,x+w,y,rr);
     ctx.closePath();
   }
+
   function drawFallback(p){
-    const w = window.innerWidth, h = window.innerHeight;
+    const w = canvasW || window.innerWidth, h = canvasH || window.innerHeight;
     ctx.clearRect(0,0,w,h);
     const bg = ctx.createRadialGradient(w*.52,h*.45,20,w*.5,h*.45,Math.max(w,h)*.78);
     bg.addColorStop(0,'rgba(100,116,255,.34)');
     bg.addColorStop(.45,'rgba(12,18,38,.74)');
     bg.addColorStop(1,'rgba(0,0,0,1)');
     ctx.fillStyle = bg; ctx.fillRect(0,0,w,h);
-
     ctx.save();
     ctx.translate(w/2, h/2 + 26 - p*68);
     ctx.rotate((-8 + p*16) * Math.PI/180);
     const scale = Math.min(w/1180, h/720) * (1.02 + p*.10);
     ctx.scale(scale, scale);
-
-    // back glow
     ctx.shadowColor = 'rgba(129,140,248,.55)';
     ctx.shadowBlur = 70;
     ctx.fillStyle = 'rgba(129,140,248,.18)';
     roundRect(-440,-230,880,460,34); ctx.fill();
     ctx.shadowBlur = 0;
-
-    // main browser panel
     const grd = ctx.createLinearGradient(-460,-260,460,260);
     grd.addColorStop(0,'rgba(255,255,255,.22)');
     grd.addColorStop(.5,'rgba(255,255,255,.08)');
@@ -11437,19 +11503,13 @@ button, a { outline: none; }
     ctx.strokeStyle = 'rgba(255,255,255,.28)';
     ctx.lineWidth = 1.2;
     roundRect(-470,-270,940,540,28); ctx.fill(); ctx.stroke();
-
-    // top bar dots
     ['#ff5f57','#ffbd2e','#28c840'].forEach((c,i)=>{ ctx.fillStyle=c; ctx.beginPath(); ctx.arc(-425+i*28,-232,7,0,Math.PI*2); ctx.fill(); });
     ctx.fillStyle='rgba(255,255,255,.18)'; roundRect(-330,-244,420,24,12); ctx.fill();
-
-    // hero mock content
     ctx.fillStyle='rgba(255,255,255,.92)'; roundRect(-395,-170,260,18,9); ctx.fill();
     ctx.fillStyle='rgba(255,255,255,.78)'; roundRect(-395,-135,470,26,13); ctx.fill();
     ctx.fillStyle='rgba(255,255,255,.38)'; roundRect(-395,-92,360,14,7); ctx.fill();
     ctx.fillStyle='rgba(129,140,248,.92)'; roundRect(-395,-50,130,42,21); ctx.fill();
     ctx.fillStyle='rgba(255,255,255,.12)'; roundRect(-250,-50,130,42,21); ctx.fill();
-
-    // search cards / ranking lines
     for(let i=0;i<5;i++){
       const y = -20 + i*58 + Math.sin(p*6+i)*8;
       const x = 80 + i*10;
@@ -11459,8 +11519,6 @@ button, a { outline: none; }
       ctx.fillStyle = i===0 ? 'rgba(251,191,36,.95)' : 'rgba(255,255,255,.42)';
       roundRect(x+18,y+14,160-i*14,9,5); ctx.fill();
     }
-
-    // growth curve
     ctx.strokeStyle='rgba(129,140,248,.9)'; ctx.lineWidth=5; ctx.beginPath();
     for(let i=0;i<=80;i++){
       const t=i/80;
@@ -11471,34 +11529,56 @@ button, a { outline: none; }
     ctx.stroke();
     ctx.restore();
   }
-  function draw(p){
-    if (frameCount > 0 && images[currentFrame] && images[currentFrame].complete) {
-      const img = images[currentFrame];
-      const w = window.innerWidth, h = window.innerHeight;
-      const s = Math.max(w/img.naturalWidth, h/img.naturalHeight);
-      const iw = img.naturalWidth*s, ih = img.naturalHeight*s;
-      ctx.clearRect(0,0,w,h);
-      ctx.drawImage(img,(w-iw)/2,(h-ih)/2,iw,ih);
-    } else {
+
+  function drawFrame(index, p){
+    const img = images[index];
+    if (!img || !img.complete || img.naturalWidth === 0) {
       drawFallback(p);
+      return;
     }
+    const w = canvasW || window.innerWidth, h = canvasH || window.innerHeight;
+    const s = Math.max(w/img.naturalWidth, h/img.naturalHeight);
+    const iw = img.naturalWidth*s, ih = img.naturalHeight*s;
+    ctx.clearRect(0,0,w,h);
+    ctx.drawImage(img,(w-iw)/2,(h-ih)/2,iw,ih);
+    lastDrawnFrame = index;
+    section.dataset.currentFrame = String(index + 1);
   }
+
   function update(){
     ticking = false;
     const p = progress();
+    const target = Math.floor(p * (frameCount - 1));
+    currentFrame = clamp(target, 0, frameCount - 1);
     section.style.setProperty('--motion-progress', p.toFixed(4));
     section.style.setProperty('--motion-copy-y', `${Math.round(-p*34)}px`);
     section.style.setProperty('--motion-copy-opacity', String(clamp(1 - Math.max(0,p-.72)*2.4, .42, 1)));
-    if (frameCount > 0) currentFrame = Math.floor(p * (frameCount - 1));
-    draw(p);
+    requestAround(currentFrame);
+    const drawable = nearestLoaded(currentFrame);
+    if (drawable >= 0) drawFrame(drawable, p);
+    else drawFallback(p);
   }
+
   function requestTick(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
-  for(let i=0;i<frameCount;i++){
-    const img = new Image(); img.src = frameBase + String(i+1).padStart(6,'0') + '.jpg'; images.push(img);
+
+  function warmPreload(){
+    let i = 0;
+    const step = () => {
+      const end = Math.min(i + 3, frameCount);
+      for (; i < end; i++) requestFrame(i);
+      if (i < frameCount) {
+        (window.requestIdleCallback || window.setTimeout)(step, 80);
+      }
+    };
+    step();
   }
+
   window.addEventListener('resize', resize, {passive:true});
   window.addEventListener('scroll', requestTick, {passive:true});
-  resize(); requestTick();
+  requestFrame(0);
+  requestAround(0);
+  resize();
+  warmPreload();
 })();
 </script>
 
