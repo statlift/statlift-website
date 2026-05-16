@@ -8494,7 +8494,7 @@ html.modal-open,body.modal-open{overflow:hidden!important}
 
                             <li><span class="ck" style="color:#818cf8;">✓</span> Mit Anpassungen</li>
 
-                            <li><span class="ck" style="color:#818cf8;">✓</span> Alle Dateiformate (Vektor, PNG, JPG)</li>
+                            <li><span class="ck" style="color:#818cf8;">✓</span> Personalisiert auf Ihre Branche &amp; Marke</li>
 
                             <li><span class="ck" style="color:#818cf8;">✓</span> Volle Nutzungsrechte</li>
 
@@ -10450,7 +10450,49 @@ document.getElementById(id).style.display = 'none';
 .btn:hover { transform: translateY(-2px) scale(1.03) !important; box-shadow: 0 10px 30px rgba(79,70,229,0.3) !important; }
 nav a { transition: color 0.2s, transform 0.2s !important; }
 nav a:hover { transform: translateY(-1px) !important; }
+
+/* ── Pricing card entrance animation (Abo + Einmal, identisch) ── */
+.pricing-card {
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease !important;
+  will-change: opacity, transform;
+}
+.pricing-card.pc-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.pricing-grid .pricing-card:nth-of-type(1) { transition-delay: 0.05s, 0.05s, 0s, 0s; }
+.pricing-grid .pricing-card:nth-of-type(2) { transition-delay: 0.18s, 0.18s, 0s, 0s; }
+.pricing-grid .pricing-card:nth-of-type(3) { transition-delay: 0.31s, 0.31s, 0s, 0s; }
+.pricing-card:hover { transform: translateY(-6px) scale(1.005); }
+@media (prefers-reduced-motion: reduce) {
+  .pricing-card { transition: none !important; transform: none !important; opacity: 1 !important; }
+}
 </style>
+<script>
+(function(){
+  function init(){
+    var cards = document.querySelectorAll('.pricing-card');
+    if(!cards.length) return;
+    if(!('IntersectionObserver' in window)){
+      cards.forEach(function(c){ c.classList.add('pc-in'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('pc-in'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    cards.forEach(function(c){ obs.observe(c); });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
 <style>
 /* ── Particle Canvas ── */
 #hero-canvas-old {
