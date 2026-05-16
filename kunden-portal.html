@@ -110,7 +110,7 @@
     @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 
     /* Full blog rendered HTML */
-    .blog-body > h1:first-child{display:none}.blog-body h1{font-size:1.05rem;margin:18px 0 10px;color:var(--text)} .blog-body{font-size:.9rem;color:var(--muted);line-height:1.85;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border-s)}
+    .blog-body{font-size:.9rem;color:var(--muted);line-height:1.85;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border-s)}
     .blog-body h1,.blog-body h2,.blog-body h3{color:var(--text);margin:1.2em 0 .5em;font-weight:700;line-height:1.3}
     .blog-body h1{font-size:1.3rem}
     .blog-body h2{font-size:1.1rem}
@@ -167,7 +167,7 @@
     .modal-input:focus{border-color:var(--primary)}
     .modal-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
     .btn-neutral{background:rgba(255,255,255,.06);border:1px solid var(--border-s);border-radius:10px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;padding:.72rem 1rem}
-    .btn-primary{background:#4F46E5;border:none;border-radius:10px;color:#fff;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:700;padding:.72rem 1rem;min-width:150px;transition:all .2s;white-space:nowrap}.btn-primary:hover{background:#4338CA;transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,70,229,.30)}.btn-primary:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none} .btn-primary-danger{background:#dc2626;border:1px solid #ef4444;border-radius:10px;color:white;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:700;padding:.72rem 1rem;min-width:150px}
+    .btn-primary-danger{background:#dc2626;border:1px solid #ef4444;border-radius:10px;color:white;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:700;padding:.72rem 1rem;min-width:150px}
     .btn-primary-danger:disabled{opacity:.55;cursor:not-allowed;transform:none}
     #cancel-result{font-size:.86rem;line-height:1.65;margin-top:14px;display:none}
     #cancel-result.ok{display:block;color:#86efac}
@@ -282,8 +282,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .pw-req span{display:inline-block;margin-right:10px}
 .pw-req span.ok{color:var(--success)}
 .auth-btn{width:100%;padding:13px;border:none;border-radius:10px;font-family:inherit;font-size:.92rem;font-weight:700;cursor:pointer;transition:all .2s;margin-top:6px;letter-spacing:.01em}
-.auth-btn-primary{background:#4F46E5;color:#fff}
-.auth-btn-primary:hover{background:#4338CA;transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,70,229,.30)}
+.auth-btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff}
+.auth-btn-primary:hover{opacity:.9;transform:translateY(-1px)}
 .auth-btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .auth-error{color:#fca5a5;font-size:.8rem;margin-top:10px;padding:10px 12px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:8px;display:none}
 .auth-error.show{display:block}
@@ -307,83 +307,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 #auth-resend{text-align:center;margin-top:16px}
 </style>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<style id="mobile-portal-css">
-@media (max-width: 768px) {
-  /* Logo kompakter damit die Nav-Buttons Platz haben */
-  nav img[alt="Statlift"],
-  #navbar img[alt="Statlift"] {
-    max-height: 44px !important;
-    max-width: 38vw !important;
-    height: auto !important;
-    width: auto !important;
-  }
-  /* Nav-Bar darf umbrechen, Buttons in eigener Zeile unter dem Logo */
-  nav {
-    padding: 10px 14px !important;
-    min-height: auto !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-  }
-  nav .logo {
-    order: 1;
-    flex: 0 0 auto;
-  }
-  /* Nav-Right voll auf eigene Zeile */
-  .nav-right {
-    order: 2 !important;
-    flex-basis: 100% !important;
-    width: 100% !important;
-    justify-content: center !important;
-    gap: 6px !important;
-    flex-wrap: wrap !important;
-    padding-bottom: 4px;
-  }
-  /* Badge auf Mobile aus */
-  .badge-portal {
-    display: none !important;
-  }
-  /* Buttons gleichmaessig verteilt, mit Wrap auf zweite Zeile wenn noetig */
-  .nav-btn, .nav-btn-danger {
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
-    font-size: 0.72rem !important;
-    padding: 0.55rem 0.45rem !important;
-    text-align: center !important;
-    white-space: nowrap !important;
-  }
-  /* Abo kuendigen Button auf Mobile als Voll-Breite zweite Zeile damit es auffaellt */
-  #cancel-btn {
-    flex-basis: 100% !important;
-    margin-top: 4px;
-  }
-  /* Hero kompakter */
-  .hero {
-    padding: 32px 18px 24px !important;
-  }
-  .hero h1 {
-    font-size: clamp(1.6rem, 6vw, 2.4rem) !important;
-  }
-  /* Stat-Cards: 2 pro Zeile statt 4 */
-  .stats-row {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-  }
-  /* Filter-Bar mobile: vertikal */
-  .filter-bar {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    padding: 14px !important;
-  }
-  /* Modal mobile: weniger Padding */
-  .modal-card, .portal-modal {
-    padding: 0 !important;
-  }
-  .portal-modal-body, .modal-card > * {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-}
-</style>
 </head>
 <body>
 
@@ -400,7 +323,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <div id="auth-mode-title" style="font-size:1.15rem;font-weight:700;margin-bottom:4px"></div>
         <div id="auth-mode-sub" style="font-size:.82rem;color:var(--muted)"></div>
       </div>
-      <div id="auth-error-global" class="auth-error" style="margin-bottom:12px"></div>
 
       <!-- Google Button Container (wird vom SDK gerendert) -->
       <div id="google-btn-container" style="margin-bottom:4px;min-height:44px"></div>
@@ -456,7 +378,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div class="auth-spinner"></div>
       <div class="auth-pulse"><span></span><span></span><span></span></div>
       <p class="auth-state-text" style="font-size:.75rem;margin-top:12px">Warten auf Bestätigung…</p>
-      
+      <div id="auth-resend">
+        <button class="auth-link" onclick="stopPolling();clearErrs();document.getElementById('reg-email').value='';document.getElementById('reg-pw').value='';document.getElementById('reg-pw2').value='';showOverlayState('main','register')">Andere E-Mail verwenden</button>
+      </div>
     </div>
 
     <!-- ── State: E-Mail auf anderem Gerät bestätigt ── -->
@@ -550,7 +474,7 @@ function handleGoogleCredential(response) {
       <div id="overlay-support" style="display:none">
         <input id="support-subject" class="modal-input" placeholder="Betreff *" style="margin-bottom:0">
         <textarea id="support-message" class="modal-input" style="min-height:110px;resize:vertical;margin-top:8px" placeholder="Ihre Nachricht *"></textarea>
-        <button id="support-submit-btn" class="btn-primary" onclick="submitSupport()" style="margin-top:10px;min-width:150px;transition:all .2s">Anfrage senden</button>
+        <button id="support-submit-btn" class="btn-neutral" onclick="submitSupport()" style="margin-top:10px;min-width:150px;transition:all .2s">Anfrage senden</button>
         <div id="support-result" class="form-result"></div>
       </div>
 
@@ -668,8 +592,8 @@ function renderCard(art, idx) {
   <div class="article-card${isExpanded?' open':''}" id="card-${idx}" onclick="toggleExpand(${idx})">
     <div class="card-head">
       <div class="card-meta">
-        
-        <span class="blog-nr">#${art._num||(idx+1)}</span>
+        <span class="abo-badge ${aboClass(art.abo_typ)}">${art.abo_typ||'Abo 1'}</span>
+        <span class="blog-nr">#${art.blog_nr||idx+1}</span>
         <span class="card-date">
           <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
           ${formatDate(art.versand_datum || art.erstellt_am)}
@@ -728,11 +652,7 @@ function filterArticles() {
   const monthF = document.getElementById('filterMonth').value;
 
   let filtered = allArticles.filter(a => {
-    const qNum = parseInt(q, 10);
-    const matchQ = !q
-      || (a.blog_titel||'').toLowerCase().includes(q)
-      || (a.inhalt||'').toLowerCase().includes(q)
-      || (!isNaN(qNum) && a._num === qNum);
+    const matchQ = !q || (a.blog_titel||'').toLowerCase().includes(q) || (a.inhalt||'').toLowerCase().includes(q);
     const matchMonth = !monthF || monthKey(a.versand_datum || a.erstellt_am) === monthF;
     return matchQ && matchMonth;
   });
@@ -811,61 +731,34 @@ async function loadAccountExtras() {
 
 function renderAccountStatus(data) {
   const s = data.subscription || {};
-  // Strict cancelled detection: nur wenn Stripe explizit cancelled/canceled meldet
-  // ODER cancel_at_period_end=true. Leere subscription -> NICHT als cancelled werten,
-  // damit der Cancel-Button bei Stripe-Lookup-Fehlern weiterhin klickbar bleibt.
-  const explicitlyCancelled = s.cancel_at_period_end === true
-    || s.status === 'canceled' || s.status === 'cancelled'
-    || s.status === 'incomplete_expired' || s.status === 'unpaid';
-  const isCancelled = explicitlyCancelled;
-  const statusText = s.cancel_at_period_end ? 'Kündigung vorgemerkt' : (s.status === 'active' ? 'Aktiv' : (s.status === 'trialing' ? 'Testphase' : (s.status || 'Aktiv')));
+  const isCancelled = s.cancel_at_period_end || (s.status !== 'active' && s.status !== 'trialing');
+  const statusText = s.cancel_at_period_end ? 'Kündigung vorgemerkt' : (s.status === 'active' ? 'Aktiv' : (s.status || 'Unbekannt'));
   const endText = s.current_period_end ? s.current_period_end : (s.cancel_at_period_end ? 'zum Periodenende' : '—');
   const rawAbo = data.abo || data.plan || data.price_id || data.package || '';
   const paketName = aboDisplayName(rawAbo);
   
-  // Abo 3 Mindestlaufzeit-Berechnung (12 Monate ab start_datum)
   let extraTiles = '';
-  let abo3LockedUntil = null; // Date wenn Abo 3 noch in Mindestlaufzeit, sonst null
   if (paketName === 'Rundum-Sorglos' && data.start_datum) {
     const start = new Date(data.start_datum);
     if (!isNaN(start)) {
-      const earliest = new Date(start);
-      earliest.setMonth(earliest.getMonth() + 12);
-      const today = new Date();
-      if (earliest > today) {
-        abo3LockedUntil = earliest;
-      }
-      extraTiles = `<div class="info-tile"><div class="label">Mindestlaufzeit bis</div><div class="value">${earliest.toLocaleDateString('de-DE')}</div></div>`;
+      start.setMonth(start.getMonth() + 12);
+      extraTiles = `<div class="info-tile"><div class="label">Mindestlaufzeit bis</div><div class="value">${start.toLocaleDateString('de-DE')}</div></div>`;
     }
   }
 
-  // Update cancel button. Drei Zustaende:
-  //   1) Bereits gekuendigt -> "Abo gekündigt" (grau, Toast)
-  //   2) Abo 3 in Mindestlaufzeit -> "Kündigung ab DD.MM.YYYY" (grau, Toast mit Datum)
-  //   3) Sonst -> "Abo kündigen" (aktiv, oeffnet Modal)
-  // onclick wird nie auf null gesetzt damit der Button immer reagiert.
+  // Update cancel button if already cancelled
   const cancelBtn = document.getElementById('cancel-btn');
   if (cancelBtn) {
     if (isCancelled) {
       cancelBtn.textContent = 'Abo gekündigt';
-      cancelBtn.onclick = function(){ showToast('Ihr Abo ist bereits gekündigt.'); };
-      cancelBtn.style.opacity = '0.55';
-      cancelBtn.style.cursor = 'default';
-    } else if (abo3LockedUntil) {
-      const dateStr = abo3LockedUntil.toLocaleDateString('de-DE');
-      cancelBtn.textContent = 'Kündigung ab ' + dateStr;
-      cancelBtn.onclick = function(){
-        showToast('Abo 3 hat eine Mindestlaufzeit von 12 Monaten. Frühestens kündbar ab ' + dateStr + '.');
-      };
-      cancelBtn.style.opacity = '0.55';
+      cancelBtn.onclick = null;
+      cancelBtn.style.opacity = '0.5';
       cancelBtn.style.cursor = 'not-allowed';
-      cancelBtn.title = 'Abo 3 hat eine Mindestlaufzeit von 12 Monaten. Frühestens kündbar ab ' + dateStr + '.';
     } else {
       cancelBtn.textContent = 'Abo kündigen';
       cancelBtn.onclick = openCancelModal;
       cancelBtn.style.opacity = '1';
       cancelBtn.style.cursor = 'pointer';
-      cancelBtn.title = '';
     }
   }
 
@@ -1026,25 +919,6 @@ async function submitCancellation() {
     result.textContent = data.message || 'Ihre Kündigung wurde bestätigt.';
     btn.textContent = 'Gekündigt';
     showToast('✓ Kündigung wurde bestätigt');
-
-    // Sofortiges UI-Update: Cancel-Btn im Nav umstellen, ohne auf Reload zu warten.
-    const navBtn = document.getElementById('cancel-btn');
-    if (navBtn) {
-      navBtn.textContent = 'Abo gekündigt';
-      navBtn.onclick = function(){ showToast('Ihr Abo ist bereits gekündigt.'); };
-      navBtn.style.opacity = '0.55';
-      navBtn.style.cursor = 'default';
-    }
-    // Account-Status-Box optimistisch markieren (Stripe-Webhook propagiert ggf. erst spaeter)
-    if (typeof portalAccount === 'object' && portalAccount) {
-      portalAccount.subscription = portalAccount.subscription || {};
-      portalAccount.subscription.cancel_at_period_end = true;
-      if (data.endet_am) portalAccount.subscription.current_period_end = data.endet_am;
-      try { renderAccountStatus(portalAccount); } catch(e){}
-    }
-
-    // Modal nach 2.5 Sek automatisch schliessen
-    setTimeout(closeCancelModal, 2500);
   } catch (err) {
     result.className = 'err';
     result.textContent = err.message || 'Es ist ein Fehler aufgetreten. Bitte kontaktieren Sie team@statlift.de.';
@@ -1074,9 +948,6 @@ async function loadPortal() {
       const db = new Date(a.versand_datum || a.erstellt_am || 0);
       return da - db;
     });
-    // Stabile Nummerierung: aelteste = #1, neuere wachsen
-    const _total = allArticles.length;
-    allArticles.forEach((a, i) => { a._num = _total - i; });
 
     // Update hero
     document.getElementById('firma-name').textContent = data.firma;
@@ -1173,7 +1044,7 @@ async function loadPortal() {
 
   let _authMode = 'login'; // 'login' | 'register'
 
-  function showOverlayState(state, mode, provider) {
+  function showOverlayState(state, mode) {
     const overlay = document.getElementById('auth-overlay');
     overlay.style.display = 'flex';
     ['auth-state-main','auth-state-verify-pending','auth-state-verified-other'].forEach(id => {
@@ -1187,23 +1058,6 @@ async function loadPortal() {
     }[state];
     if (target) document.getElementById(target).style.display = 'block';
     if (state === 'main' && mode) _showAuthMode(mode);
-
-    // Provider-Sichtbarkeit MUSS NACH _showAuthMode laufen
-    // weil _showAuthMode form-login.display='block' setzt
-    const overlayEl = document.getElementById('auth-overlay');
-    const googleBox = overlayEl && overlayEl.querySelector('#google-btn-container');
-    const divider = overlayEl && overlayEl.querySelector('.auth-divider');
-    const formLogin = document.getElementById('form-login');
-    if (state === 'main' && mode === 'login' && provider === 'google') {
-      // Nur Google-Login (kein Email/PW Feld)
-      if (googleBox) googleBox.style.display = '';
-      if (divider) divider.style.display = 'none';
-      if (formLogin) formLogin.style.display = 'none';
-    } else if (state === 'main') {
-      // Default: alles zeigen (Email-User darf zusaetzlich Google nutzen)
-      if (googleBox) googleBox.style.display = '';
-      if (divider) divider.style.display = '';
-    }
   }
 
   function _showAuthMode(mode) {
@@ -1241,8 +1095,8 @@ async function loadPortal() {
         });
         const d = await r.json();
         if (d.success) { storeSession(d.session_token); hideOverlay(); loadPortal(); }
-        else showErr('auth-error-global', d.error || 'Google-Anmeldung fehlgeschlagen.');
-      } catch { showErr('auth-error-global', 'Verbindungsfehler.'); }
+        else showErr(_authMode === 'login' ? 'login-error' : 'reg-error', d.error || 'Google-Anmeldung fehlgeschlagen.');
+      } catch { showErr(_authMode === 'login' ? 'login-error' : 'reg-error', 'Verbindungsfehler.'); }
     };
     // Google SDK renderButton (kein Popup — wird nicht vom Browser geblockt)
     const tryRender = () => {
@@ -1304,7 +1158,7 @@ async function loadPortal() {
   }
 
   function clearErrs() {
-    ['login-error','reg-error','auth-error-global'].forEach(id => {
+    ['login-error','reg-error'].forEach(id => {
       const el = document.getElementById(id);
       if (el) { el.textContent = ''; el.classList.remove('show'); }
     });
@@ -1322,15 +1176,12 @@ async function loadPortal() {
 
   /* ─── Auth-Status für Portal prüfen (registriert oder nicht) ─── */
   async function getAuthMode(slug) {
-    if (!slug) return { mode: 'register', provider: null };
+    if (!slug) return 'register';
     try {
       const r = await fetch(`${AUTH}/auth-status?slug=${encodeURIComponent(slug)}`);
       const d = await r.json();
-      return {
-        mode: d.has_account ? 'login' : 'register',
-        provider: d.provider || null  // 'email' | 'google' | 'both' | null
-      };
-    } catch { return { mode: 'register', provider: null }; }
+      return d.has_account ? 'login' : 'register';
+    } catch { return 'register'; }
   }
 
   /* ─── Passwort anzeigen ─── */
@@ -1432,8 +1283,8 @@ async function loadPortal() {
         });
         const d = await r.json();
         if (d.success) { storeSession(d.session_token); hideOverlay(); loadPortal(); }
-        else showErr('auth-error-global', d.error || 'Google-Anmeldung fehlgeschlagen.');
-      } catch { showErr('auth-error-global','Verbindungsfehler.'); }
+        else showErr(mode === 'login' ? 'login-error' : 'reg-error', d.error || 'Google-Anmeldung fehlgeschlagen.');
+      } catch { showErr(mode === 'login' ? 'login-error' : 'reg-error','Verbindungsfehler.'); }
     };
     google.accounts.id.initialize({
       client_id: GOOGLE_CLIENT_ID,
@@ -1462,15 +1313,12 @@ async function loadPortal() {
   }
 
   /* ─── LOGOUT ─── */
-  window.logoutPortal = async function() {
-    if (_pollTimer) clearInterval(_pollTimer);
-    // Token VOR clearSession lesen
-    const tok = getSession();
-    // Serverseitig invalidieren UND auf Antwort warten
-    if (tok) {
-      try { await fetch(AUTH + '/auth-logout?token=' + encodeURIComponent(tok)); } catch {}
-    }
+  window.logoutPortal = function() {
     clearSession();
+    if (_pollTimer) clearInterval(_pollTimer);
+    // Session serverseitig invalidieren (best-effort)
+    const tok = getSession();
+    if (tok) fetch(AUTH + '/auth-logout?token=' + tok).catch(() => {});
     window.location.reload();
   };
 
@@ -1512,40 +1360,22 @@ async function loadPortal() {
         }
       } catch {}
       // Token ungültig → passendes Formular + Fehlermeldung
-      const { mode, provider } = await getAuthMode(getSlug());
-      showOverlayState('main', mode, provider);
-      showErr('auth-error-global', 'Der Bestätigungslink ist abgelaufen oder ungültig.');
+      const mode = await getAuthMode(getSlug());
+      showOverlayState('main', mode);
+      showErr(mode === 'login' ? 'login-error' : 'reg-error', 'Der Bestätigungslink ist abgelaufen oder ungültig.');
       return;
     }
 
-    // ② Gespeicherte Session vorhanden -> serverseitig validieren
+    // ② Gespeicherte Session vorhanden → Portal sofort laden
     const token = getSession();
     if (token) {
-      try {
-        const r = await fetch(`${AUTH}/auth-session?token=${encodeURIComponent(token)}&slug=${encodeURIComponent(getSlug())}`);
-        const d = await r.json();
-        if (d && d.valid) {
-          // Session gueltig - Portal laden, Session wird serverseitig automatisch verlaengert
-          loadPortal();
-          return;
-        }
-        // Token ungueltig oder gehoert zu anderem Portal
-        if (!d || !d.slug_mismatch) {
-          // Wirklich expired/invalid -> Session loeschen
-          clearSession();
-        }
-        // Bei slug_mismatch: Session bleibt für das Original-Portal gültig,
-        // wir zeigen hier nur Login für das aktuelle Portal an.
-      } catch {
-        // Netzwerkfehler beim Validieren -> trotzdem Portal versuchen (offline-tolerant)
-        loadPortal();
-        return;
-      }
+      loadPortal();
+      return;
     }
 
-    // ③ Kein gueltiger Token -> Login/Register anzeigen
-    const { mode, provider } = await getAuthMode(getSlug());
-    showOverlayState('main', mode, provider);
+    // ③ Kein Token → Login/Register anzeigen
+    const mode = await getAuthMode(getSlug());
+    showOverlayState('main', mode);
   }
 
   // Starten
