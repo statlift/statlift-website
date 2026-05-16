@@ -823,18 +823,27 @@ function renderAccountStatus(data) {
   const rawAbo = data.abo || data.plan || data.price_id || data.package || '';
   const paketName = aboDisplayName(rawAbo);
   
+  // Abo 3 Mindestlaufzeit-Berechnung (12 Monate ab start_datum)
   let extraTiles = '';
+  let abo3LockedUntil = null; // Date wenn Abo 3 noch in Mindestlaufzeit, sonst null
   if (paketName === 'Rundum-Sorglos' && data.start_datum) {
     const start = new Date(data.start_datum);
     if (!isNaN(start)) {
-      start.setMonth(start.getMonth() + 12);
-      extraTiles = `<div class="info-tile"><div class="label">Mindestlaufzeit bis</div><div class="value">${start.toLocaleDateString('de-DE')}</div></div>`;
+      const earliest = new Date(start);
+      earliest.setMonth(earliest.getMonth() + 12);
+      const today = new Date();
+      if (earliest > today) {
+        abo3LockedUntil = earliest;
+      }
+      extraTiles = `<div class="info-tile"><div class="label">Mindestlaufzeit bis</div><div class="value">${earliest.toLocaleDateString('de-DE')}</div></div>`;
     }
   }
 
-  // Update cancel button. WICHTIG: onclick NIEMALS auf null setzen - sonst kann
-  // der User nicht mehr klicken wenn renderAccountStatus mit unvollstaendigen
-  // Stripe-Daten aufgerufen wird. Stattdessen Klick-Verhalten konditional.
+  // Update cancel button. Drei Zustaende:
+  //   1) Bereits gekuendigt -> "Abo gekündigt" (grau, Toast)
+  //   2) Abo 3 in Mindestlaufzeit -> "Kündigung ab DD.MM.YYYY" (grau, Toast mit Datum)
+  //   3) Sonst -> "Abo kündigen" (aktiv, oeffnet Modal)
+  // onclick wird nie auf null gesetzt damit der Button immer reagiert.
   const cancelBtn = document.getElementById('cancel-btn');
   if (cancelBtn) {
     if (isCancelled) {
@@ -842,11 +851,21 @@ function renderAccountStatus(data) {
       cancelBtn.onclick = function(){ showToast('Ihr Abo ist bereits gekündigt.'); };
       cancelBtn.style.opacity = '0.55';
       cancelBtn.style.cursor = 'default';
+    } else if (abo3LockedUntil) {
+      const dateStr = abo3LockedUntil.toLocaleDateString('de-DE');
+      cancelBtn.textContent = 'Kündigung ab ' + dateStr;
+      cancelBtn.onclick = function(){
+        showToast('Abo 3 hat eine Mindestlaufzeit von 12 Monaten. Frühestens kündbar ab ' + dateStr + '.');
+      };
+      cancelBtn.style.opacity = '0.55';
+      cancelBtn.style.cursor = 'not-allowed';
+      cancelBtn.title = 'Abo 3 hat eine Mindestlaufzeit von 12 Monaten. Frühestens kündbar ab ' + dateStr + '.';
     } else {
       cancelBtn.textContent = 'Abo kündigen';
       cancelBtn.onclick = openCancelModal;
       cancelBtn.style.opacity = '1';
       cancelBtn.style.cursor = 'pointer';
+      cancelBtn.title = '';
     }
   }
 
